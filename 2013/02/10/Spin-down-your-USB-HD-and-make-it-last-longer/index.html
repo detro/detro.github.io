@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Spin-down your USB HD and make it last longer </title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Spin-down your USB HD and make it last longer </h2>
+<p class="meta">10 Feb 2013</p>
+
+<div class="post">
+<p>I have built for myself a simple Media Center, based on <a href="http://www.zotacusa.com/zbox-id41-plus.html">Zotac ZBOX ID41 Plus</a>, <a href="http://wiki.xbmc.org/index.php?title=XBMCbuntu">XBMC-Live</a>, <a href="http://www.transmissionbt.com/">Transmission</a>, <a href="http://flirc.tv/">Flirc</a> and other useful stuff. The idea is having a low-energy consumption machine that I control with a remote. And it has to be always on.</p>
+
+<p>One thing I was concerned about is how to deal with my external HD connected to it: I&#39;m of course expecting those to eventually fail if they are always spinning.</p>
+
+<div class="img">
+<img src="http://www.colourbox.com/preview/2111168-646188-read-data-on-hard-disk-with-spinning-hard-disk.jpg" />
+</div>
+
+<p>Well, a bit of scripting and cron can go a long way. Here is my solution.</p>
+
+<h3>Step 1: dependencies</h3>
+
+<p>Just install <a href="http://linux.die.net/man/8/sdparm">sdparm</a> and you should be all set, at least on a &quot;normal&quot; Linux box where <a href="http://en.wikipedia.org/wiki/Cron">Cron</a> is already configured.</p>
+
+<h3>Step 2: scripting <code>FTW</code></h3>
+
+<p>Put a script like this somewhere in your system. I have it in my <code>~/bin</code>:
+[sourcecode:bash]</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>Only ROOT can run this</h1>
+
+<p>if [ &quot;$(id -u)&quot; != &quot;0&quot; ]; then
+        echo “This script must be run as root” 1&gt;&amp;2
+        exit 1
+fi</p>
+
+<p>STATE<em>FILENAME=state</em>$1.spindown
+PREV<em>STATE</em>FILENAME=prev<em>state</em>$1.spindown</p>
+
+<h1>Get new state from diskstats</h1>
+
+<p>NEWstate=$(cat /proc/diskstats | grep $1)
+echo $NEWstate &gt; &quot;$STATE_FILENAME&quot;</p>
+
+<h1>compare md5 sums</h1>
+
+<p>md5new=$(md5sum $STATE<em>FILENAME | sed &#39;s/ .*//&#39;)
+md5old=$(md5sum $PREV</em>STATE_FILENAME | sed &#39;s/ .*//&#39;)</p>
+
+<h1>if no changes, power down</h1>
+
+<p>if [ &quot;$md5new&quot; = &quot;$md5old&quot; ]; then
+        sdparm --flexible --command=stop /dev/$1 &amp;&gt;/dev/null
+fi</p>
+
+<h1>Write current state to file</h1>
+
+<p>echo $NEWstate &gt; &quot;$PREV<em>STATE</em>FILENAME&quot;
+[/sourcecode]</p>
+
+<p>A very basic and simple one, isn&#39;t it?
+What it does is just probe <code>/proc/diskstats</code> virtual file to get info about the recent activity of a disk. If it has not changed in the last 30 minutes, than it&#39;s time to use <code>sdparm</code> to send a stop command <code>--command=stop</code>. That&#39;s it.</p>
+
+<h3>Step 3: Cron-it-up!</h3>
+
+<p>Add the following lines to your <code>/etc/crontab</code>:</p>
+
+<p>[sourcecode:bash]
+*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
+*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdb
+*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdc
+*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdd
+*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sde
+[/sourcecode]</p>
+
+<p>The above lines execute the script against <code>sda</code>, <code>sdb</code>, <code>sdc</code>, <code>sdd</code> and <code>sde</code>.</p>
+
+<p>That&#39;s it. I have been using this method for almost 2 years not, and  thought it might be helpful to others.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

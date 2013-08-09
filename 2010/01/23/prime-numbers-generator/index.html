@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Prime Numbers Generator</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Prime Numbers Generator</h2>
+<p class="meta">23 Jan 2010</p>
+
+<div class="post">
+<p>I believe I don&#39;t have to describe what <a href="http://en.wikipedia.org/wiki/Prime_number">primes</a> are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (<a href="http://twitter.com/lucabox">@lucabox</a>) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) .</p>
+
+<div class="img">
+<img src="http://scottthong.files.wordpress.com/2006/08/optimus_prime.jpg" alt="Optimus Prime" width="250" />
+Optimus Prime :-P - yeah yeah, a stupid joke
+</div>
+
+<h2>Briefing</h2>
+
+<p>This code is based on the assumption that we want to generate very very large primes, so it uses <code>unsigned long long</code> to store the values, instead of classical <code>unsigned int</code>. Live with that.</p>
+
+<p>Also, give that there is nothing much better then a <em>&quot;try-dividing-by-every-previous-prime&quot;</em> out there (there are alternatives, but I&#39;m not aware of more complex ones), I took a look to some properties of Primes, and putted into the algorithm those properties as <strong>conditions for early stop</strong>:
+<ol>
+<li>Say <code>P[i]</code> are the previously calculated Primes; If trying dividing value <code>V</code> by every <code>P[i]</code> we find that <code>P[i] &gt; sqrt(V)</code>, stop dividing and classify <code>V</code> as a newly found prime</li>
+<li><strong>No need to check any even number</strong>: they are divisible by 2, so no primes by definition</li>
+<li><strong>No need to allocate more space then an array of the size of the requested prime <em>ordinality</em></strong>: everything can be done in place</li>
+</ol></p>
+
+<h2>Code</h2>
+
+<p>[sourcecode:c]</p>
+
+<h1>include <stdio.h></h1>
+
+<h1>include <stdlib.h></h1>
+
+<h1>include <math.h></h1>
+
+<p>typedef unsigned long long ull;
+typedef unsigned short int bool;</p>
+
+<h1>define TRUE    1</h1>
+
+<h1>define FALSE   0</h1>
+
+<p>// Check if a number is a Prime, dividing it by all the other 
+//  verified primes &lt; of it&#39;s Square value.
+bool is<em>prime(ull *primes, ull primes</em>found, ull value) {
+    ull i;
+    // Limit - Never check for primes larger then the sqrt(value)
+    ull limit = (ull)sqrt(value);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#ifdef DEBUG
+    printf(&quot;Value: %llu - Primes found so far: %llu\n&quot;, value, primes_found);
+#endif
+
+for ( i = 0; i &lt; primes_found; ++i ) {
+    // Check if the value is divisible by this prime
+    if ( value % primes[i] == 0 ) return FALSE;
+    // Check if it&#39;s enough. Limit sqrt(value) exceded
+    if ( primes[i] &gt; limit ) break;
+}
+return TRUE;
+</code></pre></div>
+<p>}</p>
+
+<p>ull* prime<em>numbers</em>generator(ull input) {
+    ull* primes = NULL;
+    ull primes_found = 1;
+    ull i, j;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Allocating memory to store the Primes
+primes = (ull*)malloc(input * sizeof(ull));
+if ( NULL == primes ) return NULL;    
+
+// &#39;2&#39; is the first prime 
+primes[0] = 2;
+
+primes[1] = 3; // Let&#39;s start testing &#39;3&#39; for primality ;)
+for ( i = 1; i &lt; input; ) {
+    #ifdef DEBUG
+        printf(&quot;i: %llu - Potential Prime: %llu\n&quot;, i, primes[i]);
+    #endif
+    // Check if &#39;primes[i]&#39; is a prime
+    if ( is_prime(primes, primes_found, primes[i]) ) {
+        #ifdef DEBUG
+            printf(&quot;Found a new Prime: %llu\n&quot;, primes[i]);
+        #endif
+        // Increment num of primes found so far
+        ++primes_found;
+        // Move to the next odd number
+        primes[++i] = primes[i-1] + 2;
+    } else {
+        // Move to the next odd number, overriding the current one
+        primes[i] += 2;
+    }
+}
+
+return primes;
+</code></pre></div>
+<p>}</p>
+
+<p>int main(int argc, char** argv) {
+    ull input, i, *primes = NULL;
+    if ( argc == 2 ) input = atoi(argv[1]); else return EXIT_FAILURE;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Calculate the required primes
+primes = prime_numbers_generator(input);
+if ( NULL == primes ) return EXIT_FAILURE;
+
+#ifndef FAST
+printf(&quot;All the first %llu Primes are:\n&quot;, input);
+for ( i = 0; i &lt; input; ++i ) {
+    printf(&quot;%llu &quot;, primes[i]);
+}
+printf(&quot;\n\n&quot;);
+#endif
+
+printf(&quot;The Prime #%llu is %llu\n\n&quot;, input, primes[input-1]);
+
+return EXIT_SUCCESS;
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>Time Complexity of this algorithm is quite complex to calculate. Without <strong>condition 1.</strong> described above, we could quickly say that the complexity is an <strong>O(n<sup>2</sup>)</strong>.</p>
+
+<p>But I believe is more complex then that. Overall speaking, the complexity above is indeed correct, but it does vary a lot, because of the <strong>condition 1.</strong>: the number of times in which <code>P[i] will be &gt; sqrt(V)</code> grows with the square value of P[i]. Means that the bigger the prime, the easier is to find the upper-bound of the modulo operations that will be actually executed. This <em>could</em> make the complexity also something like an <strong>&Omega;(n * log(n))</strong>. But this assertion is far from tested/demonstrated/verified, so I could be boldly wrong.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

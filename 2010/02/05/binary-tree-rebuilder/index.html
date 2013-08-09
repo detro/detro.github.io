@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Binary Tree Rebuilder</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Binary Tree Rebuilder</h2>
+<p class="meta">05 Feb 2010</p>
+
+<div class="post">
+<p>Imagine you have a <a href="http://en.wikipedia.org/wiki/Binary_tree">Binary Tree</a>, with those characteristics:
+<ul>
+    <li>Nodes do not respect any order relation - In other words: it&#39;s <strong>not</strong> a <a href="http://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> of any kind</li>
+    <li>Every node appears <em>once and only once</em> within the tree</li>
+</ul></p>
+
+<div align="center">
+<img src="http://www.drunkmenworkhere.org/bintree/pagerank.png" alt="A nice Binary Tree" />
+<em>A nice Binary Tree</em>
+</div>
+
+<p>Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I&#39;m pathetic at inventing hypothetical situations :-P ).</p>
+
+<p>Fortunately though, you previously did a <a href="http://en.wikipedia.org/wiki/Tree_traversal">Pre-Order and an In-Order visit of your tree</a>, and stored the result in an 2 nice array.</p>
+
+<p><strong>Can you rebuild the original tree structure out of this 2 array?</strong></p>
+
+<h3>How are you going to rebuild it?</h3>
+
+<p>Yes, you can! (Sorry, I couldn&#39;t resist). And it&#39;s quite easy as well. What you have to do, is the following: 
+<ul>
+<li>Take the first element of the PreOrder Array and use it as root of a new tree</li>
+<li>Find the position of this New Node in the InOrder Array, scanning it from <code>0</code> to <code>n-1</code> (<code>n</code> is the number of Nodes)</li>
+<li>IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from <code>0</code> to the <code>position of the New Node in the InOrder Array -1</code>.</li>
+<li>IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the<code> position of the New Node in the InOrder Array +1</code> to <code>n-1</code>.</li>
+<li>Return the New Node</li>
+</ul></p>
+
+<p>By the way, this doesn&#39;t work. To fix it we should be more generic, specifying things a little bit better. Things like:
+<ul>
+    <li>Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array</li>
+    <li>There is going to be as much recursive calls as the number of elements in the PreOrder array</li>
+</ul></p>
+
+<p>Of course, is a tree what we are talking about here: <strong>recursion is a MUST</strong>.&lt;!--more--&gt;</p>
+
+<h3>The solution</h3>
+
+<p>Well, after the crappiest algorithmic explanation I have ever written, here it comes the code.</p>
+
+<p>This time it&#39;s not pure <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>: I wanted to use the beautiful <a href="http://qt.nokia.com/">Qt Framework</a> that I&#39;m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:
+[sourcecode:cpp]</p>
+
+<h1>include &quot;TreeRebuilder.h&quot;</h1>
+
+<h1>include <QDebug></h1>
+
+<p>TreeRebuilder::TreeRebuilder() { }</p>
+
+<p>TreeNode *TreeRebuilder::rebuild(QVector<TREE_NODE_VAL_TYPE> *preOrderVisit, QVector<TREE_NODE_VAL_TYPE> *inOrderVisit) {
+    reset();</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">m_preOrderVisit = preOrderVisit;
+m_inOrderVisit = inOrderVisit;
+
+mapNodePosInInOrderVisit();
+
+return doRebuild(0, m_inOrderVisit-&gt;size() - 1);
+</code></pre></div>
+<p>}</p>
+
+<p>void TreeRebuilder::mapNodePosInInOrderVisit() {
+    if ( !m_inOrderVisit ) {
+        qCritical() &lt;&lt; &quot;InOrder Visit not provided&quot;;
+    }</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Memorize the Position in the InOrder Visit of every element for quick-lookup
+for (qint32 i = 0; i &lt; m_inOrderVisit-&gt;size(); ++i) {
+    m_nodePosInInOrderVisit.insert(m_inOrderVisit-&gt;at(i), i);
+}
+</code></pre></div>
+<p>}</p>
+
+<p>TreeNode *TreeRebuilder::doRebuild(const qint32 &amp;inOrderLeftLimit, const qint32 &amp;inOrderRightLimit) {
+    TreeNode *newNode = new TreeNode;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">qDebug() &lt;&lt; &quot;[Node:\t&quot; &lt;&lt; m_preOrderVisit-&gt;at( m_currRootInPreOrderVisit ) &lt;&lt; &quot;]&quot;;
+newNode-&gt;val = m_preOrderVisit-&gt;at( m_currRootInPreOrderVisit++ ); // Post-increment used to select the next New Node value, taken from the PreOrder Visit
+
+if ( inOrderLeftLimit &lt; inOrderRightLimit ) {
+    // If the current Node Value is not the first in the InOrderVisit current range, means there is a Left Child
+    if ( m_nodePosInInOrderVisit.value(newNode-&gt;val) &gt; inOrderLeftLimit ) {
+        qDebug() &lt;&lt; &quot;   Found Left Child&quot;;
+        newNode-&gt;leftChild = doRebuild(inOrderLeftLimit, m_nodePosInInOrderVisit.value(newNode-&gt;val) -1);
+    }
+
+    // If the current Node Value is not the last in the InOrderVisit current range, means there is a Right Child
+    if ( m_nodePosInInOrderVisit.value(newNode-&gt;val) &lt; inOrderRightLimit ) {
+        qDebug() &lt;&lt; &quot;   Found Right Child&quot;;
+        newNode-&gt;rightChild = doRebuild(m_nodePosInInOrderVisit.value(newNode-&gt;val) + 1, inOrderRightLimit);
+    }
+}
+
+qDebug() &lt;&lt; &quot;[/Node:\t&quot; &lt;&lt; newNode-&gt;val &lt;&lt; &quot;]&quot;;
+
+return newNode;
+</code></pre></div>
+<p>}</p>
+
+<p>void TreeRebuilder::reset() {
+    m<em>currRootInPreOrderVisit = 0;
+    m</em>preOrderVisit = NULL;
+    m<em>inOrderVisit = NULL;
+    m</em>nodePosInInOrderVisit.clear();
+}</p>
+
+<p>QVector<TREE_NODE_VAL_TYPE> TreeRebuilder::generateInOrderVisit(TreeNode * const root) {
+    QVector<TREE_NODE_VAL_TYPE> result;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">TreeRebuilder::doGenerateInOrderVisit(root, &amp;result);
+
+return result;
+</code></pre></div>
+<p>}</p>
+
+<p>void TreeRebuilder::doGenerateInOrderVisit(TreeNode * const root, QVector<TREE_NODE_VAL_TYPE> *result) {
+    if ( NULL != root ) {
+        doGenerateInOrderVisit(root-&gt;leftChild, result);
+        result-&gt;append(root-&gt;val);
+        doGenerateInOrderVisit(root-&gt;rightChild, result);
+    }
+}</p>
+
+<p>QVector<TREE_NODE_VAL_TYPE> TreeRebuilder::generatePreOrderVisit(TreeNode * const root) {
+    QVector<TREE_NODE_VAL_TYPE> result;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">TreeRebuilder::doGeneratePreOrderVisit(root, &amp;result);
+
+return result;
+</code></pre></div>
+<p>}</p>
+
+<p>void TreeRebuilder::doGeneratePreOrderVisit(TreeNode * const root, QVector<TREE_NODE_VAL_TYPE> *result) {
+    if ( NULL != root ) {
+        result-&gt;append(root-&gt;val);
+        doGeneratePreOrderVisit(root-&gt;leftChild, result);
+        doGeneratePreOrderVisit(root-&gt;rightChild, result);
+    }
+}
+[/sourcecode]</p>
+
+<p>Mmm, I can see that the code doesn&#39;t look very clear in here. Well, again, the code is downloadable from: <a href='http://www.detronizator.org/wp-content/uploads/2010/02/TreeRebuilder.tar.gz'>TreeRebuilder.tar.gz</a></p>
+
+<p>For Qt experts: yes, I&#39;m using just the build-mechanism of Qt and the containers. All the rest is just plain <a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a>. But using <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Signals and Slots</a> for this would have been a massive overkill, don&#39;t you think? ;)</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

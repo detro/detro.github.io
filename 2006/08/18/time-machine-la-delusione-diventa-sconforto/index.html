@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Time Machine: La delusione diventa sconforto</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Time Machine: La delusione diventa sconforto</h2>
+<p class="meta">18 Aug 2006</p>
+
+<div class="post">
+<p>Apple, ora sono profondamente deluso da te.
+&quot;The Next big Features&quot;? Questa é il tipico &quot;JOKE&quot;!. E&#39; una presa per i fondelli.</p>
+
+<p>Mi sono andato a leggere tutto l&#39;articolo (ottimo, da 10 e lode) di <a href="http://arstechnica.com/staff/fatbits.ars/2006/8/15/4995">Ars Technica</a> scritto dal talentuoso (almeno con le parole e per la conoscenza) <strong>John Siracusa</strong>... e lo sconforto mi ha assalito.</p>
+
+<p>Io quest&#39;anno sono stato (e sono ancora) impegnatissimo, quindi ho dovuto letteralmente &quot;bypassare&quot; <a href="http://opensolaris.org/os/;jsessionid=360C02BBB52F138B52CCBBACA99C5624">Solaris 10</a>. L&#39;ho solo scaricato, ma senza avere il tempo di installarlo. 2 erano le cose che mi interessavano (e ora lo sono anche di più): <a href="http://opensolaris.org/os/community/zfs/">ZFS</a> e <a href="http://www.opensolaris.org/os/community/dtrace/">DTrace</a>.</p>
+
+<p>Ho scoperto che internet pullula di siti web in cui si discute e si chiede che ZFS venga scelto come futuro filesystem di <a href="http://www.apple.com/macosx">MacOSX</a> (e non solo). Ne voglio citare solo alcune delle maggiori e più applaudite features:
+<blockquote>...
+<strong>ZFS Features</strong></p>
+
+<ul class="feature_list">
+<li>Pooled Storage Model</li>
+<li>Always consistent on disk</li>
+
+<li>Protection from data corruption</li>
+<li>Live data scrubbing</li>
+<li>Instantaneous snapshots and clones</li>
+<li>Fast native backup and restore</li>
+<li>Highly scalable</li>
+<li>Built in compression</li>
+<li>Simplified administration model</li>
+</ul>
+
+<p>...</blockquote></p>
+
+<p>Quando é stato presentato Time Machine, ovviamente tutti quelli che conoscevano ZFS e le discussioni in proposito (io no, purtroppo ;( ), hanno pensato al file system di <a href="http://www.sun.com">Sun</a> integrato in Leopard. Io mi ero limitato a pensare (a dire il vero, a dare per scontato) ad un nuovo f.s.</p>
+
+<p>Leggere della soluzione reale, fa venire i brividi.
+Ma ancor peggio, fa venire sconforto questo:
+<blockquote>There&#39;s still plenty of room for legitimate Time Machine criticism, however. While the hard link trees are a clever solution, given the constraints of HFS+, the strategy dictates a file-level granularity for all backups. In other words, if you change a single byte of a 500MB file, the entire 500MB file will be copied to the backup volume during the next Time Machine backup. Frequent modifications to large files will fill your backup volume very quickly.</p>
+
+<p>According to MacWorld, &quot;<em>Apple suggests that the answer will be for application developers to modify their programs to break up data into more discrete elements that can be backed up more simply by Time Machine—something they may already be doing in order to make their files searchable via Spotlight.</em>&quot; <strong>Of course, this advice is totally unhelpful for people who edit video or work with other large media files on a daily basis.</strong> </blockquote></p>
+
+<p>Paradossalmente, ci va peggio chi doveva goderne di più, cioé chi tratta grandissimi file.
+Uno che opera su file che, messi insieme, arrivano a qualche mega (come nel mio caso quando programmo) potrebbe, con un pò di diligenza, non aver bisogno di backup: basterebbe farsi con regolarità delle copie.
+Chi invece opera su file di grandi... grandissime dimensioni, NECESSITA di un sistema trasparente di Backup. Sarebbe davvero assurdo non averlo.</p>
+
+<p>Non continuo con le mie considerazione, perché diventerebbero una mera traduzione dell&#39;<a href="http://arstechnica.com/staff/fatbits.ars/2006/8/15/4995">articolo di Ars Technica</a>. Resta però lo sconforto per una GRANDE OCCASIONE PERSA.
+E se penso al fatto che ci vogliono ancora 7 mesi... posso solo sperare che Apple pensi di integrare ZFS o qualcosa di simile (anche perché ero all&#39;oscuro della VACCHIAIA di HFS, che pensavo risalisse al Mac OSX 10.0... non a Macos 8O !!!)</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

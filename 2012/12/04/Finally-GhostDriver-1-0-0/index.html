@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Finally, GhostDriver 1.0.0</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Finally, GhostDriver 1.0.0</h2>
+<p class="meta">03 Dec 2012</p>
+
+<div class="post">
+<p>After ~10 months of work, I finally managed to push the ball forward enough to reach <strong>GhostDriver 1.0.0</strong>.
+I won&#39;t lie: it does feel great. It always is to see so much effort mutate into an <em>achievement</em>,
+even it is such only for me.</p>
+
+<p>Before I go any further though, I owe a massive <strong>THANK-YOU</strong> to the people that through contribution
+and / or issue reporting have helped me to build a <em>releasable</em> 1.0.0. In particular to
+<a href="http://jimevansmusic.blogspot.co.uk/">Jim Evans</a>, an awesome guy and a bit of a
+mentor for me: you ROCK Jim, and I think that is true, <em>literally!</em></p>
+
+<div class="img">
+<img src="http://fc02.deviantart.net/fs71/i/2011/149/0/e/ghost_driver_by_swanee3-d3hkmjo.jpg" alt="Ghost Driver" width="600" />
+</div>
+
+<h2>Explaining <code>1.0.0</code></h2>
+
+<p>In 1.0.0 I wanted to have the right amount of <a href="http://code.google.com/p/selenium/wiki/JsonWireProtocol">Wire Protocol</a>
+implemented, but still be able to deliver something stable before <strong>Christmas 2012</strong>!</p>
+
+<p>So, what&#39;s in GhostDriver 1.0.0 (<a href="https://github.com/detro/ghostdriver/blob/master/CHANGELOG.md">changelog</a>)?</p>
+
+<ol>
+<li>Navigation</li>
+<li>Page content extraction</li>
+<li>Arbitrary JS execution</li>
+<li>Window handling</li>
+<li>Frame handling</li>
+<li>Screen-shot generation</li>
+<li>Cookies</li>
+<li>Element Search, Localization &amp; Manipulation</li>
+<li>Mouse interaction (even though <code>doubeClick</code> and <code>rightClick</code> seems to be a bit flaky)</li>
+<li>Keyboard interaction</li>
+</ol>
+
+<p>It&#39;s not the entire protocol yet, but it feels like a good start: I do think you can cover a lot of ground in your
+tests with those already.</p>
+
+<p>To monitor progress, and to know in details what&#39;s there and what&#39;s not, check
+<a href="https://docs.google.com/spreadsheet/ccc?key=0Am63grtxc7bDdGNqX1ZPX2VoZlE2ZHZhd09lNDkzbkE#gid=0">this spreadsheet out</a>.</p>
+
+<h3>You said &quot;explaining&quot;...</h3>
+
+<p>OK. So, GhostDriver is developed as a plain PhantomJS script that makes use of basically 2 PhantomJS built-in
+modules:</p>
+
+<ul>
+<li><code>require(&quot;webserver&quot;)</code>: to receive the Wire Protocol REST commands HTTP Requests</li>
+<li><code>require(&quot;webpage&quot;)</code>: to execute those commands into Browser Windows (i.e. 1 <code>webpage</code> corresponds to 1 <code>window</code>)</li>
+</ul>
+
+<p>You can download the source code from the repository
+(see <a href="https://github.com/detro/ghostdriver/blob/master/README.md">README.md</a>), and launch it with the following:</p>
+
+<p>[sourcecode:bash]
+$ phantomjs ghostdriver/src/main.js [LOCAL_IP:]PORT
+[/sourcecode]</p>
+
+<p>This approach was and is <strong>for development only</strong> though: GhostDriver target, since the beginning,
+was to embed the driver into PhantomJS - a feature demanded
+<a href="http://code.google.com/p/phantomjs/issues/detail?id=49">since February 2011</a>(!!!).</p>
+
+<p>So, from next release of PhantomJS (<strong>1.8</strong> should come just before Christmas) you will be able to do instead:</p>
+
+<p>[sourcecode:bash]
+$ phantomjs --webdriver=[LOCAL_IP:]PORT
+[/sourcecode]</p>
+
+<p>without the need to download anything but your favourite <em>single-binary-headless-browser</em>.
+If you are impatient though, just download latest PhantomJS <code>master</code> branch, compile with <code>./build.sh</code> and enjoy.</p>
+
+<h3>Binding</h3>
+
+<p>To make it easier to get started, <a href="https://github.com/lukeis">Luke Inman</a>-<a href="https://twitter.com/tunabum">Semerau</a>,
+Jim Evans and I have provided binding classes that
+will make even easier to get up and running with PhantomJS/GhostDriver in your Selenium/WebDriver tests.
+<a href="https://code.google.com/p/selenium/source/browse/#svn%2Ftrunk%2Fpy%2Fselenium%2Fwebdriver%2Fphantomjs">Luke is providing Python binding</a>,
+<a href="https://code.google.com/p/selenium/source/browse/#svn%2Ftrunk%2Fdotnet%2Fsrc%2FWebDriver%2FPhantomJS">Jim covers C#/.Net</a>
+and <a href="https://github.com/detro/ghostdriver/tree/master/binding/java/jars">I wrote the Java</a> ones.</p>
+
+<p>The next Selenium version is <code>2.27.0</code>, and it&#39;s going to contain those bindings (hurray!). As I write this,
+<a href="http://www.theautomatedtester.co.uk/">David Burns</a> is
+<a href="https://groups.google.com/forum/?fromgroups=#!topic/selenium-developers/0wFXuEHU2hs">taking matters into his hands</a>
+to prepare the release.</p>
+
+<p>But I&#39;m sure you want to see some code. Here is a Java snippet:
+[sourcecode:java]
+import org.openqa.selenium.phantomjs.PhantomJSDriver;</p>
+
+<p>public class TestPhantomJSDriver {</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public static void main(String[] argv) {
+    // prepare capabilities
+    Capabilities caps = new DesiredCapabilities();
+    caps.setJavascriptEnabled(true);                //&lt; not really needed: JS enabled by default
+    caps.setCapability(&quot;takesScreenshot&quot;, true);    //&lt; yeah, GhostDriver haz screenshotz!
+    caps.setCapability(
+        PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+        &quot;/path/to/your/phantomjs/binary/greater/than/1.7&quot;
+    );
+
+    // Launch driver (will take care and ownership of the phantomjs process)
+    WebDriver driver = new PhantomJSDriver(caps);
+
+    // Load Google.com
+    driver.get(&quot;http://www.google.com&quot;);
+    // Locate the Search field on the Google page
+    WebElement element = driver.findElement(By.name(&quot;q&quot;));
+    // Type Cheese
+    String strToSearchFor = &quot;Cheese!&quot;;
+    element.sendKeys(strToSearchFor);
+    // Submit form
+    element.submit();
+
+    // Check results contains the term we searched for
+    assertTrue(driver.getTitle().toLowerCase().contains(strToSearchFor.toLowerCase()));
+
+    // done
+    driver.quit();
+}
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>It&#39;s also important to highlight that <strong>GhostDriver implements the standard WebDriver WireProtocol</strong>.
+This means that you can connect to a running instance of PhantomJS in WebDriver mode by simply using any
+<code>RemoteWebDriver</code> class available in your favourite language. No strict need to use those bindings.</p>
+
+<h2>Where do I get it?</h2>
+
+<p>Because GhostDriver is now part of PhantomJS, you can get it in the next PhantomJS binary, stable release.
+It should be <strong>PhantomJS 1.8</strong>, and should be out by the 21st of December (don&#39;t tell <a href="http://ariya.ofilabs.com/">Ariya</a>
+I told you that - it&#39;s still cooking :-) ).</p>
+
+<p>In the meantime, as briefly mentioned above, you have to do a bit of leg work: check out latest PhantomJS
+<code>master</code> branch (from either <a href="https://github.com/ariya/phantomjs">Ariya&#39;s (official upstream)</a> or
+<a href="https://github.com/detro/phantomjs">my own (usually in sync with upstream)</a>),
+and compile it (takes 30 minutes on average specs machine - much less if you have got <em>SSD</em>).</p>
+
+<p>The nice thing is that to build this you apply the same &quot;set-up&quot; required to compile any PhantomJS: nothing special
+is required. Just follow the instructions from <a href="http://phantomjs.org/build.html">here</a>
+if you have never compiled it before.</p>
+
+<h2>After <code>1.0.0</code>: what&#39;s next?</h2>
+
+<p>There is a lot left to do. To push for 1.0.0 I had to make compromises, particularly in the number of Wire Protocol
+commands I had to implement. Few key ones haven&#39;t made it, but work on them it&#39;s already started
+(mostly in my head for now).</p>
+
+<h3><code>1.0.1</code>: bug fixes</h3>
+
+<p>I plan to have a <code>1.0.1</code> to address all the immediate issues. The work for this will be limited fixing bugs though.
+I already got a couple of issues / comments reported and I&#39;ll act on those.</p>
+
+<p>So, don&#39;t expect this release to be anything BUT bug-fixes: new stuff has to go in <em>&quot;at the right time&quot;</em> (see next).</p>
+
+<p>A quick list of issues that will be address in this release:</p>
+
+<ul>
+<li><a href="https://github.com/detro/ghostdriver/issues/123">Issue #123</a>:
+Wait for potential &quot;Page Load&quot; when &quot;Element.click()&quot; is used</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/119">Issue #119</a>:
+Command <code>/shutdown</code> arrives via <code>HTTP HEAD</code> in some language bindings (by <a href="https://github.com/jarib">Jari Bakken</a>)</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/124">Issue #124</a>:
+Invalid response when checking element equality</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/126">Issue #126</a>:
+Crash on <code>get</code> + <code>execute_async_script</code></li>
+</ul>
+
+<p>Track the work for <code>1.0.1</code> <a href="https://github.com/detro/ghostdriver/issues?labels=1.0.1&amp;page=1&amp;state=open">here</a>.</p>
+
+<h3><code>1.1.0</code>: new features</h3>
+
+<p>This is <em>&quot;the right time&quot;</em> to add new features. This will be about pushing towards a full, complete WireProtocol
+implementation. So far I have picked the following from the issue tracker:</p>
+
+<ul>
+<li><a href="https://github.com/detro/ghostdriver/issues/108">Issue #108</a>: &quot;Timeouts default value should be INFINITE&quot;</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/120">Issue #120</a>:
+Improve command line interface: support for just <code>--webdriver</code> without parameters</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/121">Issue #121</a>:
+Better check for command line parameter: enforce <code>LOCAL_IP:PORT</code> or <code>localhost:PORT</code></li>
+<li><a href="https://github.com/detro/ghostdriver/issues/20">Issue #20</a>: Implement support for JavaScript Alert/Prompt/Confirm</li>
+<li><a href="https://github.com/detro/ghostdriver/issues/84">Issue #84</a>:
+Rewrite the Request Routing code to be more like <a href="http://expressjs.com/">Node.js&#39;s Express</a></li>
+<li><a href="https://github.com/detro/ghostdriver/issues/57">Issue #57</a>: Implement &quot;Drag &amp; Drop&quot; action builder</li>
+</ul>
+
+<p>Track the work for <code>1.1.0</code> <a href="https://github.com/detro/ghostdriver/issues?labels=1.1&amp;page=1">here</a>.</p>
+
+<h3><code>1.x</code>: finishing up</h3>
+
+<p>Well, this is quite simple. I can&#39;t plan too much ahead, but the idea is to push toward 100% of the whole
+WireProtocol. Maybe putting on top of that some Mobile User Agent simulation, but that requires some thinking first.</p>
+
+<h2>Anything else?</h2>
+
+<p>Developing a WebDriver has been quite a journey so far, and it&#39;s not yet finished.
+If you listen to some of the Selenium devs, apparently will never actually end, as issues, feature requests,
+criticism and pure simple <em>trolling</em> should keep flowing. At least that should happen if this is successful.</p>
+
+<p>That might turn out to be tiring (or a failure), but I don&#39;t hide that knowing this is something that
+few people actually want to use makes me a tiny bit proud of my self.</p>
+
+<h3>Priorities</h3>
+
+<p>Before I go deep into another cycle of development though, my personal life is to regain some priority:
+<strong>I&#39;m getting married in April 2013</strong>. That, as you might expect, will take time and energy.
+So, if you want to contribute to a small Open Source project that has some potential to be awesome, please join me and
+the other few awesome souls that helped me so far. And this leads me to my last thoughts and conclusions...</p>
+
+<h3>Lesson learned (still learning actually!)</h3>
+
+<p>As any small Open Source project, I need contributors. People that are willing to either write code, or kind enough
+to report issues in a <strong>proper and reproducible</strong> manner.
+One thing I had to learn is that, if I want to keep this project going, I need to be very strict in what I allow
+myself to get involved into.</p>
+
+<p>And, worst of all, while I got a bunch of guys really supportive of this work (I&#39;m looking at you, Selenium-ers),
+there is always the kind of jerk that prefers to spend time telling you why you are going
+to fail, instead of trying to help you contributing improvements or fixes.</p>
+
+<p>Those &quot;encounters&quot; taught me some very useful things:</p>
+
+<ol>
+<li><em>Open Source it&#39;s not Democracy</em>: You have to keep the ship sailing in the right direction</li>
+<li><em>Open Source it&#39;s a &quot;doers&quot; culture</em>: ignore who talks and does nothing - embrace who makes things happen</li>
+<li><em>Lots of people ignore README files</em>: they just don&#39;t read - but don&#39;t get too upset by it</li>
+<li><em>Kill unhelpful issues</em>: they pollute the bug-tracker and lower morale, but reopen and discuss if the reporter &quot;comes back to his senses&quot;</li>
+</ol>
+
+<p>I have recently started to read <a href="http://www.amazon.co.uk/Team-Geek-Software-Developers-Working/dp/1449302440">Team Geek</a>, and it matches perfectly what I have experienced so far. Read it if you can!</p>
+
+<h2>Conclusions</h2>
+
+<p>This post was long overdue, and it took me few days to finish it up. I&#39;m sure I could add more details here, but it&#39;s now the 4th night in a row and I want to move on.</p>
+
+<p>What else can I say? <strong>Just that I hope this to be the first of other, even better releases!</strong></p>
+
+<p>Happy Driving! :)</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

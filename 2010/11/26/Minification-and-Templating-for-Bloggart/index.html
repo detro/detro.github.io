@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Minification and Templating for Bloggart</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Minification and Templating for Bloggart</h2>
+<p class="meta">26 Nov 2010</p>
+
+<div class="post">
+<p>I&#39;m sick home, but I can&#39;t just sit in bed. It&#39;s not how I work: I need to do something. So, I decided to give some love to Bloggart and put into proper code some features <a href="http://blog.ivandemarino.me/2010/11/25/Too-busy-to-blog">I already said</a> I wanted to add.</p>
+
+<div style="text-align: center; margin: 10px;" class="img">
+<img src="http://www.greatescapecars.co.uk/images/library/images/Mini01.JPG" />
+</div>
+
+<p>I just committed on <a href="https://github.com/detro/bloggart/commits/master">my Bloggart fork</a> quite a list of things:</p>
+
+<ul>
+<li>Support for JS and CSS &#39;Minification&#39; (no obfuscation though)</li>
+<li>Support for JS and CSS &#39;Templating&#39; (i.e. Being able to use App Engine Djiango Template grammar into JS and CSS files)</li>
+<li>Support for JS and CSS &#39;Memcaching&#39;</li>
+<li>Show line numbers for &#39;&lt;pre&gt;sourcecode&lt;/pre&gt;&#39; areas in posts</li>
+</ul>
+
+<p>Even though this is simple stuff, two of them stand out I think: <strong>Minification and Templating</strong>. Why? Because even if those are not complex or new, they speed Bloggart up even more! Let me spend a couple of words on it, so that it can be useful for you, even if you are not planning to use Bloggart.</p>
+
+<h3>How I implemented Minification and Templating in Bloggart</h3>
+
+<p>The magic is made of 3 parts. First, a new URL handler in the <a href="https://github.com/detro/bloggart/blob/master/app.yaml">app.yaml</a> file:</p>
+
+<p>[sourcecode:yaml]</p>
+
+<h1>...</h1>
+
+<ul>
+<li><p>url: /.*.(css|js)
+script: minifier.py</p></li>
+<li><p>url: /static/([^/]+)/(.<em>)
+static_files: themes/\1/static/\2
+upload: themes/[^/]+/static/.</em></p>
+
+<h1>...</h1>
+
+<p>[/sourcecode]</p></li>
+</ul>
+
+<p>This routes requests to CSS and JS files to a new Request Handler, <a href="https://github.com/detro/bloggart/blob/master/minifier.py">minifier.py</a>:</p>
+
+<p>[sourcecode:python]</p>
+
+<h1>...</h1>
+
+<p>class CssMinifier( webapp.RequestHandler ):<br>
+   def get( self, requestedCssFilename ):
+      cssPath = os.path.join( os.path.dirname( <strong>file</strong> ), &#39;themes/%s/%s&#39; % (config.theme, requestedCssFilename) );
+      if ( not os.path.exists(cssPath) ):
+         util.setErrorResponse(self, 404);
+         return;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  cssRenderingResult = None;
+  if ( config.memcaching ):
+     cssRenderingResult = memcache.get(cssPath);
+
+  if ( cssRenderingResult is None ):      
+     cssRenderingResult = template.render(cssPath, { &#39;config&#39; : config });
+
+     if ( config.logging_level != logging.DEBUG ):
+        cssRenderingResult = cssmin.minify(cssRenderingResult);
+
+     memcache.set(cssPath, cssRenderingResult);
+
+  self.response.headers[&#39;Content-Type&#39;] = &#39;text/css&#39;
+  self.response.out.write( cssRenderingResult );
+</code></pre></div>
+<p>class JSMinifier( webapp.RequestHandler ):<br>
+   def get( self, requestedJsFilename ):
+      jsPath = os.path.join( os.path.dirname( <strong>file</strong> ), &#39;themes/%s/%s&#39; % (config.theme, requestedJsFilename) );
+      if ( not os.path.exists(jsPath) ):
+         util.setErrorResponse(self, 404);
+         return;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  jsRenderingResult = None;
+  if ( config.memcaching ):
+     jsRenderingResult = memcache.get(jsPath);
+
+  if ( jsRenderingResult is None ):         
+     jsRenderingResult = template.render(jsPath, { &#39;config&#39; : config });
+
+     if ( config.logging_level != logging.DEBUG ):
+        jsRenderingResult = jsmin.jsmin(jsRenderingResult);
+
+     memcache.set(jsPath, jsRenderingResult);
+
+  self.response.headers[&#39;Content-Type&#39;] = &#39;application/javascript&#39;
+  self.response.out.write( jsRenderingResult );
+</code></pre></div>
+<p>application = webapp.WSGIApplication([
+                                      ( &#39;(/.<em>.js)$&#39;, JSMinifier ),
+                                      ( &#39;(/.</em>.css)$&#39;, CssMinifier )
+                                      ], debug=True )</p>
+
+<h1>...</h1>
+
+<p>[/sourcecode]</p>
+
+<p>The minification is done using a couple of libraries that I&#39;ll mention in a second. Templating is transparently applied <strong>BEFORE Minification</strong>, so that the Theme developer (me most probably) can use code like the following to Bundle JS and CSS in as less HTTP Requests as possible:</p>
+
+<p>[sourcecode:djiango]
+/* CSS code... <em>/
+Include file &#39;&quot;another_file.css&quot;&#39; contains invalid characters or sequences
+/</em> more CSS code */
+[/sourcecode]</p>
+
+<p>The actual business logic for the minification is done by <a href="https://github.com/detro/bloggart/blob/master/lib/cssmin.py">lib/cssmin.py</a> and <a href="https://github.com/detro/bloggart/blob/master/lib/jsmin.py">lib/jsmin.py from Douglas Crockford</a>.</p>
+
+<p>If you are a Python App Engine developer, I hope you find useful this <em>simple-yet-effectiv</em>e technique.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

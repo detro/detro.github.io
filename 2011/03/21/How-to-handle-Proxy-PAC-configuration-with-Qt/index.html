@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>How to handle Proxy PAC configuration with Qt</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>How to handle Proxy PAC configuration with Qt</h2>
+<p class="meta">20 Mar 2011</p>
+
+<div class="post">
+<p>This article was originally <a href="http://blog.orangelabsuk.com/2010/06/03/extract-proxy-configuration-from-a-pac-file-with-qt/">written on another blog</a>. That blog was never <em>officially published</em>, and it will probably never be. It was written on the <strong>3rd of June 2010</strong>, but is still &quot;somewhat important&quot; and relevant.</p>
+
+<p>Since the post was published, <strong>Richard Moore <rich @linux…fpb.site></strong> has done <a href="http://gitorious.org/qt-examples/qt-examples/trees/master/pac-files">a commit in the Qt examples directory that resamples very closely my code below</a>.</p>
+
+<p>So, I decided to repost it here.</p>
+
+<h1>Qt and Proxy Configuration</h1>
+
+<p>What’s great of <a href="http://qt.nokia.com/">Qt</a>, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time.</p>
+
+<p>For us a Mobile Developer like me, coming from a <a href="http://www.symbian.org/">Symbian</a> background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive.</p>
+
+<p>There are (very small) shortcomings though. Qt provides <a href="http://doc.qt.nokia.com/4.6/qnetworkproxyfactory.html">QNetworkProxyFactory</a> to get the proxy configuration from the System Configuration, but <a href="http://doc.qt.nokia.com/4.6/qnetworkproxyfactory.html#systemProxyForQuery">it works only on Windows and, partially, on Mac</a>. Other platforms are not handled for now. That’s unfortunate, given that we mainly work with Qt on Symbian and, in my current case, <a href="http://maemo.org/">Maemo 5</a>.</p>
+
+<div class="img">
+<img src="http://sis.sissa.it/_media/services/network/proxy/safari/macosx/saf_pac_mod.jpg" alt="Automatic Proxy Configuration on Mac OS X" />
+Automatic Proxy Configuration on Mac OS X
+</div>
+
+<h1>What could be done on Linux</h1>
+
+<p>Of course this can be worked out: in the case of Maemo, being it based on <a href="http://www.kernel.org/">Linux</a>, I will probably just have to find a way to interface with the <strong>gconftool</strong> or make use of <code>QProcess::systemEnvironment()</code>. But what if you are in a LAN where the Proxy configuration is distributed across different offices using a <a href="http://en.wikipedia.org/wiki/Proxy_auto-config">PAC file</a>? Well, you need to work by hand.</p>
+
+<p>A PAC file is a Javascript that looks like this:
+[sourcecode:javascript]
+function FindProxyForURL(url, host) {
+   // our local URLs from the domains below example.com don&#39;t need a proxy:
+   if (shExpMatch(url,&quot;<em>.example.com/</em>&quot;))                  {return &quot;DIRECT&quot;;}
+   if (shExpMatch(url, &quot;<em>.example.com:</em>/*&quot;))               {return &quot;DIRECT&quot;;}</p>
+
+<p>// URLs within this network are accessed through
+   // port 8080 on fastproxy.example.com:
+   if (isInNet(host, &quot;10.0.0.0&quot;,  &quot;255.255.248.0&quot;))    {
+      return &quot;PROXY fastproxy.example.com:8080&quot;;
+   }</p>
+
+<p>// All other requests go through port 8080 of proxy.example.com.
+   // should that fail to respond, go directly to the WWW:
+   return &quot;PROXY proxy.example.com:8080; DIRECT&quot;;
+}
+[/sourcecode]</p>
+
+<p>Working by hand looks scary, because, like in our case, a script can be huge and complex. A <a href="http://en.wikipedia.org/wiki/Regular_expression">RegExp</a> is a very bad idea, and start from “square one” with <a href="http://en.wikipedia.org/wiki/Lex_(software">LEX</a>) and <a href="http://en.wikipedia.org/wiki/Yacc">YACC</a> would feel dumb… and an overkill.</p>
+
+<h1><code>QtScript</code> to the rescue</h1>
+
+<p>Fortunately, Qt provides a lot of help. The <a href="http://doc.qt.nokia.com/4.7-snapshot/network-programming.html">QtNetwork</a> and <a href="http://doc.qt.nokia.com/4.7-snapshot/qtscript.html">QtScript</a> (<a href="http://labs.qt.nokia.com/2009/11/23/qtscript-in-46/">now based on WebKit’s JavascriptCore</a>) have what it takes to solve the problem. What I show here is a usage of the QtScript Engine, that takes the PAC file and executes it to extract the right configuration.</p>
+
+<p>[sourcecode:cpp]</p>
+
+<h1>include <QtCore/QCoreApplication></h1>
+
+<h1>include <QScriptEngine></h1>
+
+<h1>include <QIODevice></h1>
+
+<h1>include <QFile></h1>
+
+<h1>include <QDebug></h1>
+
+<h1>include <QScriptValue></h1>
+
+<h1>include <QHostInfo></h1>
+
+<h1>include <QHostAddress></h1>
+
+<h1>include <QNetworkInterface></h1>
+
+<p>// Functions to implement are here:
+// - http://linuxmafia.com/faq/Web/autoproxy.html
+// - http://www.returnproxy.com/proxypac/static/netscape-proxy-format.html</p>
+
+<p>QScriptValue dnsResolve(QScriptContext *context, QScriptEngine *engine) {
+   Q_UNUSED(engine)
+   QString toResolve = context-&gt;argument(0).toString();
+   qDebug() &lt;&lt; &quot;dnsResolve - toResolve: &quot; &lt;&lt; toResolve;</p>
+
+<p>QHostInfo info = QHostInfo::fromName(toResolve);
+   if ( info.error() == QHostInfo::NoError ) {
+      return info.addresses().first().toString(); //&lt; Pick the first one
+   } else {
+      return QString(&quot;Host not found&quot;);
+   }
+}</p>
+
+<p>QScriptValue isPlainHostName(QScriptContext *context, QScriptEngine *engine) {
+   Q_UNUSED(engine)
+   QString hostname = context-&gt;argument(0).toString();
+   qDebug() &lt;&lt; &quot;isPlainHostName - hostname: &quot; &lt;&lt; hostname;</p>
+
+<p>return hostname.contains(&#39;.&#39;) ? false : true;
+}</p>
+
+<p>QScriptValue isInNet(QScriptContext *context, QScriptEngine *engine) {
+   Q_UNUSED(engine)
+   QString host = context-&gt;argument(0).toString();
+   QHostAddress hostAddress;
+   QPair<QHostAddress, int> subnet;
+   QString pattern = context-&gt;argument(1).toString();
+   QString mask = context-&gt;argument(2).toString();
+   qDebug() &lt;&lt; &quot;isInNet - host: &quot; &lt;&lt; host;
+   qDebug() &lt;&lt; &quot;isInNet - pattern: &quot; &lt;&lt; pattern;
+   qDebug() &lt;&lt; &quot;isInNet - mask: &quot; &lt;&lt; mask;</p>
+
+<p>QHostInfo info = QHostInfo::fromName(host);
+   if ( info.error() == QHostInfo::NoError ) {
+      hostAddress = info.addresses().first();
+      subnet = QHostAddress::parseSubnet(QString(&quot;%1/%2&quot;).arg(pattern,mask));
+      qDebug() &lt;&lt; &quot;Host &quot;&lt;&lt; host &lt;&lt; &quot; is in Subnet &quot; &lt;&lt; QString(&quot;%1/%2&quot;).arg(pattern,mask) &lt;&lt; &quot;? &quot; &lt;&lt; hostAddress.isInSubnet(subnet);
+      return hostAddress.isInSubnet(subnet);
+   } else {
+      return false;
+   }
+}</p>
+
+<p>QScriptValue myIpAddress(QScriptContext *context, QScriptEngine *engine) {
+   Q<em>UNUSED(context)
+   Q</em>UNUSED(engine)</p>
+
+<p>foreach ( QHostAddress address, QNetworkInterface::allAddresses() ) {
+      if( !address.isNull()
+         &amp;&amp; address != QHostAddress::Null
+         &amp;&amp; address != QHostAddress::LocalHost
+         &amp;&amp; address != QHostAddress::LocalHostIPv6
+         &amp;&amp; address != QHostAddress::Broadcast
+         &amp;&amp; address != QHostAddress::Any
+         &amp;&amp; address != QHostAddress::AnyIPv6
+         ) {
+         qDebug() &lt;&lt; &quot;myIpAddress - &quot; &lt;&lt; address.toString();
+         return address.toString(); //&lt; Pick the First one
+      }
+   }
+}</p>
+
+<p>int main(int argc, char *argv[])
+{
+   QCoreApplication a(argc, argv);</p>
+
+<p>QScriptEngine engine;
+   QString str;</p>
+
+<p>// Read the PAC file in a String
+   QFile scriptFile(&quot;:/proxy-config.pac&quot;);
+   if ( !scriptFile.open(QIODevice::ReadOnly|QIODevice::Text) ) {
+      return EXIT_FAILURE;
+   }
+   str = scriptFile.readAll();
+   scriptFile.close();</p>
+
+<p>// Inject the extra JS function as explained above
+   QScriptValue dnsResolveFunction = engine.newFunction(dnsResolve);
+   engine.globalObject().setProperty(&quot;dnsResolve&quot;, dnsResolveFunction);
+   QScriptValue isPlainHostNameFunction = engine.newFunction(isPlainHostName);
+   engine.globalObject().setProperty(&quot;isPlainHostName&quot;, isPlainHostNameFunction);
+   QScriptValue isInNetFunction = engine.newFunction(isInNet);
+   engine.globalObject().setProperty(&quot;isInNet&quot;, isInNetFunction);
+   QScriptValue myIpAddressFunction = engine.newFunction(myIpAddress);
+   engine.globalObject().setProperty(&quot;myIpAddress&quot;, myIpAddressFunction);</p>
+
+<p>// Evalute the PAC file
+   if ( engine.canEvaluate(str) ) {
+      engine.evaluate(str);
+      QScriptValue ctor = engine.evaluate(&quot;FindProxyForURL(\&quot;http://blog.orangelabsuk.com\&quot;, \&quot;blog.orangelabsuk.com\&quot;)&quot;);
+      if ( !ctor.isError() ) {
+         qDebug() &lt;&lt; ctor.toString();
+         return EXIT_SUCCESS;
+      }
+   }</p>
+
+<p>qDebug() &lt;&lt; &quot;Error Occurred&quot;;
+   return EXIT_FAILURE;
+}
+[/sourcecode]</p>
+
+<p>As you can see, what I had to add to the QtScript module was just the implementation of some of the core functions that a PAC interpreter has to offer. Those are not part of the standard Javascript, but QtScript makes it super-easy to inject what is missing.</p>
+
+<h1>Contributing back?</h1>
+
+<p>Maybe I’ll should see if the Trolls are interested in getting something like that added to Qt. Maybe a method like
+[sourcecode:cpp]
+QNetworkProxyFactory::proxyForPac(const QIODevice &amp;pacFile)
+[/sourcecode]
+could be added to the current QNetworkProxyFactory.</p>
+
+<p><strong>What do you think?</strong></p>
+
+<p>PS If you are asking yourself if there is a BUG/FEATURE-REQUEST on the Qt Official Bugzilla, here is what you can currently find:</p>
+
+<ul>
+<li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-2069">QTBUG-2069</a></li>
+<li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-9588">QTBUG-9588</a></li>
+</ul>
+
+<p>and both are marked as <em>“P3: Somewhat important”</em>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

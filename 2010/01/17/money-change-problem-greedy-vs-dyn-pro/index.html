@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Money change problem: Greedy vs. Dyn.Pro.</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Money change problem: Greedy vs. Dyn.Pro.</h2>
+<p class="meta">17 Jan 2010</p>
+
+<div class="post">
+<p>This is a classical problem of <a href="http://en.wikipedia.org/wiki/Computer_science">Computer Science</a>: it&#39;s used to study both <a href="http://en.wikipedia.org/wiki/Greedy_algorithm">Greedy</a> and <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Dynamic Programming</a> algorithmic techniques.</p>
+
+<div class="img">
+<img src="http://www.freephotosbank.com/photographers/photos1/45/med_53ff4957d796d0ff0a7d3151ec4e4a20.jpg" alt="Coins" />
+I hate having my pocket full of copper!!! -_-
+</div>
+
+<h2>Definition</h2>
+
+<p>Given:
+<ul>
+<li>A set of <code>n</code> Denominations <code>D[0...n-1]</code> in ascending order, representing a Monetary Coin System</li>
+<li>An money amount <code>A</code>, as input</li>
+</ul>
+calculate a solution:
+<ul>
+    <li><strong><code>S[0...n-1]</code></strong>, with <code>0 &lt;= S[i] &lt;= (A/S[i])</code> and <code>0 &lt; i &lt; n-1</code></li>
+</ul>
+where:
+<ul>
+    <li><strong><code>A = Sum<sub>[i=0 -&gt; n-1]</sub> { D[i] * S[i] }</code></strong></li>
+    <li><strong><code>Min{ Sum<sub>[i=0 -&gt; n-1]</sub> { S[i] } }</code></strong></li>
+</ul></p>
+
+<h2>In other words</h2>
+
+<p>Find the smallest amount of coins to make the given amount.</p>
+
+<h2>First, the Greedy solution</h2>
+
+<p>The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy.
+[soucecode:c]
+change<em>coins</em>greedy(D[], A):
+   init S[n]
+   i = n-1
+   // Pick as much largest coins as possible
+   while ( A &gt; 0 ) do:
+      S[i] = A / D[i]
+      A = A - S[i] * D[i]
+      i = i - 1
+   endwhile</p>
+
+<p>// Set to &#39;0&#39; the result for all the other coins
+   while ( i &gt;= 0 ) do:
+      S[i] = 0
+      i = i - 1
+   endwhile
+[/sourcecode]
+This algorithm, of time complexity <strong>O(A)</strong>, doesn&#39;t work for some (rare) situations.</p>
+
+<h2>When Greedy is not enough</h2>
+
+<del datetime="2010-01-18T10:41:49+00:00">The Greedy algorithm doesn't work for Denominations where if <strong>2 denominations D[i] and D[j] exists</strong> with:</del>
+
+<ul>
+<li><del datetime="2010-01-18T10:41:49+00:00"><strong>i &lt; j</strong></del></li>
+<li><del datetime="2010-01-18T10:41:49+00:00"><strong>D[i] &lt; D[j]</strong></del></li>
+<li><del datetime="2010-01-18T10:41:49+00:00"><strong>2 * D[i] &gt; D[j]</strong></del></li>
+</ul>
+
+<del datetime="2010-01-18T10:41:49+00:00">For example, taken <strong>D = {1, 10, 30, 40}</strong> and amount <strong>A = 63</strong>, the Greedy algorithm will build a solution <strong>S = {3, 2, 0, 1}</strong>, that is sub-optimal. The optimal solution in this case is <strong>S = {3, 0, 2, 0}</strong>.</del>
+
+<p><strong>UPDATE:</strong> <a href="#comment-11505">In the comments Vincenzo</a> gives an example where this condition doesn&#39;t still stand but the Greedy Algorithm still produces the best solution.</p>
+
+<h2>Dynamically Programmed Solution</h2>
+
+<p>In real life the Greedy algorithm should be always enough: I couldn&#39;t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being &quot;normally&quot; applies when changing money.</p>
+
+<p>But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one.</p>
+
+<p>Given the function <strong>M[j], that is the minimum number of coins to make the amount &#39;j&#39;</strong>, it looks like:
+<ul>
+<li><strong>M[A] = min<sub>[i = 0 -&gt; n-1]</sub> { M[ A - D[i] ] +1 , M[A] }</strong></li>
+</ul>
+Here is the code:
+[sourcecode:c]
+unsigned int* change<em>coins</em>dynpro(unsigned short int D[],
+    unsigned int D<em>size, unsigned int amount) {
+    // Min. num. of coins for the given &#39;amount&#39;
+    unsigned int min</em>num<em>coins[amount], cur</em>min<em>num</em>coins;
+    // Biggest coin used for the given &#39;amount&#39;
+    unsigned int biggest<em>coin</em>at[amount], cur<em>biggest</em>coin_at;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">unsigned int i, j;
+unsigned int* solution = NULL;
+
+// Ensure the Denomination System can represent any value
+if ( D[0] != 1 ) return NULL;
+
+// Initialize the solution array to Zero
+solution = (unsigned int*)calloc(D_size, sizeof(unsigned int));
+if ( NULL == solution ) {
+    return NULL;
+}
+
+// Amount &#39;0&#39; requires &#39;0&#39; coins
+min_num_coins[0] = 0;
+biggest_coin_at[0] = 0;
+
+// For Amounts from &#39;1&#39; to &#39;amount&#39;
+for ( i = 1; i &lt;= amount; ++i ) {
+    // Start taking &#39;D[0]&#39; &#39;i-times&#39;
+    cur_min_num_coins = (i / D[0]);
+    cur_biggest_coin_at = 0;
+
+    // For coins from &#39;D[1]&#39; to &#39;D[D_size -1]&#39;
+    for ( j = 1; j &lt; D_size; ++j ) {
+        // If &#39;D[j]&#39; minimizes the num. of coins to take for amount &#39;i&#39;
+        if ( (i &gt;= D[j]) &amp;&amp; (cur_min_num_coins &gt;= (min_num_coins[ i - D[j] ] +1)) ) {
+            cur_min_num_coins = min_num_coins[ i - D[j] ] +1;
+            cur_biggest_coin_at = j;
+        }
+    }
+
+    // Store the minimum just found
+    min_num_coins[i] = cur_min_num_coins;
+    biggest_coin_at[i] = cur_biggest_coin_at;
+}
+
+// Let&#39;s build the solution array
+while ( amount &gt; 0 ) {
+    cur_biggest_coin_at = biggest_coin_at[amount];
+
+    solution[ cur_biggest_coin_at ] += 1; // Add &#39;1&#39; of this coin to the solution
+    amount -= D[cur_biggest_coin_at]; // Amount left when picking this coin
+}
+
+return solution;
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>Time complexity for this algorithm is <strong>O( Amount * num<em>of</em>denominations )</strong>.
+<em>Pretty heavy algorithm, but do you want to compare with the satisfaction of carrying the minimum amount of coins with you? :P</em></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

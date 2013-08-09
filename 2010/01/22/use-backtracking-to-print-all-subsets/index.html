@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Use Backtracking to print all Subsets</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Use Backtracking to print all Subsets</h2>
+<p class="meta">22 Jan 2010</p>
+
+<div class="post">
+<p>I&#39;m &quot;studying&quot; this algorithmic technique: <a href="http://en.wikipedia.org/wiki/Backtracking">Backtracking</a>. This is an algorithmic approach to problem solution that I trust every good Computer Scientist already uses; but taking a <a href="http://www.algorist.com/">good theo-practical look</a> at it is something better.</p>
+
+<div class="img">
+<img src="http://upload.wikimedia.org/wikipedia/commons/2/2c/Depthfirst.png" alt="A Backtracking Tree" width="200"/>
+A Backtracking Tree
+</div>
+
+<p>I believe you can find enough informations about it online (the 2 links I provided are more than enough), so I&#39;ll go straight to the problem.</p>
+
+<h2>Problem definition</h2>
+
+<p>Given an integer <code>n</code>, and the set <code>S = { 1 ... n }</code>, calculate (print) all the possible subsets of <code>S</code>. For example, for <code>n = 1</code>, all the possible subsets are <code>{ 1 }</code> and <code>{ }</code> (empty set). For <code>n = 2</code>, all the possible subsets are: <code>{ 1 2 } { 1 } { 2 } { }</code>. In general, for the set made of the first <code>n Integers</code>, the number of possible subsets is <code>2<sup>n</sup></code>.</p>
+
+<h2>Approaching the problem</h2>
+
+<p>A way to describe a possible subset is an <strong>array of <code>n</code> elements, one for every integers; every element in the array will have value <code>TRUE</code> if the correspondent integers is part of the subset, <code>FALSE</code> otherwise</strong>.</p>
+
+<p>Why the Backtracking then? Because the backtracking technique is designed to generate every possible &quot;candidate solution&quot; once. If we design the algorithm smartly, we can get the backtracking logic to work for us and generate all the possible subsets.</p>
+
+<p>Are you are asking yourself: <em>&quot;isn&#39;t this a bit of a stretching of the backtracking approach?&quot;</em>. I believe it is: the code could be made way smaller, even though it would have the same complexity. We are going to execute the backtracking, designing the algorithm so it will never stop until it tried every possible solution. No &quot;intermediate stopping condition&quot; then.</p>
+
+<h2>Solution</h2>
+
+<p>Give a good look at the <strong><code>void backtrack(int *curr<em>sol, int curr</em>sol_size, int input)</code></strong>: it works as a <strong><em>&quot;skeleton&quot;</em></strong> for <em>generic backtracking</em> algorithms. I&#39;m going to use it in the future as well: I&#39;m going to have fun to implement a <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> solver ASAP (probably this weekend). Why? Because I suck at Sudoku: never got into it very much to learn how to play :-P.</p>
+
+<p>Anyway, here is the code
+[sourcecode:c]</p>
+
+<h1>include <stdio.h></h1>
+
+<h1>include <stdlib.h></h1>
+
+<p>// Fake boolean values</p>
+
+<h1>define TRUE    (1)</h1>
+
+<h1>define FALSE   (0)</h1>
+
+<p>// Candidates used at every recursive call</p>
+
+<h1>define MAX_CANDIDATES 2</h1>
+
+<p>// Define the &quot;bool&quot; type using &quot;short int&quot;
+typedef short int bool;
+static bool finished = FALSE;</p>
+
+<p>bool reject(int* curr<em>sol, int curr</em>sol_size, int input) {
+    return FALSE; // EMPTY for now
+}</p>
+
+<p>bool accept(int* curr<em>sol, int curr</em>sol<em>size, int input) {
+    return (curr</em>sol_size == input);
+}</p>
+
+<p>void output(int* curr<em>sol, int curr</em>sol<em>size, int input) {
+    static int i;
+    printf(&quot;[ &quot;);
+    for ( i = 1; i &lt;= curr</em>sol<em>size; ++i ) {
+        if ( curr</em>sol[i] == TRUE ) printf(&quot;%d &quot;, i);
+    }
+    printf(&quot;]\n&quot;);
+}</p>
+
+<p>void extend<em>solution(int* curr</em>sol, int curr<em>sol</em>size, int input, int* candidates, int* num<em>candidates) {
+    // Only 2 possibilities: the element is take or not taken
+    candidates[0] = TRUE;
+    candidates[1] = FALSE;
+    *num</em>candidates = 2;
+}</p>
+
+<p>void try(int *curr<em>sol, int curr</em>sol_size, int input) {
+    // EMPTY for now
+}</p>
+
+<p>void revert(int *curr<em>sol, int curr</em>sol_size, int input) {
+    // EMPTY for now
+}</p>
+
+<p>void backtrack(int *curr<em>sol, int curr</em>sol<em>size, int input) {
+    int candidates[MAX</em>CANDIDATES];
+    int num_candidates;
+    int i;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">if ( reject(curr_sol, curr_sol_size, input) ) {
+    return; // Not worth completing
+}
+
+if ( accept(curr_sol, curr_sol_size, input) ) {
+    output(curr_sol, curr_sol_size, input); // Found! Print it
+} else {
+    ++curr_sol_size; // Increase solution size
+
+    // Generate solution extension
+    extend_solution(curr_sol, curr_sol_size, input, candidates, &amp;num_candidates);
+    // Try every candidates just generated
+    for ( i = 0; i &lt; num_candidates; ++i ) {
+        curr_sol[curr_sol_size] = candidates[i];
+
+        try(curr_sol, curr_sol_size, input);
+
+        backtrack(curr_sol, curr_sol_size, input);
+
+        revert(curr_sol, curr_sol_size, input);
+
+        if ( finished ) return; // Early termination
+    }
+}
+</code></pre></div>
+<p>}</p>
+
+<p>void print<em>all</em>subset<em>from</em>1_to(int n) {
+    int *sol;
+    sol = malloc(n * sizeof(int));
+    backtrack(sol, 0, n);
+    free (sol);
+}</p>
+
+<p>int main(int argc, char** argv) {
+    int input;
+    if ( argc == 2 ) input = atoi(argv[1]); else return (EXIT_FAILURE);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">print_all_subset_from_1_to(input);
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<h2>Complexity</h2>
+
+<p>Time Complexity? Actually, I believe we are talking about a very complex algorithm here: there are <strong>2<sup>n</sup></strong> different subsets here, but to generate everyone of them, the algorithm has to go deep down in every branch of the Backtracking tree. And, given that the depth of a branch is exactly <strong>n</strong> (because is when the printing actually happens), I believe here we have a <strong>O(n * 2^n)</strong> complexity; pretty big. But I could be wrong, so if any <a href="http://en.wikipedia.org/wiki/Big_O_notation">Big-O notation</a> expert is out there, please advice.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

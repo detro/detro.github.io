@@ -1,0 +1,100 @@
+<p>Another old-classic problem: the <a href="http://en.wikipedia.org/wiki/Merge_sort">Merge Sort</a>.</p>
+
+<div class="img">
+<img src="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/Gifs/mergeSort.gif" alt="Merge Sort Algorithm" />
+Merge Sort Algorithm
+</div>
+
+<h2>The problem of the classical implementation</h2>
+
+<p>The whole algorithm is explained in the wikipedia link above, so I&#39;ll focus on the problem here.</p>
+
+<p>The Merge Sort is an<strong> in-place-sorting-algorithm</strong> that requires some support memory to do it&#39;s calculations. At the <em>&quot;merge step&quot;</em>, an amount of memory as large as the current portion of array being merged is allocated to be used as <strong>priority queue</strong> (again, the why is easy to find on the web).
+After this memory is used, normally get&#39;s released.</p>
+
+<p>Theoretically speaking, the amount of memory that at every recursive call get&#39;s created is always <strong><code>&lt;= size-of-input-array</code></strong>. So, no big deal: we knew it.</p>
+
+<p>Unfortunately in practice this is not always a good idea: <code>malloc(...)</code> and <code>free(...)</code> are <a href="http://en.wikipedia.org/wiki/System_call">System Calls</a>, and those are expensive to do. They <em>normally</em> require <a href="http://en.wikipedia.org/wiki/Context_switch">Context Switches</a> and other system operations that I can&#39;t advice to do without properly thinking through your code.</p>
+
+<h2>A more <em>&quot;Polite&quot;</em> Merge Sort</h2>
+
+<p>So, because we know the amount of memory that is going to be needed by this algorithm, why don&#39;t we design one that takes it in the beginning and doesn&#39;t bother the <a href="http://en.wikipedia.org/wiki/Operating_system">Operating System</a> anymore? Good idea!</p>
+
+<p><strong>The thing we need is an array of the same size of the input.</strong> Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this &quot;support array&quot;.</p>
+
+<h3>Not Polite Enough?</h3>
+
+<p>A small tweak: <strong>when the <strong>size</strong> input array of the <em>K<sub>th</sub></em> is <code>2</code>, I avoid to do another recursive call.</strong> Instead, I just swap the 2 values if they are not already sorted.
+Very &quot;basical&quot; tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid.
+...
+Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this algorithm will normally generate, I avoid <code>M/2</code> calls.</strong> The logical structure of the calls of this problem, as in the example image above, is a <strong>Balanced Binary Tree</strong>. And in such structure the number of Leaf is equal to M/2, if M are the nodes. <strong>Quite a relieve for the call stack, isn&#39;t it! ;)</strong></p>
+
+<h2>The code</h2>
+
+<p>[sourcecode:cpp]</p>
+
+<h1>include <stdio.h></h1>
+
+<h1>include <stdlib.h></h1>
+
+<p>// === Polite Merge Sort ===
+// This implementation of Merge Sort is defined &quot;polite&quot;, because it tries
+// to bother the Operating Systems as less as possible.
+//
+// Instead of allocating and freeing memory at every intermediate step
+// to implement a the priority queue required to sort do the &quot;MERGE STEP&quot;,
+// it requires to pass at input an empty support array of the same size
+// of the input array.
+//
+// The support array is going to be the solely memory used as support.</p>
+
+<p>void polite<em>merge(int* array, const unsigned int l</em>limit, const unsigned int m<em>limit, const unsigned int r</em>limit, int* support_array) {
+    // Create 3 Peace Marker
+    unsigned int i; // For the &#39;array&#39;
+    unsigned int j; // For the &#39;left part of the array already ordered&#39;
+    unsigned int k; // For the &#39;right part of the array already ordered&#39;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Copy the portion of sorted arrays in the support array (like a static priority queue)
+for ( i = l_limit; i &lt;= r_limit; ++i ) {
+    support_array[i] = array[i];
+}
+
+// Set the Peace Markers
+i = j = l_limit; // &#39;i&#39; and &#39;j&#39; both start from the Left
+k = m_limit + 1; // &#39;k&#39; starts from the Middle + 1 
+
+// Merge the 2 sorted portions
+while ( j &lt;= m_limit &amp;&amp; k &lt;= r_limit ) {
+    if ( support_array[j] &lt; support_array[k] )
+        array[i++] = support_array[j++];
+    else
+        array[i++] = support_array[k++];
+}
+// Add the remaining sorted portions (if any)
+while ( j &lt;= m_limit ) array[i++] = support_array[j++];
+while ( k &lt;= r_limit ) array[i++] = support_array[k++];
+</code></pre></div>
+<p>}</p>
+
+<p>void polite<em>merge</em>sort(int* array, const unsigned int l<em>limit, const unsigned int r</em>limit, int* support_array) {
+    unsigned int middle;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">if ( l_limit == r_limit ) {
+    // Nothing to do =&gt; Only 1 element - already sorted
+} else if ( 1 == r_limit - l_limit ) {
+    // Only 2 elements - swap them if not yet sorted
+    if ( array[r_limit] &lt; array[l_limit] ) {
+        // Swap in place - cool!
+        array[r_limit] ^= array[l_limit];
+        array[l_limit] ^= array[r_limit];
+        array[r_limit] ^= array[l_limit];
+    }
+} else {
+    middle = (l_limit + r_limit) / 2;
+    polite_merge_sort(array, l_limit, middle, support_array);
+    polite_merge_sort(array, middle + 1, r_limit, support_array);
+    polite_merge(array, l_limit, middle, r_limit, support_array);
+}
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>This is designed to handle only Integers&#39; Array, but it can easily adapted to whatever kind of data you mean to sort.</p>

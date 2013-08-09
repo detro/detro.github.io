@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Calculate abs(int) without branching</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Calculate abs(int) without branching</h2>
+<p class="meta">13 Jan 2010</p>
+
+<div class="post">
+<p>For this you need someone to teach it to you: if you made it yourself, then you are a very good <a href="http://en.wikipedia.org/wiki/Computer_science">Comp-Sci</a>, and you should send your CV to <a href="http://www.google.co.uk/intl/en/jobs/">Google</a> ASAP. ;)</p>
+
+<h2>Without branching O_o?</h2>
+
+<p>Yes, without using any &quot;<code>if ( a &lt; 0 )...</code>&quot;. To do that, you need to refresh how <a href="http://en.wikipedia.org/wiki/Two's_complement">Two&#39;s Complement works</a>, then come back.</p>
+
+<p>What we really need to focus on is that, given a <code>signed int A</code>, the negative of that number is: <code>B = ~A + 1</code>. BUT, we are trying to calculate the Absolute Value, not the negative. So, something like:
+[sourcecode:c]
+RESULT =
+    (INPUT, if positive, or NEGATE_INPUT, if negative)
+    +
+    (0, if positive, or 1, if negative)
+[/sourcecode]</p>
+
+<p>Does it makes sense to you? To me it didn&#39;t for the first 10 minutes.</p>
+
+<h2>What do we need?</h2>
+
+<p>We need, given the integer in input, to calculate 2 values:
+<ul>
+<li>A way to &quot;optionally negate&quot; the input</li>
+<li>A variable carrying <code>0</code> if the input is positive, <code>1</code> otherwise
+</ul></p>
+
+<h3>Look what we have here: the <code>XOR</code></h3>
+
+<p>Properties of XOR are:
+<ul>
+<li><strong><code>A ^ 0 = A</code></strong></li>
+<li><strong><code>A ^ 1 = ~A</code></strong></li>
+<li><code>A ^ A = 0</code></li>
+<li><code>A ^ B = B ^ A</code> (commutative)</li>
+</ul></p>
+
+<p>The first two properties are key here: if we could only generate a variable from the input that contains <code>0</code> if positive and <code>1</code> if negative, we would have half hack done.</p>
+
+<h3>Ladies and Gentleman, all shift please</h3>
+
+<p>Now, let&#39;s see some shifting in action. <strong>If A is a Positive number, then:</strong>
+[sourcecode:c]
+A = INPUT &gt;&gt; 31 =&gt; 0x00000000 =&gt; 0
+B = -A =&gt; -0x00000000 =&gt; 0
+[/sourcecode]</p>
+
+<p><strong>While if A is a Negative number, then:</strong>
+[sourcecode:c]
+A = INPUT &gt;&gt; 31 =&gt; 0xFFFFFFFF =&gt; -1
+B = -A =&gt; 0x00000001 =&gt; 1
+[/sourcecode]</p>
+
+<h2>Putting all together</h2>
+
+<p>So, this means that we can calculate the absolute value using the new variables we have produced, A and B. Here is how:
+[sourcecode:c]</p>
+
+<h1>include <stdio.h></h1>
+
+<p>int abs(const int value) {
+   int A = value &gt;&gt; 31;     // 0x00000000 if Positive, 0xFFFFFFFF if Negative
+   int B = -A;              // 0x00000000 if Positive, 0x00000001 if Negative
+   return (value ^ A) + B;  // value ^ A = value if Positive, value ^ A = ~value if Negative
+}</p>
+
+<p>int main(int argc, char** argv)
+{
+    int input;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Check the Input
+if ( argc == 2 ) input = atoi(argv[1]); else return (1);
+
+printf(&quot;abs(%d) = %d\n\n&quot;, input, abs(input));
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>Who showed me this hack? eh eh eh! ;)</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Snippet: fix Screen Orientation in a Qt/S60 app</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Snippet: fix Screen Orientation in a Qt/S60 app</h2>
+<p class="meta">11 Aug 2009</p>
+
+<div class="post">
+<p>I follow the <a href="mailto:qts60-feedback@trolltech.com">Qt/S60 Mailing list</a>, that is turning out to be a very interesting and active ML, and the <a href="http://labs.trolltech.com/blogs/">Qt Labs blog</a>, always full of very good code, written directly by the guys of <a href="http://www.qtsoftware.com/">Qt Software</a>. I thought could be nice to start to post some of the stuff I&#39;m learning.</p>
+
+<div class="highlight"><pre><span class="cp">#include &lt;eikenv .h&gt;</span>
+<span class="cp">#include &lt;eikappui .h&gt;</span>
+<span class="cp">#include &lt;aknenv .h&gt;</span>
+<span class="cp">#include &lt;aknappui .h&gt;</span>
+<span class="c1">// ...</span>
+<span class="c1">// lock orientation</span>
+<span class="n">CAknAppUi</span><span class="o">*</span> <span class="n">appUi</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">caknappui</span> <span class="o">*&gt;</span><span class="p">(</span> <span class="n">CEikonEnv</span><span class="o">::</span><span class="n">Static</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">AppUi</span><span class="p">()</span> <span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">appUi</span> <span class="p">)</span> <span class="c1">//&lt; Actually, this will always pass. It&#39;s a &quot;static_cast&quot; after all...</span>
+<span class="p">{</span>
+   <span class="n">appUi</span><span class="o">-&gt;</span><span class="n">SetOrientationL</span><span class="p">(</span> <span class="n">CAknAppUi</span><span class="o">::</span><span class="n">EAppUiOrientationPortrait</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// ...</span>
+</pre></div>
+
+<p>Today&#39;s source is: <a href="http://discussion.forum.nokia.com/forum/showthread.php?t=164499">Nokia Forum</a>.</caknappui></aknappui></aknenv></eikappui></eikenv></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

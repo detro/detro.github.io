@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>REPL and HTTP Mapping: ideas to contribute to PhantomJS</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>REPL and HTTP Mapping: ideas to contribute to PhantomJS</h2>
+<p class="meta">01 Nov 2011</p>
+
+<div class="post">
+<p>Recently, I&#39;m donating my spare time to the amazing <a href="http://www.ai-class.com">Stanford Online AI Class</a>, and writing down <a href="http://blog.ivandemarino.me/tag/notes">notes</a> takes time.</p>
+
+<p>But I&#39;m still working, in the spare time of the spare time, on <a href="http://www.phantomjs.org/">PhantomJS</a>. Yes, very slowly, but I&#39;m not stall.</p>
+
+<p>Recently two ideas have come to mind, and it&#39;s stuff I&#39;d love to see supported by PhantomJS.</p>
+
+<h2>REPL</h2>
+
+<p>From <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">the Wikipedia article</a>:
+<blockquote>
+A read–eval–print loop (REPL), also known as an interactive toplevel, is a simple, interactive computer programming environment.</p>
+
+<p>[...]</p>
+
+<p>In a REPL, the user may enter expressions, which are then evaluated, and the results displayed.
+</blockquote></p>
+
+<p>What I really like of the REPL, is the idea of launching it and start typing code into it straightaway. No files to create, save and launch. It&#39;s very good when you want to quickly toy with a concept/idea, and it&#39;s so small it doesn&#39;t really <em>deserves</em> a dedicated script file for that.</p>
+
+<p>I haven&#39;t finished it yet, but I published my current status on <a href="https://github.com/detro/phantomjs/tree/dev-repl2">this branch</a>. Check it out!</p>
+
+<p>Also, the REPL is truly enabling an even more simple concept: controlling PhantomJS by just piping commands to it through the <a href="http://en.wikipedia.org/wiki/Standard_streams">STD_IN</a>. A <strong>key</strong> aspect to enable easier integration of PhantomJS in larger stacks.</p>
+
+<p>In facts, I discovered that <a href="https://github.com/sgentle">sgentle</a> has started working on wrapping PhantomJS into a Node module, and released <a href="https://github.com/sgentle/phantomjs-node">phantomjs-node</a>. What struck me is how he had to work out a <em>communication channel</em> between <a href="http://nodejs.org/">Node</a> and the instances of PhantomJS: he opted for <a href="http://socket.io/">Socket.io</a>.</p>
+
+<p>Socket.io is definitely a <em>smart</em> solution, but phantom is launched as a child process: there must be a better way to let Node and PhantomJS speak, instead of having to pass through the network stack. Right?</p>
+
+<p>And that&#39;s where my work on the REPL (and in general into controlling PhantomJS via STD_IN) comes into the picture.</p>
+
+<h2>HTTP Mapping</h2>
+
+<p>In our effort to build proper Javascript Testing into <a href="http://beta.betfair.com">Betfair&#39;s new platform</a>, a problem arises: how do we mock <em>effectively</em> and <em>easily</em> the service data responses that our code consumes?</p>
+
+<p>Javascript, as many of you know, is not <em>easy to test</em>: it normally requires you to run your full stack to be able to test it <em>fairly</em>. But we are not giving up, and want to find a solution to be able to test our code, without having to run an entire infrastructure of services, particularly while code is actually developed. The developer has to be able to <em>work into this loop</em>:</p>
+
+<ol>
+<li>type</li>
+<li>save</li>
+<li>run test</li>
+</ol>
+
+<p>So, here is the idea: <em>what if we could intercept all those HTTP/XHR calls that the Javascript in the page does, and Map them to local files (or even different remotes)?</em></p>
+
+<p>PhantomJS source code is already structured to abstract the network access of the <a href="http://doc.qt.nokia.com/4.7/qwebpage.html">WebPage</a> through a <a href="http://doc.qt.nokia.com/4.7/qnetworkaccessmanager.html">NetworkAccessManager</a>. At the moment we are using it for monitoring and sniffing.</p>
+
+<p>I want to add a functionality to the <code>webpage</code> module so that given a file <code>httpmap.json</code> that looks like:
+[sourcecode:json]
+[
+     {
+          &quot;method&quot; : [&quot;GET&quot;, &quot;POST&quot;],
+          &quot;source&quot; : &quot;http://<em>.betfair.com/bla/</em>/test&quot;,
+          &quot;destination&quot; : &quot;local<em>file.json&quot;
+     },
+     {
+          &quot;method&quot; : &quot;GET&quot;,
+          &quot;source&quot; : &quot;http://<em>.betfair.com/bla/</em>/api&quot;,
+          &quot;destination&quot; : [
+               &quot;1</em>local<em>file.json&quot;,
+               &quot;2</em>local_file.json&quot;,
+               &quot;http://testapi.example.com/bla/api/test&quot;
+          ]
+     }
+]
+[/sourcecode]</p>
+
+<p>a tester that uses phantom could do something like:
+[sourcecode:javascript]
+var fs = require(&#39;fs&#39;),
+    page = require(&#39;webpage&#39;).create(),
+    HTTP_MAP = &quot;httpmap.json&quot;;</p>
+
+<p>page.setHttpMap(fs.read(HTTP_MAP));</p>
+
+<p>// ... do stuff with page, while the HTTP requests are mapped
+[/sourcecode]</p>
+
+<p>As you can probably guess, the format of the map offers some extra nifty features:</p>
+
+<ul>
+<li>the <code>method</code> field can be single (a <code>string</code>) or multiple (an array of <code>string</code>)</li>
+<li>the <code>destination</code> field can be a single url (a <code>string</code>), or multiple destinations (an array of <code>string</code>) that phantom will cycle through at every matching request</li>
+<li>the <code>source</code> field accepts <a href="http://en.wikipedia.org/wiki/Regular_expression">regexp</a>, and I&#39;m thinking to add variables</li>
+</ul>
+
+<h2>Help</h2>
+
+<p>This are my ideas so far. It would be of GREAT help if you, PhantomJS lover, could spend sometime to review those and suggest accordingly.</p>
+
+<p><strong>Happy Testing!</strong></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

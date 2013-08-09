@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Linux Io Scheduler</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Linux Io Scheduler</h2>
+<p class="meta">15 Apr 2006</p>
+
+<div class="post">
+<p><img src="http://www.wlug.org.nz/theme/WLUG05/penguin_head.png" alt="tux" align="right" />
+<blockquote>The 2.6 Linux Kernel included selectable IO schedulers. IO Schedulers control the way the kernel commits reads and writes to disks - the intention of providing different schedulers is to allow better optimsation for different classes of workload.</p>
+
+<p>Without an IO scheduler, the kernel would basically just issue each request to disk in the order that it received them. This could result in massive thrashing of the disk subsystem - if one process was reading from one part of the disk, and one writing to another, it would have to seek back and forth across the disk for every operation. The schedulers main goal is to optimise disk access times.</p>
+
+<p>An IO scheduler can use the following techniques to improve performance:</p>
+
+<p>Request merging
+    The scheduler merges adjacent requests together to reduce disk seeking
+Elevator
+    The scheduler orders requests based on their physical location on the block device, and it basically tries to seek in one direction as much as possible.
+Prioritisation
+    The scheduler has complete control over how it prioritises requests, and can do so in a number of ways</p>
+
+<p>All IO schedulers should also take into account resource starvation, to ensure requests eventually do get serviced!... </blockquote></p>
+
+<p>Continue on <a href="http://www.wlug.org.nz/LinuxIoScheduler">WLUG</a>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

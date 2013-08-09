@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Browser Adaptive CSS with AppEngine</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Browser Adaptive CSS with AppEngine</h2>
+<p class="meta">21 Sep 2008</p>
+
+<div class="post">
+<p><a href="http://www.detronizator.org/2008/08/30/google-appengine-resources/">As I said, I&#39;m doing some stuff with Google AppEngine</a>. And, of course, I&#39;m facing the usual problem of Browser Incompatibility:
+<div align="center">
+<img src="http://www.detronizator.org/wp-content/uploads/2008/09/firefox_eating_ie.jpg" alt="Browser Incompatibility" />
+Browser Incompatibility ;-)
+</div>
+<blockquote>
+=Browser Incompatibilities: the Most Common Problem=
+The most common problem for Web Site developers is the fact that every browser treats HTML Tags, CSS and Javascript in it&#39;s own way.
+This Recipe tries to address one of the problem I faced the most: having a slightly different CSS for every Browser.</p>
+
+<p>=The Usual Solution=
+The usual solution is to load every time a different CSS depending on the Browser. But this solution has some side effects:
+- It&#39;s difficult to Maintain: very hard because every update to the style needs to be applied to multiple files
+- It&#39;s Boring: for the above reason
+- It&#39;s Not Cool: again, for the same above reason 
+...
+</blockquote></p>
+
+<p>So, what I did is to build a very simple solution, using the Template Engine and applying some of the concepts I learnt studying appengine and <a href="http://www.detronizator.org/2008/09/17/back-from-the-google-developer-day-2008/">at the Google Developer Day 2008</a>.</p>
+
+<p>And, because <a href="http://www.google.com/">Google</a> built this <a href="http://appengine-cookbook.appspot.com/">very simple but useful Google AppEngine Cookbook application</a> (based on appengine itself ;-) ), <a href="http://appengine-cookbook.appspot.com/recipe/browser-adaptive-css/">here is it</a>.
+<strong>Enjoy!</strong></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

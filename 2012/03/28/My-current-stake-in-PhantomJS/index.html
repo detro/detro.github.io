@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>My current stake in PhantomJS</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>My current stake in PhantomJS</h2>
+<p class="meta">28 Mar 2012</p>
+
+<div class="post">
+<p>I have been spending a lot of time on PhantomJS in the last couple of months. But feels like I could have done much more: there are so many interesting issues to work on in the <a href="http://code.google.com/p/phantomjs/issues/list">official tracker</a>.</p>
+
+<p>** Hey, why don&#39;t you <a href="http://code.google.com/p/phantomjs/wiki/ContributionGuide">give us a hand</a>? :) **</p>
+
+<div class="img">
+<img src="http://farm1.staticflickr.com/103/262840712_aca950e48c_z.jpg?zz=1" alt="My stake" />
+Some English expressions still puzzle me...  
+</div>
+
+<p>Here is where my stake is.</p>
+
+<h2>REPL</h2>
+
+<p>I just finished putting down a new wiki page that explains a bit about the REPL and how it works. <a href="http://code.google.com/p/phantomjs/wiki/InteractiveModeREPL">Give it a read</a> and let me know if you want more clarification.</p>
+
+<p>I can already see few problems with it, as it doesn&#39;t always behave as I want. I&#39;m sure this is the beginning of the work on this feature, not the end. But it is a good start.</p>
+
+<h2>GhostDriver</h2>
+
+<p><a href="http://code.google.com/p/phantomjs/issues/detail?id=49">Issue #49 - &quot;Integrate with WebDriver&quot;</a> was opened in February 29 2011! Yes, more than 1 year ago.</p>
+
+<p>So, last week I started hacking away on a new idea: now that PhantomJS has the <code>webserver</code> moduel (i.e. <code>require(&quot;webserver&quot;).create()</code>), it is possible to implement the full <a href="http://code.google.com/p/selenium/wiki/JsonWireProtocol">WebDriver Wire Protocol</a> and have PhantomJS act as a back-end for <code>RemoteWebDriver</code>.</p>
+
+<p>That&#39;s when <a href="https://github.com/detro/ghostdriver">GhostDriver</a> was born.</p>
+
+<p>The code is very young, and the list of TODO is as long as the amount of code written, but you can already:</p>
+
+<ul>
+<li>Start the RemoteWebDriver Server</li>
+<li>Run the &quot;Getting Started&quot; example</li>
+</ul>
+
+<p>if you already have PhantomJS on your system and you have Maven to build the example.</p>
+
+<p>Speed-wise, there is no comparison: respect to use <a href="http://code.google.com/p/selenium/wiki/FirefoxDriver">FirefoxDriver</a>, <strong>the test takes between a 1/5 and a 1/10 of the time</strong>. When you launch GhostDriver on the side and than make the test hit it, it&#39;s when you get the maximum performances.</p>
+
+<p>Give it a go and let me know if the instructions provided are clear enough.</p>
+
+<h2>Selenium Conference 2012, London, UK</h2>
+
+<p>I managed to get a talk accepted for the <a href="http://www.seleniumconf.org/speakers/">Selenium Conference 2012</a>, that this year will be hosted in London at the &quot;IET London: Savoy Place&quot; (<a href="http://www.seleniumconf.org/tickets/">tickets here</a> / <a href="http://www.seleniumconf.org/venue/">venue</a>).</p>
+
+<div class="img">
+<img src="http://www.seleniumconf.org/wp-content/uploads/2012/02/300x250_speaking.jpg" alt="Selenium Conference 2012 - I'm Speaking" />
+Yes, I'm :)
+</div>
+
+<p>The title of my talk couldn&#39;t be more <em>ostentatious</em>:
+<blockquote>
+&quot;Speed Up Your Selenium Tests with PhantomJS, The Headless Browser&quot;</p>
+
+<p><strong>Ivan De Marino</strong> / Senior Software Engineer at Neustar Webmetrics
+</blockquote></p>
+
+<p>like I have any idea of what I&#39;m talking about.</p>
+
+<p>Anyway, if you come along and say hi, I&#39;ll be pleased. Hopefully I won&#39;t bore anyone to death.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

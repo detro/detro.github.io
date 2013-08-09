@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Riflessioni su ZFS</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Riflessioni su ZFS</h2>
+<p class="meta">30 Aug 2006</p>
+
+<div class="post">
+<p><a href="http://www.sun.com/software/solaris/zfs_learning_center.jsp"><img src="http://www.sun.com/software/solaris/img/ig_ra_solaris_zfs.gif" alt="ZFS schema" align="right" /></a>
+Stamane, venendo in auto nell&#39;ufficio dove ho svolto il tirocinio pre-laurea, riflettevo su <a href="http://opensolaris.org/os/community/zfs/">ZFS</a> <a href="http://www.detronizator.org/2006/08/18/time-machine-la-delusione-diventa-sconforto/">in</a> <a href="http://www.apple.com/macosx">Mac OS X</a>.</p>
+
+<p>Mi domandavo come mai gli sviluppatori di Apple abbiano inserito nel <a href="http://en.wikipedia.org/wiki/Virtual_file_system">VFS</a> le strutture necessarie per integrare <a href="http://en.wikipedia.org/wiki/ZFS">ZFS</a>... senza poi annunciarlo al mondo intero con squilli di trombe e rulli di tamburi.</p>
+
+<p>Ho infine fantasticato su COME ZFS si sarebbe potuto integrare nel discorso di Apple sul Backup, <a href="http://www.apple.com/macosx/leopard/timemachine.html">Time Machine</a> ecc... e ho realizzato una cosa: Apple vuole integrare un sistema di Backup facile
+e trasparente. Non il versioning. ZFS ha il supporto per il versioning, non per il backup.</p>
+
+<p>Cerchiamo un attimo di fare ordine.
+<ul>
+    <li><strong>Versioning</strong> Capacità di conservare le versioni precedenti di un file durante tutta la sua evoluzione (ovvero, mentre ci si lavora sopra). Suggerisco comunque
+di dare uno sguardo su <a href="http://www.detronizator.org/2006/08/18/time-machine-la-delusione-diventa-sconforto/">Wikipedia</a> per maggior precisione.</li>
+    <li><strong>Backup</strong> Salvataggio di file come copia di sicurezza, normalmente su <strong>device diverse da quello di origine</strong>.</li>
+</ul></p>
+
+<p>Ed è proprio questo l&#39;aspetto più &quot;importante&quot; da tenere in considerazione.
+Ho visto &quot;in moto&quot; ZFS e, a meno che non supporti (come immagino sicuramente faccia) la possibilità di salvare gli <em>snapshot</em> su altre device, non è un backup inteso alla maniera &quot;classica&quot;. A me, utente &quot;smaliziato&quot; di MacOSX, utilizzare gli Snapshot di ZFS non farebbe che piacere. Ma un utente che la riga di comando la odia, che se ne farebbe così com&#39;è? Cos&#39;ì com&#39;è stato presentato, Time Machine è un sistema di backup... non di versioning (malgrado ne integri le qualità).</p>
+
+<p>Quindi, <strong>a che cosa serviva ZFS?</strong>
+Io immagino che Apple, per i suoi server, non usi lo stesso identico MacOSX che vende a noi: di sicuro è pieno di personalizzazioni interessanti. 
+Pensate al sistema di backup attuale di <strong>.Mac</strong>. 
+Pensate al fatto che, tra le destinazioni preferite per effettuare i nostri backup su <a href="http://www.apple.com/macosx/leopard/"><strong>Leopard</strong></a>, hanno indicato appunto .Mac.</p>
+
+<p>La pensate come me? Io credo che loro useranno (se non usano già) ZFS. E che l&#39;abbiano integrato nei loro server, così da ridurre DRASTICAMENTE lo spazio occupato dai backup degli utenti (dato che il versioning di <strong>ZFS supporta gli snapshot incrementali e differenziali</strong> (per questo sarei entusiasta di usarlo, che credete)). </p>
+
+<p>E, volendo spiengermi oltre con la fantasia, <strong>potrei pensare ad un Leopard Server capace di fare da server di Backup, basato sull&#39;uso di ZFS.</strong> Di sicuro io lo installerei subito in favore della versione Client.</p>
+
+<p>Staremo a vedere.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

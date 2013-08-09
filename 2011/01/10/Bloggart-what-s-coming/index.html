@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Bloggart: what's coming</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Bloggart: what's coming</h2>
+<p class="meta">10 Jan 2011</p>
+
+<div class="post">
+<p>Dear Bloggart belovers (like there were any out there...), this is a quick update on what&#39;s happening with <a href="https://github.com/detro/bloggart">my Bloggart fork</a>. Yes, <strong>fork</strong> - this is now the correct way to calling it.</p>
+
+<p>Initially I was just touching and modelling the software to my personal needs. Now I&#39;m really going in my own direction.</p>
+
+<p>Anyway, let&#39;s stay focused. I was here to tell you about a couple of new things that are coming to Bloggart.</p>
+
+<h1>Pages</h1>
+
+<p>If there is one thing that I really don&#39;t like of Bloggart, is the total absence of <strong>pages</strong> as a type of content. Pages that can be used to serve content like:</p>
+
+<ul>
+<li>a description of yourself</li>
+<li>a &quot;homepage&quot; for a project</li>
+<li>an &quot;about me&quot; page</li>
+<li>a &quot;curriculum vitae&quot; or &quot;resume&quot; page</li>
+<li>even a hierarchy of pages(!)</li>
+</ul>
+
+<p>and alike.</p>
+
+<p>Yes, structurally we are talking of something <strong>very similar</strong> to a post - but a post has things like &quot;comments&quot;, &quot;tags&quot;, &quot;links to previous/next&quot; posts and so forth. Maybe I&#39;m too picky (or too old school) (or too <em>wordpressy</em>). But that&#39;s what I like.</p>
+
+<p>So, I&#39;m adding support for Page content. It&#39;s a bit tricky, because Bloggart was designed with Posts in mind, but it&#39;s happening.</p>
+
+<h1>A better <code>sitemap.xml</code></h1>
+
+<p><a href="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps</a> are currently the best way of making your website easy to crawl for search engine, ensuring always a good positioning in search result (given that your content is relevant ;-) ).</p>
+
+<p>The current version of Bloggart generates <strong>a very basic <code>sitemap.xml</code></strong> (you can see mine <a href="http://blog.ivandemarino.me/sitemap.xml">here</a>). Just the links without any other metadata:</p>
+
+<p>[sourcecode:xml]
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> </p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;url&gt; 
+  &lt;loc&gt;http://blog.ivandemarino.me/&lt;/loc&gt; 
+&lt;/url&gt; 
+
+&lt;url&gt; 
+  &lt;loc&gt;http://blog.ivandemarino.me/2004/11/15/il-mio-nuovo-blogger-my-new-blogger/&lt;/loc&gt; 
+&lt;/url&gt; 
+&lt;!-- ... --&gt;
+</code></pre></div>
+<p></urlset>
+[/sourcecode]</p>
+
+<p>A bit too simple if you ask me. There are other informations that should be there, like <code>&lt;lastmod&gt;</code> and <code>&lt;priority&gt;</code>.</p>
+
+<p>As you know (you do? of course you do! you <em>love</em> Bloggart, otherwise you&#39;d not be reading this :-P), Bloggart serves static content, that has been previously generated and stored in the App Engine Datastore (and Memcache).</p>
+
+<p>Problem is, currently the content gets <em>&quot;statically stored&quot;</em> without any <strong>type</strong> information. And I need that type (in addition to other metadata) to generate a better sitemap.</p>
+
+<p>So, that&#39;s what I&#39;m adding.</p>
+
+<h1>Want to see what&#39;s going on?</h1>
+
+<p>If you are interested in following what&#39;s happening to Bloggart, <a href="https://github.com/detro/bloggart">follow it on github</a> or just take a look to the <a href="https://github.com/detro/bloggart/commits/master">latest commits on the &quot;master&quot; branch</a>.</p>
+
+<p>If you like bloggart or just use it, please let me know with comments or <a href="https://github.com/inbox/new/detro">message me on github</a>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

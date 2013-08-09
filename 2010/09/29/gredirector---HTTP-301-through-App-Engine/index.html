@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>gredirector - 'HTTP 301' through App Engine</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>gredirector - 'HTTP 301' through App Engine</h2>
+<p class="meta">29 Sep 2010</p>
+
+<div class="post">
+<p>When I decided to <a href="http://blog.ivandemarino.me/2010/08/30/Hello-World-again">migrate to this new blog</a> I was confronted by a very important issue: how do I make sure that the (already modest) traffic going to <code>http://www.detronizator.org/*</code> would be redirected to this new URL?</p>
+
+<div style="text-align: center; margin: 10px; ">
+<img src="http://www.hellboundbloggers.com/wp-content/uploads/2009/05/301-Redirection.jpg" title="301 Redirection" />
+<br />
+_301 Redirection_
+</div>
+
+<p>I started searching and I found <a href="http://blog.dantup.com/2010/01/generic-redirection-script-for-google-app-engine">this article by Danny Tuppeny</a> on how to use a <a href="http://code.google.com/appengine/">Google App Engine</a> application to do the trick.</p>
+
+<p>So, what I did was to take his code and started putting it in place for me at <a href="http://redirector.ivandemarino.me">http://redirector.ivandemarino.me</a>. But because I&#39;m a Software Developer that likes to make elegant stuff, I noticed that quite few things were missing:</p>
+
+<ul>
+<li>It didn&#39;t use any <strong><a href="http://memcached.org/">Memcache</a></strong>, so Destination URL were <em>always</em> regenerated</li>
+<li><strong>Logging</strong> was poor</li>
+<li>Was not really configurable</li>
+<li>Destination URL were not Checked (i.e. <em>test if it exists</em>) before Redirection</li>
+</ul>
+
+<h3>Introducing <code>gredirector</code></h3>
+
+<p><a href="http://github.com/detro/gredirector">gredirector</a> is an App Engine project that lets you set up your personal <strong>HTTP Redirect HUB</strong>, with a lot of emphasys on:</p>
+
+<ul>
+<li>Speed</li>
+<li>Configurability (but it could be pushed a even more)</li>
+<li>Logging</li>
+</ul>
+
+<p>It&#39;s a very very simple application, but I think serves well it&#39;s purpose. See here the main code:</p>
+
+<p>[sourcecode:python]</p>
+
+<h1>/main.py</h1>
+
+<h1>...</h1>
+
+<h1>Main Request Handler</h1>
+
+<p>class MainHandler(webapp.RequestHandler):
+   def get(self):
+      # Perform redirect
+      url = get<em>redirect</em>url(self.request.url);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Check that we were able to build a URL and that this URL actually exists
+  if url and (check_url_exists(url) if config.CHECK_URL_EXISTANCE else True):
+     logging.info(&quot;Redirecting URL &#39;%s&#39; to URL &#39;%s&#39;&quot; % (self.request.url, url) );
+     self.redirect(url, permanent=True);
+  else:
+     # Log that we didn&#39;t know what this was, and redirect to a good default
+     logging.error(&quot;Unable to Redirect URL &#39;%s&#39;&quot; % (self.request.url) );
+     if config.ERROR_EMAIL_ACTIVE:
+        mail.send_mail_to_admins(
+           sender=config.ERROR_EMAIL_SENDER,
+           subject=config.ERROR_EMAIL_SUBJECT,
+           body=config.ERROR_EMAIL_BODY + self.request.url
+        );
+     self.redirect(config.DEFAULT_URL, permanent=True);
+</code></pre></div>
+<h1>...</h1>
+
+<p>[/sourcecode]</p>
+
+<p>As you can see, it works in few simple steps:</p>
+
+<ol>
+<li>Generate a Destination URL</li>
+<li>If it&#39;s Valid and it Exists (optional) do 3. else 4.</li>
+<li>Redirect</li>
+<li>Log error and redirect to Default URL</li>
+</ol>
+
+<h4>URL generation</h4>
+
+<p>To generate the URL, it uses the mapping from the <code>config.py</code> file. Here is a portion of an example configuration:</p>
+
+<p>[sourcecode:python]</p>
+
+<h1>/config.py</h1>
+
+<h1>...</h1>
+
+<h1>Default URL: if no Redirect URL can be generated, traffic will be diverted here</h1>
+
+<p>DEFAULT_URL = &#39;http://default.new-domain.com/&#39;</p>
+
+<h1>Mapping of Source URLs to Target URLs.</h1>
+
+<h1>You can choose to map in 2 ways:</h1>
+
+<h1>1) to the new URL maintaining the same Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com/p/a/t/h/index.html&#39;)</h1>
+
+<h1>2) or to discard the Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com&#39;)</h1>
+
+<h1>Format:</h1>
+
+<h1>URLS = { &#39;Old Domain&#39;: (&#39;New Domain&#39;, &#39;Discard URL Path part and Redirect to Root?&#39;), ... }</h1>
+
+<p>URLS = {
+   &#39;%s.appspot.com&#39; % (os.environ[&#39;APPLICATION_ID&#39;]) : (&#39;www.new-domain.com&#39;, False),
+   &#39;www.old-domain.com&#39; : (&#39;www.new-domain.com&#39;, False),
+    &#39;downloads.old-domain.com&#39;: (&#39;downloads.new-domain.com&#39;, False),
+    &#39;stuff.old-domain.com&#39;: (&#39;stuff.new-domain.com&#39;, True),
+};</p>
+
+<h1>...</h1>
+
+<p>[/sourcecode]</p>
+
+<p>The code that actually generates the URL is:</p>
+
+<p>[sourcecode:python]</p>
+
+<h1>/main.py</h1>
+
+<h1>...</h1>
+
+<h1>Generates the URL to redirect to</h1>
+
+<p>def get<em>redirect</em>url(url):
+   # Search the Memcache
+   memcachekey = &quot;get<em>redirect</em>url-&quot; + url;
+   result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;</p>
+
+<p># Nothing in Memcache
+   if ( result == None ):
+      logging.debug(&quot;Redirect for URL &#39;%s&#39; not in Memcache&quot; % (url) );
+      scheme, netloc, path, query, fragment = urlparse.urlsplit(url);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Discard any port number from the hostname
+  netloc = netloc.split(&#39;:&#39;, 1)[0];
+
+# Fix empty paths to be just &#39;/&#39; for consistency
+  if path == &#39;&#39;:
+     path = &#39;/&#39;;
+
+# Check if we have a mapping for this domain
+  if netloc in config.URLS:
+     # Grab the redirect info tuple
+     redirect_info = config.URLS[netloc];
+     # Root redirects
+     if redirect_info[1]:
+        result = &#39;http://&#39; + redirect_info[0] + &#39;/&#39;;
+        logging.debug(&quot;Redirecting to Root: &quot; + result);
+     # Paths
+     else:
+        result = urlparse.urlunsplit([&#39;http&#39;, redirect_info[0], path, query, fragment]);
+        logging.debug(&quot;Redirecting to Precise Path: &quot; + result);
+  # No mapping, so return None
+  else:
+     logging.debug(&quot;No Mapping found for: &quot; + url);
+     result = None;
+
+  # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
+  memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
+</code></pre></div>
+<p>return result;</p>
+
+<h1>...</h1>
+
+<p>[/sourcecode]</p>
+
+<p>As you can see, the results are stored in Memcache and reused until expired. A <strong>major speed improvement</strong> if you ask me.</p>
+
+<h4>How do you check the URL?</h4>
+
+<p>Yes, I also said that I added a check to see if a Destination URL actually exists, before serving the Redirect. Well, App Engine provides a very nice package, <code>google.appengine.api.urlfetch</code>, and I used it this way:</p>
+
+<p>[sourcecode:python]</p>
+
+<h1>/main.py</h1>
+
+<h1>...</h1>
+
+<h1>Check if a URL exists, trying a URL Fetch</h1>
+
+<p>def check<em>url</em>exists(url):
+   # Search the Memcache
+   memcachekey = &quot;check<em>url</em>exists-&quot; + url;
+   result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;</p>
+
+<p># Nothing in Memcache
+   if ( result == None ):
+      logging.debug(&quot;Existence of URL &#39;%s&#39; not in Memcache&quot; % (url) );
+      try:
+         response = urlfetch.fetch(url, allow<em>truncated=True, deadline=10); # Wait as much as possible: 10 sec
+         if ( response.status</em>code == 200 ):
+            logging.debug(&quot;Verified URL &#39;%s&#39; existence&quot; % (url));
+            result = True;
+         else:
+            logging.error(&quot;Unable to Verify URL &#39;%s&#39; existence&quot; % (url));
+            result = False;
+      except:
+         # In case of InvalidURLError or DownloadError
+         logging.error(&quot;Exception while Verifying URL &#39;%s&#39; existence&quot; % (url));
+         result = False;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
+  memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
+</code></pre></div>
+<p>return result;</p>
+
+<h1>...</h1>
+
+<p>[/sourcecode]</p>
+
+<h3>Try it out</h3>
+
+<p>This is an App Engine application, so just clone/fork it from <a href="http://github.com/detro/gredirector">http://github.com/detro/gredirector</a>, personalize the <code>config.py</code> and push it out on. If you are not a complete newbie to App Engine, it should be really really simple.</p>
+
+<p>301 Happy Redirecting ;-).</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

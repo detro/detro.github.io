@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Console++ - enhance your console</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Console++ - enhance your console</h2>
+<p class="meta">18 Feb 2013</p>
+
+<div class="post">
+<p>I need a logger for <a href="https://github.com/detro/ghostdriver">GhostDriver</a> but I&#39;m too lazy to figure out how to use a nice, proper logging library. Plus I&#39;m a BIG fun of old-school-debugging: I just substituted all the <code>printf()</code> calls with <code>console.log</code>.</p>
+
+<p>So I decide to make every JavaScript developer <em>shiver in disgust</em> and wrote a small library that enhances the global <code>console</code> object.</p>
+
+<p>This tiny library is called <a href="https://github.com/detro/consoleplusplus">Console++</a> and works with <a href="http://nodejs.org">NodeJS</a>, <a href="http://phantomjs.org">PhantomJS</a> and any decent JavaScript runtime.</p>
+
+<div class="img">
+<img src="https://raw.github.com/detro/consoleplusplus/master/README.pics/console++-1.png" />
+</div>
+
+<p>It does output colouring, adds timestamps and log level to the lines, and can be used to redirect the output to other media than the console (just register a callback). On <code>node</code>, just type <code>npm install consoleplusplus</code> to get started.</p>
+
+<p>It&#39;s so simple that the <a href="https://github.com/detro/consoleplusplus/blob/master/README.md">README</a> is more than enough to use it.</p>
+
+<p>It&#39;s under <a href="http://en.wikipedia.org/wiki/BSD_licenses">BSD license</a>, so you can have fun with it.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

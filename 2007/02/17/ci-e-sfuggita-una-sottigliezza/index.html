@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Ci è sfuggita una sottigliezza...</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Ci è sfuggita una sottigliezza...</h2>
+<p class="meta">17 Feb 2007</p>
+
+<div class="post">
+<p>... che però è più che fondamentale.
+Quando siamo stati alla &quot;<a href="http://www.detronizator.org/2007/02/13/e-la-chiamano-giornata-di-informazione-tecnologica/">Giornata di Informazione Tecnologica</a>&quot; ci siamo fatti &quot;fregare&quot; dalle parole degli Evangelist Microsoft circa una sottigliezza a dir poco SCONCERTANTE.</p>
+
+<p>Su [en:Windows_Vista|Windows Vista] non si possono installare programmi SE NON come Admin. Questo vuol dire che non si può installare nulla, nemmeno il [en:Mame] o l&#39;emulatore della [en:Playstation|Play]. Con ovvie restrizioni all&#39;usabilità (nonchè alla liberta) degli utenti.
+E&#39; ovvio che, che so, il [it:driver] della [it:Scheda Video] vada installato con permessi &quot;elevati&quot;: ma lo stesso non vale se voglio giocare a <a href="http://aluminumangel.org/attack/">CrackAttack</a>.</p>
+
+<p>Ci hanno fregato con la storia della retrocompatibilità e della sandbox: su Vista, infatti, i programmi che tentano di scrivere nel registro o in file/directory di sistema vengono &quot;fregati&quot; a livello di API, redirigendo il loro output su una sandbox contenuta nella cartella utente. Molto bello. Ma ci devi arrivare ad installare ;)</p>
+
+<div align="center"><img src="http://upload.wikimedia.org/wikipedia/en/9/93/UAC_File_Operation.jpg" alt="UAC" /></div>
+
+<p>Ma questo cosa comporterà (secondo me)? Che TUTTI si faranno account amministratore e useranno SOLO QUELLO, perché è naturale che non si vorrà essere infastiditi continuamente. Questo avrà la naturale conseguenza di eliminare ogni traccia della filosofia &quot;l&#39;account di Admin lo si usa solo se necessario&quot;. E quindi di tutta l&#39;architettura &quot;SICURA&quot; di questo (s)Vista.
+E, a testimonianza di questo, gli stessi Evangelist lì presenti avevano TUTTI disabilitato la funzione di &quot;chieder loro se continuare o meno quando un programma richiede di eseguire operazioni potenzialmente pericolose&quot;: se nemmeno loro sopportano questi messaggi... figurarsi l&#39;utente.</p>
+
+<p>Seguono altre fonti. &lt;!--more--&gt;</p>
+
+<p>Cito <a href="http://it.theinquirer.net/2007/02/vista_ha_un_enorme_buco_nel_si.html">Inquier Italia</a> in proposito:
+<blockquote>
+Microsoft ha dichiarato che il suo “sicurissimo” sistema operativo Vista ha un enorme buco nel sistema di sicurezza, precisamente nell&#39;[en:User<em>Account</em>Control|UAC (User Account Control)].</p>
+
+<p>Secondo l&#39;hacker che l&#39;ha trovato, Joanna Rutkowska, il buco significa che il leggendario setting di default “no-admin” non è più un meccanismo di sicurezza. Compreso?
+La Rutkowska ha dichiarato a ZD Net che l&#39;User Account Control automaticamente dà per scontato che tutti i programmi di setup vadano eseguiti con privilegi da amministratore.
+Quando esegui uno di questi programmi, si apre un prompt dell&#39;UAC tramite il quale puoi acconsentire a conferire privilegi da amministratore al programma oppure decidere di non eseguirlo. State ancora seguendo?
+Così se un utente si scarica il gioco del Tetris, le possibilità che ha sono decidere se consentirgli tutti i diritti di accesso ai file di sistema, al registro e al kernel, oppure decidere di non eseguire il programma. In nessun momento in Microsoft si sono chiesti perchè mai l&#39;installer del Tetris dovrebbe avere il permesso di accedere al kernel.
+Nel suo blog &#39;Invisible Things&#39;, la Rutkowska sostiene che si dovrebbe garantire all&#39;utente la possibilità di scegliere se concedere tutti i privilegi al software o semplicemente il diritto di aggiungere una cartella nella directory C:\Programmi e qualche comando in HKLMSoftware e niente più. Questa opzione, molto più sicura, era possibile in XP ma è stata eliminata da Vista.
+Un responsabile della sicurezza di Microsoft ha smentito l&#39;esistenza del buco, sostenendo che il modo in cui Vista permette l&#39;accesso a diverse parti del sistema operativo non è così semplice. Ha ammesso che si tratta di una debolezza, ma ha dichiarato che è stata una “scelta di architettura”.
+Rutkowska ha detto a ZD Net di non essere contenta delle dichiarazioni di Microsoft riguardo ai potenziali rischi, dichiarazioni che sostengono la tesi che i bug presenti dell&#39;UAC non sono da considerarsi come “security bugs”.
+</blockquote></p>
+
+<p>Altre informazioni le trovate <a href="http://theinvisiblethings.blogspot.com/2007/02/vista-security-model-big-joke.html">qui</a> e <a href="http://blogs.zdnet.com/security/?p=29">qui</a>.</p>
+
+<p>Ringrazio il mio amicone <a href="http://blog.neminis.org/">Nemo</a> per la segnalazione.</p>
+
+<p>Cosa fa ridere di tutta sta storia? Che questi hanno il modello Unix dei permessi avanti agli occhi da più di 20 anni... e stanno a perdere il tempo a reinventare la ruota ogni volta... pensando di riuscirci... e fallendo sempre miseramente.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

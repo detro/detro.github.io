@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Andiamoci piano con la sicurezza</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Andiamoci piano con la sicurezza</h2>
+<p class="meta">18 Mar 2006</p>
+
+<div class="post">
+<p><strong>Edit 23 Marzo 2006</strong>: Io ho torto e lui ha ragione. Lascio il post per chi volesse ridere della mia gaffe. Sono stato freagato dal fatto che la libreria JS che uso si occupava &quot;di suo&quot; ad ovviare alle limitazioni di security. </p>
+
+<p>Su <a href="http://groups.google.com/group/spaghettiajax?lnk=li">SpaghettiAjax</a> un tizio ha fatto una domanda:
+<blockquote>...
+Dunque mi sto documentando da poco su ajax e vorrei farmi un&#39;idea sulla
+fattibilità di quanto segue: attualmente ho un WebService che espone
+determinati metodi. Poi ho una web application che sostanzialmente
+tramite una jsp richiama una servlet. Questa servlet richiede delle
+info al WS (tramite un metodo esposto) ed una volta ottenute le passa
+alla jsp che le visualizza.</p>
+
+<p>Ora mi chiedo se la parte utente può essere reimplementata usando
+ajax: in particolare sarebbe ottimo se tramite javascript potessi
+richiamare quella servlet (o addirittura direttamente il WS) ed esporre
+quindi all&#39;utente i risultati.
+Per esempio alla jsp attualmente arriva una lista di oggetti, che io
+stampo poi a video in modo opportuno. Come ci si comporta in ajax
+(javascript) con collezioni ed oggetti (classi java)?...
+</blockquote>
+Risposta di un tizio:
+<blockquote></p>
+
+<blockquote>
+<p>Ora mi chiedo se la parte utente può essere reimplementata usando
+ajax: in particolare sarebbe ottimo se tramite javascript potessi
+richiamare quella servlet (o addirittura direttamente il WS) ed esporre
+quindi all&#39;utente i risultati.</p>
+</blockquote>
+
+<p>Primo limite di Ajax: non si possono fare richieste a server diversi
+da quello in cui l&#39;applicazione Ajax risiede, dunque per far funzionare
+il tutto e&#39; necessario installare Ajax nello stesso dominio in cui
+c&#39;e&#39; l&#39;applicazione server-side che poi esporta i dati in qualche modo.</p>
+
+<blockquote>
+<p>Per esempio alla jsp attualmente arriva una lista di oggetti, che io
+stampo poi a video in modo opportuno. Come ci si comporta in ajax
+(javascript) con collezioni ed oggetti (classi java)?</p>
+</blockquote>
+
+<p>Javascript e Java hanno in comune solo le prime 4 lettere del nome :)
+In seguito ad una decisione commerciale. javascript nativamente non ha
+alcun modo di leggere oggetti java, dunque e&#39; necessario che l&#39;applicazione
+lato server serializzi in qualche modo i dati, ad esempio in XML o in qualunque
+altro formato opportuno, cosi&#39; che javascript possa leggerli e visualizzarli
+a video...
+</blockquote></p>
+
+<p>La mia risposta (dovuta):
+<blockquote>&gt; On 3/17/06, sloop <apett ...@gmail.com> wrote:</p>
+
+<blockquote>
+<blockquote>
+<p>Ora mi chiedo se la parte utente può essere reimplementata usando
+ajax: in particolare sarebbe ottimo se tramite javascript potessi
+richiamare quella servlet (o addirittura direttamente il WS) ed esporre
+quindi all&#39;utente i risultati.</p>
+</blockquote>
+
+<p>Primo limite di Ajax: non si possono fare richieste a server diversi
+da quello in cui l&#39;applicazione Ajax risiede, dunque per far funzionare
+il tutto e&#39; necessario installare Ajax nello stesso dominio in cui
+c&#39;e&#39; l&#39;applicazione server-side che poi esporta i dati in qualche modo.</p>
+</blockquote>
+
+<p>???
+Me la spieghi questa?
+No perché se no la roba che manipoli in Ajax da una vita che mi arriva
+dall&#39;altra parte del globo non funziona ma io non lo so!
+No, a parte la mia battuta, ti rendi conto che secondo questa
+affermazione cose tipo le GMap usate con le GMap API non hanno alcun
+motivo di esistere perché non possono funzionare?
+Stiamo attenti a quello che scriviamo: la gente potrebbe prenderci sul
+serio. Magari tu intendevi dire altro ma... rileggi please.</p>
+
+<blockquote>
+<blockquote>
+<p>Per esempio alla jsp attualmente arriva una lista di oggetti, che io
+stampo poi a video in modo opportuno. Come ci si comporta in ajax
+(javascript) con collezioni ed oggetti (classi java)?</p>
+</blockquote>
+
+<p>Javascript e Java hanno in comune solo le prime 4 lettere del nome :)
+In seguito ad una decisione commerciale....</p>
+</blockquote>
+
+<p>Si tratta semplicemente di linguaggi diversi che girano in ambienti e
+con logiche ben diverse.</p>
+
+<blockquote>
+<p>javascript nativamente non ha
+alcun modo di leggere oggetti java, dunque e&#39; necessario che l&#39;applicazione
+lato server serializzi in qualche modo i dati, ad esempio in XML o in qualunque
+altro formato opportuno, cosi&#39; che javascript possa leggerli e visualizzarli
+a video.</p>
+</blockquote>
+
+<p>I WS più evoluti (quelli dello standard 2.0 non ancora definito
+&quot;reccomended&quot; definiscono
+il formato XML XSD per l&#39;invio di interi Oggetti e non solo di &quot;tipi
+primitivi&quot;+Array come é ora.
+Questo permetterà quindi di serializzare oggetti in un linguaggio e
+riutilizzarli (nei limiti definiti dallo stesso standard) in un altro.
+Per esempio, il ho fatto sistemi in cui il backend é una servlet che
+espone un WS fatto con WSCompile ed il client era una pagina PHP5 che
+interrogava tale WS.
+Per potermi spedire dati &quot;complessi&quot; ho utilizzato un formato XML
+comune a Client e Server.
+In attesa di WS2.0 consiglio CALDAMENTE questa soluzione. Veloce,
+sicura e pienamente controllabile dallo sviluppatore. </apett></blockquote></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

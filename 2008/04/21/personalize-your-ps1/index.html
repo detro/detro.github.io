@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Personalize your $PS1</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Personalize your $PS1</h2>
+<p class="meta">21 Apr 2008</p>
+
+<div class="post">
+<div class="img">
+<img src="http://4.bp.blogspot.com/_Zfnd5XZP80Y/S8S8ZPTdVvI/AAAAAAAABg8/dfnIlEXmDJM/s1600/Picture+2.png" />
+Fancy $PS1 setting
+</div>
+
+<p>The code to make the <a href="http://www.gnu.org/software/bash/">Bash</a> prompt looks like mine is (<code>~/.bashrc</code>):
+[sourcecode:bash]
+case $TERM in
+    xterm<em>|rxvt</em>)
+        TITLEBAR=&#39;[\033]0;\u@\h:\w\007]&#39;
+        ;;
+    *)
+        TITLEBAR=&quot;&quot;
+        ;;
+esac;</p>
+
+<p>PS1=&quot;${TITLEBAR}\n[\033[0;0m][\033[0;32m]time: \
+[\033[0m][\033[1;31m]\t[\033[0m][\033[0;0m]]-\
+[[\033[0m][\033[0;32m]host: [\033[0m]\
+[\033[1;31m]\h[\033[0m][\033[0;0m]]-\
+[[\033[0m][\033[0;32m]user: [\033[0m][\033[1;31m]\u\
+[\033[0m][\033[0;0m]]-[[\033[0m][\033[0;32m]bash: \
+[\033[0m][\033[1;31m]\v[\033[0;0m]]\n\
+[\033[0;0m][[\033[0;32m]cwd: [\033[0m][\033[1;31m]\w\
+[\033[0m][\033[0;0m]]# &quot;
+[/sourcecode]</p>
+
+<p>Thanks to <a href="http://www.gilesorr.com/bashprompt/howto/">Bash Prompt HOWTO</a>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

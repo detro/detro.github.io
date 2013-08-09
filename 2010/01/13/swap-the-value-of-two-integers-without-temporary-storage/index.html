@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Swap the value of two integers without temporary storage</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Swap the value of two integers without temporary storage</h2>
+<p class="meta">13 Jan 2010</p>
+
+<div class="post">
+<p>Someone says this is an old lame trick. I think it&#39;s simple and clever use of XOR.</p>
+
+<h2>How/Why does it work?</h2>
+
+<p>It&#39;s built around the properties of the <code>XOR ^</code> operator, who has the following properties:
+<ul>
+<li><code>A ^ B = B ^ A</code> (commutative)</li>
+<li><code>A ^ 0 = A</code></li>
+<li><code>A ^ 1 = ~A</code></li>
+<li><code>A ^ A = 0</code></li>
+</ul></p>
+
+<p>So, you can see how it get&#39;s applied here:
+[sourcecode:c]</p>
+
+<h1>include <stdio .h></h1>
+
+<p>int main(void)
+{
+   unsigned int a, b;
+   // ... populate somehow &quot;a&quot; and &quot;b&quot;...</p>
+
+<p>printf(&quot;a = %d - b = %d\n&quot;, a, b);</p>
+
+<p>a ^= b; // store in &quot;a&quot; the value of &quot;a XOR b&quot;
+   b ^= a; // store in &quot;b&quot; the value of &quot;a XOR b XOR b&quot; = &quot;a XOR 0&quot; = &quot;a&quot;
+   a ^= b; // store in &quot;a&quot; the velue of &quot;a XOR b XOR a&quot; = &quot;b XOR 0&quot; = &quot;b&quot;</p>
+
+<p>printf(&quot;a = %d - b = %d\n&quot;, a, b);
+}
+[/sourcecode]</p>
+
+<p>Neat.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

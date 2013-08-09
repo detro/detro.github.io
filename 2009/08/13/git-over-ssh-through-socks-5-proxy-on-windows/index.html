@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Git-over-SSH through Socks 5 Proxy on Windows</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Git-over-SSH through Socks 5 Proxy on Windows</h2>
+<p class="meta">13 Aug 2009</p>
+
+<div class="post">
+<p>Because of my work, I use crappy M$ Windows in my office. And we are behind a bidirectional firewall.</p>
+
+<p>So, how do you do if you need to pull/push code with Git-over-SSH in this scenario? You need a Socks 5 that passes the firewall, and some scripting.</p>
+
+<p>First, you need to install:
+<ul>
+<li>Git on Windows - <a href="http://code.google.com/p/msysgit/">http://code.google.com/p/msysgit/</a></li>
+<li>Connect.c - <a href="http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html">http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html</a></li>
+</ul></p>
+
+<p>Then, you need a script that connects to the Socks 5 server. Like:
+[sourcecode lang=&#39;bash&#39;]</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>Filename: /path/to/socks-gw.sh</h1>
+
+<h1>This script connects to a SOCKS proxy using Connect.c</h1>
+
+<p>/path/to/connect.exe -S your.socks5.server:1080 $@
+[/sourcecode]</p>
+
+<p>A script that opens an SSH connection using the connection opened by the previous script:
+[sourcecode lang=&#39;bash&#39;]</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>Filename: /path/to/socks-ssh.sh</h1>
+
+<h1>This script opens an SSH connection through a SOCKS server</h1>
+
+<p>ssh -o ProxyCommand=&quot;/path/to/socks-gw.sh %h %p&quot; $@
+[/sourcecode]</p>
+
+<p>Finally, another script that you need to source in the same Bash session you are going to use Git:
+[sourcecode lang=&#39;bash&#39;]</p>
+
+<h1>!/bin/sh</h1>
+
+<h1>Filename: /path/to/enable<em>socks5</em>proxy<em>for</em>git.sh</h1>
+
+<h1>This script sets Git to use the SOCKS proxy</h1>
+
+<p>export GIT<em>SSH=&quot;/path/to/socks-ssh.sh&quot;
+export GIT</em>PROXY_COMMAND=&quot;/path/to/socks-gw.sh&quot;
+[/sourcecode]
+Again, don&#39;t forget to source this script before using Git.</p>
+
+<p>Thanks to <a href="http://threebytesfull.com/2008/04/git-with-and-without-proxy/">ThreeBytesFull</a>, from which I re-adapted the scripts to work on Windows.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

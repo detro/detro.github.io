@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>BST traversal without stack or recursion (?)</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>BST traversal without stack or recursion (?)</h2>
+<p class="meta">06 Aug 2012</p>
+
+<div class="post">
+<p><strong>SPOILER</strong>: <em>this article assumes quite a lot of things about your knowledge of binary trees and data structure. I won&#39;t spend much time introducing concepts. Deal with it.</em></p>
+
+<p>Some time ago I had the pleasure to meet with <a href="http://chrislord.net/blog/">Chris Lord</a>, who introduced me to the concept of Binary Tree Traversal without using neither a stack/queue or recursion.</p>
+
+<p>The list of requirements that such algorithm has to fulfil:</p>
+
+<ul>
+<li>Constant Space: no extra data structure to do the traversal</li>
+<li>Non-destructive: once finished, the tree needs to be exactly how it was before the visit</li>
+</ul>
+
+<p>Sounded <em>crazy</em> initially, but than I looked into it more deeply and discovered, thanks to some pointers from <a href="http://twitter.com/lucabox">Luca Colantonio</a>, that there is an algorithm <em>in literature</em> that does just that: <strong>Morris In-Order</strong> Traversal.</p>
+
+<p>Morris does just that - and a very good description of how it works can be found <a href="http://stackoverflow.com/a/5506601/1389112">on Stack Overflow</a>. I suggest you have a good read and come back: pointless of me to repeat it here.</p>
+
+<p>...</p>
+
+<p>You back? Great!</p>
+
+<p>So, before &quot;discovering&quot; the Morris algorithm, I was trying to write a solution myself. My basic idea was to:</p>
+
+<ol>
+<li>Move downwards</li>
+<li>Manipulate pointers to the branch we are about to explore, to point backward so we have &quot;a way back&quot;</li>
+<li>Restore once done with that branch</li>
+</ol>
+
+<p>At that stage, it had not occur to me to try to manipulate the entire tree structure like Morris does: I wanted to be very subtle, with the data structure resembling the original tree (though, with backward pointers).</p>
+
+<p>The key issue I hit? <strong>Going Backward</strong>. Once I&#39;m done visiting the branches of a node, I need to go back to the parent (to which I have a pointer too), and restore the structure.</p>
+
+<p><strong>But HOW am I going to reconstruct the tree?</strong> How do I know if the Branch I just visited was the <em>left</em> or the <em>right</em> branch of the parent I want to move back to?</p>
+
+<h2>Downsize the problem</h2>
+
+<p>In a general Binary Tree, there is no guarantee of the order and distribution of nodes. It&#39;s just a tree where every node has 0, 1 or 2 child nodes. I didn&#39;t have any &quot;rule&quot; on which to <strong>build a backward-restoring logic</strong>.</p>
+
+<p>But then I had an idea: what about <a href="http://en.wikipedia.org/wiki/Binary_search_tree">BSTs (Binary Search Tree)</a>? In those trees, there is a strong order relationship between a node and its childs.</p>
+
+<p>This means that at any moment in time, once I&#39;m done visiting a branch, I can reconstruct <em>where I&#39;m coming from</em>, looking at the values of the parent and the child:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">parent-&gt;value &gt; child-&gt;value ? is_left_child : is_right_child
+</code></pre></div>
+<p>And, so I wrote the <strong>De Marino BST Post-Order Traversal</strong> algorithm:
+[sourcecode:c]
+void de<em>marino</em>bst<em>post</em>order_traversal(node *root) {
+    node *curr = root;  //&lt; current node
+    node *par = NULL;   //&lt; parent of current node
+    node *next = root;  //&lt; next node to traversal (but sometimes, just temp variable)
+    int dir = DOWN;     //&lt; direction in which we are moving</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">do {
+    if (dir == DOWN &amp;&amp; curr-&gt;left != NULL) {
+        // Go down left
+        next = curr-&gt;left;
+        curr-&gt;left = par;
+        par = curr;
+        curr = next;
+    } else if (dir == DOWN &amp;&amp; curr-&gt;right != NULL) {
+        // Go down right
+        next = curr-&gt;right;
+        curr-&gt;right = par;
+        par = curr;
+        curr = next;
+    } else {
+        printf(&quot;%d\n&quot;, curr != NULL ? curr-&gt;value : -1);
+
+        if (par-&gt;value &gt; curr-&gt;value &amp;&amp; par-&gt;right != NULL) {
+            // Go down right, coming from left
+            // NOTE: order gives us a hint about where we come from
+            dir = DOWN;
+
+            next = par-&gt;left;   // hold the way back
+            par-&gt;left = curr;
+            curr = par-&gt;right;
+            par-&gt;right = next;  // store the way back in the right child of par now
+            next = curr;
+        } else {
+            dir = UP;
+
+            if (par-&gt;value &gt; curr-&gt;value) {
+                // Go up, coming from left
+                // NOTE: order gives us a hint about where we come from
+                next = par-&gt;left;
+                par-&gt;left = curr;
+            } else {
+                // Go up, coming from right
+                // NOTE: order gives us a hint about where we come from
+                next = par-&gt;right;
+                par-&gt;right = curr;
+            }
+            curr = par;
+            par = next;
+        }
+    }
+} while(next != NULL &amp;&amp; par != NULL);
+printf(&quot;%d\n&quot;, curr != NULL ? curr-&gt;value : -1);
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>Now, I&#39;m almost 100% sure that I&#39;m not the first one to <em>stumble</em> into something like this, but for now I&#39;m unable to find anything in literature - <em>cough</em> ... Google ... <em>cough</em> .</p>
+
+<h2>An advantage over Morris</h2>
+
+<p>Yes, this algorithm requires the <strong>strong condition of BST</strong> while Morris works with any Binary Tree. That&#39;s a given. But this algorithm is also <strong>faster</strong>: it doesn&#39;t go deep into the tree to find the rightmost left child of a node, like Morris. From a quick look <strong>the computation is linear - O(n)</strong>: every node is visited only once. But maybe I&#39;m overlooking something in Morris.</p>
+
+<h2>Far from perfect</h2>
+
+<p>I&#39;m also sure that this algorithm is <strong>far from bug-less</strong>: I have spent on it less than 24h between coding and thinking. So, please, to all the Computer Scientists people out there: let me know your thoughts and critics. This is a great way to spend some of that theory that we have in our heads.</p>
+
+<p>I have added this code to my <a href="https://github.com/detro/coding-exercises/commits/master">coding exercises</a> repo on GitHub, if you want to try it out (check latest commits).</p>
+
+<p>Now, as I expect, feel free to ignore my warnings and start your opinionated trashing - I&#39;m pretty confident I&#39;d deserve it. :)</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

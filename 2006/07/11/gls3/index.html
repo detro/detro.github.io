@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>GLS^3</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>GLS^3</h2>
+<p class="meta">11 Jul 2006</p>
+
+<div class="post">
+<p>Imagine an Integrated Desktop Search Engine that re-index every work you write, every file you create, every &quot;content&quot;... <strong>as you do that things</strong>... in a very discreet way.
+Every developer will thinks it&#39;s a very difficult &quot;mission&quot;, it isn&#39;t? ;)</p>
+
+<p>Ok, but take a look here:
+<blockquote>The <a href="http://www.glscube.org/">GNU/Linux Semantic Storage System (GLS³)</a> is a solution designed to facilitate the management and retrieval of your data. It is a solution that distances you from thinking about Where you store your data to What your data is. With GLS³, you can organize and retrieve your data based on their semantics, based on What they mean to you, and not based on their hierarchical location.</p>
+
+<p>GLS³ is an open source semantic storage solution for GNU/Linux that indexes your data, extracts from it metadata and relevant information, allows you to organize it using queries and tags, an API to allow Developers to integrate searching and organization capabilities in their application, an extensible plugin-based Type System, shared schemas between applications through an API, a pseudo file system for backward compatibility, a web interface, As-You-Type searching and more.</blockquote></p>
+
+<p>I suggest also to take a look to the published <a href="http://www.glscube.org/download.html">demo-videos</a>: these are very interesting and... pregnant!</p>
+
+<!--more-->
+
+<p>For Developers and Expert Users:
+<blockquote>GLS³ is implemented in C++, with much reliance on the Standard Template Library (STL), and uses <a href="http://zthread.sourceforge.net/">ZThread</a>, for multithreading support.</p>
+
+<p>Apache&#39;s <a href="http://lucene.apache.org/java/docs/">Lucene</a> is used for Information Retrieval (IR). Lucene is a widely recognized IR library used in the implementation of internet search engines and local, single-site searching. After evaluating several IR libraries, Lucene was selected for its leading performance results, the detailed documentation available and its wide adoption, and thus, active development.</p>
+
+<p><a href="http://www.postgresql.org/">PostgreSQL</a> was used as the Database Management System (DBMS) for storage of Metadata about Documents, Types and Stores. The Design Documentation describes why PostgreSQL was selected as the DBMS of choice. However, we are evaluating the possibility of migrating to to a lighter DBMS, specifically, <a href="http://www.sqlite.org/">SQLite</a>.</p>
+
+<p>The core of GLS³ is an user-level daemon process that communicates with other client processes through either an API or an Internet Socket Interface. Information is sent to the Socket Interface as XML, and requests are received through it also through XML, hence comes the need to parse XML documents in the GLS³ daemon. Additionally, To pass objects between the GLS³ daemon and the API, objects are serialized to XML. <a href="http://xmlsoft.org/">libxml</a> was used for parsing XML documents.</p>
+
+<p>GLS³ includes a pseudo file system that provides a backward-compatibility layer for non-GLS³-aware applications. The pseudo file system is implemented as a client module for <a href="http://fuse.sourceforge.net/">FUSE</a>. This file system, named glscubefs, allows users to browse and search the stored information through the traditional file systems interface.</p>
+
+<p>Additional dependencies may be brought up by Importers. For example, the PDF Importer depends on <a href="http://www.foolabs.com/xpdf/">xpdf</a>.</p>
+
+<p>GLS³ does not depend on any libraries specific to a desktop environment, with the only exception being the Browser. The prototype browser was implemented in HTML, CSS and JavaScript, along with a small KDE container application that uses KHTML for rendering.
+</blockquote></p>
+
+<p>Better than <a href="http://beagle-project.org/Main_Page">Beagle</a> or other similar projects? Test and Answer, please! ;)</p>
+
+<p>Source, <a href="http://www.ossblog.it/post/1121/gls%c2%b3-trovare-dati-facilmente-su-gnulinux">OSSBlog</a>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

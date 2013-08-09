@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Find the non repeating char in O(n) time and O(1) space - v2</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Find the non repeating char in O(n) time and O(1) space - v2</h2>
+<p class="meta">18 Dec 2009</p>
+
+<div class="post">
+<p>My colleague and friend Luca (<a href="http://twitter.com/lucabox">@lucabox</a>) described a better solution to the problem of <em>&quot;<a href="http://www.detronizator.org/2009/12/13/find-the-non-repeating-char-in-on-time-and-o1-space/">Finding the first non repearing char in a string in O(n) time and O(1) space</a>&quot;</em>. It uses smartly the space, making the solution nicer and slicker.
+Or we are just 2 geeks that need to give more attention to their girlfriends :P</p>
+
+<h2>Luca&#39;s solution description</h2>
+
+<p>The logic of this solution is based on the usage of an array of unsigned chars.
+Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, &quot;<em>present once in the input string</em>&quot; and &quot;<em>present multiple times in the input string</em>&quot;. After the input is &quot;scanned&quot; once, and every letter is marked with the correspondent &quot;<em>presence bit</em>&quot; (once, multiple or none), it get&#39;s scanned a second time to find the first char of the input which has the bit &quot;present once&quot; set to &quot;1&quot;.</p>
+
+<h2>Before I show you the code</h2>
+
+<p>Again, this comes from Luca Colantonio (<a href="http://uk.linkedin.com/in/lucacolantonio">http://uk.linkedin.com/in/lucacolantonio</a>), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;)</p>
+
+<p>Now, the code.
+[sourcecode:c]</p>
+
+<h1>include <stdio.h></h1>
+
+<h1>include <string.h></h1>
+
+<h1>define PRESENCE<em>ONCE</em>BIT       0x1</h1>
+
+<h1>define PRESENCE<em>MULTIPLE</em>BIT   0x2</h1>
+
+<h1>define NORMALIZE_CHAR(C)       (C-&#39;a&#39;)</h1>
+
+<p>int main(int argc, char** argv)
+{
+    char* input;
+    unsigned int input_length;
+    unsigned int i;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">unsigned char char_presence_bitmask[26];
+memset(char_presence_bitmask, 0x0, 26);
+
+// Check the Input
+if ( argc == 2 ) input = argv[1];
+else return (1);
+
+// Search for every character &quot;present only once&quot;
+for ( i = 0;; ++i )
+{
+    // Avoid use of &quot;strlen&quot;, just to look cooler
+    if ( input[i] != &#39;\0&#39; )
+    {
+        // If the current char is not already marked as &quot;present multiple times&quot;
+        if ( !( char_presence_bitmask[NORMALIZE_CHAR(input[i])] &amp; PRESENCE_MULTIPLE_BIT) )
+        {
+            // It it is already marked as &quot;present once&quot;
+            if ( char_presence_bitmask[NORMALIZE_CHAR(input[i])] &amp; PRESENCE_ONCE_BIT )
+            {
+                // Then mark it as &quot;present multiple times&quot; and unmark it&#39;s &quot;present once&quot; bits
+                char_presence_bitmask[NORMALIZE_CHAR(input[i])] |= PRESENCE_MULTIPLE_BIT;
+                char_presence_bitmask[NORMALIZE_CHAR(input[i])] &amp;= ~PRESENCE_ONCE_BIT;
+            }
+            else
+            {
+                // Otherwise, mark it as &quot;present once&quot;
+                char_presence_bitmask[NORMALIZE_CHAR(input[i])] |= PRESENCE_ONCE_BIT;
+            }
+        }
+    }
+    else
+    {
+        // Store the input length to make next iteration easier
+        input_length = i;
+        break;
+    }
+}
+
+// Look for the first char that is marked as &quot;present only once&quot; =&gt; that&#39;s the solution
+for ( i = 0; i &lt; input_length; ++i )
+{
+    if ( char_presence_bitmask[NORMALIZE_CHAR(input[i])] &amp; PRESENCE_ONCE_BIT )
+    {
+        printf(&quot;=== FINAL RESULT: %c ===\n&quot;, input[i]);
+        return (0);
+    }
+}
+printf(&quot;=== FINAL RESULT: no char appears only once ===\n&quot;);
+return (0);
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

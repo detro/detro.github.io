@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>My Rhinoceros likes WebSocket, not leafs</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>My Rhinoceros likes WebSocket, not leafs</h2>
+<p class="meta">14 Feb 2012</p>
+
+<div class="post">
+<p>Last week I started implementing <a href="http://dev.w3.org/html5/websockets/">W3C Sockets API</a> into a Rhino based JavaScript runtime.</p>
+
+<p>It seems like <em>plumbing</em> API from one environment to another is one of the activity I do the most. And if you dare doing a joke about my Italian-ness and Super Mario... you will be pointed in the direction of the door.</p>
+
+<p>Here I want to share a couple of findings.</p>
+
+<h2>Rhino is not bad at all</h2>
+
+<p>Yes, I said it. And who has worked in the past with me, knows how my opinion are hard to change. But they do sometimes, fortunately.</p>
+
+<div class="img">
+<img src="http://www.buddycom.com/animal/special/rhino/rhino.jpg" />
+a big one...
+</div>
+
+<p>I&#39;m accustomed to <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtscript.html">QtScript</a> and <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtwebkit.html">QtWebKit</a>: those are the javascript runtime API/environment I used the most. But I have to give credit to this very good piece of software from the Mozilla Foundation.</p>
+
+<p>In facts, <a href="http://www.mozilla.org/rhino/doc.html">Rhino</a> is not bad at all. I was initially very dubious of his quality (Java, ehm...) but I have to slap my own hand: it not only provides good execution time, but it also has a very, VERY nice API. And <a href="http://www.webmetrics.com/">Neustar Webmetrics</a> runs it&#39;s whole business on it!</p>
+
+<p>What I liked the most? <strong>2 things</strong>:</p>
+
+<ul>
+<li>One, the fact that to create a JavaScript read-only property named, say, <code>prop</code> you just have to provide <code>getProp</code> method. And if you want the property to be writable, provide a <code>setProp</code>. The engine will take care of mapping <code>L-VALUES</code> or <code>R-VALUES</code> usages to the correct getter/setter.</li>
+<li>Two, the <code>NativeFunction</code> Class is neat and easy to use: extremely simple to allow the scripter to provide an event handler. Almost <em>brain-dead-simple</em>.</li>
+</ul>
+
+<h2>Java-WebSocket</h2>
+
+<p><a href="http://tootallnate.net/">Nathan Rajlich</a> has made available on GitHub a good (not yet complete, though) <a href="https://github.com/TooTallNate/Java-WebSocket">implementation of WebSockets in Java</a>. The API is simple, reflects <em>more or less</em> the W3C specs, and does the job.</p>
+
+<div class="img">
+<img src="http://warmcat.com/websocket-lifecycle.png" />
+the fun of WebSocket handshake
+</div>
+
+<p>I used it with a couple of Node WebSocket implementations (<a href="https://github.com/miksago/node-websocket-server">miksago&#39;s</a> and <a href="https://github.com/einaros/ws">einaros&#39;</a>), and it&#39;s the only one that managed to negotiate a connection and transmit stuff without issues.</p>
+
+<p>There are not many implementation of WebSockets out there yet (particularly for Java). I believe the main reason being the unstable and still-changing specs (take a look at <a href="http://en.wikipedia.org/wiki/WebSocket#Browser_support">this table</a>).</p>
+
+<p>So, KUDOS to Nathan!</p>
+
+<p><strong>P.S.</strong> A beer if you can write in the comment where the name <strong>Rhino</strong> originally comes from. A hint: you must have <em>studied</em> JavaScript BEFORE jQuery was cool and XHR was yet to become a superstar.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

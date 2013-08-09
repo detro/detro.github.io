@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Maven, PhantomJS and Jasmine to write your JS Unit Testing</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Maven, PhantomJS and Jasmine to write your JS Unit Testing</h2>
+<p class="meta">08 Jul 2011</p>
+
+<div class="post">
+<p>In <a href="http://www.betfair.com">Betfair</a> we are building all sort of new things, and one of the aspects on which we are trying to focus more is doing Automated Tests for JavaScript.  Currently, all non-js code in Betfair passes through different kind of Automated (and Human) Testing (from Unit Testing, to Security, to Performance, to Human and Scripted QA), but the JavaScript language, by its very nature, makes it tricky to test in an automated fashion. It&#39;s not impossible, just a bit harder than it should.</p>
+
+<div class="img">
+<img src="http://www.itmonline.org/jintu/image/jasmine.jpg" alt="A beautiful jasmine..." />
+A beautiful jasmine...
+</div>
+
+<p>Lately I have been spending a big chunk of my spare time lending a hand to the <a href="http://www.phantomjs.org/">PhantomJS</a> project, as some of you that know me might recall.</p>
+
+<h1>Don&#39;t break the flow</h1>
+
+<p>That started because I saw in PhantomJS, and it&#39;s headless nature, a great opportunity to contribute to the internal effort around <strong>JS Unit Testing</strong>. And because I wanted to allow both developers and <a href="http://en.wikipedia.org/wiki/Continuous_integration">CI</a>-Servers to run JavaScript Tests with ease.</p>
+
+<p>I believe that if <strong>development experience</strong> it&#39;s easy (and, I dare to say, <strong>FUN</strong>), <em>code just flows</em>! And if you can do testing with just one command from your <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a>, the flow becomes almost <em>beat</em>.</p>
+
+<p>In Betfair we use <a href="http://maven.apache.org/">Maven</a> to drive our build system (yeah, I know, XML orgies are terrible...). So, we type a lot of:</p>
+
+<p>[sourcecode:bash]
+$ mvn clean install
+[/sourcecode]</p>
+
+<p>even in departments where we mostly do Front End code. Ideally, we wanted to add, as a step to the build, a way to hook in the JavaScript Testing, and having the test result driving the build outcome. </p>
+
+<p><strong><code>IF</code> JavaScript Test fails <code>THEN</code> Build Fails</strong>! Dead simple.</p>
+
+<h1>Jasmine, but not necessarily</h1>
+
+<p>There are multiple libraries to write <a href="http://www.google.co.uk/search?sourceid=chrome&amp;ie=UTF-8&amp;q=javascript+unit+testing">Unit Tests for JavaScript out there</a>, and we decided to go for <a href="http://pivotal.github.com/jasmine/">Jasmine</a>, the evolution of <a href="http://www.jsunit.net/">JSUnit</a> (now discontinued).</p>
+
+<p>You can go for anything you want really, but in this post/example (and here in Betfair) we picked Jasmine. Feel free to choose your own library: as long as you are running in a browser, anything is good.</p>
+
+<h1>Setup</h1>
+
+<p>To run the show, I came up with this setup: PhantomJS runs a script that runs a &quot;jasmine-enabled&quot; webpage. The script is then able to <strong>extract the result out of the webpage</strong> and save it on files. That&#39;s how it looks like:</p>
+
+<div class="img">
+<img src="https://lh3.googleusercontent.com/-nJO__AXEdWQ/TvMHQ0agptI/AAAAAAAACUU/GPrj4MKuEUk/s800/PhantomJSJasmineXMLexamplesetup%252520%2525281%252529.png" width="700" />
+</div>
+
+<p>Yes, it&#39;s a long chain of delegation. But it works. And it&#39;s also &quot;modular&quot;: in case you want to run the tests in another Browser, you can just open the <code>&quot;.html&quot;</code> runner! Or, in case you don&#39;t want to use Maven, you can just invoke phantom and pass it the &quot;jasmine xml runner script&quot; (plus arguments).</p>
+
+<h2>Jasmine reporters <code>#forthewin</code></h2>
+
+<p>Jasmine has a very great <em>design feature</em>: <strong>Reporters</strong>. You can implement this kind of plugins to <em>attach</em> to Jasmine, separating the test execution from the test reporting. Based on the reporter you write, you can get any sort of output.</p>
+
+<p>In our case, we need the tests to produce output in <a href="http://stackoverflow.com/questions/4922867/junit-xml-format-specification-that-hudson-supports/4925847#4925847">JUnit XML format</a>, and so I wrote one. But, if you know your shit, you are probably thinking:
+<blockquote>
+&laquo;A web browser is sandboxed: how do your write a file with XML from there?&raquo;
+</blockquote>
+Well, read on.</p>
+
+<h2>Jasmine <code>test_runner.html</code></h2>
+
+<p>As mentioned, Jasmine requires a webpage prepared to run the tests. In our case, something like the following is good:
+[sourcecode:html]
+&lt;!DOCTYPE HTML&gt;
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.0.2/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine-html.js"></script>
+  <script type="text/javascript" src="lib/jasmine-reporters/jasmine.phantomjs-reporter.js"></script></p>
+
+<p>&lt;!-- include source files here... --&gt;
+  <script type="text/javascript" src="../src/tv.js"></script></p>
+
+<p>&lt;!-- include spec files here... --&gt;
+  <script type="text/javascript" src="test_spec.js"></script></p>
+
+<p></head>
+<body></p>
+
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
+  jasmine.getEnv().execute();
+</script>
+
+<p></body>
+</html>
+[/sourcecode]</p>
+
+<h2>How PhantomJS does the trick</h2>
+
+<p>PhantomJS, as you might know, allows to instantiate and manipulate webpages. And webpages are &quot;sandboxed&quot;: so, it&#39;s not possible to write files on the filesystem from there. So, what I did 2 things:</p>
+
+<ol>
+<li>Implemented a set of API for File I/O and submitted a pull request (see <code>fs</code> object in PhantomJS)</li>
+<li>Implemented a Jasmine Reporter that saves the output of the tests in isolated variables in the test runner page context (see <code>test/lib/jasmine-reporters/jasmine.phantomjs-reporter.js</code>)</li>
+<li>Wrote a PhantomJS script that is able to extract the test output from the webpage context and save it on filesystem (see <code>test/phantomjs_jasminexml_runner.js</code>)</li>
+</ol>
+
+<p>In this way it&#39;s possible to preserve the sanboxing, while saving the desired XML format. And, along the way, give to PhantomJS the ability to manipulate files.</p>
+
+<p>The script looks like this:
+[sourcecode:javascript]
+// ...
+    var htmlrunner = phantom.args[0],
+        resultdir = phantom.args[1],
+        page = new WebPage();</p>
+
+<p>// ...</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">page.open(htmlrunner, function(status) {
+    if (status === &quot;success&quot;) {
+        utils.core.waitfor(function() { // wait for this to be true
+            return page.evaluate(function() {
+                return typeof(jasmine.phantomjsXMLReporterPassed) !== &quot;undefined&quot;;
+            });
+        }, function() { // once done...
+            // Retrieve the result of the tests
+            var suitesResults = page.evaluate(function(){
+                return jasmine.phantomjsXMLReporterResults;
+            });
+
+            // Save the result of the tests in files
+            var f = null;
+            for ( var i = 0, len = suitesResults.length; i &lt; len; ++i ) {
+                try {
+                    f = fs.open(resultdir + &#39;/&#39; + suitesResults[i][&quot;xmlfilename&quot;], &quot;w&quot;);
+                    f.write(suitesResults[i][&quot;xmlbody&quot;]);
+                    f.close();
+                } catch (e) {
+                    console.log(e);
+                    console.log(&quot;phantomjs&gt; Unable to save result of Suite &#39;&quot;+ suitesResults[i][&quot;xmlfilename&quot;] +&quot;&#39;&quot;);
+                }
+            }
+
+            // Return the correct exit status. &#39;0&#39; only if all the tests passed
+            phantom.exit(page.evaluate(function(){
+                return jasmine.phantomjsXMLReporterPassed ? 0 : 1; //&lt; exit(0) is success, exit(1) is failure
+            }));
+        }, function() { // or, once it timesout...
+            phantom.exit(1);
+        });
+    } else {
+        console.log(&quot;phantomjs&gt; Could not load &#39;&quot; + htmlrunner + &quot;&#39;.&quot;);
+        phantom.exit(1);
+    }
+});
+</code></pre></div>
+<p>[/sourcecode]</p>
+
+<p>Ah, the Filesystem API (i.e. the <code>fs.open()</code> above) are still <em>stabilising</em> as we are not sure yet how much of the <a href="http://wiki.commonjs.org/wiki/Filesystem">CommonJS/Filesystem</a> specs we want to implement in PhantomJS. If you care about PhantomJS, contribute to the discussion <a href="https://groups.google.com/d/topic/phantomjs/Z4E3cD3IJIM/discussion">here</a>.</p>
+
+<h2>Oh, yes, Maven</h2>
+
+<p>Some of you might have reached this page for Maven. Let me say, I&#39;m sorry you have to deal with that thing, but... let&#39;s just focus.</p>
+
+<p>Maven has a plugin for running external executable: <code>exec-maven-plugin</code>. It allows to launch any executable and, in case this exit failing (i.e. <code>exit(1);</code> or <code>exit(EXIT_FAILURE);</code>), fail the build. Super!</p>
+
+<p>So, how it looks like?
+[sourcecode:xml]
+&lt;?xml version=&quot;1.0&quot;?&gt;
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/maven-v4_0_0.xsd">
+    &lt;!-- ... --&gt;
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>PhantomJS Unit Testing</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>phantomjs</executable>
+                    <workingDirectory>test</workingDirectory>
+                    <arguments>
+                        <argument>phantomjs<em>jasminexml</em>runner.js</argument>
+                        <argument>test_runner.html</argument>
+                        <argument>${project.build.directory}/surefire-reports</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+[/sourcecode]</p>
+
+<p>This adds a step in the <code>test phase</code> of the build, running our tests.</p>
+
+<h1>It&#39;s on GitHub</h1>
+
+<p>As every piece of code that a) I think it&#39;s of any value, and b) that I can share, it&#39;s on GitHub: <a href="https://github.com/detro/phantomjs-jasminexml-example">phantom-jasminexml-example</a>. As the name says, this is just an example. An <em>inspiration</em>. Please customise it as much as you want to fit your purposes. And in case you can, contribute a patch to make it better.</p>
+
+<h1>Conclusion</h1>
+
+<p>This just started. My experience in JavaScript Unit Testing is not very good, and I&#39;m learning in the process. So, chances are, this solution has a lot of problems, it&#39;s rubbish and needs rewrite.</p>
+
+<p>If that&#39;s the case, please post a comment with your thoughts and, possibly, suggestions on how this can be improved. For example, it would be great if <code>phantomjs_jasminexml_runner.js</code> was able to <strong>generate the <code>test_runner.html</code> automagically</strong>, after having scanned a directory containing test specs.</p>
+
+<h1>PR time</h1>
+
+<p>By the way, if you eat code for breakfast, and you are proud of it, <a href="http://jobvite.com/m?37Sa6fwZ">we are hiring</a>: you might join us in trying to build this new piece of the puzzle for Betfair.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

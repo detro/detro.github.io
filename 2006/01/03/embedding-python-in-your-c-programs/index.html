@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Embedding Python in your C programs</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Embedding Python in your C programs</h2>
+<p class="meta">03 Jan 2006</p>
+
+<div class="post">
+<blockquote>The language of choice for large, high-performance applications in Linux is almost always C, or somewhat less often C++. Both are powerful languages that allow you to create high-performance natively compiled programs. However, they are not languages that lend themselves to runtime flexibility. Once a C/C++ application is compiled, its code is pretty much static. At times, that can be a real hindrance. For example, <ins datetime="2006-01-03T19:22:45+00:00">if you want to allow users of a program to create plugins easily</ins> that extend the application's functionality, you have to deal with complex dynamic linking issues that can cause no end of headaches. Additionally, your users will have to know C/C++ in order to extend the application, which severely limits the number of people capable of writing extensions.
+
+A much better solution is to <ins datetime="2006-01-03T19:22:45+00:00">provide your users with a scripting language they can use to extend your application</ins>. <strong>With a scripting language, you will tend to have much more runtime flexibility, as well as shorter development times and a lower learning curve that will extend the base of users capable of creating extensions</strong>.
+
+Unfortunately, creating a scripting language is very much a nontrivial task that easily could become a major portion of your program. Fortunately, you don't need to create a scripting language. <strong>With Python, you can embed the interpreter directly into your application and expose the full power and flexibility of Python without adding very much code at all to your application</strong>.</blockquote>
+
+<p>E VERY VERY INTERESTING howto: <a target="_new" title="Linux Journal article" href="http://www.linuxjournal.com/article/8497">here</a>.
+Thanks much too much to William Nagel.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

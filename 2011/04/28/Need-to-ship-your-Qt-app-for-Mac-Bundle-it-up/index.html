@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Need to ship your Qt app for Mac? Bundle it up!</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Need to ship your Qt app for Mac? Bundle it up!</h2>
+<p class="meta">27 Apr 2011</p>
+
+<div class="post">
+<p>I&#39;m contributing some code and GCC-CPU-time to <a href="https://github.com/ariya/phantomjs">PhantomJS</a>. It&#39;s a brilliant idea and I hope it will grow, maybe with some help from me as well.</p>
+
+<p>I have recently spent some time working out how to go from a &quot;compiled from source&quot; version, to generate a shippable executable. For Mac, in my case.</p>
+
+<div class="img">
+<img src="http://i.ehow.co.uk/images/a04/j8/5h/fold-cute-origami-gift-box-800x800.jpg" alt="a 'cute' bundle" />
+a 'cute' bundle
+</div>
+
+<p>I&#39;ll explain how to bundle up your Qt based application, so that you can ship it. PhantomJS will be my reference example.</p>
+
+<h2>Static build? Don&#39;t do it!</h2>
+
+<p>PhantomJS is build on top of <a href="http://trac.webkit.org/wiki/QtWebKit">(Qt)WebKit</a>. </p>
+
+<p>The initial idea was to build Qt libraries enabling <strong>static linkage</strong> (i.e. passing <code>-static</code> to <code>./configure</code> script). But I soon discovered that <a href="http://doc.trolltech.com/4.7/developing-on-mac.html#building-qt-statically">QtWebKit can&#39;t be linked statically</a>:
+<blockquote>
+[...] Static builds are only partially supported, meaning that you can build most of Qt statically, but some modules, like web-kit and Designer, will fail. [...]
+</blockquote></p>
+
+<p>So, for PhantomJS was a no go. But I would say in general that if you are building an Application for Mac, you should ship it following the platform &quot;expected format&quot;. In other words, as classical <strong><code>.app bundle</code></strong>.</p>
+
+<h2>What are we going to do</h2>
+
+<p>We want to create a <code>.app</code> and ship it within a <code>.dmg</code> file. To do that, we need to:
+* Get Qt source and build it
+* Build the <code>.app</code>
+* Tune it (optional)
+* Generate the final <code>.dmg</code> package</p>
+
+<h2>Get Qt source and build it</h2>
+
+<p>It&#39;s advisable NOT to use Qt from the official repo for this. Instead, download latest stable source from <a href="http://qt.nokia.com/downloads">http://qt.nokia.com/downloads</a> and <em>untar</em> with the following command:
+[sourcecode:bash]
+$ mkdir ~/tmp
+$ cd ~/tmp
+$ tar -xzf ~/Downloads/qt-everywhere-opensource-src-<latest stable>.tar.gz 
+[/sourcecode]
+it will ensure that you build your code against the most stable Qt.</p>
+
+<p>Once finished downloading, build like this:
+[sourcecode:bash]
+$ cd ~/tmp/qt-everywhere-opensource
+$ ./configure -universal -carbon -framework -release \
+   -opensource -no-exceptions -webkit -no-phonon \
+   -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl \
+   -no-declarative -prefix $PWD
+$ make -j3 sub-src
+[/sourcecode]</p>
+
+<p>Most of the above <em>configure flags</em> it&#39;s focused on compile the minimum necessary to build PhantomJS:</p>
+
+<ul>
+<li>&quot;<code>-no-phonon -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl -no-declarative</code>&quot; disabled Phonon, XML Patterns, Qt 3 support, SQLite, STL, Qt Quick for this build</li>
+<li>&quot;<code>-universal -carbon</code>&quot; ensures that we build for both <code>x86</code> and <code>ppc</code> architecture, and maintaining compatibility with older version of Mac OS X</li>
+<li>&quot;<code>-framework</code>&quot; ensures that Mac OS X-style framework bundles are built, to be later included/embedded in our own PhantomJS bundle</li>
+</ul>
+
+<p><strong>You should change those flags based on your needs</strong>. Refer to <a href="http://doc.trolltech.com/4.7/configure-options.html">this documentation</a> or just type:
+[sourcecode:bash]
+$ ./configure --help
+[/sourcecode]</p>
+
+<p>After the build has finished without errors, just add the &quot;<code>/bin</code>&quot; directory in &quot;<code>~/tmp/qt-everywhere-opensource</code>&quot; to the &quot;<code>PATH</code>&quot; environment variable. Do something like:
+[sourcecode:bash]
+$ export PATH=~/tmp/qt-everywhere-opensource/bin/:$PATH
+[/sourcecode]</p>
+
+<h2>Build the <code>.app</code></h2>
+
+<p>I assume you know where to get your source code :-). I will use the path <strong><code>/sourcedir/</code></strong> to refer to it.</p>
+
+<p>In case you want to build for <code>x86</code> and <code>ppc</code>, you also need to add to your Qt project <code>.pro</code> file:
+[sourcecode:c]
+...
+mac: CONFIG += x86 ppc
+...
+[/sourcecode]</p>
+
+<p>Time to compile:
+[sourcecode:bash]
+$ qmake -spec macx-g++ -config release &amp;&amp; make
+[/sourcecode]
+Finger crossed, all compiled fine.</p>
+
+<h2>Tune it (optional)</h2>
+
+<p>For PhantomJS we didn&#39;t want the classical <em>bouncy icon</em> on the Dock to appear at every execution, given that PhantomJS is a command line tool. If you are in the same situation, edit &quot;<code>/sourcedir/bin/yourproject.app/Content/Info.plist</code>&quot; and add the attribute:
+[sourcecode:xml]
+<key>LSUIElement</key>
+<string>1</string>
+[/sourcecode]</p>
+
+<p><code>Info.plist</code> allows to control many more things than just the Dock icon. Apple documentation about this it&#39;s <a href="http://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/000-Introduction/introduction.html">here</a>. Tune it as you like/need.</p>
+
+<h2>Generate the final <code>.dmg</code> package</h2>
+
+<p>The Trolls provide a simple tool to convert a dynamically linked executable, in a self contained &quot;<code>.app</code>&quot; file. The tool is called &quot;<code>macdeployqt</code>&quot; and you can find a description <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html#the-mac-deployment-tool">here</a>.</p>
+
+<p>It&#39;s part of the Qt source code, but it&#39;s not built by default. So, assuming you still have the previously compiled Qt in your <code>PATH</code>, do the following:
+[sourcecode:bash]
+$ cd ~/tmp/qt-everywhere-opensource/tools/macdeployqt
+$ qmake -spec macx-g++ &amp;&amp; make &amp;&amp; make install
+[/sourcecode]</p>
+
+<p>We are ready to package. The last bit to do:
+[sourcecode:bash]
+$ cd /sourcedir/bin/
+$ macdeployqt phantomjs.app -verbose=2 -dmg
+[/sourcecode]</p>
+
+<p><em>Done!</em> Now you have got a nice <code>.dmg</code> ready for deployment.</p>
+
+<h2>A word of advice</h2>
+
+<p>I strongly recommend to read the <a href="http://doc.trolltech.com/4.7/developing-on-mac.html">Development</a> and <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html">Deployment</a> on Mac, from the official Qt documentation. Top to bottom. It&#39;s full of useful information and can really help out to understand the <em>full picture</em>.</p>
+
+<p><em>Happy bundling ;-)</em></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

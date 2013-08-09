@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>MS: «Was DES cracked? Really?»</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>MS: «Was DES cracked? Really?»</h2>
+<p class="meta">21 Feb 2007</p>
+
+<div class="post">
+<p><img src="http://www.cepolina.com/freephoto/f/other.food/cracker.snack.bread.jpg" alt="cracker... ;)" align="right" width="100" />
+Yeasterday <a href="http://blog.neminis.org/">Nemo</a> and I have found a post on <a href="http://www.ossblog.it/post/2033/ophcrack-vista-password-cracking">OSSBlog</a> about the new release of <a href="http://ophcrack.sourceforge.net/">ophcrack 2.3.4</a>.</p>
+
+<blockquote>
+Ophcrack is a Windows password cracker based on rainbow tables. It is a very efficient implementation of rainbow tables done by the inventors of the method. It comes with a GTK+ Graphical User Interface and runs on [en:Windows], [en:Mac OS X] (Intel CPU) as well as on [en:Linux].
+</blockquote>
+
+<p>In the last release, ophcrack supports [en:Windows Vista|Vista]. Mmmm... sounds strange. &lt;!--more--&gt;</p>
+
+<p>But it&#39;s true. And its because Vista is based on [en:LM<em>hash]... too. Reading the article on [en:LM</em>hash|Wikipedia about LM_hash]:
+<blockquote>
+[...]
+<strong>Security weaknesses</strong>
+Although it is based on DES, a reasonably secure block cipher, the LM hash can easily be cracked due to two weaknesses in its implementation.
+[...]
+Because LM hash does not include salt, a time-memory trade-off cryptanalysis attack, such as rainbow tables, is also feasible. In 2003, Ophcrack, an implementation of the rainbow table technique, was published. It specifically targets the weaknesses of LM encryption, and includes pre-computed data sufficient to crack virtually all alphanumeric LM hashes in a few seconds. Many cracking tools, e.g. RainbowCrack, L0phtCrack and Cain, now incorporate similar attacks and make cracking of LM hashes trivial.
+To address the security weaknesses inherent in LM encryption, Microsoft introduced the NTLM algorithm with Windows NT 3.1. While LAN Manager is considered obsolete and current Windows operating systems use the stronger NTLM hashing method, all Windows systems still compute and store the LAN Manager hash by default for compatibility with LAN Manager and Windows Me or earlier clients. It is considered good security practice to disable this feature where it isn’t needed. Microsoft claims that support for LM will be completely eliminated in the new Windows Vista operating system.
+</blockquote></p>
+
+<p>So, does [en:Microsoft|M$] know that it&#39;s a very old and very &quot;weak&quot; algorithm? What about the <strong>famous and &quot;<em>wowed</em>&quot;</strong> security of Vista? Ok, the physical [en:Computer_security|security] is not possible (if I have physical access to a machine... software security is pratically useless), but... why they continue to use a so poor technology? Why If theyrself have tried to improve the strength of the algorithm in the past? </p>
+
+<p>Why they are so [en:Idiot|IDIOT]?!?!?!?!? Why a plenty of [en:Moron (psychology)|MORONS] owns the Personla Computer Market-Share?!?!?!?!?</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

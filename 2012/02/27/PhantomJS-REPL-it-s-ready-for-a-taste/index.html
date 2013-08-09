@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PhantomJS REPL: it's ready for a taste</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>PhantomJS REPL: it's ready for a taste</h2>
+<p class="meta">27 Feb 2012</p>
+
+<div class="post">
+<p>After 2 months of on-off working on this, I finally managed to make something I&#39;m happy with: a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> for <a href="http://www.phantomjs.org">PhantomJS</a>.</p>
+
+<p>The <a href="http://blog.ivandemarino.me/2011/11/01/REPL-and-HTTP-Mapping-ideas-to-contribute-to-PhantomJS">last post I wrote about this</a> was in November 2011 (!!!). But I started putting code together only in Jan 2012. So, overall, from the first commit until today is almost 2 months.</p>
+
+<div class="img">
+<img src="http://ubik.cc/MAOW-Firenze-09/images/repl-loop.png" />
+</div>
+
+<p>First thing first: <strong>how do you get to try it?</strong> Well, you can get my fork, switch to the <code>dev-repl</code> branch and try it out:
+[sourcecode:bash]
+$ git clone git://github.com/detro/phantomjs.git
+$ cd phantomjs
+$ git checkout -b dev-repl origin/dev-repl
+$ qmake &amp;&amp; make
+[/sourcecode]</p>
+
+<p>You can <a href="https://github.com/detro/phantomjs/zipball/dev-repl">download this tarball</a>. Or you just can come up with your own way to <a href="https://github.com/detro/phantomjs/tree/dev-repl">checkout my branch</a>.</p>
+
+<p>To launch it, just type:
+[sourcecode:bash]
+$ ./bin/phantomjs</p>
+
+<blockquote>
+<p>[/sourcecode]</p>
+</blockquote>
+
+<p>You will be welcomed by a prompt, waiting for your JavaScript code to be evaluated on the spot. Line by line. Like a proper REPL. The ideal companion for your <strong>quick-and-dirty phantomjs-hack-sessions</strong> or <strong>live-coding keynotes</strong>.</p>
+
+<p>The REPL is packed with some good features that I&#39;m sure will please command-line junkies:</p>
+
+<ul>
+<li>Context-sensitive auto-completions (i.e. push on <code>TAB</code> to cycle through suggestions)</li>
+<li>Arrow navigation through the history of what you type</li>
+<li>Permanent history (yes, like any &quot;modern&quot; CLI)</li>
+<li>Editable command line (use <code>Left</code> and <code>Right</code> to insert characters where you need them)</li>
+<li>Pretty-print of expression result (great to quickly recall the name of a method)</li>
+</ul>
+
+<p>It&#39;s not part of the latest PhantomJS, but I plan to file a pull request very soon.</p>
+
+<p>Please, help yourself to it and share your view and feedback.
+I did this work specifically to make PhantomJS users happy: so, help me make you happy :)</p>
+
+<p><em>Happy REPL-coding!</em></p>
+
+<p><strong>P.S.:</strong> This whole branch would have not made it without the great <a href="https://github.com/antirez/linenoise">linenoise library</a>. In the specific case, I&#39;m using <a href="https://github.com/tadmarshall/linenoise">this fork</a> because it has more maintenance. <strong>Kudos to everyone involved</strong>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

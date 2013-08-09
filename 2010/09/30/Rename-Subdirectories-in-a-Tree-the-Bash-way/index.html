@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Rename Subdirectories in a Tree: the Bash way</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Rename Subdirectories in a Tree: the Bash way</h2>
+<p class="meta">30 Sep 2010</p>
+
+<div class="post">
+<p>My granma always used to say every time she was recompiling the <a href="http://www.kernel.org">Linux Kernel</a> of her wash machine:</p>
+
+<blockquote>
+<p>Bash Scripting is GREAT!
+Be sure you learn it.
+One day will understand why it can make your life much easier.</p>
+</blockquote>
+
+<p>And she was right! I&#39;m not an <a href="http://tiswww.case.edu/php/chet/bash/bashtop.html">Bash</a> expert, but when I spend that <em>10 minutes</em> putting together that scripts that <em>makes that tedious task _piece of cake</em>, the satisfaction is as tick as a Mug of Coffee.</p>
+
+<p>Today I got this new colleague having to rename a lot of specific directories in a deep directory tree, and I decided to help.</p>
+
+<p>Here is the full code:
+[sourcecode:bash]</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>Simple Bash script to recursively rename Subdirectories in a Tree.</h1>
+
+<h1>Author: Ivan De Marino <a href="mailto:ivan.demarino@betfair.com">ivan.demarino@betfair.com</a></h1>
+
+<h1>Usage:</h1>
+
+<h1>rename_subdirs.sh <starting directory> <new dir name> <old dir name></h1>
+
+<p>usage () {
+   echo &quot;Simple Bash script to recursively rename Subdirectories in a Tree.&quot;
+   echo &quot;Author: Ivan De Marino <a href="mailto:ivan.demarino@betfair.com">ivan.demarino@betfair.com</a>&quot;
+   echo
+   echo &quot;Usage:&quot;
+   echo &quot;   rename_subdirs.sh <starting directory> <old dir name> <new dir name>&quot;</p>
+
+<p>exit 1
+}</p>
+
+<p>[ &quot;$#&quot; -eq 3 ] || usage</p>
+
+<p>recursive()
+{
+   cd &quot;$1&quot;
+   for dir in *
+   do
+      if [ -d &quot;$dir&quot; ]; then
+         echo &quot;Directory found: &#39;$dir&#39;&quot;
+         ( recursive &quot;$dir&quot; &quot;$2&quot; &quot;$3&quot; )
+         if [ &quot;$dir&quot; == &quot;$2&quot; ]; then
+            echo &quot;Renaming &#39;$2&#39; in &#39;$3&#39;&quot;
+            mv &quot;$2&quot; &quot;$3&quot;
+         fi;
+      fi;
+   done
+}</p>
+
+<p>recursive &quot;$1&quot; &quot;$2&quot; &quot;$3&quot;
+[/sourcecode]</p>
+
+<p>Clean and Fun: I learned how to do recursion in Bash.</p>
+
+<p>Happy (Bash) Scripting.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

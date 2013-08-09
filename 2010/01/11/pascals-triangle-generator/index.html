@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Pascal's Triangle generator</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Pascal's Triangle generator</h2>
+<p class="meta">11 Jan 2010</p>
+
+<div class="post">
+<p>What&#39;s <a href="http://en.wikipedia.org/wiki/Pascal's_triangle">Pascal&#39;s Triangle</a>? That&#39;s what it is (<a href="http://en.wikipedia.org/wiki/Pascal's_triangle">Wikipedia</a> has all the theory, if you need).</p>
+
+<div class="img">
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Pascal%27s_triangle_5.svg/250px-Pascal%27s_triangle_5.svg.png" alt="Pascal's Triangle first 6 rows" />
+Pascal's Triangle first 6 rows
+</div>
+
+<p>The thing I wrote here is a generator of the <em>n-th row</em> of the triangle, that doesn&#39;t use more then the memory needed to store the solution. Instead of allocating a <em>Triangular Matrix</em>, and building every row based on the one above, solution is <em>built in place</em>.</p>
+
+<h2>How does it work</h2>
+
+<p>The result is generated <em>&quot;filling the row from right to left&quot;</em>. I start initiating the element on the right hand side to <code>&#39;1&#39;</code>. Then, I run something like:
+[sourcecode:c]
+init result[0.. requested_row]</p>
+
+<p>result[requested_row-1] = 1</p>
+
+<p>for i = 2 -&gt; requested<em>row do:
+   for j = requested</em>row-i -&gt; requested_row-1 do:
+      result[j] = result[j] + result[j+1]
+   endfor
+endfor
+[/sourcecode]</p>
+
+<p>Clearly this is nothing special. Just a little trick to avoid to use a triangular matrix. <a href="http://www.google.co.uk/products?hl=en&safe=off&q=memory%20prices&lr=&um=1&ie=UTF-8&sa=N&tab=wf">Memory is not cheap</a>, you know! ;-)</p>
+
+<p>[sourcecode:c]</p>
+
+<h1>include <stdio.h></h1>
+
+<h1>include <stdlib.h></h1>
+
+<p>void print_row(unsigned long long* row, unsigned int size) {
+    static unsigned int j;
+    for ( j = 0; j &lt; size; ++j ) { printf(&quot;%llu &quot;, row[j]); }
+    printf(&quot;\n&quot;);
+}</p>
+
+<p>unsigned long long* pascal<em>triangle</em>line(unsigned int pascal<em>row){
+    static unsigned int i, j;
+    unsigned long long* result = NULL;
+    result = (unsigned long long*)calloc(pascal</em>row, sizeof(unsigned long long));</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">if ( NULL != result ) {    
+    result[pascal_row-1] = 1; // First element on the right is always &#39;1&#39;
+    for ( i = 2; i &lt;= pascal_row; ++i ) {
+
+        #ifdef DEBUG
+        print_row(result, pascal_row);
+        #endif
+
+        for ( j = pascal_row-i; j &lt; pascal_row-1; ++j ) {
+            result[j] += result[j+1]; // Calculate the &#39;j&#39;-th element
+
+            #ifdef VERBOSE
+            printf(&quot;(row: %d, element: %d) =&gt; %llu\n&quot;, i, j, result[j]);
+            #endif
+        }
+    }
+}
+
+return (result);
+</code></pre></div>
+<p>}</p>
+
+<p>int main(int argc, char** argv)
+{
+    unsigned int input;
+    unsigned long long* result = NULL;</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">// Check the Input
+if ( argc == 2 ) input = atoi(argv[1]); else return (EXIT_FAILURE);
+
+// Calculate the required line
+result = pascal_triangle_line(input);
+
+// Print result
+if ( NULL != result ) { 
+    printf(&quot;RESULT ROW:\n&quot;);
+    print_row(result, input);
+    return (EXIT_SUCCESS);
+}
+return (EXIT_FAILURE);
+</code></pre></div>
+<p>}
+[/sourcecode]</p>
+
+<p>Complexity in time: O(n<sup>2</sup>/2). After all, the complexity is a constant operation O(1), multiplied by the number of elements in the Triangular Matrix: n<sup>2</sup> elements divided by 2. BUT bear in mind that O(n<sup>2</sup>/2) = O(n<sup>2</sup>). So, <strong>it&#39;s more correct to say that the complexity is quadratic</strong>.</p>
+
+<p>Of course, if instead you need the whole triangle (not just an arbitrary row) you will have to store it somewhere, so this solution wouldn&#39;t work for you as it is.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

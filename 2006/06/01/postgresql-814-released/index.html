@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PostgreSQL 8.1.4 released</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>PostgreSQL 8.1.4 released</h2>
+<p class="meta">01 Jun 2006</p>
+
+<div class="post">
+<p><img src="http://www.bimboflap.it/risorse/servizi/coloriamo/B.N/elefante.gif" width="150" align="left" alt="PG" />
+The most advanced Open Source RDBMS... becomes even more advanced!!! ;)
+<blockquote><strong>New Advanced Database Features</strong></p>
+
+<p><strong>Roles:</strong> PostgreSQL now supports database roles, which simplify the management of large numbers of users with complex overlapping database rights.</p>
+
+<p><strong>IN/OUT Parameters:</strong> PostgreSQL functions now support IN, OUT and INOUT parameters, which substantially improves support of complex business logic for J2EE and .NET applications.</p>
+
+<p><strong>Two-Phase Commit (2PC):</strong> long in demand for WAN applications and heterogeneous data centers using PostgreSQL, this feature allows ACID-compliant transactions across widely separated servers.
+Performance Enhancements</p>
+
+<p><strong>Improved Multiprocessor (SMP) Performance:</strong> the buffer manager for 8.1 has been enhanced to scale almost linearly with the number of processors, leading to significant performance gains on 8-way, 16-way, dual-core, and multi-core CPU servers.</p>
+
+<p><strong>Bitmap Scan:</strong> indexes will be dynamically converted to bitmaps in memory when appropriate, giving up to twenty times faster index performance on complex queries against very large tables. This also helps simplify database management by greatly reducing the need for multi-column indexes.
+<strong>
+Table Partitioning:</strong> the query planner is now able to avoid scanning whole sections of a large table using a technique known as Constraint Exclusion. Similar to the Table Partitioning found in other database management systems, this feature improves both performance and data management for multi-gigabyte tables.
+<strong>
+Shared Row Locking:</strong> PostgreSQL&#39;s &quot;better than row-level locking&quot; now supports even higher levels of concurrency through the addition of shared row locks for foreign keys. Shared locks will improve insert and update performance on many high-volume OLTP applications.</p>
+
+<p><a href="http://www.postgresql.org/docs/whatsnew">...</a>
+</blockquote></p>
+
+<p><a href="http://www.postgresql.org/docs/techdocs.52">Bug fixes</a>.
+<blockquote> Q: What&#39;s being released?
+A: PostgreSQL minor versions 8.1.4, 8.0.8, 7.4.13 and 7.3.15. All of these versions implement a security patch which eliminates a specific vulnerability to SQL injection attacks.</p>
+
+<p>Q: Who does this vulnerability affect?
+A: Users of PostgreSQL servers which are exposed to &quot;untrusted input&quot;, from the internet or otherwise, and use any &quot;multi-byte encoding&quot;, such as UTF-8 or SJIS. Basically, most open source database users with Web applications.</p>
+
+<p>Q: Who is not affected?
+A: Several kinds of applications:</p>
+
+<ol>
+<li>Users whose database applications are not exposed to untrusted input, such as single-user applications not exposed to the Internet.</li>
+<li>Databases which are set up with &quot;LATIN-1&quot; or other single-byte encoding, on both client and server.</li>
+<li>If application always sends untrusted strings as out-of-line parameters, instead of embedding them into SQL commands, it is not vulnerable. This is only available in PostgreSQL 7.4 or later.</li>
+</ol>
+
+<p><a href="http://www.postgresql.org/docs/techdocs.48">...</a>
+</blockquote></p>
+
+<p>Source, <a href="http://www.ziobudda.net/">Ziobudda</a>.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>
