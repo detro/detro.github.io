@@ -1,0 +1,9 @@
+name: "Considering yourself perfectible makes you perfect - Ivan De Marino"
+
+destination: ../detro.github.io-destination
+
+markdown: redcarpet
+pygments: true
+
+permalink: /:year/:month/:title
+paginate: 50

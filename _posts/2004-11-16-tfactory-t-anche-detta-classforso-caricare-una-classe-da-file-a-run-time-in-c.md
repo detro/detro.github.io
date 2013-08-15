@@ -1,0 +1,12 @@
+---
+layout: post
+author: detro
+published: true
+title: "TFactory <T> (anche detta ClassForSO): caricare una classe da file a Run-Time in C++..."
+tags: [uncategorized]
+date: "2004-11-16 11:15:23"
+updated: "2004-11-16 11:15:23"
+permalink: /2004/11/16/tfactory-t-anche-detta-classforso-caricare-una-classe-da-file-a-run-time-in-c/
+---
+
+<div style="clear:both;"></div>L'idea mi é venuta durante lo sviluppo di <a href="http://www.mandolinux.org/MGS/"><span style="font-weight: bold;">MGS</span></a>: sapevo che alcuni miei colleghi (<span style="font-weight: bold;">SbatMan</span>, <span style="font-weight: bold;">o'Troll</span>, <span style="font-weight: bold;">Sax</span>) avevano fatto una cosa in questa direzione per il loro progetto di OOP.<br />In particolare loro avevano realizzato una <u><span style="color: rgb(204, 0, 0); font-style: italic;">Template Factory</span><span style="color: rgb(0, 0, 0);"></span></u>: molto intelligente come approccio, dato che questo svincolava da una semplice Factory di Classi ad una ben più astratta <u><span style="color: rgb(204, 0, 0); font-style: italic;">Factory Parametrizzata</span></u>.<br />C'era però un limite legato ad alcune restrizioni sulle Gerarchie (alcuni <code> <span style="font-weight: bold;">typedef</span> </code> obbligatori per gestire gli handler delle SO) che una Classe che si voleva istanziare a Run-Time doveva rispettare: ho eliminato il tutto approfondendo un pò l'argomento:<br /><code><br /># man dlsym<br /></code><br />Avendo studiato il loro codice per benino (come fanno i programmatori seri...;-)), il risultato é stato una leggera trasformazione del Template che ora permette di:<br /><ul>   <li>Caricare una classe da una SO (Shared Object Library) a Run-Time (come prima);</li>   <li>Assegnare l'oggetto istanziato tramite UP-Casting ad una Super-Classe (come prima);</li>   <li>Nessuna restrizione sulle Gerarchie (unica differenza con il lavoro dei miei colleghi).</li> </ul> Cosa ho fatto quindi io di nuovo? La mia versione della <code><span style="font-weight: bold;">TFactory <t></t></span></code> (così il nome della Classe) può essere portata ovunque continuando a funzionare sempre.<br />Prossimamente posterò il codice completo o un link allo stesso.<br /><span style="font-size:78%;">Da notare che, al momeno, il sito ufficiale non é stato ancora aggiornato.</span><br /><div style="clear:both; padding-bottom: 0.25em;"></div>
