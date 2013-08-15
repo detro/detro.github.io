@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -51,105 +51,98 @@ A Backtracking Tree
 
 <p>Give a good look at the <strong><code>void backtrack(int *curr<em>sol, int curr</em>sol_size, int input)</code></strong>: it works as a <strong><em>&quot;skeleton&quot;</em></strong> for <em>generic backtracking</em> algorithms. I&#39;m going to use it in the future as well: I&#39;m going to have fun to implement a <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> solver ASAP (probably this weekend). Why? Because I suck at Sudoku: never got into it very much to learn how to play :-P.</p>
 
-<p>Anyway, here is the code
-[sourcecode:c]</p>
+<p>Anyway, here is the code</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
 
-<h1>include <stdio.h></h1>
+<span class="c1">// Fake boolean values</span>
+<span class="cp">#define TRUE    (1)</span>
+<span class="cp">#define FALSE   (0)</span>
 
-<h1>include <stdlib.h></h1>
+<span class="c1">// Candidates used at every recursive call</span>
+<span class="cp">#define MAX_CANDIDATES 2</span>
 
-<p>// Fake boolean values</p>
+<span class="c1">// Define the &quot;bool&quot; type using &quot;short int&quot;</span>
+<span class="k">typedef</span> <span class="kt">short</span> <span class="kt">int</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">bool</span> <span class="n">finished</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
 
-<h1>define TRUE    (1)</h1>
+<span class="kt">bool</span> <span class="nf">reject</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span> <span class="c1">// EMPTY for now</span>
+<span class="p">}</span>
 
-<h1>define FALSE   (0)</h1>
+<span class="kt">bool</span> <span class="nf">accept</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">curr_sol_size</span> <span class="o">==</span> <span class="n">input</span><span class="p">);</span>
+<span class="p">}</span>
 
-<p>// Candidates used at every recursive call</p>
+<span class="kt">void</span> <span class="nf">output</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ &quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">curr_sol_size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">curr_sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">TRUE</span> <span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<h1>define MAX_CANDIDATES 2</h1>
+<span class="kt">void</span> <span class="nf">extend_solution</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">candidates</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">num_candidates</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Only 2 possibilities: the element is take or not taken</span>
+    <span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+    <span class="n">candidates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">num_candidates</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>// Define the &quot;bool&quot; type using &quot;short int&quot;
-typedef short int bool;
-static bool finished = FALSE;</p>
+<span class="kt">void</span> <span class="nf">try</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// EMPTY for now</span>
+<span class="p">}</span>
 
-<p>bool reject(int* curr<em>sol, int curr</em>sol_size, int input) {
-    return FALSE; // EMPTY for now
-}</p>
+<span class="kt">void</span> <span class="nf">revert</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// EMPTY for now</span>
+<span class="p">}</span>
 
-<p>bool accept(int* curr<em>sol, int curr</em>sol<em>size, int input) {
-    return (curr</em>sol_size == input);
-}</p>
+<span class="kt">void</span> <span class="nf">backtrack</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">curr_sol</span><span class="p">,</span> <span class="kt">int</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">candidates</span><span class="p">[</span><span class="n">MAX_CANDIDATES</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">num_candidates</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
 
-<p>void output(int* curr<em>sol, int curr</em>sol<em>size, int input) {
-    static int i;
-    printf(&quot;[ &quot;);
-    for ( i = 1; i &lt;= curr</em>sol<em>size; ++i ) {
-        if ( curr</em>sol[i] == TRUE ) printf(&quot;%d &quot;, i);
-    }
-    printf(&quot;]\n&quot;);
-}</p>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">reject</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span> <span class="c1">// Not worth completing</span>
+    <span class="p">}</span>
 
-<p>void extend<em>solution(int* curr</em>sol, int curr<em>sol</em>size, int input, int* candidates, int* num<em>candidates) {
-    // Only 2 possibilities: the element is take or not taken
-    candidates[0] = TRUE;
-    candidates[1] = FALSE;
-    *num</em>candidates = 2;
-}</p>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">accept</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">output</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span> <span class="c1">// Found! Print it</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="o">++</span><span class="n">curr_sol_size</span><span class="p">;</span> <span class="c1">// Increase solution size</span>
 
-<p>void try(int *curr<em>sol, int curr</em>sol_size, int input) {
-    // EMPTY for now
-}</p>
+        <span class="c1">// Generate solution extension</span>
+        <span class="n">extend_solution</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_candidates</span><span class="p">);</span>
+        <span class="c1">// Try every candidates just generated</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_candidates</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">curr_sol</span><span class="p">[</span><span class="n">curr_sol_size</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-<p>void revert(int *curr<em>sol, int curr</em>sol_size, int input) {
-    // EMPTY for now
-}</p>
+            <span class="n">try</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
 
-<p>void backtrack(int *curr<em>sol, int curr</em>sol<em>size, int input) {
-    int candidates[MAX</em>CANDIDATES];
-    int num_candidates;
-    int i;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">if ( reject(curr_sol, curr_sol_size, input) ) {
-    return; // Not worth completing
-}
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
 
-if ( accept(curr_sol, curr_sol_size, input) ) {
-    output(curr_sol, curr_sol_size, input); // Found! Print it
-} else {
-    ++curr_sol_size; // Increase solution size
+            <span class="n">revert</span><span class="p">(</span><span class="n">curr_sol</span><span class="p">,</span> <span class="n">curr_sol_size</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
 
-    // Generate solution extension
-    extend_solution(curr_sol, curr_sol_size, input, candidates, &amp;num_candidates);
-    // Try every candidates just generated
-    for ( i = 0; i &lt; num_candidates; ++i ) {
-        curr_sol[curr_sol_size] = candidates[i];
+            <span class="k">if</span> <span class="p">(</span> <span class="n">finished</span> <span class="p">)</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// Early termination</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-        try(curr_sol, curr_sol_size, input);
+<span class="kt">void</span> <span class="nf">print_all_subset_from_1_to</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">sol</span><span class="p">;</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="n">free</span> <span class="p">(</span><span class="n">sol</span><span class="p">);</span>
+<span class="p">}</span>
 
-        backtrack(curr_sol, curr_sol_size, input);
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">input</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
 
-        revert(curr_sol, curr_sol_size, input);
-
-        if ( finished ) return; // Early termination
-    }
-}
+    <span class="n">print_all_subset_from_1_to</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}</p>
-
-<p>void print<em>all</em>subset<em>from</em>1_to(int n) {
-    int *sol;
-    sol = malloc(n * sizeof(int));
-    backtrack(sol, 0, n);
-    free (sol);
-}</p>
-
-<p>int main(int argc, char** argv) {
-    int input;
-    if ( argc == 2 ) input = atoi(argv[1]); else return (EXIT_FAILURE);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">print_all_subset_from_1_to(input);
-</code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <h2>Complexity</h2>
 
 <p>Time Complexity? Actually, I believe we are talking about a very complex algorithm here: there are <strong>2<sup>n</sup></strong> different subsets here, but to generate everyone of them, the algorithm has to go deep down in every branch of the Backtracking tree. And, given that the depth of a branch is exactly <strong>n</strong> (because is when the printing actually happens), I believe here we have a <strong>O(n * 2^n)</strong> complexity; pretty big. But I could be wrong, so if any <a href="http://en.wikipedia.org/wiki/Big_O_notation">Big-O notation</a> expert is out there, please advice.</p>

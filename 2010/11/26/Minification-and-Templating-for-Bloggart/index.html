@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -46,88 +46,72 @@
 <h3>How I implemented Minification and Templating in Bloggart</h3>
 
 <p>The magic is made of 3 parts. First, a new URL handler in the <a href="https://github.com/detro/bloggart/blob/master/app.yaml">app.yaml</a> file:</p>
+<div class="highlight"><pre><code class="yaml language-yaml" data-lang="yaml"><span class="c1"># ...</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/.*\.(css|js)</span>
+  <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">minifier.py</span>
 
-<p>[sourcecode:yaml]</p>
-
-<h1>...</h1>
-
-<ul>
-<li><p>url: /.*.(css|js)
-script: minifier.py</p></li>
-<li><p>url: /static/([^/]+)/(.<em>)
-static_files: themes/\1/static/\2
-upload: themes/[^/]+/static/.</em></p>
-
-<h1>...</h1>
-
-<p>[/sourcecode]</p></li>
-</ul>
-
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/static/([^/]+)/(.*)</span>
+  <span class="l-Scalar-Plain">static_files</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">themes/\1/static/\2</span>
+  <span class="l-Scalar-Plain">upload</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">themes/[^/]+/static/.*</span>
+<span class="c1"># ...</span>
+</code></pre></div>
 <p>This routes requests to CSS and JS files to a new Request Handler, <a href="https://github.com/detro/bloggart/blob/master/minifier.py">minifier.py</a>:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># ...</span>
+<span class="k">class</span> <span class="nc">CssMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
+   <span class="k">def</span> <span class="nf">get</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">requestedCssFilename</span> <span class="p">):</span>
+      <span class="n">cssPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">),</span> <span class="s">&#39;themes/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedCssFilename</span><span class="p">)</span> <span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cssPath</span><span class="p">)</span> <span class="p">):</span>
+         <span class="n">util</span><span class="o">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+         <span class="k">return</span><span class="p">;</span>
 
-<p>[sourcecode:python]</p>
+      <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">memcaching</span> <span class="p">):</span>
+         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cssPath</span><span class="p">);</span>
 
-<h1>...</h1>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">cssRenderingResult</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">):</span>      
+         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="p">{</span> <span class="s">&#39;config&#39;</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
 
-<p>class CssMinifier( webapp.RequestHandler ):<br>
-   def get( self, requestedCssFilename ):
-      cssPath = os.path.join( os.path.dirname( <strong>file</strong> ), &#39;themes/%s/%s&#39; % (config.theme, requestedCssFilename) );
-      if ( not os.path.exists(cssPath) ):
-         util.setErrorResponse(self, 404);
-         return;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  cssRenderingResult = None;
-  if ( config.memcaching ):
-     cssRenderingResult = memcache.get(cssPath);
+         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="p">):</span>
+            <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">cssmin</span><span class="o">.</span><span class="n">minify</span><span class="p">(</span><span class="n">cssRenderingResult</span><span class="p">);</span>
 
-  if ( cssRenderingResult is None ):      
-     cssRenderingResult = template.render(cssPath, { &#39;config&#39; : config });
+         <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="n">cssRenderingResult</span><span class="p">);</span>
 
-     if ( config.logging_level != logging.DEBUG ):
-        cssRenderingResult = cssmin.minify(cssRenderingResult);
+      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;text/css&#39;</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">cssRenderingResult</span> <span class="p">);</span>
 
-     memcache.set(cssPath, cssRenderingResult);
+<span class="k">class</span> <span class="nc">JSMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
+   <span class="k">def</span> <span class="nf">get</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">requestedJsFilename</span> <span class="p">):</span>
+      <span class="n">jsPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">),</span> <span class="s">&#39;themes/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedJsFilename</span><span class="p">)</span> <span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">jsPath</span><span class="p">)</span> <span class="p">):</span>
+         <span class="n">util</span><span class="o">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+         <span class="k">return</span><span class="p">;</span>
 
-  self.response.headers[&#39;Content-Type&#39;] = &#39;text/css&#39;
-  self.response.out.write( cssRenderingResult );
+      <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">memcaching</span> <span class="p">):</span>
+         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsPath</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span> <span class="n">jsRenderingResult</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">):</span>         
+         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="p">{</span> <span class="s">&#39;config&#39;</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
+
+         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="p">):</span>
+            <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">jsmin</span><span class="o">.</span><span class="n">jsmin</span><span class="p">(</span><span class="n">jsRenderingResult</span><span class="p">);</span>
+
+         <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="n">jsRenderingResult</span><span class="p">);</span>
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;application/javascript&#39;</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">jsRenderingResult</span> <span class="p">);</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">webapp</span><span class="o">.</span><span class="n">WSGIApplication</span><span class="p">([</span>
+                                      <span class="p">(</span> <span class="s">&#39;(/.*\.js)$&#39;</span><span class="p">,</span> <span class="n">JSMinifier</span> <span class="p">),</span>
+                                      <span class="p">(</span> <span class="s">&#39;(/.*\.css)$&#39;</span><span class="p">,</span> <span class="n">CssMinifier</span> <span class="p">)</span>
+                                      <span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
+<span class="c"># ...</span>
 </code></pre></div>
-<p>class JSMinifier( webapp.RequestHandler ):<br>
-   def get( self, requestedJsFilename ):
-      jsPath = os.path.join( os.path.dirname( <strong>file</strong> ), &#39;themes/%s/%s&#39; % (config.theme, requestedJsFilename) );
-      if ( not os.path.exists(jsPath) ):
-         util.setErrorResponse(self, 404);
-         return;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  jsRenderingResult = None;
-  if ( config.memcaching ):
-     jsRenderingResult = memcache.get(jsPath);
-
-  if ( jsRenderingResult is None ):         
-     jsRenderingResult = template.render(jsPath, { &#39;config&#39; : config });
-
-     if ( config.logging_level != logging.DEBUG ):
-        jsRenderingResult = jsmin.jsmin(jsRenderingResult);
-
-     memcache.set(jsPath, jsRenderingResult);
-
-  self.response.headers[&#39;Content-Type&#39;] = &#39;application/javascript&#39;
-  self.response.out.write( jsRenderingResult );
-</code></pre></div>
-<p>application = webapp.WSGIApplication([
-                                      ( &#39;(/.<em>.js)$&#39;, JSMinifier ),
-                                      ( &#39;(/.</em>.css)$&#39;, CssMinifier )
-                                      ], debug=True )</p>
-
-<h1>...</h1>
-
-<p>[/sourcecode]</p>
-
 <p>The minification is done using a couple of libraries that I&#39;ll mention in a second. Templating is transparently applied <strong>BEFORE Minification</strong>, so that the Theme developer (me most probably) can use code like the following to Bundle JS and CSS in as less HTTP Requests as possible:</p>
-
-<p>[sourcecode:djiango]
-/* CSS code... <em>/
-Include file &#39;&quot;another_file.css&quot;&#39; contains invalid characters or sequences
-/</em> more CSS code */
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/* CSS code... */
+{ % include &quot;another_file.css&quot; % }
+/* more CSS code */
+</code></pre></div>
 <p>The actual business logic for the minification is done by <a href="https://github.com/detro/bloggart/blob/master/lib/cssmin.py">lib/cssmin.py</a> and <a href="https://github.com/detro/bloggart/blob/master/lib/jsmin.py">lib/jsmin.py from Douglas Crockford</a>.</p>
 
 <p>If you are a Python App Engine developer, I hope you find useful this <em>simple-yet-effectiv</em>e technique.</p>

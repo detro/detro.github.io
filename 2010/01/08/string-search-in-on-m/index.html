@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>String search in O(n + m)</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>String search in O(n + m)</h2>
+<p class="meta">08 Jan 2010</p>
+
+<div class="post">
+<p>Searching a string inside another string is a very easy task. Given a string <code>A</code> and a string <code>B</code>, start a loop over <code>A</code> from left to right and, for every letter, start an internal loop to see if there is a match with the letters of <code>B</code>.</p>
+
+<div class="img">
+<img src="http://dm.ncl.ac.uk/peterevans/blog/wp-content/uploads/2009/04/string.jpg" alt="String" width="300"/>
+A ball of string
+</div>
+
+<p>Pseudo code would look something like this:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">function</span> <span class="n">NaiveSearch</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">[</span><span class="mf">1.</span><span class="p">.</span><span class="n">n</span><span class="p">],</span> <span class="n">string</span> <span class="n">sub</span><span class="p">[</span><span class="mf">1.</span><span class="p">.</span><span class="n">m</span><span class="p">])</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="n">from</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="n">from</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">m</span>
+         <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="err">≠</span> <span class="n">sub</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">jump</span> <span class="n">to</span> <span class="n">next</span> <span class="n">iteration</span> <span class="n">of</span> <span class="n">outer</span> <span class="n">loop</span>
+      <span class="k">return</span> <span class="n">i</span>
+   <span class="k">return</span> <span class="n">not</span> <span class="n">found</span>
+</code></pre></div>
+<p>Time Complexity? <strong>O(n * m), where <code>n</code> is the size of <code>A</code> and <code>m</code> is the size of <code>B</code></strong>.</p>
+
+<p>Wonna do better? Follow me.</p>
+
+<h2>Hashing is the key</h2>
+
+<p>Let&#39;s build an <a href="http://en.wikipedia.org/wiki/Hash_function">hashing function</a> that generates a quite big number for every string. It has to depend on multiple factors:
+<ul>
+<li>Size of the Alphabet</li>
+<li>Position of every char within the string</li>
+<li>A function that for a Chars of the Alphabet gives Numbers</li>
+</ul></p>
+
+<p>Think of Binary Numbers as strings made of 0 and 1, with an alphabet of only 2 characters: <code>0,1</code>. How do we convert a Binary Number in a Decimal?</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="p">[</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">1</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">0</span><span class="o">*</span><span class="mi">1</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">11</span>
+</code></pre></div>
+<p>Isn&#39;t that the kind of hashing we need?
+<ul>
+<li>Size of the Alphabet <strong>=&gt; 2, made of the Characters {0,1}</strong></li>
+<li>Position of every char within the string <strong>=&gt; The power applied to the 2 depends on the position of that char</strong></li>
+<li>A function that for a Chars of the Alphabet gives Numbers <strong>=&gt; In this case, 0 and 1 have already a value ;)</strong></li>
+</ul></p>
+
+<p>Why all this stuff about Hashing? Bear with me and I&#39;ll explain.</p>
+
+<h2>Our hashing function</h2>
+
+<p>We want to search B in A, so let&#39;s take:
+<ul>
+<li><code>&#39;S&#39;</code> is the String in which we are searching (i.e. &#39;A&#39;)</li>
+<li><code>&#39;j&#39;</code> is position of the <del>last</del> <ins>first</ins> (thanks <a href="http://www.whatsthebeef.org/">John</a>) char in <code>&#39;S&#39;</code> included in the Hashing</li>
+<li><code>&#39;alpha&#39;</code> is the size of the Alphabet</li>
+<li><code>&#39;m&#39;</code> is the size of the string being searched (i.e. the size of &#39;B&#39;)</li>
+</ul></p>
+
+<p>The hashing function will be something like:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">Hashing</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">SUMMATION</span> <span class="p">[</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">{</span> <span class="n">alpha</span><span class="o">^</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="kt">char</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">])</span> <span class="p">}</span>
+</code></pre></div>
+<h2>What&#39;s great about this hashing?</h2>
+
+<p>Now comes the great part. Once we calculate the hashing of a string K, and then we REMOVE the first character, APPEND a new one, how do we calculate the hashing of this new L string? Like this:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span> <span class="n">H</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">^</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="kt">char</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">)</span> <span class="o">+</span> <span class="kt">char</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">m</span><span class="p">])</span>
+</code></pre></div>
+<p><strong>2 MULTIPLICATIONS, 1 SUBTRACTION and 1 ADDITION</strong>. That takes <strong>O(1)</strong>. See where am I heading?</p>
+
+<h2>Searching by Hashing</h2>
+
+<p>Given the <code>B<em>size</code> size of <code>B</code>, we calculate the hashing of the first <code>B</em>size</code> characters of <code>A</code>: an <em>&quot;hashing window&quot;</em> over A. If B is not found, we proceed on moving this window, 1 character to the right, 1 at a time; until either we find (the hashing of) B, or the string finishes.</p>
+
+<p>Here is the code:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include &lt;math.h&gt;</span>
+
+<span class="cp">#define NORM_CHAR(A)    (A - &#39; &#39;)</span>
+<span class="cp">#define ALPHABET_SIZE   (NORM_CHAR(255)+1)</span>
+<span class="cp">#define LLU_POW(x, y)   (unsigned long long)pow(x, y)</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">hash_char</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;HASHING of char &#39;%c&#39; (of value %d) in position #%d of a string of size %d is: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">string</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span>
+        <span class="n">NORM_CHAR</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="n">pos</span><span class="p">]),</span>
+        <span class="n">pos</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">,</span>
+        <span class="n">LLU_POW</span><span class="p">(</span><span class="n">ALPHABET_SIZE</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">NORM_CHAR</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+        <span class="p">);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="k">return</span> <span class="n">LLU_POW</span><span class="p">(</span><span class="n">ALPHABET_SIZE</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">NORM_CHAR</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="n">pos</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">Given that:</span>
+<span class="cm">- &#39;S&#39; is the String in which we are searching (i.e. &#39;A&#39;)</span>
+<span class="cm">- &#39;j&#39; is position of the last char in &#39;S&#39; included in the Hashing</span>
+<span class="cm">- &#39;alpha&#39; is the size of the Alphabet</span>
+<span class="cm">- &#39;m&#39; is the size of the string being searched (i.e. &#39;B_size&#39;)</span>
+
+<span class="cm">=&gt; Hashing(S, j) = SUMMATION [i=0 -&gt; m-1] { alpha^(m -(i+1)) * char(S[i+j]) }</span>
+<span class="cm">*/</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">hash_string</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">hash</span><span class="p">;</span>
+
+    <span class="n">hash</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">hash</span> <span class="o">+=</span> <span class="n">hash_char</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">hash</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span><span class="o">*</span> <span class="n">A</span><span class="p">;</span>
+    <span class="kt">char</span><span class="o">*</span> <span class="n">B</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">A_hash</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">B_hash</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">B_size</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">3</span> <span class="p">)</span> <span class="p">{</span>
+       <span class="n">A</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+       <span class="n">B</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+       <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">// Calculate initial Hashings</span>
+    <span class="n">B_size</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+    <span class="n">A_hash</span> <span class="o">=</span> <span class="n">hash_string</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B_size</span><span class="p">);</span>
+    <span class="n">B_hash</span> <span class="o">=</span> <span class="n">hash_string</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">B_size</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;HASHING of B(&#39;%s&#39;) is: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">B_hash</span><span class="p">);</span>
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Starting from char in position %d, the HASHING of A for length %d is: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">B_size</span><span class="p">,</span> <span class="n">A_hash</span><span class="p">);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="n">B_size</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">A_hash</span> <span class="o">==</span> <span class="n">B_hash</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES! B is a Substring of A, in the range { %d, %d}</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">i</span><span class="o">-</span><span class="n">B_size</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// &#39;S&#39; is the String in which we are searching (i.e. &#39;A&#39;)</span>
+            <span class="c1">// &#39;j&#39; is position of the last char in &#39;S&#39; included in the Hashing</span>
+            <span class="c1">// &#39;alpha&#39; is the size of the Alphabet</span>
+            <span class="c1">// &#39;m&#39; is the size of the string being searched (i.e. &#39;B_size&#39;)</span>
+            <span class="c1">//</span>
+            <span class="c1">// H(S, j+1) = alpha * ( H(S, j) - alpha^(m-1) * char(S[j]) ) + char(S[j+m])</span>
+            <span class="n">A_hash</span> <span class="o">=</span> <span class="n">ALPHABET_SIZE</span>
+                <span class="o">*</span> <span class="p">(</span>
+                    <span class="n">A_hash</span>
+                    <span class="o">-</span> <span class="n">LLU_POW</span><span class="p">(</span><span class="n">ALPHABET_SIZE</span><span class="p">,</span> <span class="p">(</span><span class="n">B_size</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="o">*</span> <span class="n">NORM_CHAR</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">B_size</span><span class="p">]</span> <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="o">+</span> <span class="n">NORM_CHAR</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="p">);</span>
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Starting from char in position %d, the HASHING of A for length %d is: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">i</span><span class="o">-</span><span class="n">B_size</span><span class="p">,</span> <span class="n">B_size</span><span class="p">,</span> <span class="n">A_hash</span><span class="p">);</span>
+            <span class="err">#</span><span class="n">endif</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO. B is not a Substring of A</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">B_hash</span><span class="p">,</span> <span class="n">A_hash</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>I used <code>unsigned long long</code> so that I could handle the largest numbers possible. Check out large strings to see how easily you can reach enormous values.</p>
+
+<h2>Complexity</h2>
+
+<p><strong>O( 2 * hashing(B) + (size<em>of</em>A - size<em>of</em>B) * hashing<em>window</em>moves  ) =</strong>
+<strong>O( 2m + (n-m) * O(1) ) =</strong>
+<strong>O( 2m + n -m ) =</strong>
+<strong>O( n + m )</strong></p>
+
+<p>Pretty neat, eh?.</p>
+
+<h2>Where does it come from?</h2>
+
+<p>I didn&#39;t create the algorithm myself: I &quot;only&quot; coded it in C. Officially this algorithm is called <a href="http://en.wikipedia.org/wiki/Rabin–Karp_string_search_algorithm">Rabin–Karp string search algorithm</a>. But, as for every other things I code, it&#39;s great when you actually spend time coding it: you get a great understanding of the problem and the proposed algorithm.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

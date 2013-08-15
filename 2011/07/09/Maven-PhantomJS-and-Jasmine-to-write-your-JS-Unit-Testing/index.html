@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -42,11 +42,8 @@ A beautiful jasmine...
 <p>I believe that if <strong>development experience</strong> it&#39;s easy (and, I dare to say, <strong>FUN</strong>), <em>code just flows</em>! And if you can do testing with just one command from your <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a>, the flow becomes almost <em>beat</em>.</p>
 
 <p>In Betfair we use <a href="http://maven.apache.org/">Maven</a> to drive our build system (yeah, I know, XML orgies are terrible...). So, we type a lot of:</p>
-
-<p>[sourcecode:bash]
-$ mvn clean install
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>mvn clean install
+</code></pre></div>
 <p>even in departments where we mostly do Front End code. Ideally, we wanted to add, as a step to the build, a way to hook in the JavaScript Testing, and having the test result driving the build outcome. </p>
 
 <p><strong><code>IF</code> JavaScript Test fails <code>THEN</code> Build Fails</strong>! Dead simple.</p>
@@ -79,36 +76,34 @@ Well, read on.</p>
 
 <h2>Jasmine <code>test_runner.html</code></h2>
 
-<p>As mentioned, Jasmine requires a webpage prepared to run the tests. In our case, something like the following is good:
-[sourcecode:html]
-&lt;!DOCTYPE HTML&gt;
-<html>
-<head>
-  <title>Jasmine Test Runner</title>
-  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.0.2/jasmine.css">
-  <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine.js"></script>
-  <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine-html.js"></script>
-  <script type="text/javascript" src="lib/jasmine-reporters/jasmine.phantomjs-reporter.js"></script></p>
+<p>As mentioned, Jasmine requires a webpage prepared to run the tests. In our case, something like the following is good:</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Jasmine Test Runner<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;lib/jasmine-1.0.2/jasmine.css&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/jasmine-1.0.2/jasmine.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/jasmine-1.0.2/jasmine-html.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;lib/jasmine-reporters/jasmine.phantomjs-reporter.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-<p>&lt;!-- include source files here... --&gt;
-  <script type="text/javascript" src="../src/tv.js"></script></p>
+  <span class="c">&lt;!-- include source files here... --&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;../src/tv.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-<p>&lt;!-- include spec files here... --&gt;
-  <script type="text/javascript" src="test_spec.js"></script></p>
+  <span class="c">&lt;!-- include spec files here... --&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;test_spec.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-<p></head>
-<body></p>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
 
-<script type="text/javascript">
-  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-  jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
-  jasmine.getEnv().execute();
-</script>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+  <span class="nx">jasmine</span><span class="p">.</span><span class="nx">getEnv</span><span class="p">().</span><span class="nx">addReporter</span><span class="p">(</span><span class="k">new</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">TrivialReporter</span><span class="p">());</span>
+  <span class="nx">jasmine</span><span class="p">.</span><span class="nx">getEnv</span><span class="p">().</span><span class="nx">addReporter</span><span class="p">(</span><span class="k">new</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">PhantomJSReporter</span><span class="p">());</span>
+  <span class="nx">jasmine</span><span class="p">.</span><span class="nx">getEnv</span><span class="p">().</span><span class="nx">execute</span><span class="p">();</span>
+<span class="nt">&lt;/script&gt;</span>
 
-<p></body>
-</html>
-[/sourcecode]</p>
-
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
 <h2>How PhantomJS does the trick</h2>
 
 <p>PhantomJS, as you might know, allows to instantiate and manipulate webpages. And webpages are &quot;sandboxed&quot;: so, it&#39;s not possible to write files on the filesystem from there. So, what I did 2 things:</p>
@@ -121,54 +116,52 @@ Well, read on.</p>
 
 <p>In this way it&#39;s possible to preserve the sanboxing, while saving the desired XML format. And, along the way, give to PhantomJS the ability to manipulate files.</p>
 
-<p>The script looks like this:
-[sourcecode:javascript]
-// ...
-    var htmlrunner = phantom.args[0],
-        resultdir = phantom.args[1],
-        page = new WebPage();</p>
+<p>The script looks like this:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// ...</span>
+    <span class="kd">var</span> <span class="nx">htmlrunner</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="nx">resultdir</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="nx">page</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebPage</span><span class="p">();</span>
 
-<p>// ...</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">page.open(htmlrunner, function(status) {
-    if (status === &quot;success&quot;) {
-        utils.core.waitfor(function() { // wait for this to be true
-            return page.evaluate(function() {
-                return typeof(jasmine.phantomjsXMLReporterPassed) !== &quot;undefined&quot;;
-            });
-        }, function() { // once done...
-            // Retrieve the result of the tests
-            var suitesResults = page.evaluate(function(){
-                return jasmine.phantomjsXMLReporterResults;
-            });
+<span class="c1">// ...</span>
 
-            // Save the result of the tests in files
-            var f = null;
-            for ( var i = 0, len = suitesResults.length; i &lt; len; ++i ) {
-                try {
-                    f = fs.open(resultdir + &#39;/&#39; + suitesResults[i][&quot;xmlfilename&quot;], &quot;w&quot;);
-                    f.write(suitesResults[i][&quot;xmlbody&quot;]);
-                    f.close();
-                } catch (e) {
-                    console.log(e);
-                    console.log(&quot;phantomjs&gt; Unable to save result of Suite &#39;&quot;+ suitesResults[i][&quot;xmlfilename&quot;] +&quot;&#39;&quot;);
-                }
-            }
+    <span class="nx">page</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">htmlrunner</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">utils</span><span class="p">.</span><span class="nx">core</span><span class="p">.</span><span class="nx">waitfor</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// wait for this to be true</span>
+                <span class="k">return</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="k">typeof</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">phantomjsXMLReporterPassed</span><span class="p">)</span> <span class="o">!==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">;</span>
+                <span class="p">});</span>
+            <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// once done...</span>
+                <span class="c1">// Retrieve the result of the tests</span>
+                <span class="kd">var</span> <span class="nx">suitesResults</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+                    <span class="k">return</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">phantomjsXMLReporterResults</span><span class="p">;</span>
+                <span class="p">});</span>
 
-            // Return the correct exit status. &#39;0&#39; only if all the tests passed
-            phantom.exit(page.evaluate(function(){
-                return jasmine.phantomjsXMLReporterPassed ? 0 : 1; //&lt; exit(0) is success, exit(1) is failure
-            }));
-        }, function() { // or, once it timesout...
-            phantom.exit(1);
-        });
-    } else {
-        console.log(&quot;phantomjs&gt; Could not load &#39;&quot; + htmlrunner + &quot;&#39;.&quot;);
-        phantom.exit(1);
-    }
-});
+                <span class="c1">// Save the result of the tests in files</span>
+                <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">suitesResults</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="nx">f</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">resultdir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nx">suitesResults</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="s2">&quot;xmlfilename&quot;</span><span class="p">],</span> <span class="s2">&quot;w&quot;</span><span class="p">);</span>
+                        <span class="nx">f</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">suitesResults</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="s2">&quot;xmlbody&quot;</span><span class="p">]);</span>
+                        <span class="nx">f</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;phantomjs&gt; Unable to save result of Suite &#39;&quot;</span><span class="o">+</span> <span class="nx">suitesResults</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="s2">&quot;xmlfilename&quot;</span><span class="p">]</span> <span class="o">+</span><span class="s2">&quot;&#39;&quot;</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+
+                <span class="c1">// Return the correct exit status. &#39;0&#39; only if all the tests passed</span>
+                <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+                    <span class="k">return</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">phantomjsXMLReporterPassed</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">//&lt; exit(0) is success, exit(1) is failure</span>
+                <span class="p">}));</span>
+            <span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// or, once it timesout...</span>
+                <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;phantomjs&gt; Could not load &#39;&quot;</span> <span class="o">+</span> <span class="nx">htmlrunner</span> <span class="o">+</span> <span class="s2">&quot;&#39;.&quot;</span><span class="p">);</span>
+            <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
 </code></pre></div>
-<p>[/sourcecode]</p>
-
 <p>Ah, the Filesystem API (i.e. the <code>fs.open()</code> above) are still <em>stabilising</em> as we are not sure yet how much of the <a href="http://wiki.commonjs.org/wiki/Filesystem">CommonJS/Filesystem</a> specs we want to implement in PhantomJS. If you care about PhantomJS, contribute to the discussion <a href="https://groups.google.com/d/topic/phantomjs/Z4E3cD3IJIM/discussion">here</a>.</p>
 
 <h2>Oh, yes, Maven</h2>
@@ -177,44 +170,42 @@ Well, read on.</p>
 
 <p>Maven has a plugin for running external executable: <code>exec-maven-plugin</code>. It allows to launch any executable and, in case this exit failing (i.e. <code>exit(1);</code> or <code>exit(EXIT_FAILURE);</code>), fail the build. Super!</p>
 
-<p>So, how it looks like?
-[sourcecode:xml]
-&lt;?xml version=&quot;1.0&quot;?&gt;
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-    http://maven.apache.org/maven-v4_0_0.xsd">
-    &lt;!-- ... --&gt;
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>PhantomJS Unit Testing</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>phantomjs</executable>
-                    <workingDirectory>test</workingDirectory>
-                    <arguments>
-                        <argument>phantomjs<em>jasminexml</em>runner.js</argument>
-                        <argument>test_runner.html</argument>
-                        <argument>${project.build.directory}/surefire-reports</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-</project>
-[/sourcecode]</p>
-
+<p>So, how it looks like?</p>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0</span>
+<span class="s">    http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>exec-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;id&gt;</span>PhantomJS Unit Testing<span class="nt">&lt;/id&gt;</span>
+                        <span class="nt">&lt;phase&gt;</span>test<span class="nt">&lt;/phase&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>exec<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;executable&gt;</span>phantomjs<span class="nt">&lt;/executable&gt;</span>
+                    <span class="nt">&lt;workingDirectory&gt;</span>test<span class="nt">&lt;/workingDirectory&gt;</span>
+                    <span class="nt">&lt;arguments&gt;</span>
+                        <span class="nt">&lt;argument&gt;</span>phantomjs_jasminexml_runner.js<span class="nt">&lt;/argument&gt;</span>
+                        <span class="nt">&lt;argument&gt;</span>test_runner.html<span class="nt">&lt;/argument&gt;</span>
+                        <span class="nt">&lt;argument&gt;</span>${project.build.directory}/surefire-reports<span class="nt">&lt;/argument&gt;</span>
+                    <span class="nt">&lt;/arguments&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div>
 <p>This adds a step in the <code>test phase</code> of the build, running our tests.</p>
 
 <h1>It&#39;s on GitHub</h1>

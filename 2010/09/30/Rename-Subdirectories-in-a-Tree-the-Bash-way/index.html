@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -38,50 +38,44 @@ One day will understand why it can make your life much easier.</p>
 
 <p>Today I got this new colleague having to rename a lot of specific directories in a deep directory tree, and I decided to help.</p>
 
-<p>Here is the full code:
-[sourcecode:bash]</p>
+<p>Here is the full code:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
+<span class="c"># Simple Bash script to recursively rename Subdirectories in a Tree.</span>
+<span class="c"># Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;</span>
+<span class="c">#</span>
+<span class="c"># Usage:</span>
+<span class="c">#    rename_subdirs.sh &lt;starting directory&gt; &lt;new dir name&gt; &lt;old dir name&gt;</span>
 
-<h1>!/bin/bash</h1>
+usage <span class="o">()</span> <span class="o">{</span>
+   <span class="nb">echo</span> <span class="s2">&quot;Simple Bash script to recursively rename Subdirectories in a Tree.&quot;</span>
+   <span class="nb">echo</span> <span class="s2">&quot;Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;&quot;</span>
+   <span class="nb">echo</span>
+<span class="nb">   echo</span> <span class="s2">&quot;Usage:&quot;</span>
+   <span class="nb">echo</span> <span class="s2">&quot;   rename_subdirs.sh &lt;starting directory&gt; &lt;old dir name&gt; &lt;new dir name&gt;&quot;</span>
 
-<h1>Simple Bash script to recursively rename Subdirectories in a Tree.</h1>
+   <span class="nb">exit </span>1
+<span class="o">}</span>
 
-<h1>Author: Ivan De Marino <a href="mailto:ivan.demarino@betfair.com">ivan.demarino@betfair.com</a></h1>
+<span class="o">[</span> <span class="s2">&quot;$#&quot;</span> -eq 3 <span class="o">]</span> <span class="o">||</span> usage
 
-<h1>Usage:</h1>
+recursive<span class="o">()</span>
+<span class="o">{</span>
+   <span class="nb">cd</span> <span class="s2">&quot;$1&quot;</span>
+   <span class="k">for </span>dir in *
+   <span class="k">do</span>
+<span class="k">      if</span> <span class="o">[</span> -d <span class="s2">&quot;$dir&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">         </span><span class="nb">echo</span> <span class="s2">&quot;Directory found: &#39;$dir&#39;&quot;</span>
+         <span class="o">(</span> recursive <span class="s2">&quot;$dir&quot;</span> <span class="s2">&quot;$2&quot;</span> <span class="s2">&quot;$3&quot;</span> <span class="o">)</span>
+         <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> <span class="o">==</span> <span class="s2">&quot;$2&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nb">echo</span> <span class="s2">&quot;Renaming &#39;$2&#39; in &#39;$3&#39;&quot;</span>
+            mv <span class="s2">&quot;$2&quot;</span> <span class="s2">&quot;$3&quot;</span>
+         <span class="k">fi</span>;
+      <span class="k">fi</span>;
+   <span class="k">done</span>
+<span class="o">}</span>
 
-<h1>rename_subdirs.sh <starting directory> <new dir name> <old dir name></h1>
-
-<p>usage () {
-   echo &quot;Simple Bash script to recursively rename Subdirectories in a Tree.&quot;
-   echo &quot;Author: Ivan De Marino <a href="mailto:ivan.demarino@betfair.com">ivan.demarino@betfair.com</a>&quot;
-   echo
-   echo &quot;Usage:&quot;
-   echo &quot;   rename_subdirs.sh <starting directory> <old dir name> <new dir name>&quot;</p>
-
-<p>exit 1
-}</p>
-
-<p>[ &quot;$#&quot; -eq 3 ] || usage</p>
-
-<p>recursive()
-{
-   cd &quot;$1&quot;
-   for dir in *
-   do
-      if [ -d &quot;$dir&quot; ]; then
-         echo &quot;Directory found: &#39;$dir&#39;&quot;
-         ( recursive &quot;$dir&quot; &quot;$2&quot; &quot;$3&quot; )
-         if [ &quot;$dir&quot; == &quot;$2&quot; ]; then
-            echo &quot;Renaming &#39;$2&#39; in &#39;$3&#39;&quot;
-            mv &quot;$2&quot; &quot;$3&quot;
-         fi;
-      fi;
-   done
-}</p>
-
-<p>recursive &quot;$1&quot; &quot;$2&quot; &quot;$3&quot;
-[/sourcecode]</p>
-
+recursive <span class="s2">&quot;$1&quot;</span> <span class="s2">&quot;$2&quot;</span> <span class="s2">&quot;$3&quot;</span>
+</code></pre></div>
 <p>Clean and Fun: I learned how to do recursion in Bash.</p>
 
 <p>Happy (Bash) Scripting.</p>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -80,55 +80,50 @@ I can&#39;t cover that as well.</p>
 <p>What we really need, though, is an <em>&quot;XML Export&quot;</em> of the blog. <a href="http://en.blog.wordpress.com/2006/06/12/xml-import-export/">Matt here explains</a> how to do
 exactly that. The result in my case was an enormous (for a personal irrelevant blog like mine) <strong>6MB</strong>! Yes, I write a lot of bulls**t! ;)
 The result will be something looking like:</p>
-
-<p>[sourcecode:xml]
-<rss xmlns:excerpt="http://wordpress.org/export/1.0/excerpt/"
-    xmlns:content="http://purl.org/rss/1.0/modules/content/"
-    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:wp="http://wordpress.org/export/1.0/"
-    version="2.0">
-    <channel>
-        <title>Your blog title</title>
-        <link>http://www.yourblog.com</link>
-        <description>Bla bla bla</description>
-        <pubDate>Sun, 30 May 2010 19:15:05 +0000</pubDate>
-        &lt;!-- ... more info about your blog ... --&gt;
-        <a href="wp:category">wp:category</a>
-            <a href="wp:category_nicename">wp:category_nicename</a>cat<a href="/wp:category_nicename">/wp:category_nicename</a>
-            <a href="wp:category_parent/">wp:category_parent/</a>
-            <a href="wp:cat_name">wp:cat_name</a>Category<a href="/wp:cat_name">/wp:cat_name</a>
-            <a href="wp:category_description">wp:category_description</a>Category Description<a href="/wp:category_description">/wp:category_description</a>
-        <a href="/wp:category">/wp:category</a>
-        &lt;!-- ... more category ... --&gt;
-        <a href="wp:tag">wp:tag</a>
-            <a href="wp:tag_slug">wp:tag_slug</a>movie<a href="/wp:tag_slug">/wp:tag_slug</a>
-            <a href="wp:tag_name">wp:tag_name</a>movie<a href="/wp:tag_name">/wp:tag_name</a>
-        <a href="/wp:tag">/wp:tag</a>
-        &lt;!-- ... more tag ... --&gt;
-        <item>
-            <title>A blog post</title>
-            <link>http://www.yourblog.com/2005/12/13/a-blog-post/</link>
-            <pubDate>Tue, 13 Dec 2005 11:10:14 +0000</pubDate>
-            <a href="dc:creator">dc:creator</a>&lt;![CDATA[You]]&gt;<a href="/dc:creator">/dc:creator</a>
-            <category>&lt;![CDATA[Category]]&gt;</category>
-            &lt;!-- ... body and other stuff --&gt;
-        </item>
-        &lt;!-- ... more items/articles ... --&gt;<br>
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;rss</span> <span class="na">xmlns:excerpt=</span><span class="s">&quot;http://wordpress.org/export/1.0/excerpt/&quot;</span>
+    <span class="na">xmlns:content=</span><span class="s">&quot;http://purl.org/rss/1.0/modules/content/&quot;</span>
+    <span class="na">xmlns:wfw=</span><span class="s">&quot;http://wellformedweb.org/CommentAPI/&quot;</span>
+    <span class="na">xmlns:dc=</span><span class="s">&quot;http://purl.org/dc/elements/1.1/&quot;</span>
+    <span class="na">xmlns:wp=</span><span class="s">&quot;http://wordpress.org/export/1.0/&quot;</span>
+    <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;channel&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Your blog title<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link&gt;</span>http://www.yourblog.com<span class="nt">&lt;/link&gt;</span>
+        <span class="nt">&lt;description&gt;</span>Bla bla bla<span class="nt">&lt;/description&gt;</span>
+        <span class="nt">&lt;pubDate&gt;</span>Sun, 30 May 2010 19:15:05 +0000<span class="nt">&lt;/pubDate&gt;</span>
+        <span class="c">&lt;!-- ... more info about your blog ... --&gt;</span>
+        <span class="nt">&lt;wp:category&gt;</span>
+            <span class="nt">&lt;wp:category_nicename&gt;</span>cat<span class="nt">&lt;/wp:category_nicename&gt;</span>
+            <span class="nt">&lt;wp:category_parent/&gt;</span>
+            <span class="nt">&lt;wp:cat_name&gt;</span>Category<span class="nt">&lt;/wp:cat_name&gt;</span>
+            <span class="nt">&lt;wp:category_description&gt;</span>Category Description<span class="nt">&lt;/wp:category_description&gt;</span>
+        <span class="nt">&lt;/wp:category&gt;</span>
+        <span class="c">&lt;!-- ... more category ... --&gt;</span>
+        <span class="nt">&lt;wp:tag&gt;</span>
+            <span class="nt">&lt;wp:tag_slug&gt;</span>movie<span class="nt">&lt;/wp:tag_slug&gt;</span>
+            <span class="nt">&lt;wp:tag_name&gt;</span>movie<span class="nt">&lt;/wp:tag_name&gt;</span>
+        <span class="nt">&lt;/wp:tag&gt;</span>
+        <span class="c">&lt;!-- ... more tag ... --&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+            <span class="nt">&lt;title&gt;</span>A blog post<span class="nt">&lt;/title&gt;</span>
+            <span class="nt">&lt;link&gt;</span>http://www.yourblog.com/2005/12/13/a-blog-post/<span class="nt">&lt;/link&gt;</span>
+            <span class="nt">&lt;pubDate&gt;</span>Tue, 13 Dec 2005 11:10:14 +0000<span class="nt">&lt;/pubDate&gt;</span>
+            <span class="nt">&lt;dc:creator&gt;</span><span class="cp">&lt;![CDATA[You]]&gt;</span><span class="nt">&lt;/dc:creator&gt;</span>
+            <span class="nt">&lt;category&gt;</span><span class="cp">&lt;![CDATA[Category]]&gt;</span><span class="nt">&lt;/category&gt;</span>
+            <span class="c">&lt;!-- ... body and other stuff --&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+        <span class="c">&lt;!-- ... more items/articles ... --&gt;</span>    
+</code></pre></div>
 <p><strong>Save it somewhere safe</strong>. <em>Why do we need the XML? Isn&#39;t the SQL backup enough?</em>
 No, because Bloggart has a nice tool to import the XML export. More about this later.</p>
 
 <h3>Step 2: Clone, Setup and Deploy the new blog</h3>
 
-<p>So, you want to get a nice clean installation of Bloggart in the cloud. Open your CLI and type:
-[sourcecode:bash]
-$ git clone git://github.com/detro/bloggart.git
-$ cd bloggart
-$ git submodule update --init
-[/sourcecode]</p>
-
+<p>So, you want to get a nice clean installation of Bloggart in the cloud. Open your CLI and type:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/detro/bloggart.git
+<span class="nv">$ </span><span class="nb">cd </span>bloggart
+<span class="nv">$ </span>git submodule update --init
+</code></pre></div>
 <p>This will clone the latest master of my branch of Bloggart, where I host all my additions, tweaks and changes to Bloggart.
 <a href="http://github.com/Arachnid/bloggart">Nick&#39;s original branch</a> hasn&#39;t been updated since June 2010.</p>
 
@@ -148,12 +143,10 @@ You will need this later on as well.</p>
 
 <p>No, I won&#39;t go more in details: if you are not <strong>techy enough</strong> to read the comments in the <code>config.py</code> and figure out what to do, why are you even reading this?</p>
 
-<p>Well, now you should be ready to deploy!
-[sourcecode:bash]
-$ cd ..
-$ appcfg.py update bloggart
-[/sourcecode]</p>
-
+<p>Well, now you should be ready to deploy!</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> ..
+<span class="nv">$ </span>appcfg.py update bloggart
+</code></pre></div>
 <p>If you are not interested in migrating, but just starting a blog, then you are done. Your blog is up-and-running already.
 Otherwise, read on.</p>
 
@@ -185,13 +178,11 @@ that bloggart ALREADY provides one <em>ready-to-go</em> as well: find it at <cod
 
 <h4>ready, set, migrate</h4>
 
-<p>We are all set for using <code>migrate.py</code>. Run <code>remote.py</code> and type:
-[sourcecode:python]
-import migrate;
-wpmig = migrate.WordpressMigration(path<em>to</em>your<em>wordpress</em>export<em>xml, the</em>disqus<em>key, the</em>disqus<em>forum</em>name);
-wpmig.migrate_all();
-[/sourcecode]</p>
-
+<p>We are all set for using <code>migrate.py</code>. Run <code>remote.py</code> and type:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
+</code></pre></div>
 <p>This will kick off Deferred Tasks that will store in App Engine your blog posts and in Disqus the associated comments.</p>
 
 <h4>wait, I&#39;m having a problem here</h4>
@@ -211,20 +202,18 @@ new WordPress installation.</p>
 </blockquote>
 
 <p>Use it to split your Wordpress Export XML into chunks (remember, smaller than 1MB). Then run the <code>remote.py</code>
-and do like:
-[sourcecode:python]
-import migrate;
-wpmig = migrate.WordpressMigration(path<em>to</em>your<em>wordpress</em>export<em>xml-chunk-01, the</em>disqus<em>key, the</em>disqus<em>forum</em>name);
-wpmig.migrate_all();</p>
+and do like:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">01</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
 
-<p>wpmig = migrate.WordpressMigration(path<em>to</em>your<em>wordpress</em>export<em>xml-chunk-02, the</em>disqus<em>key, the</em>disqus<em>forum</em>name);
-wpmig.migrate_all();</p>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">02</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
 
-<p>wpmig = migrate.WordpressMigration(path<em>to</em>your<em>wordpress</em>export<em>xml-chunk-03, the</em>disqus<em>key, the</em>disqus<em>forum</em>name);
-wpmig.migrate_all();
-...
-[/sourcecode]</p>
-
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">03</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<span class="o">...</span>
+</code></pre></div>
 <h3>Step 4: <code>301 Permanent Redirect</code></h3>
 
 <p>Well, you don&#39;t necessarily need this, but it helps if you want to retain some of your old traffic.

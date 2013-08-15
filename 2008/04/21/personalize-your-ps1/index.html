@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -31,28 +31,26 @@
 Fancy $PS1 setting
 </div>
 
-<p>The code to make the <a href="http://www.gnu.org/software/bash/">Bash</a> prompt looks like mine is (<code>~/.bashrc</code>):
-[sourcecode:bash]
-case $TERM in
-    xterm<em>|rxvt</em>)
-        TITLEBAR=&#39;[\033]0;\u@\h:\w\007]&#39;
+<p>The code to make the <a href="http://www.gnu.org/software/bash/">Bash</a> prompt looks like mine is (<code>~/.bashrc</code>):</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="k">case</span> <span class="nv">$TERM</span> in
+    xterm*|rxvt*<span class="o">)</span>
+        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s1">&#39;\[\033]0;\u@\h:\w\007\]&#39;</span>
         ;;
-    *)
-        TITLEBAR=&quot;&quot;
+    *<span class="o">)</span>
+        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
         ;;
-esac;</p>
+<span class="k">esac</span>;
 
-<p>PS1=&quot;${TITLEBAR}\n[\033[0;0m][\033[0;32m]time: \
-[\033[0m][\033[1;31m]\t[\033[0m][\033[0;0m]]-\
-[[\033[0m][\033[0;32m]host: [\033[0m]\
-[\033[1;31m]\h[\033[0m][\033[0;0m]]-\
-[[\033[0m][\033[0;32m]user: [\033[0m][\033[1;31m]\u\
-[\033[0m][\033[0;0m]]-[[\033[0m][\033[0;32m]bash: \
-[\033[0m][\033[1;31m]\v[\033[0;0m]]\n\
-[\033[0;0m][[\033[0;32m]cwd: [\033[0m][\033[1;31m]\w\
-[\033[0m][\033[0;0m]]# &quot;
-[/sourcecode]</p>
-
+<span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;${TITLEBAR}\n\[\033[0;0m\][\033[0;32m\]time: \</span>
+<span class="s2">\[\033[0m\]\[\033[1;31m\]\t\[\033[0m\]\[\033[0;0m\]]-\</span>
+<span class="s2">[\[\033[0m\]\[\033[0;32m\]host: \[\033[0m\]\</span>
+<span class="s2">\[\033[1;31m\]\h\[\033[0m\]\[\033[0;0m\]]-\</span>
+<span class="s2">[\[\033[0m\]\[\033[0;32m\]user: \[\033[0m\]\[\033[1;31m\]\u\</span>
+<span class="s2">\[\033[0m\]\[\033[0;0m\]]-[\[\033[0m\]\[\033[0;32m\]bash: \</span>
+<span class="s2">\[\033[0m\]\[\033[1;31m\]\v\[\033[0;0m\]]\n\</span>
+<span class="s2">\[\033[0;0m\][\[\033[0;32m\]cwd: \[\033[0m\]\[\033[1;31m\]\w\</span>
+<span class="s2">\[\033[0m\]\[\033[0;0m\]]# &quot;</span>
+</code></pre></div>
 <p>Thanks to <a href="http://www.gilesorr.com/bashprompt/howto/">Bash Prompt HOWTO</a>.</p>
 
 </div>

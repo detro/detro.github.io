@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -68,63 +68,61 @@
 <p>This means that at any moment in time, once I&#39;m done visiting a branch, I can reconstruct <em>where I&#39;m coming from</em>, looking at the values of the parent and the child:</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">parent-&gt;value &gt; child-&gt;value ? is_left_child : is_right_child
 </code></pre></div>
-<p>And, so I wrote the <strong>De Marino BST Post-Order Traversal</strong> algorithm:
-[sourcecode:c]
-void de<em>marino</em>bst<em>post</em>order_traversal(node *root) {
-    node *curr = root;  //&lt; current node
-    node *par = NULL;   //&lt; parent of current node
-    node *next = root;  //&lt; next node to traversal (but sometimes, just temp variable)
-    int dir = DOWN;     //&lt; direction in which we are moving</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">do {
-    if (dir == DOWN &amp;&amp; curr-&gt;left != NULL) {
-        // Go down left
-        next = curr-&gt;left;
-        curr-&gt;left = par;
-        par = curr;
-        curr = next;
-    } else if (dir == DOWN &amp;&amp; curr-&gt;right != NULL) {
-        // Go down right
-        next = curr-&gt;right;
-        curr-&gt;right = par;
-        par = curr;
-        curr = next;
-    } else {
-        printf(&quot;%d\n&quot;, curr != NULL ? curr-&gt;value : -1);
+<p>And, so I wrote the <strong>De Marino BST Post-Order Traversal</strong> algorithm:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="kt">void</span> <span class="nf">de_marino_bst_post_order_traversal</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">//&lt; current node</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">par</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>   <span class="c1">//&lt; parent of current node</span>
+    <span class="n">node</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">//&lt; next node to traversal (but sometimes, just temp variable)</span>
+    <span class="kt">int</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">DOWN</span><span class="p">;</span>     <span class="c1">//&lt; direction in which we are moving</span>
 
-        if (par-&gt;value &gt; curr-&gt;value &amp;&amp; par-&gt;right != NULL) {
-            // Go down right, coming from left
-            // NOTE: order gives us a hint about where we come from
-            dir = DOWN;
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dir</span> <span class="o">==</span> <span class="n">DOWN</span> <span class="o">&amp;&amp;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Go down left</span>
+            <span class="n">next</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="n">curr</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">par</span><span class="p">;</span>
+            <span class="n">par</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">dir</span> <span class="o">==</span> <span class="n">DOWN</span> <span class="o">&amp;&amp;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Go down right</span>
+            <span class="n">next</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+            <span class="n">curr</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">par</span><span class="p">;</span>
+            <span class="n">par</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 
-            next = par-&gt;left;   // hold the way back
-            par-&gt;left = curr;
-            curr = par-&gt;right;
-            par-&gt;right = next;  // store the way back in the right child of par now
-            next = curr;
-        } else {
-            dir = UP;
+            <span class="k">if</span> <span class="p">(</span><span class="n">par</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&amp;&amp;</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Go down right, coming from left</span>
+                <span class="c1">// NOTE: order gives us a hint about where we come from</span>
+                <span class="n">dir</span> <span class="o">=</span> <span class="n">DOWN</span><span class="p">;</span>
 
-            if (par-&gt;value &gt; curr-&gt;value) {
-                // Go up, coming from left
-                // NOTE: order gives us a hint about where we come from
-                next = par-&gt;left;
-                par-&gt;left = curr;
-            } else {
-                // Go up, coming from right
-                // NOTE: order gives us a hint about where we come from
-                next = par-&gt;right;
-                par-&gt;right = curr;
-            }
-            curr = par;
-            par = next;
-        }
-    }
-} while(next != NULL &amp;&amp; par != NULL);
-printf(&quot;%d\n&quot;, curr != NULL ? curr-&gt;value : -1);
+                <span class="n">next</span> <span class="o">=</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>   <span class="c1">// hold the way back</span>
+                <span class="n">par</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>  <span class="c1">// store the way back in the right child of par now</span>
+                <span class="n">next</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">dir</span> <span class="o">=</span> <span class="n">UP</span><span class="p">;</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">par</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// Go up, coming from left</span>
+                    <span class="c1">// NOTE: order gives us a hint about where we come from</span>
+                    <span class="n">next</span> <span class="o">=</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+                    <span class="n">par</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// Go up, coming from right</span>
+                    <span class="c1">// NOTE: order gives us a hint about where we come from</span>
+                    <span class="n">next</span> <span class="o">=</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+                    <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">par</span><span class="p">;</span>
+                <span class="n">par</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">par</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>Now, I&#39;m almost 100% sure that I&#39;m not the first one to <em>stumble</em> into something like this, but for now I&#39;m unable to find anything in literature - <em>cough</em> ... Google ... <em>cough</em> .</p>
 
 <h2>An advantage over Morris</h2>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -117,18 +117,13 @@ the same commit: <em>it&#39;s only logical!</em></p>
 
 <p>So, what I suggest you do is you take the branch, starting from it&#39;s root, and
 <strong>change it&#39;s base</strong> - indeed, <code>rebase</code> it on the master:</p>
-
-<p>[sourcecode:bash]
-$ git fetch upstream
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git fetch upstream
 ...
-$ git status</p>
-
-<h1>On branch the-coolest-feature-ever</h1>
-
-<p>nothing to commit (working directory clean)
-$ git rebase upstream/master
-[/sourcecode]</p>
-
+<span class="nv">$ </span>git status
+<span class="c"># On branch the-coolest-feature-ever</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+<span class="nv">$ </span>git rebase upstream/master
+</code></pre></div>
 <p>What this does, is taking all the commits of your branch, remove
 them from where they are, and re-apply them one by one on the top of the current
 master (that&#39;s why I had that <code>git fetch upstream</code>).</p>
@@ -142,11 +137,10 @@ Particularly the maintainer that is reviewing it!</p>
 <h3>While you are at it, fix that typo in the message</h3>
 
 <p><code>git rebase</code> is also awesome for fixing the body of your commit messages.
-Use:
-[sourcecode:bash]
-$ git rebase -i <COMMIT HASH>
-[/sourcecode]
-to be able to re-touch your history. But
+Use:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git rebase -i &lt;COMMIT HASH&gt;
+</code></pre></div>
+<p>to be able to re-touch your history. But
 be careful and don&#39;t overdue: <strong>don&#39;t be a plastic surgeon - just a
 mother taking care of it&#39;s child</strong>. No one will be upset.</p>
 

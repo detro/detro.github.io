@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -55,22 +55,19 @@
 <p><a href="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps</a> are currently the best way of making your website easy to crawl for search engine, ensuring always a good positioning in search result (given that your content is relevant ;-) ).</p>
 
 <p>The current version of Bloggart generates <strong>a very basic <code>sitemap.xml</code></strong> (you can see mine <a href="http://blog.ivandemarino.me/sitemap.xml">here</a>). Just the links without any other metadata:</p>
+<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span> 
+<span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="nt">&gt;</span> 
 
-<p>[sourcecode:xml]
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> </p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;url&gt; 
-  &lt;loc&gt;http://blog.ivandemarino.me/&lt;/loc&gt; 
-&lt;/url&gt; 
+    <span class="nt">&lt;url&gt;</span> 
+      <span class="nt">&lt;loc&gt;</span>http://blog.ivandemarino.me/<span class="nt">&lt;/loc&gt;</span> 
+    <span class="nt">&lt;/url&gt;</span> 
 
-&lt;url&gt; 
-  &lt;loc&gt;http://blog.ivandemarino.me/2004/11/15/il-mio-nuovo-blogger-my-new-blogger/&lt;/loc&gt; 
-&lt;/url&gt; 
-&lt;!-- ... --&gt;
+    <span class="nt">&lt;url&gt;</span> 
+      <span class="nt">&lt;loc&gt;</span>http://blog.ivandemarino.me/2004/11/15/il-mio-nuovo-blogger-my-new-blogger/<span class="nt">&lt;/loc&gt;</span> 
+    <span class="nt">&lt;/url&gt;</span> 
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/urlset&gt;</span>
 </code></pre></div>
-<p></urlset>
-[/sourcecode]</p>
-
 <p>A bit too simple if you ask me. There are other informations that should be there, like <code>&lt;lastmod&gt;</code> and <code>&lt;priority&gt;</code>.</p>
 
 <p>As you know (you do? of course you do! you <em>love</em> Bloggart, otherwise you&#39;d not be reading this :-P), Bloggart serves static content, that has been previously generated and stored in the App Engine Datastore (and Memcache).</p>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -45,99 +45,92 @@ Optimus Prime :-P - yeah yeah, a stupid joke
 </ol></p>
 
 <h2>Code</h2>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;math.h&gt;</span>
 
-<p>[sourcecode:c]</p>
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ull</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="kt">bool</span><span class="p">;</span>
 
-<h1>include <stdio.h></h1>
+<span class="cp">#define TRUE    1</span>
+<span class="cp">#define FALSE   0</span>
 
-<h1>include <stdlib.h></h1>
+<span class="c1">// Check if a number is a Prime, dividing it by all the other </span>
+<span class="c1">//  verified primes &lt; of it&#39;s Square value.</span>
+<span class="kt">bool</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">ull</span> <span class="o">*</span><span class="n">primes</span><span class="p">,</span> <span class="n">ull</span> <span class="n">primes_found</span><span class="p">,</span> <span class="n">ull</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ull</span> <span class="n">i</span><span class="p">;</span>
+    <span class="c1">// Limit - Never check for primes larger then the sqrt(value)</span>
+    <span class="n">ull</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">(</span><span class="n">ull</span><span class="p">)</span><span class="n">sqrt</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
 
-<h1>include <math.h></h1>
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value: %llu - Primes found so far: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">primes_found</span><span class="p">);</span>
+    <span class="err">#</span><span class="n">endif</span>
 
-<p>typedef unsigned long long ull;
-typedef unsigned short int bool;</p>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">primes_found</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Check if the value is divisible by this prime</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">value</span> <span class="o">%</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+        <span class="c1">// Check if it&#39;s enough. Limit sqrt(value) exceded</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">limit</span> <span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
 
-<h1>define TRUE    1</h1>
+<span class="n">ull</span><span class="o">*</span> <span class="nf">prime_numbers_generator</span><span class="p">(</span><span class="n">ull</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ull</span><span class="o">*</span> <span class="n">primes</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">ull</span> <span class="n">primes_found</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">ull</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
 
-<h1>define FALSE   0</h1>
+    <span class="c1">// Allocating memory to store the Primes</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">(</span><span class="n">ull</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">input</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ull</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">primes</span> <span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>    
 
-<p>// Check if a number is a Prime, dividing it by all the other 
-//  verified primes &lt; of it&#39;s Square value.
-bool is<em>prime(ull *primes, ull primes</em>found, ull value) {
-    ull i;
-    // Limit - Never check for primes larger then the sqrt(value)
-    ull limit = (ull)sqrt(value);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">#ifdef DEBUG
-    printf(&quot;Value: %llu - Primes found so far: %llu\n&quot;, value, primes_found);
-#endif
+    <span class="c1">// &#39;2&#39; is the first prime </span>
+    <span class="n">primes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
-for ( i = 0; i &lt; primes_found; ++i ) {
-    // Check if the value is divisible by this prime
-    if ( value % primes[i] == 0 ) return FALSE;
-    // Check if it&#39;s enough. Limit sqrt(value) exceded
-    if ( primes[i] &gt; limit ) break;
-}
-return TRUE;
+    <span class="n">primes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Let&#39;s start testing &#39;3&#39; for primality ;)</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i: %llu - Potential Prime: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="err">#</span><span class="n">endif</span>
+        <span class="c1">// Check if &#39;primes[i]&#39; is a prime</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="n">primes_found</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Found a new Prime: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="err">#</span><span class="n">endif</span>
+            <span class="c1">// Increment num of primes found so far</span>
+            <span class="o">++</span><span class="n">primes_found</span><span class="p">;</span>
+            <span class="c1">// Move to the next odd number</span>
+            <span class="n">primes</span><span class="p">[</span><span class="o">++</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// Move to the next odd number, overriding the current one</span>
+            <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">primes</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ull</span> <span class="n">input</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">primes</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+
+    <span class="c1">// Calculate the required primes</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="n">prime_numbers_generator</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">primes</span> <span class="p">)</span> <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+
+    <span class="err">#</span><span class="n">ifndef</span> <span class="n">FAST</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;All the first %llu Primes are:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%llu &quot;</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The Prime #%llu is %llu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">input</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}</p>
-
-<p>ull* prime<em>numbers</em>generator(ull input) {
-    ull* primes = NULL;
-    ull primes_found = 1;
-    ull i, j;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">// Allocating memory to store the Primes
-primes = (ull*)malloc(input * sizeof(ull));
-if ( NULL == primes ) return NULL;    
-
-// &#39;2&#39; is the first prime 
-primes[0] = 2;
-
-primes[1] = 3; // Let&#39;s start testing &#39;3&#39; for primality ;)
-for ( i = 1; i &lt; input; ) {
-    #ifdef DEBUG
-        printf(&quot;i: %llu - Potential Prime: %llu\n&quot;, i, primes[i]);
-    #endif
-    // Check if &#39;primes[i]&#39; is a prime
-    if ( is_prime(primes, primes_found, primes[i]) ) {
-        #ifdef DEBUG
-            printf(&quot;Found a new Prime: %llu\n&quot;, primes[i]);
-        #endif
-        // Increment num of primes found so far
-        ++primes_found;
-        // Move to the next odd number
-        primes[++i] = primes[i-1] + 2;
-    } else {
-        // Move to the next odd number, overriding the current one
-        primes[i] += 2;
-    }
-}
-
-return primes;
-</code></pre></div>
-<p>}</p>
-
-<p>int main(int argc, char** argv) {
-    ull input, i, *primes = NULL;
-    if ( argc == 2 ) input = atoi(argv[1]); else return EXIT_FAILURE;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">// Calculate the required primes
-primes = prime_numbers_generator(input);
-if ( NULL == primes ) return EXIT_FAILURE;
-
-#ifndef FAST
-printf(&quot;All the first %llu Primes are:\n&quot;, input);
-for ( i = 0; i &lt; input; ++i ) {
-    printf(&quot;%llu &quot;, primes[i]);
-}
-printf(&quot;\n\n&quot;);
-#endif
-
-printf(&quot;The Prime #%llu is %llu\n\n&quot;, input, primes[input-1]);
-
-return EXIT_SUCCESS;
-</code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>Time Complexity of this algorithm is quite complex to calculate. Without <strong>condition 1.</strong> described above, we could quickly say that the complexity is an <strong>O(n<sup>2</sup>)</strong>.</p>
 
 <p>But I believe is more complex then that. Overall speaking, the complexity above is indeed correct, but it does vary a lot, because of the <strong>condition 1.</strong>: the number of times in which <code>P[i] will be &gt; sqrt(V)</code> grows with the square value of P[i]. Means that the bigger the prime, the easier is to find the upper-bound of the modulo operations that will be actually executed. This <em>could</em> make the complexity also something like an <strong>&Omega;(n * log(n))</strong>. But this assertion is far from tested/demonstrated/verified, so I could be boldly wrong.</p>

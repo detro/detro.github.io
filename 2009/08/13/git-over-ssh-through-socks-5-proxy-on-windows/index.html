@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -46,7 +46,7 @@
 <h1>This script connects to a SOCKS proxy using Connect.c</h1>
 
 <p>/path/to/connect.exe -S your.socks5.server:1080 $@
-[/sourcecode]</p>
+```</p>
 
 <p>A script that opens an SSH connection using the connection opened by the previous script:
 [sourcecode lang=&#39;bash&#39;]</p>
@@ -58,7 +58,7 @@
 <h1>This script opens an SSH connection through a SOCKS server</h1>
 
 <p>ssh -o ProxyCommand=&quot;/path/to/socks-gw.sh %h %p&quot; $@
-[/sourcecode]</p>
+```</p>
 
 <p>Finally, another script that you need to source in the same Bash session you are going to use Git:
 [sourcecode lang=&#39;bash&#39;]</p>
@@ -71,8 +71,9 @@
 
 <p>export GIT<em>SSH=&quot;/path/to/socks-ssh.sh&quot;
 export GIT</em>PROXY_COMMAND=&quot;/path/to/socks-gw.sh&quot;
-[/sourcecode]
-Again, don&#39;t forget to source this script before using Git.</p>
+```</p>
+
+<p>Again, don&#39;t forget to source this script before using Git.</p>
 
 <p>Thanks to <a href="http://threebytesfull.com/2008/04/git-with-and-without-proxy/">ThreeBytesFull</a>, from which I re-adapted the scripts to work on Windows.</p>
 

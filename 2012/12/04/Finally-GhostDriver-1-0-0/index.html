@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -77,21 +77,15 @@ modules:</p>
 
 <p>You can download the source code from the repository
 (see <a href="https://github.com/detro/ghostdriver/blob/master/README.md">README.md</a>), and launch it with the following:</p>
-
-<p>[sourcecode:bash]
-$ phantomjs ghostdriver/src/main.js [LOCAL_IP:]PORT
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs ghostdriver/src/main.js <span class="o">[</span>LOCAL_IP:<span class="o">]</span>PORT
+</code></pre></div>
 <p>This approach was and is <strong>for development only</strong> though: GhostDriver target, since the beginning,
 was to embed the driver into PhantomJS - a feature demanded
 <a href="http://code.google.com/p/phantomjs/issues/detail?id=49">since February 2011</a>(!!!).</p>
 
 <p>So, from next release of PhantomJS (<strong>1.8</strong> should come just before Christmas) you will be able to do instead:</p>
-
-<p>[sourcecode:bash]
-$ phantomjs --webdriver=[LOCAL_IP:]PORT
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs --webdriver<span class="o">=[</span>LOCAL_IP:<span class="o">]</span>PORT
+</code></pre></div>
 <p>without the need to download anything but your favourite <em>single-binary-headless-browser</em>.
 If you are impatient though, just download latest PhantomJS <code>master</code> branch, compile with <code>./build.sh</code> and enjoy.</p>
 
@@ -109,44 +103,42 @@ and <a href="https://github.com/detro/ghostdriver/tree/master/binding/java/jars"
 <a href="https://groups.google.com/forum/?fromgroups=#!topic/selenium-developers/0wFXuEHU2hs">taking matters into his hands</a>
 to prepare the release.</p>
 
-<p>But I&#39;m sure you want to see some code. Here is a Java snippet:
-[sourcecode:java]
-import org.openqa.selenium.phantomjs.PhantomJSDriver;</p>
+<p>But I&#39;m sure you want to see some code. Here is a Java snippet:</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.openqa.selenium.phantomjs.PhantomJSDriver</span><span class="o">;</span>
 
-<p>public class TestPhantomJSDriver {</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">public static void main(String[] argv) {
-    // prepare capabilities
-    Capabilities caps = new DesiredCapabilities();
-    caps.setJavascriptEnabled(true);                //&lt; not really needed: JS enabled by default
-    caps.setCapability(&quot;takesScreenshot&quot;, true);    //&lt; yeah, GhostDriver haz screenshotz!
-    caps.setCapability(
-        PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-        &quot;/path/to/your/phantomjs/binary/greater/than/1.7&quot;
-    );
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPhantomJSDriver</span> <span class="o">{</span>
 
-    // Launch driver (will take care and ownership of the phantomjs process)
-    WebDriver driver = new PhantomJSDriver(caps);
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// prepare capabilities</span>
+        <span class="n">Capabilities</span> <span class="n">caps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DesiredCapabilities</span><span class="o">();</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setJavascriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>                <span class="c1">//&lt; not really needed: JS enabled by default</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">&quot;takesScreenshot&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>    <span class="c1">//&lt; yeah, GhostDriver haz screenshotz!</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span>
+            <span class="n">PhantomJSDriverService</span><span class="o">.</span><span class="na">PHANTOMJS_EXECUTABLE_PATH_PROPERTY</span><span class="o">,</span>
+            <span class="s">&quot;/path/to/your/phantomjs/binary/greater/than/1.7&quot;</span>
+        <span class="o">);</span>
 
-    // Load Google.com
-    driver.get(&quot;http://www.google.com&quot;);
-    // Locate the Search field on the Google page
-    WebElement element = driver.findElement(By.name(&quot;q&quot;));
-    // Type Cheese
-    String strToSearchFor = &quot;Cheese!&quot;;
-    element.sendKeys(strToSearchFor);
-    // Submit form
-    element.submit();
+        <span class="c1">// Launch driver (will take care and ownership of the phantomjs process)</span>
+        <span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhantomJSDriver</span><span class="o">(</span><span class="n">caps</span><span class="o">);</span>
 
-    // Check results contains the term we searched for
-    assertTrue(driver.getTitle().toLowerCase().contains(strToSearchFor.toLowerCase()));
+        <span class="c1">// Load Google.com</span>
+        <span class="n">driver</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="o">);</span>
+        <span class="c1">// Locate the Search field on the Google page</span>
+        <span class="n">WebElement</span> <span class="n">element</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="na">findElement</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">&quot;q&quot;</span><span class="o">));</span>
+        <span class="c1">// Type Cheese</span>
+        <span class="n">String</span> <span class="n">strToSearchFor</span> <span class="o">=</span> <span class="s">&quot;Cheese!&quot;</span><span class="o">;</span>
+        <span class="n">element</span><span class="o">.</span><span class="na">sendKeys</span><span class="o">(</span><span class="n">strToSearchFor</span><span class="o">);</span>
+        <span class="c1">// Submit form</span>
+        <span class="n">element</span><span class="o">.</span><span class="na">submit</span><span class="o">();</span>
 
-    // done
-    driver.quit();
-}
+        <span class="c1">// Check results contains the term we searched for</span>
+        <span class="n">assertTrue</span><span class="o">(</span><span class="n">driver</span><span class="o">.</span><span class="na">getTitle</span><span class="o">().</span><span class="na">toLowerCase</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">strToSearchFor</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">()));</span>
+
+        <span class="c1">// done</span>
+        <span class="n">driver</span><span class="o">.</span><span class="na">quit</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>It&#39;s also important to highlight that <strong>GhostDriver implements the standard WebDriver WireProtocol</strong>.
 This means that you can connect to a running instance of PhantomJS in WebDriver mode by simply using any
 <code>RemoteWebDriver</code> class available in your favourite language. No strict need to use those bindings.</p>

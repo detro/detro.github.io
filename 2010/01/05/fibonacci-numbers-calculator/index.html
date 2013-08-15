@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Fibonacci's numbers calculator</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Fibonacci's numbers calculator</h2>
+<p class="meta">05 Jan 2010</p>
+
+<div class="post">
+<p>Another simple-but-yet-interesting problem that I found challenging solving is the to <em>Write a Fibonacci&#39;s numbers calculator</em>. It&#39;s a REALLY SIMPLE problem, but still can demonstrate how superficial thinking in programming can lead to dramatically bad solutions.</p>
+
+<h2>What&#39;s a Fibonacci&#39;s number</h2>
+
+<p>A <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci&#39;s number</a> is an integer number generated using the following function:
+<blockquote>
+Assumed that:
+<code>f(0) = 0</code>
+<code>f(1) = 1</code></p>
+
+<p>for a generic &quot;n&quot; Integer:
+<code>f(n) = f(n-1) + f(n-2)</code>
+</blockquote></p>
+
+<p>For example, the first 20 Fibonacci&#39;s number are:
+<code>0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765</code></p>
+
+<h2>The young-and-entusiast approach</h2>
+
+<p>Recursion! We all love the elegance of it. When we manage to write something that uses Recursions, everything seems easier and simpler to our eyes for a while. BUT, in this particular case, using recursion for implementing such simple task is really bad.</p>
+
+<p>Why? <strong>Because at every call to this function, it will generate <code>2<sup>n</sup></code> recursive function calls.</strong> A bit of a nightmare for the <strong>process call stack</strong> if the whole purpose of this thing is calculating a &quot;stupid&quot; integer number.</p>
+
+<div class="img">
+<img src="http://mitpress.mit.edu/sicp/full-text/sicp/book/chapter-1/figs/fib-tree.gif" alt="" title="Fibonacci using a recursive algorithm" />
+Functions call tree using a recursive algorithm
+</div>
+
+<p>Plus, given the nature of the function itself, <strong>it will recalculate the same <code>f(x)</code> over and over again, because <code>f(x)</code> is going to be a subproblem shared between a certain <code>y</code> and <code>z</code>, where both <code>y &gt; x</code> and <code>z &gt; x</code></strong>.</p>
+
+<p>Result? An awful implementation. With a quick Big-Oh analysis I would say that the Time Complexity of this &quot;monster&quot; will be <strong>O(2<sup>n</sup>)</strong>.
+Don&#39;t believe it? Check out the implementation here:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio .h&gt;</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">fibonacci_slow</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="p">(</span> <span class="n">fibonacci_slow</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci_slow</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">i</span><span class="p">,</span> <span class="n">input</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">curr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">prevprev</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;RESULT: fibonacci(%d) = %lu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">fibonacci_slow</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Running it on my Code 2 Duo laptop with <code>n &gt; 40</code> takes around 10 seconds. For <code>n = 50</code> I got bored to wait after 1 minute passed by.</strong></p>
+
+<p>If you check out <a href="http://www.algorist.com/">this book</a>, it is going to tell you that such solution is going to take 13 days to come out with a solution, for an average machine (i.e. a machine where <em>O(1) = 0.001 &micro;s</em>).</p>
+
+<p>BUT, of course, I have an alternative solution. Actually, more then one. And the best runs in <strong>O(log(n))</strong> ;)</p>
+
+<h2>Dynamically programmed solution</h2>
+
+<p>The most important thing to bear in mind with the above solution is:
+<blockquote>
+... it will recalculate the same <code>f(x)</code> over and over again, because <code>f(x)</code> is going to be a subproblem shared between...
+</blockquote></p>
+
+<p>To make this thing work, we need to build a solution that doesn&#39;t do the same job more then once. <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Dynamic Programming</a> is the key!</p>
+
+<p>To be more precise, we need to modify the algorithm so that at every step it doesn&#39;t trow away a previous call to <code>f(n)</code>, unless we are sure it&#39;s not useful anymore. In this way problems that share sub-problems (as explained before), will enjoy the pleasure of using the previously calculated results.</p>
+
+<p>Because I assume most of my visitors are developers, I&#39;m going to put here the code: it explains itself better than I can do writing.</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;/stdio&gt;&lt;stdio .h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">i</span><span class="p">,</span> <span class="n">input</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">curr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">prevprev</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">input</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="o">=</span> <span class="n">input</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">prevprev</span> <span class="o">+</span> <span class="n">prev</span><span class="p">;</span>
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">curr</span><span class="p">);</span>
+            <span class="err">#</span><span class="n">endif</span>
+            <span class="n">prevprev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;RESULT: fibonacci(%d) = %lu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">curr</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Complexity in Time? A very nice <strong>O(n)</strong>. And the space occupied is <strong>O(1)</strong>: just two <code>unsigned long</code>.</p>
+
+<h2>Fibonacci and Identity Matrix</h2>
+
+<p>Take a look now to this property of Matrices:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c">    <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span> <span class="n">n</span>      <span class="p">[</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>   <span class="p">]</span>
+    <span class="p">[</span> <span class="mi">1</span> <span class="mi">0</span> <span class="p">]</span>    <span class="o">=</span>   <span class="p">[</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>   <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
+</code></pre></div>
+<p>Given the formula for multiplying 2x2 Matrices</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c">    <span class="p">[</span> <span class="n">a</span> <span class="n">b</span> <span class="p">]</span> <span class="p">[</span> <span class="n">d</span> <span class="n">e</span> <span class="p">]</span>   <span class="p">[</span> <span class="n">ad</span> <span class="o">+</span> <span class="n">be</span>  <span class="n">bd</span> <span class="o">+</span> <span class="n">ce</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">b</span> <span class="n">c</span> <span class="p">]</span> <span class="p">[</span> <span class="n">e</span> <span class="n">f</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">bd</span> <span class="o">+</span> <span class="n">ce</span>  <span class="n">be</span> <span class="o">+</span> <span class="n">cf</span> <span class="p">]</span>
+</code></pre></div>
+<p>You can then prove the result above by induction: Let</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c">   <span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span>   <span class="p">(</span><span class="n">identity</span> <span class="n">matrix</span><span class="p">)</span>
+       <span class="p">[</span> <span class="mi">1</span> <span class="mi">0</span> <span class="p">]</span>
+</code></pre></div>
+<p>assume by induction that the equation above is is true for some n,
+multiply both sides by another power of A using the formula for
+matrix multiplication, and verify that the terms you get are the
+same as the formula defining the Fibonacci numbers.</p>
+
+<p>So, what you can calculate a Fibonacci&#39;s number in this way:
+<ol>
+<li>Initialize <code>M</code> as the Identity Matrix</li>
+<li>Multiply <code>M</code> by itself <code>(n-1)</code>-times</li>
+<li>Return <code>M[0][0]</code>
+</li></ol></p>
+
+<h2>Calculate <code>a<sup>n</sup></code> in O(log(n))</h2>
+
+<p>Why this now? Bear with me just a little more.
+Yes, it&#39;s possible to do such a thing. And it made me feel stupid when I realized how simple it was.</p>
+
+<p>Isn&#39;t <strong><code>a<sup>n</sup></code> = <code>a<sup>floor(n/2)</sup></code> * <code>a<sup>ceil(n/2)</sup></code></strong>? So, you can calculate it with something like:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="kt">int</span> <span class="nf">exp</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+      <span class="n">res</span> <span class="o">*=</span> <span class="n">res</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span> <span class="c1">// In case &#39;n&#39; was odd</span>
+      <span class="p">{</span>
+         <span class="n">res</span> <span class="o">*=</span> <span class="n">a</span><span class="p">;</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><del>I&#39;m leaving to you to get why the complexity of this is just <strong>O(log(n))</strong>.</del> Actually not, I&#39;m giving you a quick explanation: this method is going do do as much multiplications (<em>O(1) operations</em>) as the number of time you need to divide the input <code>n</code> by <code>2</code> before it becomes <code>1</code>.
+Confused? Ok, try the other way round: it requires as much multiplication, as you need to multiply <code>1 by 2</code>, so that the result is <code>n</code> (of course, more or less the <code>1</code> where <code>n is odd</code>).</p>
+
+<h2>Put together Fibonacci, Matrices and our latest &quot;breakthrough&quot;</h2>
+
+<p>If you arrived this far, you probably already realized where I&#39;m heading: Using the Identity Matrix property explained before with this algorithm for calculating exponentials.</p>
+
+<p>After all, multiplying a Matrix M by itself n-1 times is like calculating </code><code>M<sup>n-1</sup></code>. And here is the code that implements all this:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="nf">matrix_2x2_multiply</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">));</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="nf">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">A</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">identity</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">matrix_2x2_multiply</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">identity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="nf">matrix_2x2_power</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">input_matrix</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;INPUT MATRIX(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">result</span> <span class="o">=</span> <span class="n">input_matrix</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">)</span> <span class="c1">// Avoid useless recursion</span>
+        <span class="p">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">input_matrix</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER RECURSION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+            <span class="err">#</span><span class="n">endif</span>
+        <span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+        <span class="c1">// Free a 2x2 Array that is not needed anymore</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">temp</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER MULTIPLICATION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+        <span class="err">#</span><span class="n">endif</span>
+
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER IDENTITY MULTIP.(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+            <span class="err">#</span><span class="n">endif</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;resultULT(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">fibonacci_fast</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">result</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">matrix_2x2</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">identity_matrix_2x2</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Allocating an initial Array 2x2 of unsigned long</span>
+        <span class="n">identity_matrix_2x2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">));</span>
+        <span class="c1">// Initialize the first matrix to the &quot;identity matrix&quot;</span>
+        <span class="n">identity_matrix_2x2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">identity_matrix_2x2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">identity_matrix_2x2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">identity_matrix_2x2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="n">matrix_2x2</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">identity_matrix_2x2</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+        <span class="c1">// Freeing memory</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">identity_matrix_2x2</span><span class="p">);</span>
+        <span class="c1">// For &quot;n&quot; &lt; 3 there is the risk that the call &quot;matrix_2x2_power&quot;</span>
+        <span class="c1">//  returns the same matrix as result: this happens when no</span>
+        <span class="c1">//  alteration is done on the input matrix.</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">identity_matrix_2x2</span> <span class="o">!=</span> <span class="n">matrix_2x2</span> <span class="p">)</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">matrix_2x2</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">input</span><span class="p">;</span>
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;resultULT: fibonacci-v2(%d) = %lu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">fibonacci_fast</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>One more thing</h2>
+
+<p><strong>Yes, the allocation of all those matrices during the calculation is heavy.</strong> Even if they are just 2x2, it is still a lot of system calls to get and release memory from and to the Operating System (the <code>malloc</code> and the <code>free</code>).</p>
+
+<p>We could do the job with just 2 matrices, 1 holding the current Matrix, and 1 holding the next multiplication. <strong>A circular array of 2 matrices 2x2, swapping their role at every step?</strong> HERE WE GO:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">matrix_2x2_square</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">matrix_array</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">curr_matrix_index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">new_matrix_index</span><span class="p">;</span> <span class="n">new_matrix_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">curr_matrix_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> 
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> 
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> 
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> 
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+
+    <span class="k">return</span> <span class="n">new_matrix_index</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">matrix_array</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">curr_matrix_index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">new_matrix_index</span><span class="p">;</span>
+
+    <span class="c1">// Swap the role of the 2 Matrices</span>
+    <span class="n">new_matrix_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">curr_matrix_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">matrix_array</span><span class="p">[</span><span class="n">new_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="o">+</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">new_matrix_index</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">matrix_2x2_power</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">matrix_array</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">curr_matrix_index</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;INPUT MATRIX(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">)</span> <span class="c1">// Avoid useless recursion</span>
+        <span class="p">{</span>
+            <span class="c1">// Recursive call for N/2</span>
+            <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER RECURSION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+            <span class="err">#</span><span class="n">endif</span>
+        <span class="p">}</span>
+        <span class="c1">// Matrix = Matrix * Matrix</span>
+        <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_square</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">);</span>
+
+        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER MULTIPLICATION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+        <span class="err">#</span><span class="n">endif</span>
+
+        <span class="c1">// If N is odd</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Matrix = Matrix * IdentityMatrix (&quot;{1, 1, 1, 0}&quot;)</span>
+            <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">);</span>
+
+            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER IDENTITY MULTIP.(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+            <span class="err">#</span><span class="n">endif</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;RESULT(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="err">#</span><span class="n">endif</span>
+
+    <span class="c1">// Return the index of the matrix carrying the current result</span>
+    <span class="k">return</span> <span class="n">curr_matrix_index</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">fibonacci_fast</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span>   <span class="n">result</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="n">matrix_2x2_cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span>   <span class="n">matrix_2x2</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span> <span class="p">};</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>        
+        <span class="n">matrix_2x2_cur</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">matrix_2x2</span><span class="p">,</span> <span class="n">matrix_2x2_cur</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2</span><span class="p">[</span><span class="n">matrix_2x2_cur</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">input</span><span class="p">;</span>
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;RESULT: fibonacci-v2(%d) = %lu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">fibonacci_fast</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>Conclusion</h2>
+
+<p>If you arrived to read this far, I think you don&#39;t need conclusions. You already understood all what I meant to say here.</p>
+
+<p>What I invite you to do is to compile and run those solutions, testing their performances with growing inputs. On my system (<a href="http://en.wikipedia.org/wiki/Mac_OS_X_Snow_Leopard">Mac OS X Snow Leopard</a>), using <code>unsigned long</code> to carry the values I can calculate up to <code>f(93)</code>: after that it overflows and the generated numbers can&#39;t be stored with a base type.</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">   <span class="c"># ./fibonacci-v3 92</span>
+   RESULT: fibonacci-v2<span class="o">(</span>92<span class="o">)</span> <span class="o">=</span> 7540113804746346429
+   <span class="c"># ./fibonacci-v3 93</span>
+   RESULT: fibonacci-v2<span class="o">(</span>93<span class="o">)</span> <span class="o">=</span> 12200160415121876738
+   <span class="c"># ./fibonacci-v3 94</span>
+   RESULT: fibonacci-v2<span class="o">(</span>94<span class="o">)</span> <span class="o">=</span> 1293530146158671551
+</code></pre></div>
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -42,57 +42,46 @@
 
 <h3>Step 2: scripting <code>FTW</code></h3>
 
-<p>Put a script like this somewhere in your system. I have it in my <code>~/bin</code>:
-[sourcecode:bash]</p>
+<p>Put a script like this somewhere in your system. I have it in my <code>~/bin</code>:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c"># !/bin/sh</span>
 
-<h1>!/bin/sh</h1>
+<span class="c"># Only ROOT can run this</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(id -u)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">        </span><span class="nb">echo</span> “This script must be run as root” 1&gt;&amp;2
+        <span class="nb">exit </span>1
+<span class="k">fi</span>
 
-<h1>Only ROOT can run this</h1>
+<span class="nv">STATE_FILENAME</span><span class="o">=</span>state_<span class="nv">$1</span>.spindown
+<span class="nv">PREV_STATE_FILENAME</span><span class="o">=</span>prev_state_<span class="nv">$1</span>.spindown
 
-<p>if [ &quot;$(id -u)&quot; != &quot;0&quot; ]; then
-        echo “This script must be run as root” 1&gt;&amp;2
-        exit 1
-fi</p>
+<span class="c"># Get new state from diskstats</span>
+<span class="nv">NEWstate</span><span class="o">=</span><span class="k">$(</span>cat /proc/diskstats | grep <span class="nv">$1</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="nv">$NEWstate</span> &gt; <span class="s2">&quot;$STATE_FILENAME&quot;</span>
 
-<p>STATE<em>FILENAME=state</em>$1.spindown
-PREV<em>STATE</em>FILENAME=prev<em>state</em>$1.spindown</p>
+<span class="c"># compare md5 sums</span>
+<span class="nv">md5new</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$STATE_FILENAME</span> | sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
+<span class="nv">md5old</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$PREV_STATE_FILENAME</span> | sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
 
-<h1>Get new state from diskstats</h1>
+<span class="c"># if no changes, power down</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$md5new&quot;</span> <span class="o">=</span> <span class="s2">&quot;$md5old&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">        </span>sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> &amp;&gt;/dev/null
+<span class="k">fi</span>
 
-<p>NEWstate=$(cat /proc/diskstats | grep $1)
-echo $NEWstate &gt; &quot;$STATE_FILENAME&quot;</p>
-
-<h1>compare md5 sums</h1>
-
-<p>md5new=$(md5sum $STATE<em>FILENAME | sed &#39;s/ .*//&#39;)
-md5old=$(md5sum $PREV</em>STATE_FILENAME | sed &#39;s/ .*//&#39;)</p>
-
-<h1>if no changes, power down</h1>
-
-<p>if [ &quot;$md5new&quot; = &quot;$md5old&quot; ]; then
-        sdparm --flexible --command=stop /dev/$1 &amp;&gt;/dev/null
-fi</p>
-
-<h1>Write current state to file</h1>
-
-<p>echo $NEWstate &gt; &quot;$PREV<em>STATE</em>FILENAME&quot;
-[/sourcecode]</p>
-
+<span class="c"># Write current state to file</span>
+<span class="nb">echo</span> <span class="nv">$NEWstate</span> &gt; <span class="s2">&quot;$PREV_STATE_FILENAME&quot;</span>
+</code></pre></div>
 <p>A very basic and simple one, isn&#39;t it?
 What it does is just probe <code>/proc/diskstats</code> virtual file to get info about the recent activity of a disk. If it has not changed in the last 30 minutes, than it&#39;s time to use <code>sdparm</code> to send a stop command <code>--command=stop</code>. That&#39;s it.</p>
 
 <h3>Step 3: Cron-it-up!</h3>
 
 <p>Add the following lines to your <code>/etc/crontab</code>:</p>
-
-<p>[sourcecode:bash]
-*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdb
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdc
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdd
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sde
-[/sourcecode]</p>
-
+</code></pre></div>
 <p>The above lines execute the script against <code>sda</code>, <code>sdb</code>, <code>sdc</code>, <code>sdd</code> and <code>sde</code>.</p>
 
 <p>That&#39;s it. I have been using this method for almost 2 years not, and  thought it might be helpful to others.</p>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -71,37 +71,33 @@ A read–eval–print loop (REPL), also known as an interactive toplevel, is a s
 
 <p>PhantomJS source code is already structured to abstract the network access of the <a href="http://doc.qt.nokia.com/4.7/qwebpage.html">WebPage</a> through a <a href="http://doc.qt.nokia.com/4.7/qnetworkaccessmanager.html">NetworkAccessManager</a>. At the moment we are using it for monitoring and sniffing.</p>
 
-<p>I want to add a functionality to the <code>webpage</code> module so that given a file <code>httpmap.json</code> that looks like:
-[sourcecode:json]
-[
-     {
-          &quot;method&quot; : [&quot;GET&quot;, &quot;POST&quot;],
-          &quot;source&quot; : &quot;http://<em>.betfair.com/bla/</em>/test&quot;,
-          &quot;destination&quot; : &quot;local<em>file.json&quot;
-     },
-     {
-          &quot;method&quot; : &quot;GET&quot;,
-          &quot;source&quot; : &quot;http://<em>.betfair.com/bla/</em>/api&quot;,
-          &quot;destination&quot; : [
-               &quot;1</em>local<em>file.json&quot;,
-               &quot;2</em>local_file.json&quot;,
-               &quot;http://testapi.example.com/bla/api/test&quot;
-          ]
-     }
-]
-[/sourcecode]</p>
+<p>I want to add a functionality to the <code>webpage</code> module so that given a file <code>httpmap.json</code> that looks like:</p>
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
+     <span class="p">{</span>
+          <span class="nt">&quot;method&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">],</span>
+          <span class="nt">&quot;source&quot;</span> <span class="p">:</span> <span class="s2">&quot;http://*.betfair.com/bla/*/test&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;destination&quot;</span> <span class="p">:</span> <span class="s2">&quot;local_file.json&quot;</span>
+     <span class="p">},</span>
+     <span class="p">{</span>
+          <span class="nt">&quot;method&quot;</span> <span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;source&quot;</span> <span class="p">:</span> <span class="s2">&quot;http://*.betfair.com/bla/*/api&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;destination&quot;</span> <span class="p">:</span> <span class="p">[</span>
+               <span class="s2">&quot;1_local_file.json&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;2_local_file.json&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;http://testapi.example.com/bla/api/test&quot;</span>
+          <span class="p">]</span>
+     <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>a tester that uses phantom could do something like:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
+    <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;webpage&#39;</span><span class="p">).</span><span class="nx">create</span><span class="p">(),</span>
+    <span class="nx">HTTP_MAP</span> <span class="o">=</span> <span class="s2">&quot;httpmap.json&quot;</span><span class="p">;</span>
 
-<p>a tester that uses phantom could do something like:
-[sourcecode:javascript]
-var fs = require(&#39;fs&#39;),
-    page = require(&#39;webpage&#39;).create(),
-    HTTP_MAP = &quot;httpmap.json&quot;;</p>
+<span class="nx">page</span><span class="p">.</span><span class="nx">setHttpMap</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">HTTP_MAP</span><span class="p">));</span>
 
-<p>page.setHttpMap(fs.read(HTTP_MAP));</p>
-
-<p>// ... do stuff with page, while the HTTP requests are mapped
-[/sourcecode]</p>
-
+<span class="c1">// ... do stuff with page, while the HTTP requests are mapped</span>
+</code></pre></div>
 <p>As you can probably guess, the format of the map offers some extra nifty features:</p>
 
 <ul>

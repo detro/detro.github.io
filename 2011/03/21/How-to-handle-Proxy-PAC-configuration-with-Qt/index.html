@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -49,166 +49,151 @@ Automatic Proxy Configuration on Mac OS X
 
 <p>Of course this can be worked out: in the case of Maemo, being it based on <a href="http://www.kernel.org/">Linux</a>, I will probably just have to find a way to interface with the <strong>gconftool</strong> or make use of <code>QProcess::systemEnvironment()</code>. But what if you are in a LAN where the Proxy configuration is distributed across different offices using a <a href="http://en.wikipedia.org/wiki/Proxy_auto-config">PAC file</a>? Well, you need to work by hand.</p>
 
-<p>A PAC file is a Javascript that looks like this:
-[sourcecode:javascript]
-function FindProxyForURL(url, host) {
-   // our local URLs from the domains below example.com don&#39;t need a proxy:
-   if (shExpMatch(url,&quot;<em>.example.com/</em>&quot;))                  {return &quot;DIRECT&quot;;}
-   if (shExpMatch(url, &quot;<em>.example.com:</em>/*&quot;))               {return &quot;DIRECT&quot;;}</p>
+<p>A PAC file is a Javascript that looks like this:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// our local URLs from the domains below example.com don&#39;t need a proxy:</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="s2">&quot;*.example.com/*&quot;</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="s2">&quot;DIRECT&quot;</span><span class="p">;}</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">&quot;*.example.com:*/*&quot;</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="s2">&quot;DIRECT&quot;</span><span class="p">;}</span>
 
-<p>// URLs within this network are accessed through
-   // port 8080 on fastproxy.example.com:
-   if (isInNet(host, &quot;10.0.0.0&quot;,  &quot;255.255.248.0&quot;))    {
-      return &quot;PROXY fastproxy.example.com:8080&quot;;
-   }</p>
+   <span class="c1">// URLs within this network are accessed through</span>
+   <span class="c1">// port 8080 on fastproxy.example.com:</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">isInNet</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="s2">&quot;10.0.0.0&quot;</span><span class="p">,</span>  <span class="s2">&quot;255.255.248.0&quot;</span><span class="p">))</span>    <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">&quot;PROXY fastproxy.example.com:8080&quot;</span><span class="p">;</span>
+   <span class="p">}</span>
 
-<p>// All other requests go through port 8080 of proxy.example.com.
-   // should that fail to respond, go directly to the WWW:
-   return &quot;PROXY proxy.example.com:8080; DIRECT&quot;;
-}
-[/sourcecode]</p>
-
+   <span class="c1">// All other requests go through port 8080 of proxy.example.com.</span>
+   <span class="c1">// should that fail to respond, go directly to the WWW:</span>
+   <span class="k">return</span> <span class="s2">&quot;PROXY proxy.example.com:8080; DIRECT&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Working by hand looks scary, because, like in our case, a script can be huge and complex. A <a href="http://en.wikipedia.org/wiki/Regular_expression">RegExp</a> is a very bad idea, and start from “square one” with <a href="http://en.wikipedia.org/wiki/Lex_(software">LEX</a>) and <a href="http://en.wikipedia.org/wiki/Yacc">YACC</a> would feel dumb… and an overkill.</p>
 
 <h1><code>QtScript</code> to the rescue</h1>
 
 <p>Fortunately, Qt provides a lot of help. The <a href="http://doc.qt.nokia.com/4.7-snapshot/network-programming.html">QtNetwork</a> and <a href="http://doc.qt.nokia.com/4.7-snapshot/qtscript.html">QtScript</a> (<a href="http://labs.qt.nokia.com/2009/11/23/qtscript-in-46/">now based on WebKit’s JavascriptCore</a>) have what it takes to solve the problem. What I show here is a usage of the QtScript Engine, that takes the PAC file and executes it to extract the right configuration.</p>
+<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="cp">#include &lt;QtCore/QCoreApplication&gt;</span>
+<span class="cp">#include &lt;QScriptEngine&gt;</span>
+<span class="cp">#include &lt;QIODevice&gt;</span>
+<span class="cp">#include &lt;QFile&gt;</span>
+<span class="cp">#include &lt;QDebug&gt;</span>
+<span class="cp">#include &lt;QScriptValue&gt;</span>
+<span class="cp">#include &lt;QHostInfo&gt;</span>
+<span class="cp">#include &lt;QHostAddress&gt;</span>
+<span class="cp">#include &lt;QNetworkInterface&gt;</span>
 
-<p>[sourcecode:cpp]</p>
+<span class="c1">// Functions to implement are here:</span>
+<span class="c1">// - http://linuxmafia.com/faq/Web/autoproxy.html</span>
+<span class="c1">// - http://www.returnproxy.com/proxypac/static/netscape-proxy-format.html</span>
 
-<h1>include <QtCore/QCoreApplication></h1>
+<span class="n">QScriptValue</span> <span class="nf">dnsResolve</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+   <span class="n">QString</span> <span class="n">toResolve</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;dnsResolve - toResolve: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">toResolve</span><span class="p">;</span>
 
-<h1>include <QScriptEngine></h1>
+   <span class="n">QHostInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">QHostInfo</span><span class="o">::</span><span class="n">fromName</span><span class="p">(</span><span class="n">toResolve</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">info</span><span class="p">.</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QHostInfo</span><span class="o">::</span><span class="n">NoError</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">info</span><span class="p">.</span><span class="n">addresses</span><span class="p">().</span><span class="n">first</span><span class="p">().</span><span class="n">toString</span><span class="p">();</span> <span class="c1">//&lt; Pick the first one</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">QString</span><span class="p">(</span><span class="s">&quot;Host not found&quot;</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
 
-<h1>include <QIODevice></h1>
+<span class="n">QScriptValue</span> <span class="nf">isPlainHostName</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+   <span class="n">QString</span> <span class="n">hostname</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;isPlainHostName - hostname: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">hostname</span><span class="p">;</span>
 
-<h1>include <QFile></h1>
+   <span class="k">return</span> <span class="n">hostname</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nb">false</span> <span class="o">:</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
 
-<h1>include <QDebug></h1>
+<span class="n">QScriptValue</span> <span class="nf">isInNet</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+   <span class="n">QString</span> <span class="n">host</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+   <span class="n">QHostAddress</span> <span class="n">hostAddress</span><span class="p">;</span>
+   <span class="n">QPair</span><span class="o">&lt;</span><span class="n">QHostAddress</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">subnet</span><span class="p">;</span>
+   <span class="n">QString</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+   <span class="n">QString</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;isInNet - host: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">host</span><span class="p">;</span>
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;isInNet - pattern: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">pattern</span><span class="p">;</span>
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;isInNet - mask: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">mask</span><span class="p">;</span>
 
-<h1>include <QScriptValue></h1>
+   <span class="n">QHostInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">QHostInfo</span><span class="o">::</span><span class="n">fromName</span><span class="p">(</span><span class="n">host</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">info</span><span class="p">.</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QHostInfo</span><span class="o">::</span><span class="n">NoError</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">hostAddress</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">addresses</span><span class="p">().</span><span class="n">first</span><span class="p">();</span>
+      <span class="n">subnet</span> <span class="o">=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">parseSubnet</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s">&quot;%1/%2&quot;</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">mask</span><span class="p">));</span>
+      <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Host &quot;</span><span class="o">&lt;&lt;</span> <span class="n">host</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; is in Subnet &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">QString</span><span class="p">(</span><span class="s">&quot;%1/%2&quot;</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;? &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">hostAddress</span><span class="p">.</span><span class="n">isInSubnet</span><span class="p">(</span><span class="n">subnet</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">hostAddress</span><span class="p">.</span><span class="n">isInSubnet</span><span class="p">(</span><span class="n">subnet</span><span class="p">);</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
 
-<h1>include <QHostInfo></h1>
+<span class="n">QScriptValue</span> <span class="nf">myIpAddress</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+   <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
 
-<h1>include <QHostAddress></h1>
+   <span class="n">foreach</span> <span class="p">(</span> <span class="n">QHostAddress</span> <span class="n">address</span><span class="p">,</span> <span class="n">QNetworkInterface</span><span class="o">::</span><span class="n">allAddresses</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">address</span><span class="p">.</span><span class="n">isNull</span><span class="p">()</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">Null</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">LocalHost</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">LocalHostIPv6</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">Broadcast</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">Any</span>
+         <span class="o">&amp;&amp;</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">QHostAddress</span><span class="o">::</span><span class="n">AnyIPv6</span>
+         <span class="p">)</span> <span class="p">{</span>
+         <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;myIpAddress - &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">address</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
+         <span class="k">return</span> <span class="n">address</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span> <span class="c1">//&lt; Pick the First one</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
 
-<h1>include <QNetworkInterface></h1>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="n">QCoreApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
 
-<p>// Functions to implement are here:
-// - http://linuxmafia.com/faq/Web/autoproxy.html
-// - http://www.returnproxy.com/proxypac/static/netscape-proxy-format.html</p>
+   <span class="n">QScriptEngine</span> <span class="n">engine</span><span class="p">;</span>
+   <span class="n">QString</span> <span class="n">str</span><span class="p">;</span>
 
-<p>QScriptValue dnsResolve(QScriptContext *context, QScriptEngine *engine) {
-   Q_UNUSED(engine)
-   QString toResolve = context-&gt;argument(0).toString();
-   qDebug() &lt;&lt; &quot;dnsResolve - toResolve: &quot; &lt;&lt; toResolve;</p>
+   <span class="c1">// Read the PAC file in a String</span>
+   <span class="n">QFile</span> <span class="n">scriptFile</span><span class="p">(</span><span class="s">&quot;:/proxy-config.pac&quot;</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">scriptFile</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="o">::</span><span class="n">ReadOnly</span><span class="o">|</span><span class="n">QIODevice</span><span class="o">::</span><span class="n">Text</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">str</span> <span class="o">=</span> <span class="n">scriptFile</span><span class="p">.</span><span class="n">readAll</span><span class="p">();</span>
+   <span class="n">scriptFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
 
-<p>QHostInfo info = QHostInfo::fromName(toResolve);
-   if ( info.error() == QHostInfo::NoError ) {
-      return info.addresses().first().toString(); //&lt; Pick the first one
-   } else {
-      return QString(&quot;Host not found&quot;);
-   }
-}</p>
+   <span class="c1">// Inject the extra JS function as explained above</span>
+   <span class="n">QScriptValue</span> <span class="n">dnsResolveFunction</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">newFunction</span><span class="p">(</span><span class="n">dnsResolve</span><span class="p">);</span>
+   <span class="n">engine</span><span class="p">.</span><span class="n">globalObject</span><span class="p">().</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;dnsResolve&quot;</span><span class="p">,</span> <span class="n">dnsResolveFunction</span><span class="p">);</span>
+   <span class="n">QScriptValue</span> <span class="n">isPlainHostNameFunction</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">newFunction</span><span class="p">(</span><span class="n">isPlainHostName</span><span class="p">);</span>
+   <span class="n">engine</span><span class="p">.</span><span class="n">globalObject</span><span class="p">().</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;isPlainHostName&quot;</span><span class="p">,</span> <span class="n">isPlainHostNameFunction</span><span class="p">);</span>
+   <span class="n">QScriptValue</span> <span class="n">isInNetFunction</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">newFunction</span><span class="p">(</span><span class="n">isInNet</span><span class="p">);</span>
+   <span class="n">engine</span><span class="p">.</span><span class="n">globalObject</span><span class="p">().</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;isInNet&quot;</span><span class="p">,</span> <span class="n">isInNetFunction</span><span class="p">);</span>
+   <span class="n">QScriptValue</span> <span class="n">myIpAddressFunction</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">newFunction</span><span class="p">(</span><span class="n">myIpAddress</span><span class="p">);</span>
+   <span class="n">engine</span><span class="p">.</span><span class="n">globalObject</span><span class="p">().</span><span class="n">setProperty</span><span class="p">(</span><span class="s">&quot;myIpAddress&quot;</span><span class="p">,</span> <span class="n">myIpAddressFunction</span><span class="p">);</span>
 
-<p>QScriptValue isPlainHostName(QScriptContext *context, QScriptEngine *engine) {
-   Q_UNUSED(engine)
-   QString hostname = context-&gt;argument(0).toString();
-   qDebug() &lt;&lt; &quot;isPlainHostName - hostname: &quot; &lt;&lt; hostname;</p>
+   <span class="c1">// Evalute the PAC file</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">engine</span><span class="p">.</span><span class="n">canEvaluate</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">engine</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+      <span class="n">QScriptValue</span> <span class="n">ctor</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s">&quot;FindProxyForURL(</span><span class="se">\&quot;</span><span class="s">http://blog.orangelabsuk.com</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">blog.orangelabsuk.com</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">ctor</span><span class="p">.</span><span class="n">isError</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+         <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">ctor</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>
+         <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
 
-<p>return hostname.contains(&#39;.&#39;) ? false : true;
-}</p>
-
-<p>QScriptValue isInNet(QScriptContext *context, QScriptEngine *engine) {
-   Q_UNUSED(engine)
-   QString host = context-&gt;argument(0).toString();
-   QHostAddress hostAddress;
-   QPair<QHostAddress, int> subnet;
-   QString pattern = context-&gt;argument(1).toString();
-   QString mask = context-&gt;argument(2).toString();
-   qDebug() &lt;&lt; &quot;isInNet - host: &quot; &lt;&lt; host;
-   qDebug() &lt;&lt; &quot;isInNet - pattern: &quot; &lt;&lt; pattern;
-   qDebug() &lt;&lt; &quot;isInNet - mask: &quot; &lt;&lt; mask;</p>
-
-<p>QHostInfo info = QHostInfo::fromName(host);
-   if ( info.error() == QHostInfo::NoError ) {
-      hostAddress = info.addresses().first();
-      subnet = QHostAddress::parseSubnet(QString(&quot;%1/%2&quot;).arg(pattern,mask));
-      qDebug() &lt;&lt; &quot;Host &quot;&lt;&lt; host &lt;&lt; &quot; is in Subnet &quot; &lt;&lt; QString(&quot;%1/%2&quot;).arg(pattern,mask) &lt;&lt; &quot;? &quot; &lt;&lt; hostAddress.isInSubnet(subnet);
-      return hostAddress.isInSubnet(subnet);
-   } else {
-      return false;
-   }
-}</p>
-
-<p>QScriptValue myIpAddress(QScriptContext *context, QScriptEngine *engine) {
-   Q<em>UNUSED(context)
-   Q</em>UNUSED(engine)</p>
-
-<p>foreach ( QHostAddress address, QNetworkInterface::allAddresses() ) {
-      if( !address.isNull()
-         &amp;&amp; address != QHostAddress::Null
-         &amp;&amp; address != QHostAddress::LocalHost
-         &amp;&amp; address != QHostAddress::LocalHostIPv6
-         &amp;&amp; address != QHostAddress::Broadcast
-         &amp;&amp; address != QHostAddress::Any
-         &amp;&amp; address != QHostAddress::AnyIPv6
-         ) {
-         qDebug() &lt;&lt; &quot;myIpAddress - &quot; &lt;&lt; address.toString();
-         return address.toString(); //&lt; Pick the First one
-      }
-   }
-}</p>
-
-<p>int main(int argc, char *argv[])
-{
-   QCoreApplication a(argc, argv);</p>
-
-<p>QScriptEngine engine;
-   QString str;</p>
-
-<p>// Read the PAC file in a String
-   QFile scriptFile(&quot;:/proxy-config.pac&quot;);
-   if ( !scriptFile.open(QIODevice::ReadOnly|QIODevice::Text) ) {
-      return EXIT_FAILURE;
-   }
-   str = scriptFile.readAll();
-   scriptFile.close();</p>
-
-<p>// Inject the extra JS function as explained above
-   QScriptValue dnsResolveFunction = engine.newFunction(dnsResolve);
-   engine.globalObject().setProperty(&quot;dnsResolve&quot;, dnsResolveFunction);
-   QScriptValue isPlainHostNameFunction = engine.newFunction(isPlainHostName);
-   engine.globalObject().setProperty(&quot;isPlainHostName&quot;, isPlainHostNameFunction);
-   QScriptValue isInNetFunction = engine.newFunction(isInNet);
-   engine.globalObject().setProperty(&quot;isInNet&quot;, isInNetFunction);
-   QScriptValue myIpAddressFunction = engine.newFunction(myIpAddress);
-   engine.globalObject().setProperty(&quot;myIpAddress&quot;, myIpAddressFunction);</p>
-
-<p>// Evalute the PAC file
-   if ( engine.canEvaluate(str) ) {
-      engine.evaluate(str);
-      QScriptValue ctor = engine.evaluate(&quot;FindProxyForURL(\&quot;http://blog.orangelabsuk.com\&quot;, \&quot;blog.orangelabsuk.com\&quot;)&quot;);
-      if ( !ctor.isError() ) {
-         qDebug() &lt;&lt; ctor.toString();
-         return EXIT_SUCCESS;
-      }
-   }</p>
-
-<p>qDebug() &lt;&lt; &quot;Error Occurred&quot;;
-   return EXIT_FAILURE;
-}
-[/sourcecode]</p>
-
+   <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error Occurred&quot;</span><span class="p">;</span>
+   <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>As you can see, what I had to add to the QtScript module was just the implementation of some of the core functions that a PAC interpreter has to offer. Those are not part of the standard Javascript, but QtScript makes it super-easy to inject what is missing.</p>
 
 <h1>Contributing back?</h1>
 
-<p>Maybe I’ll should see if the Trolls are interested in getting something like that added to Qt. Maybe a method like
-[sourcecode:cpp]
-QNetworkProxyFactory::proxyForPac(const QIODevice &amp;pacFile)
-[/sourcecode]
-could be added to the current QNetworkProxyFactory.</p>
+<p>Maybe I’ll should see if the Trolls are interested in getting something like that added to Qt. Maybe a method like</p>
+<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="n">QNetworkProxyFactory</span><span class="o">::</span><span class="n">proxyForPac</span><span class="p">(</span><span class="k">const</span> <span class="n">QIODevice</span> <span class="o">&amp;</span><span class="n">pacFile</span><span class="p">)</span>
+</code></pre></div>
+<p>could be added to the current QNetworkProxyFactory.</p>
 
 <p><strong>What do you think?</strong></p>
 

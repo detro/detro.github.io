@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -73,8 +73,9 @@ change<em>coins</em>greedy(D[], A):
       S[i] = 0
       i = i - 1
    endwhile
-[/sourcecode]
-This algorithm, of time complexity <strong>O(A)</strong>, doesn&#39;t work for some (rare) situations.</p>
+```</p>
+
+<p>This algorithm, of time complexity <strong>O(A)</strong>, doesn&#39;t work for some (rare) situations.</p>
 
 <h2>When Greedy is not enough</h2>
 
@@ -100,63 +101,61 @@ This algorithm, of time complexity <strong>O(A)</strong>, doesn&#39;t work for s
 <ul>
 <li><strong>M[A] = min<sub>[i = 0 -&gt; n-1]</sub> { M[ A - D[i] ] +1 , M[A] }</strong></li>
 </ul>
-Here is the code:
-[sourcecode:c]
-unsigned int* change<em>coins</em>dynpro(unsigned short int D[],
-    unsigned int D<em>size, unsigned int amount) {
-    // Min. num. of coins for the given &#39;amount&#39;
-    unsigned int min</em>num<em>coins[amount], cur</em>min<em>num</em>coins;
-    // Biggest coin used for the given &#39;amount&#39;
-    unsigned int biggest<em>coin</em>at[amount], cur<em>biggest</em>coin_at;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">unsigned int i, j;
-unsigned int* solution = NULL;
+Here is the code:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="nf">change_coins_dynpro</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">D</span><span class="p">[],</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">D_size</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Min. num. of coins for the given &#39;amount&#39;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">min_num_coins</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">cur_min_num_coins</span><span class="p">;</span>
+    <span class="c1">// Biggest coin used for the given &#39;amount&#39;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">cur_biggest_coin_at</span><span class="p">;</span>
 
-// Ensure the Denomination System can represent any value
-if ( D[0] != 1 ) return NULL;
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="n">solution</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 
-// Initialize the solution array to Zero
-solution = (unsigned int*)calloc(D_size, sizeof(unsigned int));
-if ( NULL == solution ) {
-    return NULL;
-}
+    <span class="c1">// Ensure the Denomination System can represent any value</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
 
-// Amount &#39;0&#39; requires &#39;0&#39; coins
-min_num_coins[0] = 0;
-biggest_coin_at[0] = 0;
+    <span class="c1">// Initialize the solution array to Zero</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="n">D_size</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">solution</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
 
-// For Amounts from &#39;1&#39; to &#39;amount&#39;
-for ( i = 1; i &lt;= amount; ++i ) {
-    // Start taking &#39;D[0]&#39; &#39;i-times&#39;
-    cur_min_num_coins = (i / D[0]);
-    cur_biggest_coin_at = 0;
+    <span class="c1">// Amount &#39;0&#39; requires &#39;0&#39; coins</span>
+    <span class="n">min_num_coins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">biggest_coin_at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    // For coins from &#39;D[1]&#39; to &#39;D[D_size -1]&#39;
-    for ( j = 1; j &lt; D_size; ++j ) {
-        // If &#39;D[j]&#39; minimizes the num. of coins to take for amount &#39;i&#39;
-        if ( (i &gt;= D[j]) &amp;&amp; (cur_min_num_coins &gt;= (min_num_coins[ i - D[j] ] +1)) ) {
-            cur_min_num_coins = min_num_coins[ i - D[j] ] +1;
-            cur_biggest_coin_at = j;
-        }
-    }
+    <span class="c1">// For Amounts from &#39;1&#39; to &#39;amount&#39;</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Start taking &#39;D[0]&#39; &#39;i-times&#39;</span>
+        <span class="n">cur_min_num_coins</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    // Store the minimum just found
-    min_num_coins[i] = cur_min_num_coins;
-    biggest_coin_at[i] = cur_biggest_coin_at;
-}
+        <span class="c1">// For coins from &#39;D[1]&#39; to &#39;D[D_size -1]&#39;</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">D_size</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// If &#39;D[j]&#39; minimizes the num. of coins to take for amount &#39;i&#39;</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">cur_min_num_coins</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">min_num_coins</span><span class="p">[</span> <span class="n">i</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="n">cur_min_num_coins</span> <span class="o">=</span> <span class="n">min_num_coins</span><span class="p">[</span> <span class="n">i</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-// Let&#39;s build the solution array
-while ( amount &gt; 0 ) {
-    cur_biggest_coin_at = biggest_coin_at[amount];
+        <span class="c1">// Store the minimum just found</span>
+        <span class="n">min_num_coins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_min_num_coins</span><span class="p">;</span>
+        <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_biggest_coin_at</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    solution[ cur_biggest_coin_at ] += 1; // Add &#39;1&#39; of this coin to the solution
-    amount -= D[cur_biggest_coin_at]; // Amount left when picking this coin
-}
+    <span class="c1">// Let&#39;s build the solution array</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">amount</span><span class="p">];</span>
 
-return solution;
+        <span class="n">solution</span><span class="p">[</span> <span class="n">cur_biggest_coin_at</span> <span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Add &#39;1&#39; of this coin to the solution</span>
+        <span class="n">amount</span> <span class="o">-=</span> <span class="n">D</span><span class="p">[</span><span class="n">cur_biggest_coin_at</span><span class="p">];</span> <span class="c1">// Amount left when picking this coin</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">solution</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>Time complexity for this algorithm is <strong>O( Amount * num<em>of</em>denominations )</strong>.
 <em>Pretty heavy algorithm, but do you want to compare with the satisfaction of carrying the minimum amount of coins with you? :P</em></p>
 

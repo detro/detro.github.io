@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -66,102 +66,99 @@
 
 <p>Well, after the crappiest algorithmic explanation I have ever written, here it comes the code.</p>
 
-<p>This time it&#39;s not pure <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>: I wanted to use the beautiful <a href="http://qt.nokia.com/">Qt Framework</a> that I&#39;m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:
-[sourcecode:cpp]</p>
+<p>This time it&#39;s not pure <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>: I wanted to use the beautiful <a href="http://qt.nokia.com/">Qt Framework</a> that I&#39;m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:</p>
+<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="cp">#include &quot;TreeRebuilder.h&quot;</span>
+<span class="cp">#include &lt;QDebug&gt;</span>
 
-<h1>include &quot;TreeRebuilder.h&quot;</h1>
+<span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">TreeRebuilder</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 
-<h1>include <QDebug></h1>
 
-<p>TreeRebuilder::TreeRebuilder() { }</p>
+<span class="n">TreeNode</span> <span class="o">*</span><span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">rebuild</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">preOrderVisit</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">inOrderVisit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">reset</span><span class="p">();</span>
 
-<p>TreeNode *TreeRebuilder::rebuild(QVector<TREE_NODE_VAL_TYPE> *preOrderVisit, QVector<TREE_NODE_VAL_TYPE> *inOrderVisit) {
-    reset();</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">m_preOrderVisit = preOrderVisit;
-m_inOrderVisit = inOrderVisit;
+    <span class="n">m_preOrderVisit</span> <span class="o">=</span> <span class="n">preOrderVisit</span><span class="p">;</span>
+    <span class="n">m_inOrderVisit</span> <span class="o">=</span> <span class="n">inOrderVisit</span><span class="p">;</span>
 
-mapNodePosInInOrderVisit();
+    <span class="n">mapNodePosInInOrderVisit</span><span class="p">();</span>
 
-return doRebuild(0, m_inOrderVisit-&gt;size() - 1);
+    <span class="k">return</span> <span class="nf">doRebuild</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m_inOrderVisit</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">mapNodePosInInOrderVisit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">m_inOrderVisit</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">qCritical</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;InOrder Visit not provided&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Memorize the Position in the InOrder Visit of every element for quick-lookup</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">qint32</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m_inOrderVisit</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">m_inOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span> <span class="o">*</span><span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doRebuild</span><span class="p">(</span><span class="k">const</span> <span class="n">qint32</span> <span class="o">&amp;</span><span class="n">inOrderLeftLimit</span><span class="p">,</span> <span class="k">const</span> <span class="n">qint32</span> <span class="o">&amp;</span><span class="n">inOrderRightLimit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[Node:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_preOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span> <span class="n">m_currRootInPreOrderVisit</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+    <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">m_preOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span> <span class="n">m_currRootInPreOrderVisit</span><span class="o">++</span> <span class="p">);</span> <span class="c1">// Post-increment used to select the next New Node value, taken from the PreOrder Visit</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">inOrderLeftLimit</span> <span class="o">&lt;</span> <span class="n">inOrderRightLimit</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// If the current Node Value is not the first in the InOrderVisit current range, means there is a Left Child</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">inOrderLeftLimit</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Found Left Child&quot;</span><span class="p">;</span>
+            <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">doRebuild</span><span class="p">(</span><span class="n">inOrderLeftLimit</span><span class="p">,</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// If the current Node Value is not the last in the InOrderVisit current range, means there is a Right Child</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">inOrderRightLimit</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Found Right Child&quot;</span><span class="p">;</span>
+            <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">doRebuild</span><span class="p">(</span><span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inOrderRightLimit</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[/Node:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">newNode</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">reset</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">m_currRootInPreOrderVisit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">m_preOrderVisit</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">m_inOrderVisit</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">generateInOrderVisit</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span> <span class="k">const</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+
+    <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doGenerateInOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doGenerateInOrderVisit</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span> <span class="k">const</span> <span class="n">root</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">doGenerateInOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">leftChild</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">doGenerateInOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rightChild</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">generatePreOrderVisit</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span> <span class="k">const</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+
+    <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doGeneratePreOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doGeneratePreOrderVisit</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span> <span class="k">const</span> <span class="n">root</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">TREE_NODE_VAL_TYPE</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">doGeneratePreOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">leftChild</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+        <span class="n">doGeneratePreOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rightChild</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}</p>
-
-<p>void TreeRebuilder::mapNodePosInInOrderVisit() {
-    if ( !m_inOrderVisit ) {
-        qCritical() &lt;&lt; &quot;InOrder Visit not provided&quot;;
-    }</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">// Memorize the Position in the InOrder Visit of every element for quick-lookup
-for (qint32 i = 0; i &lt; m_inOrderVisit-&gt;size(); ++i) {
-    m_nodePosInInOrderVisit.insert(m_inOrderVisit-&gt;at(i), i);
-}
-</code></pre></div>
-<p>}</p>
-
-<p>TreeNode *TreeRebuilder::doRebuild(const qint32 &amp;inOrderLeftLimit, const qint32 &amp;inOrderRightLimit) {
-    TreeNode *newNode = new TreeNode;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">qDebug() &lt;&lt; &quot;[Node:\t&quot; &lt;&lt; m_preOrderVisit-&gt;at( m_currRootInPreOrderVisit ) &lt;&lt; &quot;]&quot;;
-newNode-&gt;val = m_preOrderVisit-&gt;at( m_currRootInPreOrderVisit++ ); // Post-increment used to select the next New Node value, taken from the PreOrder Visit
-
-if ( inOrderLeftLimit &lt; inOrderRightLimit ) {
-    // If the current Node Value is not the first in the InOrderVisit current range, means there is a Left Child
-    if ( m_nodePosInInOrderVisit.value(newNode-&gt;val) &gt; inOrderLeftLimit ) {
-        qDebug() &lt;&lt; &quot;   Found Left Child&quot;;
-        newNode-&gt;leftChild = doRebuild(inOrderLeftLimit, m_nodePosInInOrderVisit.value(newNode-&gt;val) -1);
-    }
-
-    // If the current Node Value is not the last in the InOrderVisit current range, means there is a Right Child
-    if ( m_nodePosInInOrderVisit.value(newNode-&gt;val) &lt; inOrderRightLimit ) {
-        qDebug() &lt;&lt; &quot;   Found Right Child&quot;;
-        newNode-&gt;rightChild = doRebuild(m_nodePosInInOrderVisit.value(newNode-&gt;val) + 1, inOrderRightLimit);
-    }
-}
-
-qDebug() &lt;&lt; &quot;[/Node:\t&quot; &lt;&lt; newNode-&gt;val &lt;&lt; &quot;]&quot;;
-
-return newNode;
-</code></pre></div>
-<p>}</p>
-
-<p>void TreeRebuilder::reset() {
-    m<em>currRootInPreOrderVisit = 0;
-    m</em>preOrderVisit = NULL;
-    m<em>inOrderVisit = NULL;
-    m</em>nodePosInInOrderVisit.clear();
-}</p>
-
-<p>QVector<TREE_NODE_VAL_TYPE> TreeRebuilder::generateInOrderVisit(TreeNode * const root) {
-    QVector<TREE_NODE_VAL_TYPE> result;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">TreeRebuilder::doGenerateInOrderVisit(root, &amp;result);
-
-return result;
-</code></pre></div>
-<p>}</p>
-
-<p>void TreeRebuilder::doGenerateInOrderVisit(TreeNode * const root, QVector<TREE_NODE_VAL_TYPE> *result) {
-    if ( NULL != root ) {
-        doGenerateInOrderVisit(root-&gt;leftChild, result);
-        result-&gt;append(root-&gt;val);
-        doGenerateInOrderVisit(root-&gt;rightChild, result);
-    }
-}</p>
-
-<p>QVector<TREE_NODE_VAL_TYPE> TreeRebuilder::generatePreOrderVisit(TreeNode * const root) {
-    QVector<TREE_NODE_VAL_TYPE> result;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">TreeRebuilder::doGeneratePreOrderVisit(root, &amp;result);
-
-return result;
-</code></pre></div>
-<p>}</p>
-
-<p>void TreeRebuilder::doGeneratePreOrderVisit(TreeNode * const root, QVector<TREE_NODE_VAL_TYPE> *result) {
-    if ( NULL != root ) {
-        result-&gt;append(root-&gt;val);
-        doGeneratePreOrderVisit(root-&gt;leftChild, result);
-        doGeneratePreOrderVisit(root-&gt;rightChild, result);
-    }
-}
-[/sourcecode]</p>
-
 <p>Mmm, I can see that the code doesn&#39;t look very clear in here. Well, again, the code is downloadable from: <a href='http://www.detronizator.org/wp-content/uploads/2010/02/TreeRebuilder.tar.gz'>TreeRebuilder.tar.gz</a></p>
 
 <p>For Qt experts: yes, I&#39;m using just the build-mechanism of Qt and the containers. All the rest is just plain <a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a>. But using <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Signals and Slots</a> for this would have been a massive overkill, don&#39;t you think? ;)</p>

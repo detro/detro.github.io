@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -38,29 +38,27 @@
 
 <h2>The &quot;subject&quot;</h2>
 
-<p>First, I wrote this function:
-[sourcecode:javascript]
-var foo, obj, that, Constructor, ClosuredScope;
-aVariable = &quot;I&#39;m a String in a global (attached to &#39;window&#39;)&quot;;</p>
+<p>First, I wrote this function:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">that</span><span class="p">,</span> <span class="nx">Constructor</span><span class="p">,</span> <span class="nx">ClosuredScope</span><span class="p">;</span>
+<span class="nx">aVariable</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m a String in a global (attached to &#39;window&#39;)&quot;</span><span class="p">;</span>
 
-<p>// &#39;foo&#39;, but no &#39;bar&#39;
-foo = function(callMessage) {
-    console.log(&quot;\n\033[0;32m&quot; + callMessage + &quot; {\033[0m&quot;);    //&lt; console.log(callMessage + &quot;{&quot;);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">console.log(aVariable);
-console.log(this.aVariable);
-console.log(window.aVariable);
-if (typeof(that) != &quot;undefined&quot; &amp;&amp; that.aVariable) {
-    console.log(that.aVariable + &quot; (passed via \033[0;31m&#39;that&#39;\033[0m)&quot;);
-}
-if (this === window) {
-    console.log(&quot;Here \033[0;31m&#39;this&#39;\033[0m resolves to \033[0;31m&#39;window&#39;\033[0m&quot;);
-}
+<span class="c1">// &#39;foo&#39;, but no &#39;bar&#39;</span>
+<span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callMessage</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;\n\033[0;32m&quot;</span> <span class="o">+</span> <span class="nx">callMessage</span> <span class="o">+</span> <span class="s2">&quot; {\033[0m&quot;</span><span class="p">);</span>    <span class="c1">//&lt; console.log(callMessage + &quot;{&quot;);</span>
 
-console.log(&quot;\033[0;32m}\033[0m\n&quot;);                        //&lt; console.log(&quot;}&quot;);
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">that</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="s2">&quot; (passed via \033[0;31m&#39;that&#39;\033[0m)&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Here \033[0;31m&#39;this&#39;\033[0m resolves to \033[0;31m&#39;window&#39;\033[0m&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;\033[0;32m}\033[0m\n&quot;</span><span class="p">);</span>                        <span class="c1">//&lt; console.log(&quot;}&quot;);</span>
+<span class="p">};</span>
 </code></pre></div>
-<p>};
-[/sourcecode]</p>
-
 <p>What this those is reading the value of <code>aVariable</code>, taking it <strong>implicitly from the current scope</strong> and <strong>explicitly from <code>this</code></strong> (i.e. pointer to the current <em>scope</em>) and ** from <code>window</code>** (i.e. the gloval <em>scope</em>). Also, it does a couple of extra bits:</p>
 
 <ul>
@@ -72,169 +70,142 @@ console.log(&quot;\033[0;32m}\033[0m\n&quot;);                        //&lt; con
 
 <h2>Function Invocation Pattern</h2>
 
-<p>I started with something very easy:
-[sourcecode:javascript]
-// Function Invocation Pattern
-foo(&quot;*** Proving the &#39;Function Invocation Pattern&#39; ***&quot;);
-[/sourcecode]</p>
-
-<p>that will print out:
-[sourcecode:console]
-*** Proving the &#39;Function Invocation Pattern&#39; *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in a global (attached to &#39;window&#39;)
-Here &#39;this&#39; is equal to &#39;window&#39;
-}
-[/sourcecode]</p>
-
+<p>I started with something very easy:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// Function Invocation Pattern</span>
+<span class="nx">foo</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;Function Invocation Pattern&#39; ***&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>that will print out:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;Function Invocation Pattern&#39; *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">Here &#39;this&#39; is equal to &#39;window&#39;</span>
+<span class="go">}</span>
+</code></pre></div>
 <p>What&#39;s happening here is obvious: <strong>the scope in which the invocation is executed, is parent of the internal scope of the callee</strong>. Hence, if a variable is not found in the local scope, will be looked-up in the parent scopes(s).</p>
 
 <p>But we all knew that, didn&#39;t we?</p>
 
 <h2>Method Invocation Pattern</h2>
 
-<p>Now, let&#39;s start to have some fun:
-[sourcecode:javascript]
-// Method Invocation Pattern
-obj = {
-    aVariable : &quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;)&quot;,
-    foo : foo
-};
-obj.foo(&quot;*** Proving the &#39;Method Invocation Pattern&#39; ***&quot;);
-[/sourcecode]</p>
-
-<p>the above will print:
-[sourcecode:console]
-*** Proving the &#39;Method Invocation Pattern&#39; *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in an object (i.e. scope/&#39;this&#39;)
-I&#39;m a String in a global (attached to &#39;window&#39;)
-}
-[/sourcecode]</p>
-
+<p>Now, let&#39;s start to have some fun:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// Method Invocation Pattern</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">aVariable</span> <span class="o">:</span> <span class="s2">&quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;)&quot;</span><span class="p">,</span>
+    <span class="nx">foo</span> <span class="o">:</span> <span class="nx">foo</span>
+<span class="p">};</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;Method Invocation Pattern&#39; ***&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>the above will print:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;Method Invocation Pattern&#39; *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in an object (i.e. scope/&#39;this&#39;)</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">}</span>
+</code></pre></div>
 <p>The object <code>obj</code> to which we added a reference to foo, now acts as the scope parenting the internal function scope. Hence, <code>aVariable</code> is found in <code>obj</code>, set to something different. In other words, during the invocation the function run in a scope where <code>obj === this</code>.</p>
 
 <h2>Constructor Invocation Pattern + Prototype Inheritance</h2>
-
-<p>[sourcecode:javascript]
-// Constructor Invocation Pattern + Prototype Inheritance
-Constructor = function(s) {
-    this.aVariable = s;
-};
-Constructor.prototype.foo = foo;
-obj = new Constructor(&quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;), assigned via a Constructor&quot;);
-obj.foo(&quot;*** Proving the &#39;Constructor Invocation Pattern + Prototype Inheritance&#39; ***&quot;);
-[/sourcecode]</p>
-
-<p>predictably this prints:
-[sourcecode:console]
-*** Proving the &#39;Constructor Invocation Pattern + Prototype Inheritance&#39; *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in an object (i.e. scope/&#39;this&#39;), assigned via a Constructor
-I&#39;m a String in a global (attached to &#39;window&#39;)
-}
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// Constructor Invocation Pattern + Prototype Inheritance</span>
+<span class="nx">Constructor</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">Constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Constructor</span><span class="p">(</span><span class="s2">&quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;), assigned via a Constructor&quot;</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;Constructor Invocation Pattern + Prototype Inheritance&#39; ***&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>predictably this prints:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;Constructor Invocation Pattern + Prototype Inheritance&#39; *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in an object (i.e. scope/&#39;this&#39;), assigned via a Constructor</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">}</span>
+</code></pre></div>
 <p>when I was working at Betfair, I found this kind of inheritance in the hierarchy we used, and all was based on <a href="http://developer.yahoo.com/yui/2/">YUI2</a>. Than moved to more Closure-based inheritances with <a href="http://yuilibrary.com/">YUI3</a>.</p>
 
 <p>It&#39;s not a bad pattern per se, and makes it pretty clear to understand what&#39;s going on, but it does not offer the protection of Closures.</p>
 
 <h2>Constructor Invocation Pattern + Closure</h2>
 
-<p>Here I have to take a bit of &quot;liberty&quot; and make some ugly detour:
-[sourcecode:javascript]
-ClosuredScope = function(s) {
-    var aVariable = s;
-    this.aVariable = s;
-    this.fooWrapper = function(m) { foo(m); console.log(aVariable + &quot; (from the wrapper)&quot;); };
-    this.fooOriginal = foo;
-};
-obj = new ClosuredScope(&quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure&quot;);
-obj.fooOriginal(&quot;*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (original) <strong><em>&quot;);
-obj.fooWrapper(&quot;</em></strong> Proving the &#39;Constructor Invocation Pattern + Closure&#39; (wrapper) ***&quot;);
-[/sourcecode]</p>
+<p>Here I have to take a bit of &quot;liberty&quot; and make some ugly detour:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">ClosuredScope</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fooWrapper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="s2">&quot; (from the wrapper)&quot;</span><span class="p">);</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fooOriginal</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="s2">&quot;I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure&quot;</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooOriginal</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (original) ***&quot;</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooWrapper</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (wrapper) ***&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>that prints out:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (original) *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">}</span>
 
-<p>that prints out:
-[sourcecode:console]
-*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (original) *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure
-I&#39;m a String in a global (attached to &#39;window&#39;)
-}</p>
 
-<p>*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (wrapper) *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String in a global (attached to &#39;window&#39;)
-Here &#39;this&#39; resolves to &#39;window&#39;
-}</p>
+<span class="go">*** Proving the &#39;Constructor Invocation Pattern + Closure&#39; (wrapper) *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">Here &#39;this&#39; resolves to &#39;window&#39;</span>
+<span class="go">}</span>
 
-<p>I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure (from the wrapper)
-[/sourcecode]</p>
-
+<span class="go">I&#39;m a String in an object (i.e. scope/&#39;this&#39;), accessible via Closure (from the wrapper)</span>
+</code></pre></div>
 <p>In the first invocation (i.e. <code>obj.fooOriginal(...)</code>) the callee acts as expected: same printout as per the Prototype Inheritance. But when invoked by <code>obj.fooWrapper(...)</code> <code>obj</code>&#39;s scope is not made parent of the callee scope, as it is invoked <em>as-is</em> (i.e. <code>foo(m);</code>).</p>
 
 <p>A Closure though was indeed created: <code>console.log(aVariable + &quot; (from the wrapper)&quot;);</code> proves just that.</p>
 
 <h2>Apply Invocation Pattern</h2>
-
-<p>[sourcecode:javascript]
-foo.apply({
-    aVariable : &quot;I&#39;m a String set via the &#39;apply&#39; method: scope/&#39;this&#39; is passed to &#39;apply()&#39;&quot;
-}, [&quot;*** Proving the &#39;Apply Invocation Pattern&#39; ***&quot;]);
-[/sourcecode]</p>
-
-<p>obviously produces:
-[sourcecode:console]
-*** Proving the &#39;Apply Invocation Pattern&#39; *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String set via the &#39;apply&#39; method: scope/&#39;this&#39; is passed to &#39;apply()&#39;
-I&#39;m a String in a global (attached to &#39;window&#39;)
-}
-[/sourcecode]</p>
-
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
+    <span class="nx">aVariable</span> <span class="o">:</span> <span class="s2">&quot;I&#39;m a String set via the &#39;apply&#39; method: scope/&#39;this&#39; is passed to &#39;apply()&#39;&quot;</span>
+<span class="p">},</span> <span class="p">[</span><span class="s2">&quot;*** Proving the &#39;Apply Invocation Pattern&#39; ***&quot;</span><span class="p">]);</span>
+</code></pre></div>
+<p>obviously produces:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;Apply Invocation Pattern&#39; *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String set via the &#39;apply&#39; method: scope/&#39;this&#39; is passed to &#39;apply()&#39;</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">}</span>
+</code></pre></div>
 <p>this is the easiest one, as the scope manipulation is made very explicit, and controlled by the developer. Useful when you want to tightly control what your callee receives.</p>
 
 <h2><code>var that = this</code> Invocation Pattern</h2>
 
-<p>If you wrote a lot of JavaScript, you have written one of this. Somewhere in time, you had a piece of code that drove you nuts for a little while, because the scope was just like <a href="http://en.wikipedia.org/wiki/Frank_Abagnale">Frank Abagnale</a>. Hence, to trap it, you created a fixed reference to it, an <em>&quot;alias&quot;</em> some would say.
-[sourcecode:javascript]
-// &#39;that&#39; = &#39;this&#39; Invocation Pattern
-ClosuredScope = function(s) {
-    this.aVariable = s;
-    return {
-        aVariable : this.aVariable,
-        that : this,
-        fooThat : foo
-    };
-};
-obj = new ClosuredScope(&quot;I&#39;m a String set in another Closure&quot;);
-obj.fooThat(&quot;*** Proving the &#39;That = This Invocation Pattern&#39; ***&quot;);
-[/sourcecode]</p>
-
-<p>and this one comes out with:
-[sourcecode:console]
-*** Proving the &#39;That = This Invocation Pattern&#39; *** {
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String set in another Closure
-I&#39;m a String in a global (attached to &#39;window&#39;)
-I&#39;m a String set in another Closure (passed via &#39;that&#39;)
-}
-[/sourcecode]</p>
-
+<p>If you wrote a lot of JavaScript, you have written one of this. Somewhere in time, you had a piece of code that drove you nuts for a little while, because the scope was just like <a href="http://en.wikipedia.org/wiki/Frank_Abagnale">Frank Abagnale</a>. Hence, to trap it, you created a fixed reference to it, an <em>&quot;alias&quot;</em> some would say.</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// &#39;that&#39; = &#39;this&#39; Invocation Pattern</span>
+<span class="nx">ClosuredScope</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">aVariable</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">,</span>
+        <span class="nx">that</span> <span class="o">:</span> <span class="k">this</span><span class="p">,</span>
+        <span class="nx">fooThat</span> <span class="o">:</span> <span class="nx">foo</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="s2">&quot;I&#39;m a String set in another Closure&quot;</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooThat</span><span class="p">(</span><span class="s2">&quot;*** Proving the &#39;That = This Invocation Pattern&#39; ***&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>and this one comes out with:</p>
+<div class="highlight"><pre><code class="console language-console" data-lang="console"><span class="go">*** Proving the &#39;That = This Invocation Pattern&#39; *** {</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String set in another Closure</span>
+<span class="go">I&#39;m a String in a global (attached to &#39;window&#39;)</span>
+<span class="go">I&#39;m a String set in another Closure (passed via &#39;that&#39;)</span>
+<span class="go">}</span>
+</code></pre></div>
 <p>what&#39;s the reason? it&#39;s the only way to <em>&quot;catch and hold&quot;</em> <code>this</code>, the scope. <code>that</code> is than a reference to <code>this</code>, to ensure the callee can still get hold of it. And yes, this is a Closure.</p>
 
-<p>What do you say? Too messy? Well, the <code>that = this</code>-for-dummies is:
-[sourcecode:javascript]
-// ...
-var that = this;
- setTimeout(function () {
-     that.doStuff();
- }, 1000);
-// ...
-[/sourcecode]</p>
-
+<p>What do you say? Too messy? Well, the <code>that = this</code>-for-dummies is:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="c1">// ...</span>
+<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+ <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+     <span class="nx">that</span><span class="p">.</span><span class="nx">doStuff</span><span class="p">();</span>
+ <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="c1">// ...</span>
+</code></pre></div>
 <p>but the same applies.</p>
 
 <h2>Conclusions</h2>

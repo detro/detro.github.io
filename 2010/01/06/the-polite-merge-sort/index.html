@@ -1,3 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The "Polite" Merge Sort</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>The "Polite" Merge Sort</h2>
+<p class="meta">06 Jan 2010</p>
+
+<div class="post">
 <p>Another old-classic problem: the <a href="http://en.wikipedia.org/wiki/Merge_sort">Merge Sort</a>.</p>
 
 <div class="img">
@@ -30,71 +58,90 @@ Very &quot;basical&quot; tweak, but, for the sake of it, have fun to calculate h
 Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this algorithm will normally generate, I avoid <code>M/2</code> calls.</strong> The logical structure of the calls of this problem, as in the example image above, is a <strong>Balanced Binary Tree</strong>. And in such structure the number of Leaf is equal to M/2, if M are the nodes. <strong>Quite a relieve for the call stack, isn&#39;t it! ;)</strong></p>
 
 <h2>The code</h2>
+<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
 
-<p>[sourcecode:cpp]</p>
+<span class="c1">// === Polite Merge Sort ===</span>
+<span class="c1">// This implementation of Merge Sort is defined &quot;polite&quot;, because it tries</span>
+<span class="c1">// to bother the Operating Systems as less as possible.</span>
+<span class="c1">//</span>
+<span class="c1">// Instead of allocating and freeing memory at every intermediate step</span>
+<span class="c1">// to implement a the priority queue required to sort do the &quot;MERGE STEP&quot;,</span>
+<span class="c1">// it requires to pass at input an empty support array of the same size</span>
+<span class="c1">// of the input array.</span>
+<span class="c1">//</span>
+<span class="c1">// The support array is going to be the solely memory used as support.</span>
 
-<h1>include <stdio.h></h1>
+<span class="kt">void</span> <span class="nf">polite_merge</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">l_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">m_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">r_limit</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">support_array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Create 3 Peace Marker</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// For the &#39;array&#39;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// For the &#39;left part of the array already ordered&#39;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// For the &#39;right part of the array already ordered&#39;</span>
 
-<h1>include <stdlib.h></h1>
+    <span class="c1">// Copy the portion of sorted arrays in the support array (like a static priority queue)</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l_limit</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r_limit</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">support_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
 
-<p>// === Polite Merge Sort ===
-// This implementation of Merge Sort is defined &quot;polite&quot;, because it tries
-// to bother the Operating Systems as less as possible.
-//
-// Instead of allocating and freeing memory at every intermediate step
-// to implement a the priority queue required to sort do the &quot;MERGE STEP&quot;,
-// it requires to pass at input an empty support array of the same size
-// of the input array.
-//
-// The support array is going to be the solely memory used as support.</p>
+    <span class="c1">// Set the Peace Markers</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l_limit</span><span class="p">;</span> <span class="c1">// &#39;i&#39; and &#39;j&#39; both start from the Left</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">m_limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// &#39;k&#39; starts from the Middle + 1 </span>
 
-<p>void polite<em>merge(int* array, const unsigned int l</em>limit, const unsigned int m<em>limit, const unsigned int r</em>limit, int* support_array) {
-    // Create 3 Peace Marker
-    unsigned int i; // For the &#39;array&#39;
-    unsigned int j; // For the &#39;left part of the array already ordered&#39;
-    unsigned int k; // For the &#39;right part of the array already ordered&#39;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">// Copy the portion of sorted arrays in the support array (like a static priority queue)
-for ( i = l_limit; i &lt;= r_limit; ++i ) {
-    support_array[i] = array[i];
-}
+    <span class="c1">// Merge the 2 sorted portions</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">m_limit</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">support_array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">support_array</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">)</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">support_array</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+        <span class="k">else</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">support_array</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="c1">// Add the remaining sorted portions (if any)</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">m_limit</span> <span class="p">)</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">support_array</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">support_array</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">];</span>
+<span class="p">}</span>
 
-// Set the Peace Markers
-i = j = l_limit; // &#39;i&#39; and &#39;j&#39; both start from the Left
-k = m_limit + 1; // &#39;k&#39; starts from the Middle + 1 
+<span class="kt">void</span> <span class="nf">polite_merge_sort</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">l_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">r_limit</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">support_array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">middle</span><span class="p">;</span>
 
-// Merge the 2 sorted portions
-while ( j &lt;= m_limit &amp;&amp; k &lt;= r_limit ) {
-    if ( support_array[j] &lt; support_array[k] )
-        array[i++] = support_array[j++];
-    else
-        array[i++] = support_array[k++];
-}
-// Add the remaining sorted portions (if any)
-while ( j &lt;= m_limit ) array[i++] = support_array[j++];
-while ( k &lt;= r_limit ) array[i++] = support_array[k++];
+    <span class="k">if</span> <span class="p">(</span> <span class="n">l_limit</span> <span class="o">==</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Nothing to do =&gt; Only 1 element - already sorted</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">r_limit</span> <span class="o">-</span> <span class="n">l_limit</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Only 2 elements - swap them if not yet sorted</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">array</span><span class="p">[</span><span class="n">r_limit</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">array</span><span class="p">[</span><span class="n">l_limit</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Swap in place - cool!</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">r_limit</span><span class="p">]</span> <span class="o">^=</span> <span class="n">array</span><span class="p">[</span><span class="n">l_limit</span><span class="p">];</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">l_limit</span><span class="p">]</span> <span class="o">^=</span> <span class="n">array</span><span class="p">[</span><span class="n">r_limit</span><span class="p">];</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">r_limit</span><span class="p">]</span> <span class="o">^=</span> <span class="n">array</span><span class="p">[</span><span class="n">l_limit</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="n">l_limit</span> <span class="o">+</span> <span class="n">r_limit</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">polite_merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">l_limit</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">support_array</span><span class="p">);</span>
+        <span class="n">polite_merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r_limit</span><span class="p">,</span> <span class="n">support_array</span><span class="p">);</span>
+        <span class="n">polite_merge</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">l_limit</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">r_limit</span><span class="p">,</span> <span class="n">support_array</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}</p>
-
-<p>void polite<em>merge</em>sort(int* array, const unsigned int l<em>limit, const unsigned int r</em>limit, int* support_array) {
-    unsigned int middle;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">if ( l_limit == r_limit ) {
-    // Nothing to do =&gt; Only 1 element - already sorted
-} else if ( 1 == r_limit - l_limit ) {
-    // Only 2 elements - swap them if not yet sorted
-    if ( array[r_limit] &lt; array[l_limit] ) {
-        // Swap in place - cool!
-        array[r_limit] ^= array[l_limit];
-        array[l_limit] ^= array[r_limit];
-        array[r_limit] ^= array[l_limit];
-    }
-} else {
-    middle = (l_limit + r_limit) / 2;
-    polite_merge_sort(array, l_limit, middle, support_array);
-    polite_merge_sort(array, middle + 1, r_limit, support_array);
-    polite_merge(array, l_limit, middle, r_limit, support_array);
-}
-</code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>This is designed to handle only Integers&#39; Array, but it can easily adapted to whatever kind of data you mean to sort.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

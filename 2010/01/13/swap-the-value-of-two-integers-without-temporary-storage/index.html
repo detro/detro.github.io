@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -38,26 +38,22 @@
 <li><code>A ^ A = 0</code></li>
 </ul></p>
 
-<p>So, you can see how it get&#39;s applied here:
-[sourcecode:c]</p>
+<p>So, you can see how it get&#39;s applied here:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio .h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+   <span class="c1">// ... populate somehow &quot;a&quot; and &quot;b&quot;...</span>
 
-<h1>include <stdio .h></h1>
+   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d - b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 
-<p>int main(void)
-{
-   unsigned int a, b;
-   // ... populate somehow &quot;a&quot; and &quot;b&quot;...</p>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in &quot;a&quot; the value of &quot;a XOR b&quot;</span>
+   <span class="n">b</span> <span class="o">^=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// store in &quot;b&quot; the value of &quot;a XOR b XOR b&quot; = &quot;a XOR 0&quot; = &quot;a&quot;</span>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in &quot;a&quot; the velue of &quot;a XOR b XOR a&quot; = &quot;b XOR 0&quot; = &quot;b&quot;</span>
 
-<p>printf(&quot;a = %d - b = %d\n&quot;, a, b);</p>
-
-<p>a ^= b; // store in &quot;a&quot; the value of &quot;a XOR b&quot;
-   b ^= a; // store in &quot;b&quot; the value of &quot;a XOR b XOR b&quot; = &quot;a XOR 0&quot; = &quot;a&quot;
-   a ^= b; // store in &quot;a&quot; the velue of &quot;a XOR b XOR a&quot; = &quot;b XOR 0&quot; = &quot;b&quot;</p>
-
-<p>printf(&quot;a = %d - b = %d\n&quot;, a, b);
-}
-[/sourcecode]</p>
-
+   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d - b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Neat.</p>
 
 </div>

@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -48,61 +48,57 @@ PhantomJS is an optimal solution for headless testing of web-based applications,
 
 <p>The mind behind PhantomJS is <a href="http://ariya.blogspot.com/">Ariya Hidayat</a>, a brilliant guy that I first met when he was still working for Trolltech/Nokia. I will not spend a lot of time here explaining why it&#39;s idea is so great: for that there is <a href="http://code.google.com/p/phantomjs/w/list">the official wiki</a>.</p>
 
-<p>To share some awesomeness, here is my favourite example. <em>Do you want to know what&#39;s the weather like in London from your command line?</em> Type something like this:
-[sourcecode:bash]
-$ phantomjs examples/weather.js London, UK</p>
+<p>To share some awesomeness, here is my favourite example. <em>Do you want to know what&#39;s the weather like in London from your command line?</em> Type something like this:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs examples/weather.js London, UK
 
-<p>City: London, UK
+City: London, UK
 Current condition: Clear
 Temperature: 61 F
 Humidity: 45%
-Wind: N at 4 mph</p>
+Wind: N at 4 mph
 
-<p>Thu: 52-66 F  Partly Sunny
+Thu: 52-66 F  Partly Sunny
 Fri: 57-72 F  Partly Sunny
 Sat: 55-72 F  Partly Sunny
 Sun: 50-70 F  Chance of Rain
-[/sourcecode]</p>
-
-<p>How does that work? Here is the PhantomJS script source:
-[sourcecode:javascript]
-if phantom.state.length is 0
-    city = &#39;Mountain View&#39;
-    if phantom.args.length &gt; 0
-        city = phantom.args.join &#39; &#39;
-    phantom.state = city
-    console.log &quot;Loading #{ city }&quot;
-    phantom.open encodeURI &quot;http://www.google.com/ig/api?weather=#{ city }&quot;
-else
-    if phantom.loadStatus is &#39;fail&#39;
-        console.log &#39;Unable to access network&#39;
-    else
-        if document.querySelectorAll(&#39;problem_cause&#39;).length &gt; 0
-            console.log &quot;No data available for #{ phantom.state }&quot;
-        else
-            data = (s, e) -&gt;
-                e = e or document
-                el = e.querySelector s
-                if el then el.attributes.data.value else null</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">        console.log &#39;&#39;
-        console.log &#39;City: &#39; + data &#39;weather &gt; forecast_information &gt; city&#39;
-        console.log &#39;Current condition &#39; + data &#39;weather &gt; current_conditions &gt; condition&#39;
-        console.log &#39;Temperature: &#39; + data(&#39;weather &gt; current_conditions &gt; temp_f&#39;) + &#39; F&#39;
-        console.log data &#39;weather &gt; current_conditions &gt; humidity&#39;
-        console.log data &#39;weather &gt; current_conditions &gt; wind_condition&#39;
-        console.log &#39;&#39;
-
-        forecasts = document.querySelectorAll &#39;weather &gt; forecast_conditions&#39;
-        for f in forecasts
-            console.log &quot;#{ data &#39;day_of_week&#39;, f }: &quot; +
-                        &quot;#{ data &#39;low&#39;, f }-&quot; +
-                        &quot;#{ data &#39;high&#39;, f } F  &quot; +
-                        &quot;#{ data &#39;condition&#39;, f }&quot;
-
-phantom.exit()
 </code></pre></div>
-<p>[/sourcecode]</p>
+<p>How does that work? Here is the PhantomJS script source:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">length</span> <span class="nx">is</span> <span class="mi">0</span>
+    <span class="nx">city</span> <span class="o">=</span> <span class="s1">&#39;Mountain View&#39;</span>
+    <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="nx">city</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span> <span class="s1">&#39; &#39;</span>
+    <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">city</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;Loading #{ city }&quot;</span>
+    <span class="nx">phantom</span><span class="p">.</span><span class="nx">open</span> <span class="nb">encodeURI</span> <span class="s2">&quot;http://www.google.com/ig/api?weather=#{ city }&quot;</span>
+<span class="k">else</span>
+    <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">loadStatus</span> <span class="nx">is</span> <span class="s1">&#39;fail&#39;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Unable to access network&#39;</span>
+    <span class="k">else</span>
+        <span class="k">if</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;problem_cause&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;No data available for #{ phantom.state }&quot;</span>
+        <span class="k">else</span>
+            <span class="nx">data</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="o">-&gt;</span>
+                <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="nx">or</span> <span class="nb">document</span>
+                <span class="nx">el</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">querySelector</span> <span class="nx">s</span>
+                <span class="k">if</span> <span class="nx">el</span> <span class="nx">then</span> <span class="nx">el</span><span class="p">.</span><span class="nx">attributes</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">value</span> <span class="k">else</span> <span class="kc">null</span>
 
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;City: &#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; forecast_information &gt; city&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Current condition &#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; condition&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Temperature: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">(</span><span class="s1">&#39;weather &gt; current_conditions &gt; temp_f&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; F&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; humidity&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; wind_condition&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="nx">forecasts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span> <span class="s1">&#39;weather &gt; forecast_conditions&#39;</span>
+            <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">forecasts</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;#{ data &#39;day_of_week&#39;, f }: &quot;</span> <span class="o">+</span>
+                            <span class="s2">&quot;#{ data &#39;low&#39;, f }-&quot;</span> <span class="o">+</span>
+                            <span class="s2">&quot;#{ data &#39;high&#39;, f } F  &quot;</span> <span class="o">+</span>
+                            <span class="s2">&quot;#{ data &#39;condition&#39;, f }&quot;</span>
+
+    <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+</code></pre></div>
 <p>This scripts uses the <em>undocumented</em> <a href="http://www.google.com/search?sourceid=chrome&amp;ie=UTF-8&amp;q=google+api+weather#sclient=psy&amp;hl=en&amp;safe=off&amp;source=hp&amp;q=google+weather+api&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;pbx=1&amp;bav=on.2,or.r_gc.r_pw.&amp;fp=ee59edf59cfa0598">Google Weather API</a>. Nothing special given <em>nowdays</em> Javascript... but this is bring the result to your CLI! And yep, PhantomJS supports <strong>Coffee Script</strong>, as well as Javascript.</p>
 
 <p>Isn&#39;t this enough to make your eyes sparkly?</p>
@@ -115,18 +111,17 @@ phantom.exit()
 
 <p>Qt also provides other great modules, and one of them is <a href="http://doc.qt.nokia.com/latest/qtscript.html">QtScript</a>. Based on? Yes, it&#39;s based on Javascript! Actually, it wraps in a great API the &quot;standard&quot; <a href="http://www.webkit.org/projects/javascript/">WebKit JavascriptCode</a>.</p>
 
-<p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a &quot;resource&quot;, like any other object. The developer could do thinks like:
-[sourcecode:javascript]
-var page = require(&quot;WebPage&quot;);
-page.load(&quot;www.google.com&quot;);
-page.input(&quot;Lady Gaga&quot;, &quot;#inputTextField&quot;);
-page.click(&quot;#submitSearch&quot;);
-...
-var rasterizer = require(&quot;Rasterizer&quot;);
-rasterizer.print(page, &quot;~/ladyGagaSearchResult.png&quot;);
-...
-[/sourcecode]
-Do you see where I&#39;m heading here?</p>
+<p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a &quot;resource&quot;, like any other object. The developer could do thinks like:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;WebPage&quot;</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&quot;www.google.com&quot;</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s2">&quot;Lady Gaga&quot;</span><span class="p">,</span> <span class="s2">&quot;#inputTextField&quot;</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="s2">&quot;#submitSearch&quot;</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="kd">var</span> <span class="nx">rasterizer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;Rasterizer&quot;</span><span class="p">);</span>
+<span class="nx">rasterizer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="s2">&quot;~/ladyGagaSearchResult.png&quot;</span><span class="p">);</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>Do you see where I&#39;m heading here?</p>
 
 <p>Put into the picture the <a href="http://www.commonjs.org/">CommonJS</a> specs, still cooking, and you can imagine JavaScript reaching places that no one would have imagined few years ago.</p>
 

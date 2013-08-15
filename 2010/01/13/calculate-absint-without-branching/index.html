@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -32,14 +32,12 @@
 
 <p>Yes, without using any &quot;<code>if ( a &lt; 0 )...</code>&quot;. To do that, you need to refresh how <a href="http://en.wikipedia.org/wiki/Two's_complement">Two&#39;s Complement works</a>, then come back.</p>
 
-<p>What we really need to focus on is that, given a <code>signed int A</code>, the negative of that number is: <code>B = ~A + 1</code>. BUT, we are trying to calculate the Absolute Value, not the negative. So, something like:
-[sourcecode:c]
-RESULT =
-    (INPUT, if positive, or NEGATE_INPUT, if negative)
-    +
-    (0, if positive, or 1, if negative)
-[/sourcecode]</p>
-
+<p>What we really need to focus on is that, given a <code>signed int A</code>, the negative of that number is: <code>B = ~A + 1</code>. BUT, we are trying to calculate the Absolute Value, not the negative. So, something like:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">RESULT</span> <span class="o">=</span>
+    <span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="k">if</span> <span class="n">positive</span><span class="p">,</span> <span class="n">or</span> <span class="n">NEGATE_INPUT</span><span class="p">,</span> <span class="k">if</span> <span class="n">negative</span><span class="p">)</span>
+    <span class="o">+</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="n">positive</span><span class="p">,</span> <span class="n">or</span> <span class="mi">1</span><span class="p">,</span> <span class="k">if</span> <span class="n">negative</span><span class="p">)</span>
+</code></pre></div>
 <p>Does it makes sense to you? To me it didn&#39;t for the first 10 minutes.</p>
 
 <h2>What do we need?</h2>
@@ -64,42 +62,35 @@ RESULT =
 
 <h3>Ladies and Gentleman, all shift please</h3>
 
-<p>Now, let&#39;s see some shifting in action. <strong>If A is a Positive number, then:</strong>
-[sourcecode:c]
-A = INPUT &gt;&gt; 31 =&gt; 0x00000000 =&gt; 0
-B = -A =&gt; -0x00000000 =&gt; 0
-[/sourcecode]</p>
-
-<p><strong>While if A is a Negative number, then:</strong>
-[sourcecode:c]
-A = INPUT &gt;&gt; 31 =&gt; 0xFFFFFFFF =&gt; -1
-B = -A =&gt; 0x00000001 =&gt; 1
-[/sourcecode]</p>
-
+<p>Now, let&#39;s see some shifting in action. <strong>If A is a Positive number, then:</strong></p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0x00000000</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mh">0x00000000</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</code></pre></div>
+<p><strong>While if A is a Negative number, then:</strong></p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0xFFFFFFFF</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span> <span class="o">=&gt;</span> <span class="mh">0x00000001</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</code></pre></div>
 <h2>Putting all together</h2>
 
-<p>So, this means that we can calculate the absolute value using the new variables we have produced, A and B. Here is how:
-[sourcecode:c]</p>
+<p>So, this means that we can calculate the absolute value using the new variables we have produced, A and B. Here is how:</p>
+<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 
-<h1>include <stdio.h></h1>
+<span class="kt">int</span> <span class="nf">abs</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">A</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">;</span>     <span class="c1">// 0x00000000 if Positive, 0xFFFFFFFF if Negative</span>
+   <span class="kt">int</span> <span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span><span class="p">;</span>              <span class="c1">// 0x00000000 if Positive, 0x00000001 if Negative</span>
+   <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">^</span> <span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="p">;</span>  <span class="c1">// value ^ A = value if Positive, value ^ A = ~value if Negative</span>
+<span class="p">}</span>
 
-<p>int abs(const int value) {
-   int A = value &gt;&gt; 31;     // 0x00000000 if Positive, 0xFFFFFFFF if Negative
-   int B = -A;              // 0x00000000 if Positive, 0x00000001 if Negative
-   return (value ^ A) + B;  // value ^ A = value if Positive, value ^ A = ~value if Negative
-}</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">input</span><span class="p">;</span>
 
-<p>int main(int argc, char** argv)
-{
-    int input;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">// Check the Input
-if ( argc == 2 ) input = atoi(argv[1]); else return (1);
+    <span class="c1">// Check the Input</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
-printf(&quot;abs(%d) = %d\n\n&quot;, input, abs(input));
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;abs(%d) = %d</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>}
-[/sourcecode]</p>
-
 <p>Who showed me this hack? eh eh eh! ;)</p>
 
 </div>

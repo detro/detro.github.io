@@ -18,7 +18,7 @@
         <div class="container">
           <div class="site">
             <div class="header">
-              <h1 class="title"><a href="/">Your New Jekyll Site</a></h1>
+              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
               <a class="extra" href="/">home</a>
             </div>
 
@@ -56,38 +56,30 @@ _301 Redirection_
 </ul>
 
 <p>It&#39;s a very very simple application, but I think serves well it&#39;s purpose. See here the main code:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<span class="c"># ...</span>
+<span class="c"># Main Request Handler</span>
+<span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="c"># Perform redirect</span>
+      <span class="n">url</span> <span class="o">=</span> <span class="n">get_redirect_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">);</span>
 
-<p>[sourcecode:python]</p>
-
-<h1>/main.py</h1>
-
-<h1>...</h1>
-
-<h1>Main Request Handler</h1>
-
-<p>class MainHandler(webapp.RequestHandler):
-   def get(self):
-      # Perform redirect
-      url = get<em>redirect</em>url(self.request.url);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Check that we were able to build a URL and that this URL actually exists
-  if url and (check_url_exists(url) if config.CHECK_URL_EXISTANCE else True):
-     logging.info(&quot;Redirecting URL &#39;%s&#39; to URL &#39;%s&#39;&quot; % (self.request.url, url) );
-     self.redirect(url, permanent=True);
-  else:
-     # Log that we didn&#39;t know what this was, and redirect to a good default
-     logging.error(&quot;Unable to Redirect URL &#39;%s&#39;&quot; % (self.request.url) );
-     if config.ERROR_EMAIL_ACTIVE:
-        mail.send_mail_to_admins(
-           sender=config.ERROR_EMAIL_SENDER,
-           subject=config.ERROR_EMAIL_SUBJECT,
-           body=config.ERROR_EMAIL_BODY + self.request.url
-        );
-     self.redirect(config.DEFAULT_URL, permanent=True);
+      <span class="c"># Check that we were able to build a URL and that this URL actually exists</span>
+      <span class="k">if</span> <span class="n">url</span> <span class="ow">and</span> <span class="p">(</span><span class="n">check_url_exists</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">CHECK_URL_EXISTANCE</span> <span class="k">else</span> <span class="bp">True</span><span class="p">):</span>
+         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Redirecting URL &#39;</span><span class="si">%s</span><span class="s">&#39; to URL &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">permanent</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="c"># Log that we didn&#39;t know what this was, and redirect to a good default</span>
+         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Unable to Redirect URL &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">ERROR_EMAIL_ACTIVE</span><span class="p">:</span>
+            <span class="n">mail</span><span class="o">.</span><span class="n">send_mail_to_admins</span><span class="p">(</span>
+               <span class="n">sender</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">ERROR_EMAIL_SENDER</span><span class="p">,</span>
+               <span class="n">subject</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">ERROR_EMAIL_SUBJECT</span><span class="p">,</span>
+               <span class="n">body</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">ERROR_EMAIL_BODY</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span>
+            <span class="p">);</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">DEFAULT_URL</span><span class="p">,</span> <span class="n">permanent</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+<span class="c"># ...</span>
 </code></pre></div>
-<h1>...</h1>
-
-<p>[/sourcecode]</p>
-
 <p>As you can see, it works in few simple steps:</p>
 
 <ol>
@@ -100,135 +92,104 @@ _301 Redirection_
 <h4>URL generation</h4>
 
 <p>To generate the URL, it uses the mapping from the <code>config.py</code> file. Here is a portion of an example configuration:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /config.py</span>
+<span class="c"># ...</span>
+<span class="c"># Default URL: if no Redirect URL can be generated, traffic will be diverted here</span>
+<span class="n">DEFAULT_URL</span> <span class="o">=</span> <span class="s">&#39;http://default.new-domain.com/&#39;</span>
 
-<p>[sourcecode:python]</p>
-
-<h1>/config.py</h1>
-
-<h1>...</h1>
-
-<h1>Default URL: if no Redirect URL can be generated, traffic will be diverted here</h1>
-
-<p>DEFAULT_URL = &#39;http://default.new-domain.com/&#39;</p>
-
-<h1>Mapping of Source URLs to Target URLs.</h1>
-
-<h1>You can choose to map in 2 ways:</h1>
-
-<h1>1) to the new URL maintaining the same Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com/p/a/t/h/index.html&#39;)</h1>
-
-<h1>2) or to discard the Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com&#39;)</h1>
-
-<h1>Format:</h1>
-
-<h1>URLS = { &#39;Old Domain&#39;: (&#39;New Domain&#39;, &#39;Discard URL Path part and Redirect to Root?&#39;), ... }</h1>
-
-<p>URLS = {
-   &#39;%s.appspot.com&#39; % (os.environ[&#39;APPLICATION_ID&#39;]) : (&#39;www.new-domain.com&#39;, False),
-   &#39;www.old-domain.com&#39; : (&#39;www.new-domain.com&#39;, False),
-    &#39;downloads.old-domain.com&#39;: (&#39;downloads.new-domain.com&#39;, False),
-    &#39;stuff.old-domain.com&#39;: (&#39;stuff.new-domain.com&#39;, True),
-};</p>
-
-<h1>...</h1>
-
-<p>[/sourcecode]</p>
-
-<p>The code that actually generates the URL is:</p>
-
-<p>[sourcecode:python]</p>
-
-<h1>/main.py</h1>
-
-<h1>...</h1>
-
-<h1>Generates the URL to redirect to</h1>
-
-<p>def get<em>redirect</em>url(url):
-   # Search the Memcache
-   memcachekey = &quot;get<em>redirect</em>url-&quot; + url;
-   result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;</p>
-
-<p># Nothing in Memcache
-   if ( result == None ):
-      logging.debug(&quot;Redirect for URL &#39;%s&#39; not in Memcache&quot; % (url) );
-      scheme, netloc, path, query, fragment = urlparse.urlsplit(url);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Discard any port number from the hostname
-  netloc = netloc.split(&#39;:&#39;, 1)[0];
-
-# Fix empty paths to be just &#39;/&#39; for consistency
-  if path == &#39;&#39;:
-     path = &#39;/&#39;;
-
-# Check if we have a mapping for this domain
-  if netloc in config.URLS:
-     # Grab the redirect info tuple
-     redirect_info = config.URLS[netloc];
-     # Root redirects
-     if redirect_info[1]:
-        result = &#39;http://&#39; + redirect_info[0] + &#39;/&#39;;
-        logging.debug(&quot;Redirecting to Root: &quot; + result);
-     # Paths
-     else:
-        result = urlparse.urlunsplit([&#39;http&#39;, redirect_info[0], path, query, fragment]);
-        logging.debug(&quot;Redirecting to Precise Path: &quot; + result);
-  # No mapping, so return None
-  else:
-     logging.debug(&quot;No Mapping found for: &quot; + url);
-     result = None;
-
-  # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
-  memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
+<span class="c"># Mapping of Source URLs to Target URLs.</span>
+<span class="c"># You can choose to map in 2 ways:</span>
+<span class="c">#    1) to the new URL maintaining the same Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com/p/a/t/h/index.html&#39;)</span>
+<span class="c">#    2) or to discard the Path (i.e. &#39;www.old.com/p/a/t/h/index.html -&gt; www.new.com&#39;)</span>
+<span class="c"># Format:</span>
+<span class="c">#    URLS = { &#39;Old Domain&#39;: (&#39;New Domain&#39;, &#39;Discard URL Path part and Redirect to Root?&#39;), ... }</span>
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">&#39;</span><span class="si">%s</span><span class="s">.appspot.com&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;APPLICATION_ID&#39;</span><span class="p">])</span> <span class="p">:</span> <span class="p">(</span><span class="s">&#39;www.new-domain.com&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+   <span class="s">&#39;www.old-domain.com&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s">&#39;www.new-domain.com&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="s">&#39;downloads.old-domain.com&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;downloads.new-domain.com&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+    <span class="s">&#39;stuff.old-domain.com&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;stuff.new-domain.com&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+<span class="p">};</span>
+<span class="c"># ...</span>
 </code></pre></div>
-<p>return result;</p>
+<p>The code that actually generates the URL is:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<span class="c"># ...</span>
+<span class="c"># Generates the URL to redirect to</span>
+<span class="k">def</span> <span class="nf">get_redirect_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="c"># Search the Memcache</span>
+   <span class="n">memcachekey</span> <span class="o">=</span> <span class="s">&quot;get_redirect_url-&quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">MEMCACHE_ACTIVE</span> <span class="k">else</span> <span class="bp">None</span><span class="p">;</span>
 
-<h1>...</h1>
+   <span class="c"># Nothing in Memcache</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span> <span class="p">):</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Redirect for URL &#39;</span><span class="si">%s</span><span class="s">&#39; not in Memcache&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+      <span class="n">scheme</span><span class="p">,</span> <span class="n">netloc</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 
-<p>[/sourcecode]</p>
+      <span class="c"># Discard any port number from the hostname</span>
+      <span class="n">netloc</span> <span class="o">=</span> <span class="n">netloc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
 
+    <span class="c"># Fix empty paths to be just &#39;/&#39; for consistency</span>
+      <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+         <span class="n">path</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span><span class="p">;</span>
+
+    <span class="c"># Check if we have a mapping for this domain</span>
+      <span class="k">if</span> <span class="n">netloc</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">URLS</span><span class="p">:</span>
+         <span class="c"># Grab the redirect info tuple</span>
+         <span class="n">redirect_info</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">URLS</span><span class="p">[</span><span class="n">netloc</span><span class="p">];</span>
+         <span class="c"># Root redirects</span>
+         <span class="k">if</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span><span class="p">;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Redirecting to Root: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
+         <span class="c"># Paths</span>
+         <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">([</span><span class="s">&#39;http&#39;</span><span class="p">,</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span><span class="p">]);</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Redirecting to Precise Path: &quot;</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
+      <span class="c"># No mapping, so return None</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;No Mapping found for: &quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">);</span>
+         <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
+
+      <span class="c"># Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS</span>
+      <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">MEMCACHE_EXPIRES_IN_SECONDS</span><span class="p">);</span>
+
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="c"># ...</span>
+</code></pre></div>
 <p>As you can see, the results are stored in Memcache and reused until expired. A <strong>major speed improvement</strong> if you ask me.</p>
 
 <h4>How do you check the URL?</h4>
 
 <p>Yes, I also said that I added a check to see if a Destination URL actually exists, before serving the Redirect. Well, App Engine provides a very nice package, <code>google.appengine.api.urlfetch</code>, and I used it this way:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<span class="c"># ...</span>
+<span class="c"># Check if a URL exists, trying a URL Fetch</span>
+<span class="k">def</span> <span class="nf">check_url_exists</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="c"># Search the Memcache</span>
+   <span class="n">memcachekey</span> <span class="o">=</span> <span class="s">&quot;check_url_exists-&quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">MEMCACHE_ACTIVE</span> <span class="k">else</span> <span class="bp">None</span><span class="p">;</span>
 
-<p>[sourcecode:python]</p>
+   <span class="c"># Nothing in Memcache</span>
+   <span class="k">if</span> <span class="p">(</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span> <span class="p">):</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Existence of URL &#39;</span><span class="si">%s</span><span class="s">&#39; not in Memcache&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+      <span class="k">try</span><span class="p">:</span>
+         <span class="n">response</span> <span class="o">=</span> <span class="n">urlfetch</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_truncated</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span> <span class="c"># Wait as much as possible: 10 sec</span>
+         <span class="k">if</span> <span class="p">(</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Verified URL &#39;</span><span class="si">%s</span><span class="s">&#39; existence&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">True</span><span class="p">;</span>
+         <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Unable to Verify URL &#39;</span><span class="si">%s</span><span class="s">&#39; existence&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
+      <span class="k">except</span><span class="p">:</span>
+         <span class="c"># In case of InvalidURLError or DownloadError</span>
+         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Exception while Verifying URL &#39;</span><span class="si">%s</span><span class="s">&#39; existence&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+         <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
 
-<h1>/main.py</h1>
+      <span class="c"># Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS</span>
+      <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">MEMCACHE_EXPIRES_IN_SECONDS</span><span class="p">);</span>
 
-<h1>...</h1>
-
-<h1>Check if a URL exists, trying a URL Fetch</h1>
-
-<p>def check<em>url</em>exists(url):
-   # Search the Memcache
-   memcachekey = &quot;check<em>url</em>exists-&quot; + url;
-   result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;</p>
-
-<p># Nothing in Memcache
-   if ( result == None ):
-      logging.debug(&quot;Existence of URL &#39;%s&#39; not in Memcache&quot; % (url) );
-      try:
-         response = urlfetch.fetch(url, allow<em>truncated=True, deadline=10); # Wait as much as possible: 10 sec
-         if ( response.status</em>code == 200 ):
-            logging.debug(&quot;Verified URL &#39;%s&#39; existence&quot; % (url));
-            result = True;
-         else:
-            logging.error(&quot;Unable to Verify URL &#39;%s&#39; existence&quot; % (url));
-            result = False;
-      except:
-         # In case of InvalidURLError or DownloadError
-         logging.error(&quot;Exception while Verifying URL &#39;%s&#39; existence&quot; % (url));
-         result = False;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
-  memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="c"># ...</span>
 </code></pre></div>
-<p>return result;</p>
-
-<h1>...</h1>
-
-<p>[/sourcecode]</p>
-
 <h3>Try it out</h3>
 
 <p>This is an App Engine application, so just clone/fork it from <a href="http://github.com/detro/gredirector">http://github.com/detro/gredirector</a>, personalize the <code>config.py</code> and push it out on. If you are not a complete newbie to App Engine, it should be really really simple.</p>
