@@ -20,7 +20,9 @@ layout: default
                 </p>
             </header>
             <div class="post-description">
-                {{ post.excerpt }}
+                <p>
+                    {{ post.content | strip_html | truncatewords: site.excerpt_words }}
+                </p>
             </div>
             <em><a href="{{ post.url }}">continue...</a></em>
         </section>
