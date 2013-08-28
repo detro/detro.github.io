@@ -32,12 +32,11 @@
                         </ul>
 
                         <ul class="nav-rel-me-list">
-                            <li><a href="http://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
-                            <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
-                            <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
-                            <li><a href="https://plus.google.com/117520225301299920042/posts"><i class="icon-google-plus"></i></a></li>
-                            <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
-                            <li><a href="#"><i class="icon-rss"></i></a></li>
+                            {% if site.rel-me %}
+                                {% for rel in site.rel-me %}
+                                    <li><a href="{{ rel.link }}"><i class="icon-{{ rel.icon }}"></i></a></li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                     </nav>
                 </header>
