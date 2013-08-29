@@ -2,9 +2,30 @@
 layout: default
 ---
 
-<h1>{{ page.title }}</h1>
-<p class="meta">{{ page.date | date_to_long_string }}</p>
+<section class="post postpage">
 
-<div class="post">
-{{ content }}
-</div>
+    <header class="post-header">
+
+        {% if page.themeicon %}
+            <div class="post-icon"><i class="icon-{{ post.themeicon }}"></i></div>
+        {% endif %}
+
+        <h1 class="post-title">{{ page.title }}</h1>
+
+        <p class="post-meta">
+            <i class="icon-calendar"></i>
+            {{ page.date | date: "%A, %d %b %Y" }}
+            &mdash;
+            <i class="icon-tags"></i>
+            {% for tag in page.tags %}
+                <a class="post-tag" href="#">{{ tag }}</a>
+            {% endfor %}
+        </p>
+
+    </header>
+
+    <div class="post-body">
+        {{ content }}
+    </div>
+
+</section>
