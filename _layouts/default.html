@@ -19,25 +19,27 @@
             <div class="sidebar pure-u">
                 <header class="blog-header">
                     <hgroup>
-                        <h1 class="blog-title">{{ site.name }}</h1>
+                        <h1 class="blog-title"><a href="{{ site.url }}/">{{ site.name }}</a></h1>
                         <h2 class="blog-tagline">{{ site.author }}</h2>
                     </hgroup>
 
                     <nav class="nav">
-                        <ul class="nav-list">
-                            <li class="nav-item nav-current"><a href="#">blog</a></li>
-                            <li class="nav-item"><a href="#">project</a></li>
-                            <li class="nav-item"><a href="#">about me</a></li>
-                            <li class="nav-item"><a href="#">archive</a></li>
-                        </ul>
+                        {% if site.navs %}
+                            <ul class="nav-list">
+                                {% for nav in site.navs %}
+                                    <li class="nav-item {% if page.title == nav.title %}nav-current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
 
-                        <ul class="nav-rel-me-list">
-                            {% if site.rel-me %}
+                        {% if site.rel-me %}
+                            <ul class="nav-rel-me-list">
                                 {% for rel in site.rel-me %}
                                     <li><a href="{{ rel.link }}"><i class="icon-{{ rel.icon }}"></i></a></li>
                                 {% endfor %}
-                            {% endif %}
-                        </ul>
+                            </ul>
+                        {% endif %}
+
                     </nav>
                 </header>
             </div>

@@ -2,7 +2,7 @@
 layout: default
 author: detro
 published: true
-title: "Projects"
+title: "projects"
 date: "9999-12-31 23:59:59"
 updated: "2011-04-03 22:42:22"
 ---

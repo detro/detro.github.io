@@ -2,7 +2,7 @@
 layout: default
 author: detro
 published: true
-title: "About me"
+title: "about me"
 date: "2011-03-11 00:44:24"
 updated: "2012-10-27 20:37:04"
 ---

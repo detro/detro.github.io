@@ -1,5 +1,15 @@
-name: "Too much Coffee, too little Time"
+name: "Too much Coffee,<br/>too little Time"
 author: "Ivan De Marino"
+
+navs:
+    - title: blog
+      link: /
+    - title: projects
+      link: /projects
+    - title: about me
+      link: /about-me
+    - title: archive
+      link: /archive
 
 rel-me:
     - icon: twitter
