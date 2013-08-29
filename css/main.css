@@ -4,7 +4,7 @@ background blue: #09293e
 */
 
 /* IMPORTS */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900);
 
 /* GENERAL */
 * {
@@ -14,8 +14,8 @@ background blue: #09293e
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Open Sans Condensed", sans-serif;
-    font-weight: lighter;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
 }
 
 a,
@@ -89,7 +89,6 @@ a:active {
     padding: 0;
     list-style: none;
     font-size: 1.4em;
-    font-family: "Open Sans Condensed", sans-serif;
 }
 .nav-item {
     zoom: 1;
@@ -124,7 +123,7 @@ a:active {
 }
 
 .post {
-    padding-bottom: 0.5em;
+    margin: 0 0 4em;
 }
 .post-icon {
     font-size: 2.5em;
@@ -154,7 +153,6 @@ a:active {
     color: #999;
     font-size: 0.9em;
     margin: 0;
-    font-family: "Open Sans Condensed", sans-serif;
 }
 
 a.post-tag,
@@ -189,27 +187,23 @@ a.post-tag:active {
 
 .paginator {
     font-size: 1em;
-    font-family: "Open Sans Condensed", sans-serif;
-    padding: 2em 0;
+    padding: 1em 0;
 }
-.more-recent-posts {
-    float: right;
-}
-.less-recent-posts {
-    float: left;
-}
+.more-recent-posts { float: right; }
+.less-recent-posts { float: left; }
 
 /* FOOTER */
 .footer {
-    border-top: 1px solid #888;
     text-align: center;
     margin: 2em 0 0.5em;
     padding: 1em 0 0;
     text-transform: uppercase;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
     zoom: 1;
     font-size: 0.7em;
+    color: #bbb;
+}
+.footer span {
+    white-space: nowrap;
 }
 
 /* MEDIA QUERIES */

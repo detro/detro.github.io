@@ -25,6 +25,4 @@ permalink: /:year/:month/:title
 paginate: 10
 paginate_path: 'blog/:num'
 
-excerpt_words: 40
-
-limit_posts: 20
+limit_posts: 40
