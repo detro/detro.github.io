@@ -1,10 +1,11 @@
 ---
-layout: default
+layout: page
 author: detro
 published: true
-title: "about me"
+title: Few things about me
 date: "2011-03-11 00:44:24"
 updated: "2012-10-27 20:37:04"
+navtitle: about me
 ---
 
 Writing about myself has always been hard for me. It's difficult to balance between facts, without saying something too bias (it's myself after all).

@@ -18,8 +18,6 @@ rel-me:
       link: https://github.com/detro
     - icon: linkedin
       link: http://linkedin.com/in/ivandemarino
-    - icon: google-plus
-      link: https://plus.google.com/117520225301299920042/posts
     - icon: instagram
       link: http://instagram.com/detronizator
     - icon: rss
@@ -35,4 +33,4 @@ permalink: /:year/:month/:title
 paginate: 10
 paginate_path: 'blog/:num'
 
-limit_posts: 40
+limit_posts: 80

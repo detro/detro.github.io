@@ -5,7 +5,7 @@ background blue: #09293e
 
 /* IMPORTS */
 @import url(http://fonts.googleapis.com/css?family=Raleway:100,200);
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400);
+@import url(http://fonts.googleapis.com/css?family=Lato:300);
 
 /* GENERAL */
 * {
@@ -25,10 +25,10 @@ a:link,
 a:visited {
     text-decoration: none;
     color: #1f8dd6;
-    -webkit-transition: all .20s ease-out;
-    -moz-transition: all .20s ease-out;
-    -o-transition: all .20s ease-out;
-    transition: all .20s ease-out;
+    -webkit-transition: color .20s ease-out;
+    -moz-transition: color .20s ease-out;
+    -o-transition: color .20s ease-out;
+    transition: color .20s ease-out;
 }
 a:hover,
 a:focus,
@@ -92,10 +92,11 @@ a:active {
     list-style: none;
     font-size: 1.4em;
     font-family: 'Raleway', sans-serif;
+    font-weight: 200;
 }
 .nav-item {
     zoom: 1;
-    letter-spacing: 5px;
+
 }
 .nav-item a {
     display: block;
@@ -126,29 +127,38 @@ a:active {
     padding: 0em 5em;
 }
 
-.post {
-    margin: 1em 0 3em;
+.post,
+.page {
+    margin: 3em 0;
 }
+
 .post-icon {
     font-size: 2.5em;
     float: right;
     color: #09293e;
 }
-.postpage .post-header {
+.postpage .post-header,
+.page-header {
     margin: 2em 0 3em;
     padding: 0 0 3em;
     border-bottom: 1px solid #ccc;
     text-align: center;
     font-size: 130%;
 }
-.postpage .post-body {
+.postpage .post-body,
+.page-body {
     font-family: "Lato", sans-serif;
     font-size: 1.2em;
     font-weight: 300;
-    color: #666;
-    text-shadow: 1px 1px 0px #efefef;
+    color: #444;
 }
 
+.page-body h1,
+.page-body h2,
+.page-body h3,
+.page-body h4,
+.page-body h5,
+.page-body h6,
 .postpage .post-body h1,
 .postpage .post-body h2,
 .postpage .post-body h3,
@@ -156,12 +166,12 @@ a:active {
 .postpage .post-body h5,
 .postpage .post-body h6 {
     text-align: center;
-    font-weight: 200;
-    font-size: 130%;
-    color: #09293e;
+    color: #999;
 }
 
-.post-title {
+
+.post-title,
+.page-title {
     font-size: 2.0em;
     color: #09293e;
     margin: 0 0 0.3em;

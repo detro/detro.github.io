@@ -27,7 +27,7 @@
                         {% if site.navs %}
                             <ul class="nav-list">
                                 {% for nav in site.navs %}
-                                    <li class="nav-item {% if page.title == nav.title %}nav-current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
+                                    <li class="nav-item {% if page.navtitle == nav.title %}nav-current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         {% endif %}

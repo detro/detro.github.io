@@ -1,10 +1,11 @@
 ---
-layout: default
+layout: page
 author: detro
 published: true
-title: "projects"
+title: My Projects
 date: "9999-12-31 23:59:59"
 updated: "2011-04-03 22:42:22"
+navtitle: "projects"
 ---
 
 I love what I do. Computer Science, Software Development and relata are integral part of my daily life. I have different projects (mostly _mini_ projects) going on: sometimes I am relentless.
@@ -13,15 +14,7 @@ I love what I do. Computer Science, Software Development and relata are integral
 In the last two years I started to host [my projects on GitHub](https://github.com/detro): it's fast, it's simple, it a great free service and, very important, it's based on [mighty Git](http://git-scm.com/).
 
 ### My code on GitHub
-<div id="github-badge"></div>
-<script type="text/javascript" charset="utf-8">
-  GITHUB_USERNAME="detro";
-  GITHUB_HEAD="div";
-  GITHUB_THEME="white";
-  GITHUB_TITLE = "A brief view of my current projects on GitHub";
-  GITHUB_SHOW_ALL = "Show all";
-</script>
-<script src="http://drnic.github.com/github-badges/dist/github-badge-launcher.js" type="text/javascript"></script>
+TODO
 
 ## Non Open Source stuff
 I'm a strong supporter of Open Source: both as a way of doing stuff, and as a principle in itself. But there is also some stuff that I like to keep closed (for now at least).
