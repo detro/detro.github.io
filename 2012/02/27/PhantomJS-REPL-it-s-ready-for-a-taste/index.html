@@ -2,31 +2,95 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>PhantomJS REPL: it's ready for a taste</title>
-        <meta name="viewport" content="width=device-width">
-
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
-
-        <!-- Custom CSS -->
+        <!-- theme CSS -->
+        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/main.css">
-
     </head>
-    <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
-              <a class="extra" href="/">home</a>
+    <body>
+        <div class="pure-g-r" id="skeleton">
+
+            <div class="sidebar pure-u">
+                <header class="blog-header">
+                    <hgroup>
+                        <h1 class="blog-title"><a href="/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h2 class="blog-tagline">Ivan De Marino</h2>
+                    </hgroup>
+
+                    <nav class="nav">
+                        
+                            <ul class="nav-list">
+                                
+                                    <li class="nav-item nav-current"><a href="/">blog</a></li>
+                                
+                                    <li class="nav-item "><a href="/projects">projects</a></li>
+                                
+                                    <li class="nav-item "><a href="/about-me">about me</a></li>
+                                
+                                    <li class="nav-item "><a href="/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul class="nav-rel-me-list">
+                                
+                                    <li><a href="https://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a href="rss"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+
+                    </nav>
+                </header>
             </div>
 
-                <h2>PhantomJS REPL: it's ready for a taste</h2>
-<p class="meta">27 Feb 2012</p>
+            <div class="pure-u-1">
+                <div class="content">
 
-<div class="post">
-<p>After 2 months of on-off working on this, I finally managed to make something I&#39;m happy with: a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> for <a href="http://www.phantomjs.org">PhantomJS</a>.</p>
+                    <section class="post postpage">
+
+    <header class="post-header">
+
+        
+
+        <h1 class="post-title">PhantomJS REPL: it's ready for a taste</h1>
+
+        <p class="post-meta">
+            <i class="icon-calendar"></i>
+            Monday, 27 Feb 2012
+            &mdash;
+            <i class="icon-tags"></i>
+            
+                <a class="post-tag" href="#">personal</a>
+            
+                <a class="post-tag" href="#">source</a>
+            
+                <a class="post-tag" href="#">REPL</a>
+            
+                <a class="post-tag" href="#">opensource</a>
+            
+                <a class="post-tag" href="#">phantomjs</a>
+            
+        </p>
+
+    </header>
+
+    <div class="post-body">
+        <p>After 2 months of on-off working on this, I finally managed to make something I&#39;m happy with: a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> for <a href="http://www.phantomjs.org">PhantomJS</a>.</p>
 
 <p>The <a href="http://blog.ivandemarino.me/2011/11/01/REPL-and-HTTP-Mapping-ideas-to-contribute-to-PhantomJS">last post I wrote about this</a> was in November 2011 (!!!). But I started putting code together only in Jan 2012. So, overall, from the first commit until today is almost 2 months.</p>
 
@@ -67,26 +131,19 @@ I did this work specifically to make PhantomJS users happy: so, help me make you
 
 <p><strong>P.S.:</strong> This whole branch would have not made it without the great <a href="https://github.com/antirez/linenoise">linenoise library</a>. In the specific case, I&#39;m using <a href="https://github.com/tadmarshall/linenoise">this fork</a> because it has more maintenance. <strong>Kudos to everyone involved</strong>.</p>
 
-</div>
+    </div>
+
+</section>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Your Name<br />
-                  What You Are<br />
-                  your@email.com
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
-                </p>
-              </div>
+                    <footer class="footer">
+                        <span>Hosted on <a href="#">GitHub Pages</a></span>
+                        <span>Powered by <a href="#">Jekyll</a></span>
+                        <span>Theme by <a href="#">Ivan De Marino</a></span>
+                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
+                    </footer>
+                </div>
             </div>
-          </div>
-        </div> <!-- /container -->
-
+        </div>
     </body>
 </html>

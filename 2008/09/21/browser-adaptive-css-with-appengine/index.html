@@ -2,31 +2,117 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Browser Adaptive CSS with AppEngine</title>
-        <meta name="viewport" content="width=device-width">
-
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
-
-        <!-- Custom CSS -->
+        <!-- theme CSS -->
+        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/main.css">
-
     </head>
-    <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
-              <a class="extra" href="/">home</a>
+    <body>
+        <div class="pure-g-r" id="skeleton">
+
+            <div class="sidebar pure-u">
+                <header class="blog-header">
+                    <hgroup>
+                        <h1 class="blog-title"><a href="/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h2 class="blog-tagline">Ivan De Marino</h2>
+                    </hgroup>
+
+                    <nav class="nav">
+                        
+                            <ul class="nav-list">
+                                
+                                    <li class="nav-item nav-current"><a href="/">blog</a></li>
+                                
+                                    <li class="nav-item "><a href="/projects">projects</a></li>
+                                
+                                    <li class="nav-item "><a href="/about-me">about me</a></li>
+                                
+                                    <li class="nav-item "><a href="/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul class="nav-rel-me-list">
+                                
+                                    <li><a href="https://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a href="rss"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+
+                    </nav>
+                </header>
             </div>
 
-                <h2>Browser Adaptive CSS with AppEngine</h2>
-<p class="meta">21 Sep 2008</p>
+            <div class="pure-u-1">
+                <div class="content">
 
-<div class="post">
-<p><a href="http://www.detronizator.org/2008/08/30/google-appengine-resources/">As I said, I&#39;m doing some stuff with Google AppEngine</a>. And, of course, I&#39;m facing the usual problem of Browser Incompatibility:
+                    <section class="post postpage">
+
+    <header class="post-header">
+
+        
+
+        <h1 class="post-title">Browser Adaptive CSS with AppEngine</h1>
+
+        <p class="post-meta">
+            <i class="icon-calendar"></i>
+            Sunday, 21 Sep 2008
+            &mdash;
+            <i class="icon-tags"></i>
+            
+                <a class="post-tag" href="#">google</a>
+            
+                <a class="post-tag" href="#">curiosity</a>
+            
+                <a class="post-tag" href="#">personal</a>
+            
+                <a class="post-tag" href="#">memcache</a>
+            
+                <a class="post-tag" href="#">solution</a>
+            
+                <a class="post-tag" href="#">stylesheets</a>
+            
+                <a class="post-tag" href="#">rendering</a>
+            
+                <a class="post-tag" href="#">optimization</a>
+            
+                <a class="post-tag" href="#">css</a>
+            
+                <a class="post-tag" href="#">template</a>
+            
+                <a class="post-tag" href="#">english</a>
+            
+                <a class="post-tag" href="#">incompatibility</a>
+            
+                <a class="post-tag" href="#">gae</a>
+            
+                <a class="post-tag" href="#">browser</a>
+            
+                <a class="post-tag" href="#">appengine</a>
+            
+                <a class="post-tag" href="#">utility</a>
+            
+        </p>
+
+    </header>
+
+    <div class="post-body">
+        <p><a href="http://www.detronizator.org/2008/08/30/google-appengine-resources/">As I said, I&#39;m doing some stuff with Google AppEngine</a>. And, of course, I&#39;m facing the usual problem of Browser Incompatibility:
 <div align="center">
 <img src="http://www.detronizator.org/wp-content/uploads/2008/09/firefox_eating_ie.jpg" alt="Browser Incompatibility" />
 Browser Incompatibility ;-)
@@ -49,26 +135,19 @@ The usual solution is to load every time a different CSS depending on the Browse
 <p>And, because <a href="http://www.google.com/">Google</a> built this <a href="http://appengine-cookbook.appspot.com/">very simple but useful Google AppEngine Cookbook application</a> (based on appengine itself ;-) ), <a href="http://appengine-cookbook.appspot.com/recipe/browser-adaptive-css/">here is it</a>.
 <strong>Enjoy!</strong></p>
 
-</div>
+    </div>
+
+</section>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Your Name<br />
-                  What You Are<br />
-                  your@email.com
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
-                </p>
-              </div>
+                    <footer class="footer">
+                        <span>Hosted on <a href="#">GitHub Pages</a></span>
+                        <span>Powered by <a href="#">Jekyll</a></span>
+                        <span>Theme by <a href="#">Ivan De Marino</a></span>
+                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
+                    </footer>
+                </div>
             </div>
-          </div>
-        </div> <!-- /container -->
-
+        </div>
     </body>
 </html>

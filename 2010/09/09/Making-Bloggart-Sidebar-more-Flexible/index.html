@@ -2,31 +2,101 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Making Bloggart Sidebar more Flexible</title>
-        <meta name="viewport" content="width=device-width">
-
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
-
-        <!-- Custom CSS -->
+        <!-- theme CSS -->
+        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/main.css">
-
     </head>
-    <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
-              <a class="extra" href="/">home</a>
+    <body>
+        <div class="pure-g-r" id="skeleton">
+
+            <div class="sidebar pure-u">
+                <header class="blog-header">
+                    <hgroup>
+                        <h1 class="blog-title"><a href="/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h2 class="blog-tagline">Ivan De Marino</h2>
+                    </hgroup>
+
+                    <nav class="nav">
+                        
+                            <ul class="nav-list">
+                                
+                                    <li class="nav-item nav-current"><a href="/">blog</a></li>
+                                
+                                    <li class="nav-item "><a href="/projects">projects</a></li>
+                                
+                                    <li class="nav-item "><a href="/about-me">about me</a></li>
+                                
+                                    <li class="nav-item "><a href="/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul class="nav-rel-me-list">
+                                
+                                    <li><a href="https://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a href="rss"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+
+                    </nav>
+                </header>
             </div>
 
-                <h2>Making Bloggart Sidebar more Flexible</h2>
-<p class="meta">09 Sep 2010</p>
+            <div class="pure-u-1">
+                <div class="content">
 
-<div class="post">
-<p><a href="http://github.com/Arachnid/bloggart">Bloggart from Nick Johnson</a> is great. I think I made it clear that I love it (there hasn&#39;t been a post so far with a mention about it). But it has some &quot;shortcoming&quot;: bits that a person like me, coming from <a href="http://www.wordpress.org">Wordpress</a>, always wishes were there. But no worries, we can always tune Bloggart: it&#39;s the great part of Open Source after all.</p>
+                    <section class="post postpage">
+
+    <header class="post-header">
+
+        
+
+        <h1 class="post-title">Making Bloggart Sidebar more Flexible</h1>
+
+        <p class="post-meta">
+            <i class="icon-calendar"></i>
+            Thursday, 09 Sep 2010
+            &mdash;
+            <i class="icon-tags"></i>
+            
+                <a class="post-tag" href="#">configuration</a>
+            
+                <a class="post-tag" href="#">twitter</a>
+            
+                <a class="post-tag" href="#">appengine</a>
+            
+                <a class="post-tag" href="#">new</a>
+            
+                <a class="post-tag" href="#">bloggart</a>
+            
+                <a class="post-tag" href="#">sidebar</a>
+            
+                <a class="post-tag" href="#">google friends connect</a>
+            
+                <a class="post-tag" href="#">block</a>
+            
+        </p>
+
+    </header>
+
+    <div class="post-body">
+        <p><a href="http://github.com/Arachnid/bloggart">Bloggart from Nick Johnson</a> is great. I think I made it clear that I love it (there hasn&#39;t been a post so far with a mention about it). But it has some &quot;shortcoming&quot;: bits that a person like me, coming from <a href="http://www.wordpress.org">Wordpress</a>, always wishes were there. But no worries, we can always tune Bloggart: it&#39;s the great part of Open Source after all.</p>
 
 <div style="text-align: center; ">
 <img src="http://farm4.static.flickr.com/3464/3263818786_961f7b7ae4.jpg" alt="Branching" align="center" />
@@ -52,26 +122,19 @@ In fact, at <a href="http://github.com/detro/bloggart">github.com/detro/bloggart
 
 <p>Have fun.</p>
 
-</div>
+    </div>
+
+</section>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Your Name<br />
-                  What You Are<br />
-                  your@email.com
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
-                </p>
-              </div>
+                    <footer class="footer">
+                        <span>Hosted on <a href="#">GitHub Pages</a></span>
+                        <span>Powered by <a href="#">Jekyll</a></span>
+                        <span>Theme by <a href="#">Ivan De Marino</a></span>
+                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
+                    </footer>
+                </div>
             </div>
-          </div>
-        </div> <!-- /container -->
-
+        </div>
     </body>
 </html>

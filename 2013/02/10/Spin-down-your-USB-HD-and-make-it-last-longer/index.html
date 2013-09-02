@@ -2,31 +2,101 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Spin-down your USB HD and make it last longer </title>
-        <meta name="viewport" content="width=device-width">
-
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
-
-        <!-- Custom CSS -->
+        <!-- theme CSS -->
+        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/main.css">
-
     </head>
-    <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Considering yourself perfectible makes you perfect - Ivan De Marino</a></h1>
-              <a class="extra" href="/">home</a>
+    <body>
+        <div class="pure-g-r" id="skeleton">
+
+            <div class="sidebar pure-u">
+                <header class="blog-header">
+                    <hgroup>
+                        <h1 class="blog-title"><a href="/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h2 class="blog-tagline">Ivan De Marino</h2>
+                    </hgroup>
+
+                    <nav class="nav">
+                        
+                            <ul class="nav-list">
+                                
+                                    <li class="nav-item nav-current"><a href="/">blog</a></li>
+                                
+                                    <li class="nav-item "><a href="/projects">projects</a></li>
+                                
+                                    <li class="nav-item "><a href="/about-me">about me</a></li>
+                                
+                                    <li class="nav-item "><a href="/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul class="nav-rel-me-list">
+                                
+                                    <li><a href="https://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a href="rss"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+
+                    </nav>
+                </header>
             </div>
 
-                <h2>Spin-down your USB HD and make it last longer </h2>
-<p class="meta">10 Feb 2013</p>
+            <div class="pure-u-1">
+                <div class="content">
 
-<div class="post">
-<p>I have built for myself a simple Media Center, based on <a href="http://www.zotacusa.com/zbox-id41-plus.html">Zotac ZBOX ID41 Plus</a>, <a href="http://wiki.xbmc.org/index.php?title=XBMCbuntu">XBMC-Live</a>, <a href="http://www.transmissionbt.com/">Transmission</a>, <a href="http://flirc.tv/">Flirc</a> and other useful stuff. The idea is having a low-energy consumption machine that I control with a remote. And it has to be always on.</p>
+                    <section class="post postpage">
+
+    <header class="post-header">
+
+        
+
+        <h1 class="post-title">Spin-down your USB HD and make it last longer </h1>
+
+        <p class="post-meta">
+            <i class="icon-calendar"></i>
+            Sunday, 10 Feb 2013
+            &mdash;
+            <i class="icon-tags"></i>
+            
+                <a class="post-tag" href="#">sdparm</a>
+            
+                <a class="post-tag" href="#">spindown</a>
+            
+                <a class="post-tag" href="#">usb</a>
+            
+                <a class="post-tag" href="#">mediacenter</a>
+            
+                <a class="post-tag" href="#">diskstats</a>
+            
+                <a class="post-tag" href="#">hd</a>
+            
+                <a class="post-tag" href="#">xbmc</a>
+            
+                <a class="post-tag" href="#">external</a>
+            
+        </p>
+
+    </header>
+
+    <div class="post-body">
+        <p>I have built for myself a simple Media Center, based on <a href="http://www.zotacusa.com/zbox-id41-plus.html">Zotac ZBOX ID41 Plus</a>, <a href="http://wiki.xbmc.org/index.php?title=XBMCbuntu">XBMC-Live</a>, <a href="http://www.transmissionbt.com/">Transmission</a>, <a href="http://flirc.tv/">Flirc</a> and other useful stuff. The idea is having a low-energy consumption machine that I control with a remote. And it has to be always on.</p>
 
 <p>One thing I was concerned about is how to deal with my external HD connected to it: I&#39;m of course expecting those to eventually fail if they are always spinning.</p>
 
@@ -86,26 +156,19 @@ What it does is just probe <code>/proc/diskstats</code> virtual file to get info
 
 <p>That&#39;s it. I have been using this method for almost 2 years not, and  thought it might be helpful to others.</p>
 
-</div>
+    </div>
+
+</section>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Your Name<br />
-                  What You Are<br />
-                  your@email.com
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
-                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
-                </p>
-              </div>
+                    <footer class="footer">
+                        <span>Hosted on <a href="#">GitHub Pages</a></span>
+                        <span>Powered by <a href="#">Jekyll</a></span>
+                        <span>Theme by <a href="#">Ivan De Marino</a></span>
+                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
+                    </footer>
+                </div>
             </div>
-          </div>
-        </div> <!-- /container -->
-
+        </div>
     </body>
 </html>
