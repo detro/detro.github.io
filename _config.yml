@@ -27,10 +27,11 @@ destination: ../detro.github.io-destination
 
 markdown: redcarpet
 pygments: true
+lessc: /usr/local/share/npm/bin/lessc
 
 permalink: /:year/:month/:title
 
 paginate: 10
 paginate_path: 'blog/:num'
 
-limit_posts: 80
+limit_posts: 50
