@@ -23,6 +23,14 @@ rel-me:
     - icon: rss
       link: rss
 
+meta:
+    host:
+        name: GitHub Pages
+        link: http://pages.github.com/
+    license:
+        name: CC ASA 3.0
+        link: http://creativecommons.org/licenses/by-sa/3.0/
+
 destination: ../detro.github.io-destination
 
 markdown: redcarpet

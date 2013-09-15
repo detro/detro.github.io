@@ -10,52 +10,62 @@
         <!-- theme CSS -->
         <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/leo.css">
     </head>
 
     <body>
-        <div class="pure-g-r" id="skeleton">
+        <div class="pure-g-r" id="layout">
 
             <div class="sidebar pure-u">
                 <header class="blog-header">
+
                     <hgroup>
-                        <h1 class="blog-title"><a href="{{ site.url }}/">{{ site.name }}</a></h1>
-                        <h2 class="blog-tagline">{{ site.author }}</h2>
+                        <h1 class="title"><a href="{{ site.url }}/">{{ site.name }}</a></h1>
+                        <h2 class="tagline">{{ site.author }}</h2>
                     </hgroup>
 
-                    <nav class="nav">
+                    <nav class="navigation">
                         {% if site.navs %}
-                            <ul class="nav-list">
+                            <ul>
                                 {% for nav in site.navs %}
-                                    <li class="nav-item {% if page.navtitle == nav.title %}nav-current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
+                                    <li class="{% if page.navtitle == nav.title %}current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
 
                         {% if site.rel-me %}
-                            <ul class="nav-rel-me-list">
+                            <ul class="rel-me">
                                 {% for rel in site.rel-me %}
-                                    <li><a href="{{ rel.link }}"><i class="icon-{{ rel.icon }}"></i></a></li>
+                                    <li><a rel="me" href="{{ rel.link }}"><i class="icon-{{ rel.icon }}"></i></a></li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
-
                     </nav>
+
                 </header>
             </div>
 
             <div class="pure-u-1">
+
                 <div class="content">
 
                     {{ content }}
 
-                    <footer class="footer">
-                        <span>Hosted on <a href="#">GitHub Pages</a></span>
-                        <span>Powered by <a href="#">Jekyll</a></span>
-                        <span>Theme by <a href="#">Ivan De Marino</a></span>
-                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
-                    </footer>
                 </div>
+
+                <footer class="footer">
+
+                    {% if site.meta.host %}
+                        <span>Hosted on <a href="{{ site.meta.host.link }}">{{ site.meta.host.name }}</a></span>
+                    {% endif %}
+                    <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    <span>Theme by <a href="http://ivandemarino.me">Ivan De Marino</a></span>
+                    {% if site.meta.license %}
+                        <span>Licensed under <a href="{{ site.meta.license.link }}">{{ site.meta.license.name }}</a></span>
+                    {% endif %}
+
+                </footer>
+
             </div>
         </div>
     </body>

@@ -1,0 +1,187 @@
+@blue: #1f8dd6;
+@darkBlue: #09293e;
+@barelyReadableGrey: #bbb;
+@readableGrey: #999;
+
+@bgColor: @darkBlue;
+@bgTextColor: white;
+@bgSpecialTextColor: @blue;
+@bgLinkColor: white;
+@bgLinkHoverColor: @blue;
+
+@linkColor: @blue;
+@linkHoverColor: @darkBlue;
+
+@invTextColor: @barelyReadableGrey;
+@invLinkColor: @readableGrey;
+@invLinkHoverColor: @blue;
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Droid+Serif:400,700,400italic,700italic);
+
+.headingText {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: lighter;
+}
+
+.normalText {
+    font-family: 'Droid Serif', serif;
+    font-weight: normal;
+}
+
+.codeText {
+    font-family: 'Droid Sans Mono', sans-serif;
+    font-weight: normal;
+}
+
+.nomargin { margin: 0; }
+.nopadding { padding: 0; }
+.textShadow (@color: #333) {
+    text-shadow: 1px 1px 2px @color;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    .headingText;
+}
+
+a:link, a:visited, a:active {
+    -webkit-transition: color .20s ease-out;
+    -moz-transition: color .20s ease-out;
+    -o-transition: color .20s ease-out;
+    transition: color .20s ease-out;
+}
+
+#layout {
+    @sidebarWidth: 25%;
+
+    padding-left: @sidebarWidth; /* "left col (nav + list)" width */
+    position: relative;
+
+    .sidebar {
+        .headingText;
+
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: @sidebarWidth;
+        margin-left: -@sidebarWidth;
+        background: @bgColor;
+        color: @bgTextColor;
+
+        a:link, a:visited, a:active {
+            text-decoration: none;
+            color: @bgLinkColor;
+
+            &:hover {
+                color: @bgLinkHoverColor;
+            }
+        }
+
+        .blog-header {
+            .textShadow(#333);
+
+            margin: 20% 1.5em 0 0.1em;
+            text-align: right;
+
+            .title {
+                .nomargin;
+                font-size: 3.2em;
+            }
+            .tagline {
+                .nomargin;
+                font-size: 1.5em;
+                color: @bgSpecialTextColor;
+            }
+        }
+
+        .navigation {
+            ul {
+                margin: 1.2em 0;
+                padding: 0;
+                list-style: none;
+                font-size: 1.4em;
+
+                li {
+                    zoom: 1;
+
+                    a {
+                        display: block;
+                    }
+
+                    &.current {
+                        border-right: 2px solid @bgLinkHoverColor;
+                        padding-right: 12px;
+                        margin-right: -12px;
+
+                        a:link, a:visited, a:active {
+                            color: @bgLinkHoverColor;
+                        }
+                    }
+                }
+
+                &.rel-me {
+                    li {
+                        display: inline-block;
+                        *display: inline;
+                        zoom: 1;
+                        padding: 0 .3em;
+                    }
+                }
+            }
+        }
+    }
+
+    .content {
+        padding: 0em 5em;
+
+        a:link, a:visited, a:active {
+            text-decoration: none;
+            color: @linkColor;
+
+            &:hover {
+                color: @linkHoverColor;
+            }
+        }
+
+        .paginator {
+            text-align: center;
+            font-size: 0.9em;
+            padding: 1.5em 0;
+        }
+    }
+
+    .footer {
+        .headingText;
+
+        text-align: center;
+        padding: 1em 0;
+        text-transform: uppercase;
+        zoom: 1;
+        font-size: 0.7em;
+        color: @invTextColor;
+
+        span {
+            white-space: nowrap;
+        }
+
+        a:link, a:visited, a:active {
+            font-weight: bold;
+            text-decoration: none;
+            color: @invLinkColor;
+
+            &:hover {
+                color: @invLinkHoverColor;
+            }
+        }
+    }
+}
+
+
+
+
