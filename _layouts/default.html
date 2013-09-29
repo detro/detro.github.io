@@ -19,6 +19,8 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
+                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+
                 <header id="blog-header">
 
                     <hgroup>
@@ -70,5 +72,15 @@
 
             </div>
         </div>
+
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
+        <script>
+            YUI().use('node', 'event', function (Y) {
+                Y.one("#toggle-blog-navigation").on("click", function(e) {
+                    Y.one("#blog-navigation").toggleClass("open");
+                    e.preventDefault();
+                });
+            });
+        </script>
     </body>
 </html>
