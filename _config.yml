@@ -1,7 +1,7 @@
 name: "Too much Coffee,<br/>too little Time"
 author: "Ivan De Marino"
 
-navs:
+internal-links:
     - title: blog
       link: /
     - title: projects
@@ -11,7 +11,7 @@ navs:
     - title: archive
       link: /archive
 
-rel-me:
+rel-me-links:
     - icon: twitter
       link: https://twitter.com/detronizator
     - icon: github
@@ -27,6 +27,12 @@ meta:
     host:
         name: GitHub Pages
         link: http://pages.github.com/
+    engine:
+        name: Jekyll
+        link: http://jekyllrb.com/
+    theme-author:
+        name: Ivan De Marino
+        link: http://ivandemarino.me
     license:
         name: CC ASA 3.0
         link: http://creativecommons.org/licenses/by-sa/3.0/

@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>{{ page.title }}</title>
+
+        <meta name="author" content="{{ site.author }}">
+        <meta name="generator" content="Jekyll"
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ page.title }}</title>
+
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
         <!-- theme CSS -->
-        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/leo.css">
     </head>
 
     <body>
-        <div class="pure-g-r" id="layout">
+        <div id="layout" class="pure-g-r">
 
-            <div class="sidebar pure-u">
-                <header class="blog-header">
+            <div id="sidebar" class="pure-u">
+                <header id="blog-header">
 
                     <hgroup>
-                        <h1 class="title"><a href="{{ site.url }}/">{{ site.name }}</a></h1>
-                        <h2 class="tagline">{{ site.author }}</h2>
+                        <h1><a href="{{ site.url }}/">{{ site.name }}</a></h1>
+                        <h2>{{ site.author }}</h2>
                     </hgroup>
 
-                    <nav class="navigation">
-                        {% if site.navs %}
-                            <ul>
-                                {% for nav in site.navs %}
-                                    <li class="{% if page.navtitle == nav.title %}current{% endif %}"><a href="{{ site.url }}{{ nav.link }}">{{ nav.title }}</a></li>
+                    <nav id="blog-navigation">
+                        {% if site.internal-links %}
+                            <ul id="blog-internal-links">
+                                {% for internal in site.internal-links %}
+                                    <li class="{% if page.navtitle == internal.title %}current{% endif %}"><a href="{{ site.url }}{{ internal.link }}">{{ internal.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
 
-                        {% if site.rel-me %}
-                            <ul class="rel-me">
-                                {% for rel in site.rel-me %}
-                                    <li><a rel="me" href="{{ rel.link }}"><i class="icon-{{ rel.icon }}"></i></a></li>
+                        {% if site.rel-me-links %}
+                            <ul id="blog-rel-me-links">
+                                {% for relme in site.rel-me-links %}
+                                    <li><a rel="me" href="{{ relme.link }}"><i class="icon-{{ relme.icon }}"></i></a></li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
@@ -45,25 +50,25 @@
                 </header>
             </div>
 
-            <div class="pure-u-1">
+            <div id="main" class="pure-u-1">
 
-                <div class="content">
-
+                <div id="blog-content">
                     {{ content }}
-
                 </div>
 
-                <footer class="footer">
-
+                <footer id="blog-footer">
                     {% if site.meta.host %}
                         <span>Hosted on <a href="{{ site.meta.host.link }}">{{ site.meta.host.name }}</a></span>
                     {% endif %}
-                    <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
-                    <span>Theme by <a href="http://ivandemarino.me">Ivan De Marino</a></span>
+                    {% if site.meta.engine %}
+                        <span>Powered by <a href="{{ site.meta.engine.link }}">{{ site.meta.engine.name }}</a></span>
+                    {% endif %}
+                    {% if site.meta.theme-by %}
+                        <span>Theme by <a href="{{ site.meta.theme-by.link }}">{{ site.meta.theme-by.name }}</a></span>
+                    {% endif %}
                     {% if site.meta.license %}
                         <span>Licensed under <a href="{{ site.meta.license.link }}">{{ site.meta.license.name }}</a></span>
                     {% endif %}
-
                 </footer>
 
             </div>

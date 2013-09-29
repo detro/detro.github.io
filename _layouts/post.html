@@ -3,15 +3,14 @@ layout: default
 navtitle: blog
 ---
 
-<section class="post postpage">
+<section class="post">
 
-    <header class="post-header">
+    <header>
+        <h1>{{ page.title }}</h1>
 
         {% if page.themeicon %}
             <div class="post-icon"><i class="icon-{{ post.themeicon }}"></i></div>
         {% endif %}
-
-        <h1 class="post-title">{{ page.title }}</h1>
 
         <p class="post-meta">
             <i class="icon-calendar"></i>
@@ -22,7 +21,6 @@ navtitle: blog
                 <a class="post-tag" href="#">{{ tag }}</a>
             {% endfor %}
         </p>
-
     </header>
 
     <div class="post-body">

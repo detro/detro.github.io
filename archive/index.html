@@ -9,18 +9,13 @@ title: Posts Archive
     <h2>{{ year.first.first.date | date: "%Y" }}</h2>
 
     {% for month in year %}
-
         <h3>{{ month.first.date | date: "%B" }}</h3>
 
-        <dl>
+        <ul>
             {% for post in month %}
-                <dt>{{post.date | date: "%d"}}</dt>
-                <dd>
-                    <a href="{{ post.url}}">{{ post.title }}</a>
-                </dd>
+                <li>{{ post.date | date: "%d" }} - <a href="{{ post.url}}">{{ post.title }}</a></li>
             {% endfor %}
-        </dl>
-
+        </ul>
     {% endfor %}
 
 {% endfor %}
