@@ -1,187 +1,261 @@
+// ------------------------------------------------------------------------ Less
 @blue: #1f8dd6;
 @darkBlue: #09293e;
-@barelyReadableGrey: #bbb;
-@readableGrey: #999;
+@lightGrey: #bbb;
+@grey: #999;
 
-@bgColor: @darkBlue;
-@bgTextColor: white;
-@bgSpecialTextColor: @blue;
-@bgLinkColor: white;
-@bgLinkHoverColor: @blue;
-
-@linkColor: @blue;
-@linkHoverColor: @darkBlue;
-
-@invTextColor: @barelyReadableGrey;
-@invLinkColor: @readableGrey;
-@invLinkHoverColor: @blue;
-
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Droid+Serif:400,700,400italic,700italic);
-
-.headingText {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: lighter;
-}
-
-.normalText {
-    font-family: 'Droid Serif', serif;
-    font-weight: normal;
-}
-
-.codeText {
-    font-family: 'Droid Sans Mono', sans-serif;
-    font-weight: normal;
-}
-
-.nomargin { margin: 0; }
-.nopadding { padding: 0; }
 .textShadow (@color: #333) {
     text-shadow: 1px 1px 2px @color;
 }
 
+.a(@color, @hoverColor) {
+    color: @color;
+    text-decoration: none;
+
+    &:link,
+    &:visited,
+    &:active {
+        color: @color;
+    }
+    &:hover,
+    &:focus {
+        color: @hoverColor;
+    }
+}
+
+.transition(@transitionProperty, @transitionTime, @transitionEase) {
+    -webkit-transition: @transitionProperty @transitionTime @transitionEase;
+    -moz-transition: @transitionProperty @transitionTime @transitionEase;
+    -o-transition: @transitionProperty @transitionTime @transitionEase;
+    transition: @transitionProperty @transitionTime @transitionEase;
+}
+
+.boxSizing(@value) {
+    -webkit-box-sizing: @value;
+    -moz-box-sizing: @value;
+    -o-box-sizing: @value;
+    box-sizing: @value;
+}
+
+// --------------------------------------------------------------------- General
+@import url(highlight.css);
+@import url(fonts.css);
+
+.highlightFont {
+    font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 200;
+}
+
+.normalFont {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: normal;
+}
+
+.codeFont {
+    font-family: "Fira Mono", "Monaco", monospace;
+    font-weight: normal;
+}
+
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     text-rendering: optimizeLegibility;
+    .boxSizing(border-box);
+    .transition(color, .20s, ease-out);
+    .normalFont;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    .headingText;
+    .highlightFont;
+    a {
+        .highlightFont;
+    }
 }
 
-a:link, a:visited, a:active {
-    -webkit-transition: color .20s ease-out;
-    -moz-transition: color .20s ease-out;
-    -o-transition: color .20s ease-out;
-    transition: color .20s ease-out;
-}
-
+// ---------------------------------------------------------------------- Layout
 #layout {
     @sidebarWidth: 25%;
 
     padding-left: @sidebarWidth; /* "left col (nav + list)" width */
     position: relative;
 
-    .sidebar {
-        .headingText;
-
+    #sidebar {
         position: fixed;
         top: 0;
         bottom: 0;
         width: @sidebarWidth;
         margin-left: -@sidebarWidth;
-        background: @bgColor;
-        color: @bgTextColor;
 
-        a:link, a:visited, a:active {
-            text-decoration: none;
-            color: @bgLinkColor;
+        background-color: @darkBlue;
 
-            &:hover {
-                color: @bgLinkHoverColor;
-            }
+        a#toggle-blog-navigation {
+            display: none;
         }
 
-        .blog-header {
-            .textShadow(#333);
-
-            margin: 20% 1.5em 0 0.1em;
+        #blog-header {
+            margin: 5em 1em 0 0;
             text-align: right;
 
-            .title {
-                .nomargin;
-                font-size: 3.2em;
+            a {
+                .a(white, @blue);
+                .textShadow;
             }
-            .tagline {
-                .nomargin;
-                font-size: 1.5em;
-                color: @bgSpecialTextColor;
+            .textShadow;
+
+            hgroup {
+                h1 {
+                }
+                h2 {
+                    color: @blue;
+                }
+            }
+
+            #blog-navigation {
+                font-size: 1.2em;
+
+                ul#blog-internal-links {
+                    li {
+                        &.current {
+
+                        }
+                    }
+                }
+                ul#blog-rel-me-links {
+                    li {
+                        display: inline;
+                        margin: 0.5em;
+                    }
+                }
             }
         }
+    }
 
-        .navigation {
-            ul {
-                margin: 1.2em 0;
-                padding: 0;
-                list-style: none;
-                font-size: 1.4em;
+    #main {
+        #blog-content {
+            margin: 1.5em 1em 0;
 
-                li {
-                    zoom: 1;
+            section.post-summary {
+                header {
+                    h1 {
 
-                    a {
-                        display: block;
                     }
 
-                    &.current {
-                        border-right: 2px solid @bgLinkHoverColor;
-                        padding-right: 12px;
-                        margin-right: -12px;
+                    div.post-icon {
 
-                        a:link, a:visited, a:active {
-                            color: @bgLinkHoverColor;
+                    }
+                    p.post-meta {
+                        a.post-tag {
+
                         }
                     }
                 }
 
-                &.rel-me {
-                    li {
-                        display: inline-block;
-                        *display: inline;
-                        zoom: 1;
-                        padding: 0 .3em;
-                    }
+                &.post-latest {
+
                 }
             }
-        }
-    }
 
-    .content {
-        padding: 0em 5em;
+            section.post {
+                header {
+                    // TODO
+                }
 
-        a:link, a:visited, a:active {
-            text-decoration: none;
-            color: @linkColor;
+                div.post-body {
+                    // TODO
+                }
+            }
 
-            &:hover {
-                color: @linkHoverColor;
+            section.page {
+                header {
+                    // TODO
+                }
+
+                div.page-body {
+                    // TODO
+                }
+            }
+
+            section#blog-archive {
+                h2 {
+                    // TODO
+                }
+                h3 {
+                    // TODO
+                }
+                ul {
+                    // TODO
+                }
+            }
+
+            #blog-paginator {
+
             }
         }
 
-        .paginator {
+        #blog-footer {
+            .highlightFont;
+
             text-align: center;
-            font-size: 0.9em;
-            padding: 1.5em 0;
-        }
-    }
+            padding: 1em 0;
+            text-transform: uppercase;
+            zoom: 1;
+            font-size: 0.7em;
+            color: @lightGrey;
 
-    .footer {
-        .headingText;
+            span {
+                white-space: nowrap;
+            }
 
-        text-align: center;
-        padding: 1em 0;
-        text-transform: uppercase;
-        zoom: 1;
-        font-size: 0.7em;
-        color: @invTextColor;
-
-        span {
-            white-space: nowrap;
-        }
-
-        a:link, a:visited, a:active {
-            font-weight: bold;
-            text-decoration: none;
-            color: @invLinkColor;
-
-            &:hover {
-                color: @invLinkHoverColor;
+            a {
+                font-weight: bold;
+                .a(@grey, @darkBlue);
             }
         }
     }
 }
 
+// --------------------------------------------------------------- Media Queries
+@media (max-width: 768px) {
+    #layout {
+        padding: 0;
+
+        #sidebar {
+            width: 100%;
+            position: relative;
+            margin: 0;
+
+            a#toggle-blog-navigation {
+                display: block;
+                .a(white, @blue);
+                padding: 0.4em 0.5em 0;
+                font-size: 1.5em;
+                text-align: right;
+            }
+
+            #blog-header {
+                text-align: center;
+                top: auto;
+                margin: -2em 0 0;
+                position: static;
+
+                #blog-navigation {
+                    display: none;
+                    &.open {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #layout {
+        #main {
+            #blog-content {
+                padding: 1em 1em 0;
+            }
+        }
+    }
+}
 
 
 
