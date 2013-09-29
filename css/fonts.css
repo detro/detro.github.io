@@ -1,0 +1,58 @@
+/* Fira Mono */
+@font-face {
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fira Mono Regular'), local('FireMono-Regular'), local('Fira Mono'), local('FiraMono') url(fonts/FiraMono-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Fira Mono Bold'), local('FireMono-Bold'), url(fonts/FiraMono-Bold.woff) format('woff');
+}
+
+/* Fira Sans (Regular) */
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fira Sans Regular'), local('FireSans-Regular'), local('Fire Sans'), local('FireSans'), url(fonts/FiraSans-Regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Fira Sans Regular Italic'), local('FireSans-RegularItalic'), url(fonts/FiraSans-RegularItalic.woff) format('woff');
+}
+
+/* Fira Sans (Bold) */
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Fira Sans Bold'), local('FireSans-Bold'), url(fonts/FiraSans-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Fira Sans Bold Italic'), local('FireSans-BoldItalic'), url(fonts/FiraSans-BoldItalic.woff) format('woff');
+}
+
+/* Fira Sans (Light) */
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Fira Sans Light'), local('FireSans-Light'), url(fonts/FiraSans-Light.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: italic;
+  font-weight: 200;
+  src: local('Fira Sans Light Italic'), local('FireSans-LightItalic'), url(fonts/FiraSans-LightItalic.woff) format('woff');
+}
