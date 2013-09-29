@@ -45,7 +45,7 @@ navtitle: blog
     {% endfor %}
 </div>
 
-<div class="paginator pure-g">
+<div id="blog-paginator" class="pure-g">
     {% if paginator.next_page and paginator.previous_page %}
         <div class="pure-u-1-2">
             <a href="{{ paginator.next_page_path }}"><i class="icon-angle-left"> older</i></a>
