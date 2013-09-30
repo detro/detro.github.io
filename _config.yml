@@ -45,7 +45,7 @@ lessc: /usr/local/share/npm/bin/lessc
 
 permalink: /:year/:month/:title
 
-paginate: 10
+paginate: 16
 paginate_path: 'blog/:num'
 
 limit_posts: 50
