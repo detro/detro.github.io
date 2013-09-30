@@ -91,37 +91,49 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         #blog-header {
-            margin: 5em 1em 0 0;
+            margin: 4em 1em 0 0;
             text-align: right;
 
             a {
                 .a(white, @blue);
                 .textShadow;
+                display: block;
             }
+
             .textShadow;
+            font-size: 1.3em;
 
             hgroup {
                 h1 {
                 }
                 h2 {
                     color: @blue;
+                    font-style: italic;
                 }
             }
 
             #blog-navigation {
-                font-size: 1.2em;
+                ul {
+                    padding: 0;
 
-                ul#blog-internal-links {
-                    li {
-                        &.current {
-
+                    &#blog-internal-links {
+                        li {
+                            a {
+                                padding: 0.2em;
+                                .highlightFont;
+                            }
+                            &.current {
+                                a {
+                                    color: @blue;
+                                }
+                            }
                         }
                     }
-                }
-                ul#blog-rel-me-links {
-                    li {
-                        display: inline;
-                        margin: 0.5em;
+                    &#blog-rel-me-links {
+                        li {
+                            display: inline-block;
+                            padding: 0.1em;
+                        }
                     }
                 }
             }
