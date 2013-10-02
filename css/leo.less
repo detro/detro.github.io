@@ -37,6 +37,15 @@
     box-sizing: @value;
 }
 
+.linearGradient(@dir: top, @color1, @color2, @stop1: 0, @stop2: 100%) {
+    background-color: @color1;
+    background-image: -webkit-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
+    background-image: -moz-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
+    background-image: -o-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
+    background-image: -ms-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
+    background-image: linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
+}
+
 // --------------------------------------------------------------------- General
 @import url(highlight.css);
 @import url(fonts.css);
@@ -84,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
         width: @sidebarWidth;
         margin-left: -@sidebarWidth;
 
-        background-color: @darkBlue;
+        .linearGradient(to bottom, @darkBlue, black, 60%);
 
         a#toggle-blog-navigation {
             display: none;
@@ -141,19 +150,33 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     #main {
+        .linearGradient(to bottom, #fafbff, white, 70%);
+
         #blog-content {
             margin: 1.5em 1em 0;
 
+            a {
+                .a(@blue, @darkBlue);
+            }
+
             section.post-summary {
+                padding: 0.2em 0.5em;
+
                 header {
                     h1 {
-
+                        .textShadow(#ddd);
+                        margin: 0.1em 0;
+                        a {
+                            display: block;
+                        }
                     }
 
                     div.post-icon {
 
                     }
                     p.post-meta {
+                        color: #bbb;
+                        font-size: 0.8em;
                         a.post-tag {
 
                         }
@@ -161,7 +184,13 @@ h1, h2, h3, h4, h5, h6 {
                 }
 
                 &.post-latest {
+                    margin: 1em 0 4em;
 
+                    header {
+                        h1 {
+                            font-size: 3em;
+                        }
+                    }
                 }
             }
 
@@ -198,7 +227,16 @@ h1, h2, h3, h4, h5, h6 {
             }
 
             #blog-paginator {
+                font-size: 1.2em;
+                margin: 1em 0;
+                text-align: center;
 
+                div {
+                    a {
+                        display: block;
+                        padding: 1em;
+                    }
+                }
             }
         }
 
