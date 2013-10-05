@@ -3,9 +3,18 @@
 @darkBlue: #09293e;
 @lightGrey: #bbb;
 @grey: #999;
+@darkGrey: #333;
+@greyBlue: #f6fafd;
 
-.textShadow (@color: #333) {
+.textShadow (@color: @darkGrey) {
     text-shadow: 1px 1px 2px @color;
+}
+
+.boxShadowHighlight (@color: @lightGrey) {
+    -o-box-shadow: 0 2px 5px @lightGrey;
+    -moz-box-shadow: 0 2px 5px @lightGrey;
+    -webkit-box-shadow: 0 2px 5px @lightGrey;
+    box-shadow: 0 2px 5px @lightGrey;
 }
 
 .a(@color, @hoverColor) {
@@ -61,7 +70,7 @@
 }
 
 .codeFont {
-    font-family: "Fira Mono", "Monaco", monospace;
+    font-family: "Consolas", "Liberation Mono", Courier, monospace;
     font-weight: normal;
 }
 
@@ -77,6 +86,26 @@ h1, h2, h3, h4, h5, h6 {
     a {
         .highlightFont;
     }
+}
+
+div.highlight, code, pre {
+    .codeFont;
+
+    * {
+        font-family: inherit;
+    }
+}
+
+div.highlight {
+    padding: 0.1em 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+
+    .boxShadowHighlight;
+    background: @greyBlue;
+
+    font-size: 0.7em;
+    line-height: 1.2em;
 }
 
 // ---------------------------------------------------------------------- Layout
