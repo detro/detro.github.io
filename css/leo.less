@@ -188,32 +188,56 @@ div.highlight {
                 .a(@blue, @darkBlue);
             }
 
+            section.post,
             section.post-summary {
                 padding: 0.2em 0.5em;
 
                 header {
                     h1 {
-                        .textShadow(#ddd);
                         margin: 0.1em 0;
+
+                        color: @blue;
+                        .textShadow(#ddd);
+
                         a {
                             display: block;
                         }
                     }
 
-                    div.post-icon {
-
-                    }
                     p.post-meta {
-                        color: #bbb;
-                        font-size: 0.8em;
+                        color: @lightGrey;
+                        font-size: 0.9em;
+                        line-height: 1.3em;
                         a.post-tag {
-
+                            white-space: nowrap;
                         }
                     }
                 }
 
+                div.post-body {
+                    margin: 0 1em;
+                    font-size: 1.3em;
+                    line-height: 1.5em;
+                    text-align: justify;
+
+                    h1, h2, h3 {
+                        text-align: center;
+                    }
+                    h4, h5, h6 {
+                        border-bottom: 1px solid lighten(@lightGrey, 15%);
+                        color: @grey;
+                    }
+
+                    img {
+                        .boxShadowHighlight;
+
+                        display: block;
+                        margin: 2em auto;
+                    }
+                }
+
                 &.post-latest {
-                    margin: 1em 0 4em;
+                    margin: 2em 0 5em;
 
                     header {
                         h1 {
@@ -225,11 +249,15 @@ div.highlight {
 
             section.post {
                 header {
-                    // TODO
-                }
+                    text-align: center;
+                    font-size: 1.2em;
+                    padding: 2em;
+                    margin: 0 3em 2em;
+                    border-bottom: 1px solid @lightGrey;
 
-                div.post-body {
-                    // TODO
+                    h1 {
+                        font-size: 3em;
+                    }
                 }
             }
 
