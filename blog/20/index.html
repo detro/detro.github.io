@@ -1,471 +1,243 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title></title>
+
+        <meta name="author" content="Ivan De Marino">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="/css/syntax.css">
-        <!-- theme CSS -->
-        <link href="http://yui.yahooapis.com/combo?pure/0.2.1/base-min.css&pure/0.2.1/grids-min.css&pure/0.2.1/forms-min.css&pure/0.2.1/buttons-min.css&pure/0.2.1/menus-min.css" rel="stylesheet">
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/main.css">
+
+        <link href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!--[if IE 7]>
+            <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <link rel="stylesheet" href="/css/leo.css">
     </head>
 
     <body>
-        <div class="pure-g-r" id="skeleton">
+        <div id="layout" class="pure-g-r">
 
-            <div class="sidebar pure-u">
-                <header class="blog-header">
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="blog-header">
+
                     <hgroup>
-                        <h1 class="blog-title"><a href="/">Too much Coffee,<br/>too little Time</a></h1>
-                        <h2 class="blog-tagline">Ivan De Marino</h2>
+                        <h1><a href="/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h2>Ivan De Marino</h2>
                     </hgroup>
 
-                    <nav class="nav">
+                    <nav id="blog-navigation">
                         
-                            <ul class="nav-list">
+                            <ul id="blog-internal-links">
                                 
-                                    <li class="nav-item nav-current"><a href="/">blog</a></li>
+                                    <li class="current"><a href="/">blog</a></li>
                                 
-                                    <li class="nav-item "><a href="/projects">projects</a></li>
+                                    <li class=""><a href="/projects">projects</a></li>
                                 
-                                    <li class="nav-item "><a href="/about-me">about me</a></li>
+                                    <li class=""><a href="/about-me">about me</a></li>
                                 
-                                    <li class="nav-item "><a href="/archive">archive</a></li>
+                                    <li class=""><a href="/archive">archive</a></li>
                                 
                             </ul>
                         
 
                         
-                            <ul class="nav-rel-me-list">
+                            <ul id="blog-rel-me-links">
                                 
-                                    <li><a href="https://twitter.com/detronizator"><i class="icon-twitter"></i></a></li>
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
-                                    <li><a href="https://github.com/detro"><i class="icon-github"></i></a></li>
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a href="http://linkedin.com/in/ivandemarino"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a href="http://instagram.com/detronizator"><i class="icon-instagram"></i></a></li>
+                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a href="rss"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="rss" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
-
                     </nav>
+
                 </header>
             </div>
 
-            <div class="pure-u-1">
-                <div class="content">
+            <div id="main" class="pure-u-1">
 
-                    <div class="posts">
-
+                <div id="blog-content">
+                    <div class="pure-g-r">
     
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/23/picture-of-the-day-24/">Picture of the Day</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Monday, 23 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">laugh</a>
-                    
-                        <a class="post-tag" href="#">work</a>
-                    
-                        <a class="post-tag" href="#">lol</a>
-                    
-                        <a class="post-tag" href="#">failure</a>
-                    
-                        <a class="post-tag" href="#">rat</a>
-                    
-                        <a class="post-tag" href="#">trap</a>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">fun</a>
-                    
-                        <a class="post-tag" href="#">team</a>
-                    
-                        <a class="post-tag" href="#">mouse</a>
-                    
-                        <a class="post-tag" href="#">victory</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/19/cooliris-releases-piclens-17/">Cooliris releases PicLens 1.7</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Thursday, 19 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">picture</a>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">plugin</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">it</a>
-                    
-                        <a class="post-tag" href="#">3d</a>
-                    
-                        <a class="post-tag" href="#">project</a>
-                    
-                        <a class="post-tag" href="#">addon</a>
-                    
-                        <a class="post-tag" href="#">video</a>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">graphics</a>
-                    
-                        <a class="post-tag" href="#">release</a>
-                    
-                        <a class="post-tag" href="#">new</a>
-                    
-                        <a class="post-tag" href="#">browser</a>
-                    
-                        <a class="post-tag" href="#">cool</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/17/highlander-di-alluminio/">Highlander di Alluminio</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Tuesday, 17 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">apple</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">laptop</a>
-                    
-                        <a class="post-tag" href="#">it</a>
-                    
-                        <a class="post-tag" href="#">pro</a>
-                    
-                        <a class="post-tag" href="#">cocacola</a>
-                    
-                        <a class="post-tag" href="#">mac</a>
-                    
-                        <a class="post-tag" href="#">book</a>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">mbp</a>
-                    
-                        <a class="post-tag" href="#">coke</a>
-                    
-                        <a class="post-tag" href="#">italian</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/16/fonejacker/">Fonejacker</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Monday, 16 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">joke</a>
-                    
-                        <a class="post-tag" href="#">phone</a>
-                    
-                        <a class="post-tag" href="#">laugh</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">tv</a>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">movies-tv</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/15/a-new-even-bigger-city/">A new, even bigger City</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Sunday, 15 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">work</a>
-                    
-                        <a class="post-tag" href="#">it</a>
-                    
-                        <a class="post-tag" href="#">symbian</a>
-                    
-                        <a class="post-tag" href="#">job</a>
-                    
-                        <a class="post-tag" href="#">future</a>
-                    
-                        <a class="post-tag" href="#">london</a>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">orange</a>
-                    
-                        <a class="post-tag" href="#">professional</a>
-                    
-                        <a class="post-tag" href="#">opportunity</a>
-                    
-                        <a class="post-tag" href="#">grow</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/15/nokia-should-learn-not-teach/">Nokia should Learn, not Teach</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Sunday, 15 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">gpl</a>
-                    
-                        <a class="post-tag" href="#">learn</a>
-                    
-                        <a class="post-tag" href="#">qt</a>
-                    
-                        <a class="post-tag" href="#">lock</a>
-                    
-                        <a class="post-tag" href="#">oss</a>
-                    
-                        <a class="post-tag" href="#">nokia</a>
-                    
-                        <a class="post-tag" href="#">it</a>
-                    
-                        <a class="post-tag" href="#">free</a>
-                    
-                        <a class="post-tag" href="#">culture</a>
-                    
-                        <a class="post-tag" href="#">drm</a>
-                    
-                        <a class="post-tag" href="#">intellectual</a>
-                    
-                        <a class="post-tag" href="#">news-and-politics</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">teach</a>
-                    
-                        <a class="post-tag" href="#">property</a>
-                    
-                        <a class="post-tag" href="#">trolltech</a>
-                    
-                        <a class="post-tag" href="#">sim</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/09/google-io-2008-keynote/">Google I/O 2008 - Keynote</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Monday, 09 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">development</a>
-                    
-                        <a class="post-tag" href="#">web</a>
-                    
-                        <a class="post-tag" href="#">keynote</a>
-                    
-                        <a class="post-tag" href="#">google</a>
-                    
-                        <a class="post-tag" href="#">social</a>
-                    
-                        <a class="post-tag" href="#">it</a>
-                    
-                        <a class="post-tag" href="#">i-o</a>
-                    
-                        <a class="post-tag" href="#">api</a>
-                    
-                        <a class="post-tag" href="#">gears</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">android</a>
-                    
-                        <a class="post-tag" href="#">open</a>
-                    
-                        <a class="post-tag" href="#">important</a>
-                    
-                        <a class="post-tag" href="#">history</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/08/worse-than-being-unable-to-sleep/">Worse than being unable to Sleep...</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Sunday, 08 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">flat</a>
-                    
-                        <a class="post-tag" href="#">music</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">up</a>
-                    
-                        <a class="post-tag" href="#">morning</a>
-                    
-                        <a class="post-tag" href="#">early</a>
-                    
-                        <a class="post-tag" href="#">mate</a>
-                    
-                        <a class="post-tag" href="#">sleep</a>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">english</a>
-                    
-                        <a class="post-tag" href="#">london</a>
-                    
-                        <a class="post-tag" href="#">loud</a>
-                    
-                        <a class="post-tag" href="#">wake</a>
-                    
-                        <a class="post-tag" href="#">friend</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/04/jigsaw-04/">Jigsaw 04</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Wednesday, 04 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">job</a>
-                    
-                        <a class="post-tag" href="#">jigsaw</a>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-        <section class="post">
-            <header class="post-header">
-                
-                <h1 class="post-title"><a href="/2008/06/04/jigsaw-03/">Jigsaw 03</a></h1>
-                <p class="post-meta">
-                    <i class="icon-calendar"></i>
-                    Wednesday, 04 Jun 2008
-                    &mdash;
-                    <i class="icon-tags"></i>
-                    
-                        <a class="post-tag" href="#">curiosity</a>
-                    
-                        <a class="post-tag" href="#">personal</a>
-                    
-                        <a class="post-tag" href="#">jigsaw</a>
-                    
-                        <a class="post-tag" href="#">job</a>
-                    
-                        <a class="post-tag" href="#">uk</a>
-                    
-                        <a class="post-tag" href="#">arabic</a>
-                    
-                        <a class="post-tag" href="#">italian</a>
-                    
-                </p>
-            </header>
-        </section>
-    
-
-    <div class="paginator">
-        
-            <a class="more-recent-posts" href="/blog/19">More recent posts <i class="icon-caret-right"></i></a>
-        
 
         
-            <a class="less-recent-posts" href="/blog/21"><i class="icon-caret-left"></i> Less recent posts</a>
-        
-    </div>
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/24/tiger-woods-is-jesus-really/">Tiger Woods is Jesus, Really!</a></h1>
 
+                    <p class="post-meta">
+                        24 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/23/arsenal-vs-fc-twente/">Arsenal vs FC Twente</a></h1>
+
+                    <p class="post-meta">
+                        23 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/21/even-the-irish-times/">Even the Irish Times...</a></h1>
+
+                    <p class="post-meta">
+                        21 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/20/i-sold-my-love/">I sold my Love</a></h1>
+
+                    <p class="post-meta">
+                        20 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/15/dijkstra-on-ferragosto/">Dijkstra on Ferragosto</a></h1>
+
+                    <p class="post-meta">
+                        15 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/12/i-like-angry-techs/">I like angry techs</a></h1>
+
+                    <p class="post-meta">
+                        12 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/08/03/cinguettio-6/">Cinguettio</a></h1>
+
+                    <p class="post-meta">
+                        03 Aug 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/07/28/not-dead-just-busy/">Not Dead, Just Busy!</a></h1>
+
+                    <p class="post-meta">
+                        28 Jul 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
+
+        
+            <section class="post-summary pure-u-1-2">
+                <header>
+                    <h1><a href="/2008/07/18/inferno-in-london/">Inferno in London</a></h1>
+
+                    <p class="post-meta">
+                        18 Jul 2008
+                    </p>
+                </header>
+            </section>
+        
+
+    
 </div>
 
+<div id="blog-paginator" class="pure-g">
+    
+        <div class="pure-u-1-2">
+            <a href="/blog/21"><i class="icon-chevron-left"> older posts</i></a>
+        </div>
+        <div class="pure-u-1-2">
+            <a href="/blog/19">newer posts <i class="icon-chevron-right"></i></a>
+        </div>
+    
+</div>
 
-                    <footer class="footer">
-                        <span>Hosted on <a href="#">GitHub Pages</a></span>
-                        <span>Powered by <a href="#">Jekyll</a></span>
-                        <span>Theme by <a href="#">Ivan De Marino</a></span>
-                        <span>Licensed under <a href="#">CC ASA 3.0</a></span>
-                    </footer>
                 </div>
+
+                <footer id="blog-footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                    
+                </footer>
+
             </div>
         </div>
+
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
+        <script>
+            YUI().use('node', 'event', function (Y) {
+                Y.one("#toggle-blog-navigation").on("click", function(e) {
+                    Y.one("#blog-navigation").toggleClass("open");
+                    e.preventDefault();
+                });
+            });
+        </script>
     </body>
 </html>
