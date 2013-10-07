@@ -238,11 +238,12 @@ div.highlight, code, pre {
                     }
 
                     blockquote {
+                        padding: 0.8em 0 0 0.5em;
+
                         .highlightFont;
 
                         color: @grey;
-
-                        padding: 0.8em 0 0 0.5em;
+                        border-left: 1px solid lighten(@lightGrey, 15%);
 
                         &:before,
                         &::before {
@@ -284,14 +285,19 @@ div.highlight, code, pre {
             }
 
             section#blog-archive {
-                h2 {
-                    // TODO
-                }
-                h3 {
-                    // TODO
-                }
-                ul {
-                    // TODO
+                div {
+                    padding: 1em;
+                    text-align: justify;
+
+                    ul {
+                        font-size: 0.8em;
+                        list-style: none;
+                        padding: 0;
+
+                        li {
+                            margin: 0.1em;
+                        }
+                    }
                 }
             }
 
