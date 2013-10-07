@@ -4,7 +4,7 @@
 @lightGrey: #bbb;
 @grey: #999;
 @darkGrey: #666;
-@greyBlue: #f6fafd;
+@ultraLightGrey: #fafafa;
 
 .textShadow (@color: @darkGrey) {
     text-shadow: 1px 1px 2px @color;
@@ -231,7 +231,8 @@ div.highlight, code, pre {
                         margin-right: 0.5em;
 
                         .boxShadowHighlight;
-                        background: @greyBlue;
+                        background: @ultraLightGrey;
+                        border: 1px solid lighten(@lightGrey, 5%);
 
                         font-size: 0.7em;
                         line-height: 1.2em;
