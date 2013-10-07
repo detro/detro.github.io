@@ -285,20 +285,34 @@ div.highlight, code, pre {
             }
 
             section#blog-archive {
-                div {
-                    padding: 1em;
-                    text-align: justify;
+                div.blog-archive-links {
+                    text-align: center;
+                    font-size: 1.2em;
+
+                    a {
+                        padding: 0.5em;
+                    }
+                }
+
+                div.blog-archive-month {
+                    padding: 0.2em;
 
                     ul {
+                        text-align: justify;
                         font-size: 0.8em;
                         list-style: none;
                         padding: 0;
 
                         li {
                             margin: 0.1em;
+
+                            span.blog-archive-day {
+                                color: @grey;
+                            }
                         }
                     }
                 }
+
             }
 
             #blog-paginator {
