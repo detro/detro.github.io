@@ -105,6 +105,9 @@ pre * {
 #layout #sidebar #blog-header #blog-navigation ul {
   padding: 0;
 }
+#layout #sidebar #blog-header #blog-navigation ul#blog-internal-links {
+  font-size: 1.1em;
+}
 #layout #sidebar #blog-header #blog-navigation ul#blog-internal-links li a {
   padding: 0.2em;
   font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -113,9 +116,12 @@ pre * {
 #layout #sidebar #blog-header #blog-navigation ul#blog-internal-links li.current a {
   color: #1f8dd6;
 }
+#layout #sidebar #blog-header #blog-navigation ul#blog-rel-me-links {
+  font-size: 1.3em;
+}
 #layout #sidebar #blog-header #blog-navigation ul#blog-rel-me-links li {
   display: inline-block;
-  padding: 0.1em;
+  padding: 0.2em;
 }
 #layout #main {
   background-color: #fafbff;
@@ -248,7 +254,8 @@ pre * {
   -moz-box-shadow: 0 2px 5px #bbbbbb;
   -webkit-box-shadow: 0 2px 5px #bbbbbb;
   box-shadow: 0 2px 5px #bbbbbb;
-  background: #f6fafd;
+  background: #fafafa;
+  border: 1px solid #c8c8c8;
   font-size: 0.7em;
   line-height: 1.2em;
 }
@@ -306,17 +313,27 @@ pre * {
 #layout #main #blog-content section.post header h1 {
   font-size: 3em;
 }
-#layout #main #blog-content section#blog-archive div {
-  padding: 1em;
-  text-align: justify;
+#layout #main #blog-content section#blog-archive div.blog-archive-links {
+  text-align: center;
+  font-size: 1.2em;
 }
-#layout #main #blog-content section#blog-archive div ul {
+#layout #main #blog-content section#blog-archive div.blog-archive-links a {
+  padding: 0.5em;
+}
+#layout #main #blog-content section#blog-archive div.blog-archive-month {
+  padding: 0.2em;
+}
+#layout #main #blog-content section#blog-archive div.blog-archive-month ul {
+  text-align: justify;
   font-size: 0.8em;
   list-style: none;
   padding: 0;
 }
-#layout #main #blog-content section#blog-archive div ul li {
+#layout #main #blog-content section#blog-archive div.blog-archive-month ul li {
   margin: 0.1em;
+}
+#layout #main #blog-content section#blog-archive div.blog-archive-month ul li span.blog-archive-day {
+  color: #999999;
 }
 #layout #main #blog-content #blog-paginator {
   font-size: 1.2em;
@@ -367,8 +384,8 @@ pre * {
     display: block;
     color: #ffffff;
     text-decoration: none;
-    padding: 0.4em 0.5em 0;
-    font-size: 1.5em;
+    padding: 0.5em 0.6em 0;
+    font-size: 2em;
     text-align: right;
   }
   #layout #sidebar a#toggle-blog-navigation:link,
@@ -383,7 +400,7 @@ pre * {
   #layout #sidebar #blog-header {
     text-align: center;
     top: auto;
-    margin: -2em 0 0;
+    margin: -1em 0 0;
     position: static;
   }
   #layout #sidebar #blog-header #blog-navigation {
@@ -392,9 +409,21 @@ pre * {
   #layout #sidebar #blog-header #blog-navigation.open {
     display: block;
   }
-}
-@media (max-width: 480px) {
   #layout #main #blog-content {
-    padding: 1em 1em 0;
+    margin: 0.5em 0;
+  }
+  #layout #main #blog-content section.page header,
+  #layout #main #blog-content section.post header {
+    padding: 1em 0;
+  }
+  #layout #main #blog-content section.page header h1,
+  #layout #main #blog-content section.post header h1 {
+    font-size: 2em;
+  }
+  #layout #main #blog-content section.page div.page-body,
+  #layout #main #blog-content section.post div.page-body,
+  #layout #main #blog-content section.page div.post-body,
+  #layout #main #blog-content section.post div.post-body {
+    margin: 0;
   }
 }
