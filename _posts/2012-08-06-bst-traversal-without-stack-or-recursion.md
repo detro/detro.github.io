@@ -50,7 +50,7 @@ This means that at any moment in time, once I'm done visiting a branch, I can re
 
 And, so I wrote the **De Marino BST Post-Order Traversal** algorithm:
 
-```c
+```cpp
 void de_marino_bst_post_order_traversal(node *root) {
     node *curr = root;  //< current node
     node *par = NULL;   //< parent of current node
