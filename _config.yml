@@ -49,3 +49,6 @@ paginate: 9
 paginate_path: 'blog/:num'
 
 # limit_posts: 50
+# google_analytics:
+#     account: UA-XXXXX-X
+
