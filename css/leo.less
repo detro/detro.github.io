@@ -70,8 +70,10 @@
 }
 
 .codeFont {
-    font-family: "Consolas", "Liberation Mono", Courier, monospace;
+    font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
     font-weight: normal;
+    line-height: 1.5em;
+    white-space: pre;
 }
 
 * {
@@ -91,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 div.highlight, code, pre {
     .codeFont;
 
-    * {
+    span {
         font-family: inherit;
     }
 }
@@ -200,6 +202,7 @@ div.highlight, code, pre {
                         color: @lightGrey;
                         font-size: 0.9em;
                         line-height: 1.3em;
+
                         a.post-tag {
                             white-space: nowrap;
                         }
@@ -239,6 +242,11 @@ div.highlight, code, pre {
 
                         font-size: 0.7em;
                         line-height: 1.2em;
+
+                        overflow-x: auto;
+                        pre {
+                            min-width: 1024px;
+                        }
                     }
 
                     blockquote {
@@ -366,17 +374,17 @@ div.highlight, code, pre {
             margin: 0;
 
             a#toggle-blog-navigation {
-                display: block;
+                display: inline-block;
                 .a(white, @blue);
-                padding: 0.5em 0.6em 0;
+                padding: 0.5em 0.6em;
                 font-size: 2em;
-                text-align: right;
+                float: right;
             }
 
             #blog-header {
                 text-align: center;
                 top: auto;
-                margin: -1em 0 0;
+                margin: 3.5em 0 0;
                 position: static;
 
                 #blog-navigation {
@@ -390,7 +398,7 @@ div.highlight, code, pre {
 
         #main {
             #blog-content {
-                margin: 0.5em 0;
+                margin: 0;
 
                 section.post-summary {
                     header {
