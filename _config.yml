@@ -1,7 +1,10 @@
 url: "http://ivandemarino.me"
 
-name: "Too much Coffee,<br/>too little Time"
-author: "Ivan<strong>DeMarino</strong>"
+name: "Too much Coffee, too little Time"
+author: "Ivan De Marino"
+
+title: "Too much Coffee,<br/>too little Time"
+subtitle: "Ivan<strong>DeMarino</strong>"
 
 internal-links:
     - title: blog
@@ -23,7 +26,7 @@ rel-me-links:
     - icon: instagram
       link: http://instagram.com/detronizator
     - icon: rss
-      link: rss
+      link: ./rss.xml
 
 meta:
     host:
