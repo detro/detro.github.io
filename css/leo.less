@@ -112,7 +112,7 @@ div.highlight, code, pre {
         width: @sidebarWidth;
         margin-left: -@sidebarWidth;
 
-        .linearGradient(to bottom, @darkBlue, black, 60%);
+        .linearGradient(to bottom, @darkBlue, darken(@darkBlue, 5%), 60%);
 
         a#toggle-blog-navigation {
             display: none;
@@ -124,11 +124,9 @@ div.highlight, code, pre {
 
             a {
                 .a(white, @blue);
-                .textShadow;
                 display: block;
             }
 
-            .textShadow;
             font-size: 1.3em;
 
             hgroup {
