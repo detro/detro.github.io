@@ -1,4 +1,4 @@
-url: "http://ivandemarino.me"
+url: http://detro.github.io
 
 name: "Too much Coffee, too little Time"
 author: "Ivan De Marino"
@@ -26,7 +26,7 @@ rel-me-links:
     - icon: instagram
       link: http://instagram.com/detronizator
     - icon: rss
-      link: ./rss.xml
+      link: http://detro.github.io/rss.xml
 
 meta:
     host:
@@ -53,7 +53,7 @@ permalink: /:year/:month/:title
 paginate: 9
 paginate_path: 'blog/:num'
 
-# limit_posts: 50
 # google_analytics:
 #     account: UA-XXXXX-X
 
+# limit_posts: 50
