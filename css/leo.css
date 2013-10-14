@@ -10,8 +10,10 @@
   font-weight: normal;
 }
 .codeFont {
-  font-family: "Consolas", "Liberation Mono", Courier, monospace;
+  font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
   font-weight: normal;
+  line-height: 1.5em;
+  white-space: pre;
 }
 * {
   text-rendering: optimizeLegibility;
@@ -47,12 +49,14 @@ h6 a {
 div.highlight,
 code,
 pre {
-  font-family: "Consolas", "Liberation Mono", Courier, monospace;
+  font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
   font-weight: normal;
+  line-height: 1.5em;
+  white-space: pre;
 }
-div.highlight *,
-code *,
-pre * {
+div.highlight span,
+code span,
+pre span {
   font-family: inherit;
 }
 #layout {
@@ -68,11 +72,11 @@ pre * {
   width: 25%;
   margin-left: -25%;
   background-color: #09293e;
-  background-image: -webkit-linear-gradient(to bottom, #09293e 60%, #000000 100%);
-  background-image: -moz-linear-gradient(to bottom, #09293e 60%, #000000 100%);
-  background-image: -o-linear-gradient(to bottom, #09293e 60%, #000000 100%);
-  background-image: -ms-linear-gradient(to bottom, #09293e 60%, #000000 100%);
-  background-image: linear-gradient(to bottom, #09293e 60%, #000000 100%);
+  background-image: -webkit-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
+  background-image: -moz-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
+  background-image: -o-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
+  background-image: -ms-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
+  background-image: linear-gradient(to bottom, #09293e 60%, #061a28 100%);
 }
 #layout #sidebar a#toggle-blog-navigation {
   display: none;
@@ -80,13 +84,11 @@ pre * {
 #layout #sidebar #blog-header {
   margin: 4em 1em 0 0;
   text-align: right;
-  text-shadow: 1px 1px 2px #666666;
   font-size: 1.3em;
 }
 #layout #sidebar #blog-header a {
   color: #ffffff;
   text-decoration: none;
-  text-shadow: 1px 1px 2px #666666;
   display: block;
 }
 #layout #sidebar #blog-header a:link,
@@ -100,7 +102,6 @@ pre * {
 }
 #layout #sidebar #blog-header hgroup h2 {
   color: #1f8dd6;
-  font-style: italic;
 }
 #layout #sidebar #blog-header #blog-navigation ul {
   padding: 0;
@@ -258,6 +259,15 @@ pre * {
   border: 1px solid #c8c8c8;
   font-size: 0.7em;
   line-height: 1.2em;
+  overflow-x: auto;
+}
+#layout #main #blog-content section.page div.page-body div.highlight pre,
+#layout #main #blog-content section.post div.page-body div.highlight pre,
+#layout #main #blog-content section.post-summary div.page-body div.highlight pre,
+#layout #main #blog-content section.page div.post-body div.highlight pre,
+#layout #main #blog-content section.post div.post-body div.highlight pre,
+#layout #main #blog-content section.post-summary div.post-body div.highlight pre {
+  min-width: 1024px;
 }
 #layout #main #blog-content section.page div.page-body blockquote,
 #layout #main #blog-content section.post div.page-body blockquote,
@@ -381,12 +391,12 @@ pre * {
     margin: 0;
   }
   #layout #sidebar a#toggle-blog-navigation {
-    display: block;
+    display: inline-block;
     color: #ffffff;
     text-decoration: none;
-    padding: 0.5em 0.6em 0;
+    padding: 0.5em 0.6em;
     font-size: 2em;
-    text-align: right;
+    float: right;
   }
   #layout #sidebar a#toggle-blog-navigation:link,
   #layout #sidebar a#toggle-blog-navigation:visited,
@@ -400,7 +410,7 @@ pre * {
   #layout #sidebar #blog-header {
     text-align: center;
     top: auto;
-    margin: -1em 0 0;
+    margin: 3.5em 0 0;
     position: static;
   }
   #layout #sidebar #blog-header #blog-navigation {
@@ -410,7 +420,7 @@ pre * {
     display: block;
   }
   #layout #main #blog-content {
-    margin: 0.5em 0;
+    margin: 0;
   }
   #layout #main #blog-content section.post-summary header {
     text-align: center;
