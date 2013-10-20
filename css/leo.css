@@ -6,7 +6,7 @@
   font-weight: 200;
 }
 .normalFont {
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: normal;
 }
 .codeFont {
@@ -25,8 +25,6 @@
   -moz-transition: color 0.2s ease-out;
   -o-transition: color 0.2s ease-out;
   transition: color 0.2s ease-out;
-  font-family: "Fira Sans", sans-serif;
-  font-weight: normal;
 }
 h1,
 h2,
@@ -165,17 +163,40 @@ pre span {
 #layout #main #blog-content section.post-summary header h1 a {
   display: block;
 }
-#layout #main #blog-content section.page header p.post-meta,
-#layout #main #blog-content section.post header p.post-meta,
-#layout #main #blog-content section.post-summary header p.post-meta {
+#layout #main #blog-content section.page header .post-meta,
+#layout #main #blog-content section.post header .post-meta,
+#layout #main #blog-content section.post-summary header .post-meta {
+  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: normal;
   color: #bbbbbb;
   font-size: 0.9em;
   line-height: 1.3em;
 }
-#layout #main #blog-content section.page header p.post-meta a.post-tag,
-#layout #main #blog-content section.post header p.post-meta a.post-tag,
-#layout #main #blog-content section.post-summary header p.post-meta a.post-tag {
+#layout #main #blog-content section.page header .post-meta a.post-tag,
+#layout #main #blog-content section.post header .post-meta a.post-tag,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag {
   white-space: nowrap;
+  color: #bbbbbb;
+  text-decoration: none;
+}
+#layout #main #blog-content section.page header .post-meta a.post-tag:link,
+#layout #main #blog-content section.post header .post-meta a.post-tag:link,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag:link,
+#layout #main #blog-content section.page header .post-meta a.post-tag:visited,
+#layout #main #blog-content section.post header .post-meta a.post-tag:visited,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag:visited,
+#layout #main #blog-content section.page header .post-meta a.post-tag:active,
+#layout #main #blog-content section.post header .post-meta a.post-tag:active,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag:active {
+  color: #bbbbbb;
+}
+#layout #main #blog-content section.page header .post-meta a.post-tag:hover,
+#layout #main #blog-content section.post header .post-meta a.post-tag:hover,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag:hover,
+#layout #main #blog-content section.page header .post-meta a.post-tag:focus,
+#layout #main #blog-content section.post header .post-meta a.post-tag:focus,
+#layout #main #blog-content section.post-summary header .post-meta a.post-tag:focus {
+  color: #09293e;
 }
 #layout #main #blog-content section.page div.page-body,
 #layout #main #blog-content section.post div.page-body,
@@ -185,6 +206,8 @@ pre span {
 #layout #main #blog-content section.post-summary div.post-body {
   margin: 0 1em;
   font-size: 1.3em;
+  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: normal;
   line-height: 1.5em;
   text-align: justify;
 }
@@ -325,24 +348,31 @@ pre span {
 }
 #layout #main #blog-content section#blog-archive div.blog-archive-links {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
+  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
 }
 #layout #main #blog-content section#blog-archive div.blog-archive-links a {
   padding: 0.5em;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-month {
+#layout #main #blog-content section#blog-archive .blog-archive-month {
   padding: 0.2em;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-month ul {
+#layout #main #blog-content section#blog-archive .blog-archive-month .blog-archive-month-year {
+  color: #d9d9d9;
+  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+}
+#layout #main #blog-content section#blog-archive .blog-archive-month ul {
   text-align: justify;
   font-size: 0.8em;
   list-style: none;
   padding: 0;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-month ul li {
+#layout #main #blog-content section#blog-archive .blog-archive-month ul li {
   margin: 0.1em;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-month ul li span.blog-archive-day {
+#layout #main #blog-content section#blog-archive .blog-archive-month ul li .blog-archive-day {
   color: #999999;
 }
 #layout #main #blog-content #blog-paginator {
