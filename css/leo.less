@@ -80,7 +80,6 @@
     text-rendering: optimizeLegibility;
     .boxSizing(border-box);
     .transition(color, .20s, ease-out);
-    .normalFont;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -130,8 +129,6 @@ div.highlight, code, pre {
             font-size: 1.3em;
 
             hgroup {
-                // h1 {
-                // }
                 h2 {
                     color: @blue;
                 }
@@ -197,6 +194,8 @@ div.highlight, code, pre {
                     }
 
                     .post-meta {
+                        .normalFont;
+
                         color: @lightGrey;
                         font-size: 0.9em;
                         line-height: 1.3em;
@@ -212,6 +211,7 @@ div.highlight, code, pre {
                 div.post-body {
                     margin: 0 1em;
                     font-size: 1.3em;
+                    .normalFont;
                     line-height: 1.5em;
                     text-align: justify;
 
@@ -298,7 +298,8 @@ div.highlight, code, pre {
             section#blog-archive {
                 div.blog-archive-links {
                     text-align: center;
-                    font-size: 1.2em;
+                    font-size: 1em;
+                    .highlightFont;
 
                     a {
                         padding: 0.5em;
