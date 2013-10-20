@@ -196,13 +196,14 @@ div.highlight, code, pre {
                         }
                     }
 
-                    p.post-meta {
+                    .post-meta {
                         color: @lightGrey;
                         font-size: 0.9em;
                         line-height: 1.3em;
 
                         a.post-tag {
                             white-space: nowrap;
+                            .a(@lightGrey, @darkBlue);
                         }
                     }
                 }
@@ -304,8 +305,13 @@ div.highlight, code, pre {
                     }
                 }
 
-                div.blog-archive-month {
+                .blog-archive-month {
                     padding: 0.2em;
+
+                    .blog-archive-month-year {
+                        color: lighten(@grey, 25%);
+                        .highlightFont;
+                    }
 
                     ul {
                         text-align: justify;
@@ -316,7 +322,7 @@ div.highlight, code, pre {
                         li {
                             margin: 0.1em;
 
-                            span.blog-archive-day {
+                            .blog-archive-day {
                                 color: @grey;
                             }
                         }

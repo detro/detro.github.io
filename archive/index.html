@@ -18,12 +18,21 @@ title: Posts Archive
         </div>
 
         {% for month in year %}
-            <div class="blog-archive-month pure-u-1-3">
-                <h3>{{ month.first.date | date: "%B" }}</h3>
+            <div class="blog-archive-month pure-u-1-2">
+                <h3>
+                    <time datetime="{{ month.first.date | date: "%Y-%m" }}">
+                        {{ month.first.date | date: "%B" }}
+                        <span class="blog-archive-month-year">{{ month.first.date | date: "%Y" }}</span>
+                    </time>
+                </h3>
 
                 <ul>
                     {% for post in month %}
-                        <li><span class="blog-archive-day">{{ post.date | date: "%d" }}</span> <a href="{{ post.url}}">{{ post.title }}</a></li>
+                        <li>
+                            <time class="blog-archive-day"
+                                datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%d" }}</time>
+                            <a href="{{ post.url}}">{{ post.title }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
