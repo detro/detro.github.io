@@ -2,7 +2,7 @@
 layout: post
 author: detro
 published: true
-title: "[UPDATED - PhantomJS 1.9.0] GhostDriver 1.0.3 is out!"
+title: "GhostDriver 1.0.3 is out!"
 tags: [webdriver, contributors, phantomjs, 1.0.3, release, 1.9.0, ghostdriver]
 date: "2013-03-18 18:25:19"
 updated: "2013-03-22 15:55:50"
