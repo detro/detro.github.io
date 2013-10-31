@@ -37,7 +37,7 @@ The only reason for which you are so happy to sponsor this stuff now is because 
 
 <div class="img">
 <img src="http://images.wikia.com/finalfantasy/images/0/02/Ffviii-ifrit.jpg" alt="Ifrit" width="500" />
-[Ifrit](http://en.wikipedia.org/wiki/Ifrit)
+Ifrit
 </div>
 
 Well, Ifrit is trying to make me understand that, when older people were telling a young me (us?):
@@ -67,4 +67,4 @@ I putted my money on Double Fine Adventure for now...
 
 ## Before fire tongues start shouting at me
 
-I loved those games too. I'd love to have a lot of fun with those characters again. I was just giving Ifrit his hour of light: he chose to spend it blogging. 
+I loved those games too. I'd love to have a lot of fun with those characters again. I was just giving Ifrit his hour of light: he chose to spend it blogging.
