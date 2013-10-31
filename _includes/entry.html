@@ -25,7 +25,6 @@ include:
                     <time datetime="{{ include.date | date: "%Y-%m-%d" }}">{{ include.date | date: "%A, %d %b %Y" }}</time>
                 {% endif %}
                 {% if include.author %}
-                    &nbsp;&nbsp;
                     <i class="icon-user"></i>
                     {% if site.authors[include.author] %}
                         {{ site.authors[include.author] }}
@@ -34,10 +33,11 @@ include:
                     {% endif %}
                 {% endif %}
                 {% if include.tags %}
-                    &nbsp;&nbsp;
                     <i class="icon-tags"></i>
                     {{ include.tags | join: ' &bull; ' }}
                 {% endif %}
+                <i class="icon-time"></i>
+                {{ include.body | strip_html | number_of_words }} words
             </p>
         {% endif %}
     </header>
