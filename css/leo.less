@@ -1,5 +1,6 @@
 // ------------------------------------------------------------------------ Less
 @blue: #1f8dd6;
+@lightBlue: #f8f9ff;
 @darkBlue: #09293e;
 @grey: #999;
 @lightGrey: #bbb;
@@ -68,7 +69,6 @@
     font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
     font-weight: normal;
     line-height: 1.5em;
-    white-space: pre;
 }
 
 * {
@@ -93,7 +93,7 @@ div.highlight, code, pre {
 
 // ---------------------------------------------------------------------- Layout
 #layout {
-    @sidebarWidth: 25%;
+    @sidebarWidth: 30%;
 
     padding-left: @sidebarWidth; /* "left col (nav + list)" width */
     position: relative;
@@ -112,7 +112,7 @@ div.highlight, code, pre {
         }
 
         #header {
-            margin: 4em 1em 0 0;
+            padding: 0 1.2em;
             text-align: right;
 
             a {
@@ -120,11 +120,12 @@ div.highlight, code, pre {
                 display: block;
             }
 
-            font-size: 1.3em;
+            font-size: 1.5em;
 
             hgroup {
                 h2 {
                     color: @blue;
+                    font-size: 1.2em;
                 }
             }
 
@@ -137,7 +138,7 @@ div.highlight, code, pre {
 
                         li {
                             a {
-                                padding: 0.2em;
+                                padding: 0.2em 0;
                                 .highlightFont;
                             }
                             &.current {
@@ -161,31 +162,101 @@ div.highlight, code, pre {
     }
 
     #main {
-        .linearGradient(to bottom, #fafbff, white, 70%);
+        .linearGradient(to bottom, @lightBlue, white, 80%);
 
         #content {
+            padding: 1.2em;
+
             a {
                 .a(@blue, @darkBlue);
             }
 
             .entry {
-                padding: 0.5em 1em;
-                border-bottom: 1px dashed @lightGrey;
+                background-color: white;
+                padding: 1em 1.2em;
+                margin-bottom: 1.2em;
+                .boxShadowHighlight;
 
                 .title {
                     color: @blue;
+                    margin: 0;
                 }
                 .meta {
                     color: @grey;
                     line-height: 1.5em;
+                    text-align: justify;
 
                     i {
-                        color: @lightGrey;
+                        color: lighten(@lightGrey, 10%);
                     }
                 }
                 .body {
                     line-height: 1.5em;
                     text-align: justify;
+
+                    img,
+                    iframe,
+                    object {
+                        .boxShadowHighlight;
+
+                        display: block;
+                        margin: 2em auto 1em;
+                    }
+
+                    div.img {
+                        color: @lightGrey;
+                        text-align: center;
+                        font-style: italic;
+                    }
+
+                    div.highlight {
+                        .boxShadowHighlight;
+                        background: @ultraLightGrey;
+                        border: 1px solid @grey;
+
+                        font-size: 0.8em;
+                        line-height: 1.2em;
+
+                        pre {
+                            margin: 1.0em 0;
+                            padding: 0.2em 1.2em;
+                            overflow: auto;
+                            word-wrap: normal;
+                            white-space: pre;
+
+                            code {
+                                display: block;
+                            }
+                        }
+                    }
+
+                    h1, h2, h3 {
+                        text-align: center;
+                    }
+                    h4, h5, h6 {
+                        border-bottom: 1px solid lighten(@lightGrey, 15%);
+                        color: @grey;
+                    }
+
+                    blockquote {
+                        padding: 0.8em 0 0 0.5em;
+
+                        .highlightFont;
+
+                        color: @grey;
+                        border-left: 1px solid lighten(@lightGrey, 15%);
+
+                        &:before,
+                        &::before {
+                            content: "\f10d";
+                            font-family: "FontAwesome";
+                            float: left;
+                            color: lighten(@lightGrey, 15%);
+                            font-size: 2em;
+                            margin-top: -0.2em;
+                            margin-left: -1.5em;
+                        }
+                    }
                 }
 
                 &.summary {
@@ -195,18 +266,24 @@ div.highlight, code, pre {
                     }
                 }
                 &.full {
+                    margin-bottom: 0;
+
                     .title {
-                        font-size: 3em;
+                        font-size: 2.2em;
+                        text-align: center;
                     }
                     .meta {
-                        margin-bottom: 3em;
+                        margin-bottom: 2em;
+                    }
+                    .body {
+                        font-size: 1.2em;
                     }
                 }
             }
 
             #paginator {
                 font-size: 1.1em;
-                margin: 1em 0;
+                margin: 0.5em 0;
                 text-align: center;
                 text-transform: uppercase;
                 .highlightFont;
@@ -219,132 +296,6 @@ div.highlight, code, pre {
                 }
             }
         }
-
-        // #blog-content {
-        //     margin: 1.5em 1em 0;
-
-        //     a {
-        //         .a(@blue, @darkBlue);
-        //     }
-
-        //     section.page,
-        //     section.post,
-        //     section.post-summary {
-        //         padding: 0.2em 0.5em;
-
-        //         header {
-        //             h1 {
-        //                 margin: 0.1em 0;
-
-        //                 color: @blue;
-        //                 .textShadow(#ddd);
-
-        //                 a {
-        //                     display: block;
-        //                 }
-        //             }
-
-        //             .post-meta {
-        //                 .normalFont;
-
-        //                 color: @lightGrey;
-        //                 font-size: 0.9em;
-        //                 line-height: 1.3em;
-
-        //                 a.post-tag {
-        //                     white-space: nowrap;
-        //                     .a(@lightGrey, @darkBlue);
-        //                 }
-        //             }
-        //         }
-
-        //         div.page-body,
-        //         div.post-body {
-        //             margin: 0 1em;
-        //             font-size: 1.3em;
-        //             .normalFont;
-        //             line-height: 1.5em;
-        //             text-align: justify;
-
-        //             h1, h2, h3 {
-        //                 text-align: center;
-        //             }
-        //             h4, h5, h6 {
-        //                 border-bottom: 1px solid lighten(@lightGrey, 15%);
-        //                 color: @grey;
-        //             }
-
-        //             img {
-        //                 .boxShadowHighlight;
-
-        //                 display: block;
-        //                 margin: 2em auto;
-        //             }
-
-        //             div.highlight {
-        //                 padding: 0.1em 1em;
-        //                 margin-left: 0.5em;
-        //                 margin-right: 0.5em;
-
-        //                 .boxShadowHighlight;
-        //                 background: @ultraLightGrey;
-        //                 border: 1px solid lighten(@lightGrey, 5%);
-
-        //                 font-size: 0.7em;
-        //                 line-height: 1.2em;
-
-        //                 overflow-x: auto;
-        //                 pre {
-        //                     min-width: 1024px;
-        //                 }
-        //             }
-
-        //             blockquote {
-        //                 padding: 0.8em 0 0 0.5em;
-
-        //                 .highlightFont;
-
-        //                 color: @grey;
-        //                 border-left: 1px solid lighten(@lightGrey, 15%);
-
-        //                 &:before,
-        //                 &::before {
-        //                     content: "\f10d";
-        //                     font-family: "FontAwesome";
-        //                     float: left;
-        //                     color: lighten(@lightGrey, 15%);
-        //                     font-size: 2em;
-        //                     margin-top: -0.2em;
-        //                     margin-left: -1.5em;
-        //                 }
-        //             }
-        //         }
-
-        //         &.post-latest {
-        //             margin: 2em 0 5em;
-
-        //             header {
-        //                 h1 {
-        //                     font-size: 3em;
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     section.page,
-        //     section.post {
-        //         header {
-        //             text-align: center;
-        //             font-size: 1.2em;
-        //             padding: 2em 0 3em;
-        //             margin: 0;
-        //             border-bottom: 1px solid @lightGrey;
-
-        //             h1 {
-        //                 font-size: 3em;
-        //             }
-        //         }
-        //     }
 
         //     section#blog-archive {
         //         div.blog-archive-links {
@@ -381,31 +332,14 @@ div.highlight, code, pre {
         //             }
         //         }
 
-        //     }
-
-        //     #blog-paginator {
-        //         font-size: 1.2em;
-        //         margin: 1em 0;
-        //         text-align: center;
-
-        //         div {
-        //             a {
-        //                 display: block;
-        //                 padding: 1em;
-        //             }
-        //         }
-        //     }
-        // }
-
         #footer {
             .highlightFont;
 
             text-align: center;
-            padding: 1em 0;
             text-transform: uppercase;
-            zoom: 1;
-            font-size: 0.7em;
+            font-size: 0.8em;
             color: @grey;
+            text-shadow: 0 1px 1px @ultraLightGrey;
 
             span {
                 white-space: nowrap;
@@ -442,6 +376,7 @@ div.highlight, code, pre {
                 top: auto;
                 margin: 0 3em;
                 position: static;
+                font-size: 1.2em;
 
                 #navigation {
                     display: none;
@@ -453,6 +388,12 @@ div.highlight, code, pre {
         }
 
         #main {
+            #content {
+                .entry {
+                    .title {
+                    }
+                }
+            }
             // #blog-content {
             //     margin: 0;
 
