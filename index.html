@@ -6,50 +6,26 @@ navtitle: blog
 <div class="pure-g-r">
     {% for post in paginator.posts %}
 
-        {% if post == site.posts.first %}
-            <section class="post-summary post-latest pure-u-1">
-                <header>
-                    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-
-                    <p class="post-meta">
-                        <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%a, %d %b %Y" }}</time>
-                        &mdash;
-                        {% for tag in post.tags %}
-                            <a class="post-tag" href="{{ site.url }}/tag/{{ tag }}"><i class="icon-tag"></i> {{ tag }}</a>
-                            {% if forloop.rindex > 1 %}&sdot;{% endif %}
-                        {% endfor %}
-                    </p>
-                </header>
-            </section>
-        {% else %}
-            <section class="post-summary pure-u-1-2">
-                <header>
-                    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-
-                    <time class="post-meta"
-                        datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%a, %d %b %Y" }}</time>
-                </header>
-            </section>
-        {% endif %}
+        {% include entry.html title=post.title url=post.url date=post.date body=post.content has_meta=true is_summary=true %}
 
     {% endfor %}
 </div>
 
-<div id="blog-paginator" class="pure-g">
+<div id="paginator" class="pure-g">
     {% if paginator.next_page and paginator.previous_page %}
         <div class="pure-u-1-2">
-            <a href="{{ paginator.next_page_path }}"><i class="icon-chevron-left"> older posts</i></a>
+            <a href="{{ paginator.next_page_path }}"><i class="icon-angle-left"></i> previous</a>
         </div>
         <div class="pure-u-1-2">
-            <a href="{{ paginator.previous_page_path }}">newer posts <i class="icon-chevron-right"></i></a>
+            <a href="{{ paginator.previous_page_path }}">next <i class="icon-angle-right"></i></a>
         </div>
     {% elsif paginator.next_page %}
         <div class="pure-u-1">
-            <a href="{{ paginator.next_page_path }}"><i class="icon-chevron-left"> older posts</i></a>
+            <a href="{{ paginator.next_page_path }}"><i class="icon-angle-left"></i> previous</a>
         </div>
     {% elsif paginator.previous_page %}
         <div class="pure-u-1">
-            <a href="{{ paginator.previous_page_path }}">newer posts <i class="icon-chevron-right"></i></a>
+            <a href="{{ paginator.previous_page_path }}">newer posts <i class="icon-angle-right"></i></a>
         </div>
     {% endif %}
 </div>

@@ -1,10 +1,12 @@
-url: http://detro.github.io
-# url: http://localhost:4000
+# url: http://detro.github.io
+url: http://localhost:4000
 
-name: "Too much Coffee, too little Time"
+name: "Too much coffee, too little time"
 author: "Ivan De Marino"
+authors:
+    detro: "Ivan De Marino"
 
-title: "Too much Coffee,<br/>too little Time"
+title: "Too much <strong>coffee</strong><br/>too little <strong>time</strong>"
 subtitle: "Ivan<strong>DeMarino</strong>"
 
 internal-links:
@@ -51,10 +53,10 @@ lessc: /usr/local/share/npm/bin/lessc
 
 permalink: /:year/:month/:title
 
-paginate: 9
+paginate: 10
 paginate_path: 'blog/:num'
 
 # google_analytics:
 #     account: UA-XXXXX-X
 
-# limit_posts: 50
+limit_posts: 50

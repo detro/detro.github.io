@@ -1,0 +1,55 @@
+{% comment %}
+include:
+    url:
+    title:
+    date:
+    author:
+    tags:
+    body:
+    has_meta:
+    is_summary:
+{% endcomment %}
+<article class="entry {% if include.is_summary %}summary{% else %}full{% endif %} pure-u-1">
+    <header>
+        <h1 class="title">
+            {% if include.url %}
+                <a href="{{ include.url }}">{{ include.title }}</a>
+            {% else %}
+                {{ include.title }}
+            {% endif %}
+        </h1>
+        {% if include.has_meta %}
+            <p class="meta">
+                {% if include.date %}
+                    <i class="icon-calendar"></i>
+                    <time datetime="{{ include.date | date: "%Y-%m-%d" }}">{{ include.date | date: "%A, %d %b %Y" }}</time>
+                {% endif %}
+                {% if include.author %}
+                    &nbsp;&nbsp;
+                    <i class="icon-user"></i>
+                    {% if site.authors[include.author] %}
+                        {{ site.authors[include.author] }}
+                    {% else %}
+                        include.author
+                    {% endif %}
+                {% endif %}
+                {% if include.tags %}
+                    &nbsp;&nbsp;
+                    <i class="icon-tags"></i>
+                    {{ include.tags | join: ' &bull; ' }}
+                {% endif %}
+            </p>
+        {% endif %}
+    </header>
+    {% if include.body %}
+        <div class="body">
+            {% if include.is_summary %}
+                {{ include.body | strip_html | truncatewords: 50 }}
+                <br>
+                <a href="{{ include.url }}"><em>read article</em></a>
+            {% else %}
+                {{ include.body }}
+            {% endif %}
+        </div>
+    {% endif %}
+</article>
