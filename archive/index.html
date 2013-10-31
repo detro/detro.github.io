@@ -4,32 +4,32 @@ navtitle: archive
 title: Posts Archive
 ---
 
-<section id="blog-archive" class="pure-g-r">
+<section class="archive pure-g-r">
 
-    <div class="blog-archive-links pure-u-1">
+    <div class="pure-u-1">
         {% for year in site.years %}
             <a href="#{{ year.first.first.date | date: "%Y" }}">#{{ year.first.first.date | date: "%Y" }}</a>
         {% endfor %}
     </div>
 
     {% for year in site.years %}
-        <div class="blog-archive-year pure-u-1">
+        <div class="pure-u-1">
             <h2><a name="{{ year.first.first.date | date: "%Y" }}"></a>{{ year.first.first.date | date: "%Y" }}</h2>
         </div>
 
         {% for month in year %}
-            <div class="blog-archive-month pure-u-1-2">
+            <div class="pure-u-1-2">
                 <h3>
                     <time datetime="{{ month.first.date | date: "%Y-%m" }}">
                         {{ month.first.date | date: "%B" }}
-                        <span class="blog-archive-month-year">{{ month.first.date | date: "%Y" }}</span>
+                        <span class="year">{{ month.first.date | date: "%Y" }}</span>
                     </time>
                 </h3>
 
                 <ul>
                     {% for post in month %}
                         <li>
-                            <time class="blog-archive-day"
+                            <time class="day"
                                 datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%d" }}</time>
                             <a href="{{ post.url}}">{{ post.title }}</a>
                         </li>
