@@ -2,14 +2,4 @@
 layout: default
 ---
 
-<section class="page">
-
-    <header>
-        <h1>{{ page.title }}</h1>
-    </header>
-
-    <div class="page-body">
-        {{ content }}
-    </div>
-
-</section>
+{% include entry.html title=page.title body=content has_meta=true is_summary=false %}
