@@ -1,24 +1,26 @@
 ---
 layout: page
 navtitle: archive
-title: Posts Archive
+title: Blog archive
 ---
 
 <section class="archive pure-g-r">
 
-    <div class="pure-u-1">
+    <div class="years pure-u-1">
         {% for year in site.years %}
+            {% if forloop.index != 1 %}
+                &bull;
+            {% endif %}
             <a href="#{{ year.first.first.date | date: "%Y" }}">#{{ year.first.first.date | date: "%Y" }}</a>
         {% endfor %}
     </div>
 
     {% for year in site.years %}
-        <div class="pure-u-1">
-            <h2><a name="{{ year.first.first.date | date: "%Y" }}"></a>{{ year.first.first.date | date: "%Y" }}</h2>
-        </div>
+        <div class="pure-u-1 years-separator"></div>
+        <a name="{{ year.first.first.date | date: "%Y" }}"></a>
 
         {% for month in year %}
-            <div class="pure-u-1-2">
+            <div class="month pure-u-1-2">
                 <h3>
                     <time datetime="{{ month.first.date | date: "%Y-%m" }}">
                         {{ month.first.date | date: "%B" }}

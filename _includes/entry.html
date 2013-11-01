@@ -8,6 +8,7 @@ include:
     body:
     has_meta:
     is_summary:
+    has_wordcount:
 {% endcomment %}
 <article class="entry {% if include.is_summary %}summary{% else %}full{% endif %} pure-u-1">
     <header>
@@ -36,8 +37,10 @@ include:
                     <i class="icon-tags"></i>
                     {{ include.tags | join: ' &bull; ' }}
                 {% endif %}
-                <i class="icon-time"></i>
-                {{ include.body | strip_html | number_of_words }} words
+                {% if include.has_wordcount %}
+                    <i class="icon-time"></i>
+                    {{ include.body | strip_html | number_of_words }} words
+                {% endif %}
             </p>
         {% endif %}
     </header>
