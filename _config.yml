@@ -1,5 +1,5 @@
-# url: http://detro.github.io
-url: http://localhost:4000
+url: http://detro.github.io
+# url: http://localhost:4000
 
 name: "Too much coffee, too little time"
 author: "Ivan De Marino"
@@ -59,4 +59,4 @@ paginate_path: 'blog/:num'
 # google_analytics:
 #     account: UA-XXXXX-X
 
-limit_posts: 50
+# limit_posts: 50
