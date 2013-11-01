@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>I want one of it... DESPERATELY! - Too much Coffee, too little Time</title>
+        <title>I want one of it... DESPERATELY! - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -26,18 +26,18 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
-                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
 
-                <header id="blog-header">
+                <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
-                    <nav id="blog-navigation">
+                    <nav id="navigation">
                         
-                            <ul id="blog-internal-links">
+                            <ul id="internal-links">
                                 
                                     <li class="current"><a href="http://detro.github.io/">blog</a></li>
                                 
@@ -51,7 +51,7 @@
                         
 
                         
-                            <ul id="blog-rel-me-links">
+                            <ul id="rel-me-links">
                                 
                                     <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
@@ -72,34 +72,42 @@
 
             <div id="main" class="pure-u-1">
 
-                <div id="blog-content">
-                    <section class="post">
-
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
     <header>
-        <h1>I want one of it... DESPERATELY!</h1>
-
-        <p class="post-meta">
-            <time datetime="2007-02-05">Monday, 05 February 2007</time>
-            <br>
-            <br>
+        <h1 class="title">
             
-                <a class="post-tag" href="http://detro.github.io/tag/personal"><i class="icon-tag"></i> personal</a>
-                &sdot;
+                I want one of it... DESPERATELY!
             
-                <a class="post-tag" href="http://detro.github.io/tag/motors"><i class="icon-tag"></i> motors</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/curiosity"><i class="icon-tag"></i> curiosity</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/english"><i class="icon-tag"></i> english</a>
+        </h1>
+        
+            <p class="meta">
                 
-            
-        </p>
+                    <i class="icon-calendar"></i>
+                    <time datetime="2007-02-05">Monday, 05 Feb 2007</time>
+                
+                
+                    <i class="icon-user"></i>
+                    
+                        Ivan De Marino
+                    
+                
+                
+                    <i class="icon-tags"></i>
+                    personal &bull; motors &bull; curiosity &bull; english
+                
+                
+                    <i class="icon-time"></i>
+                    100 words
+                
+            </p>
+        
     </header>
-
-    <div class="post-body">
-        <p>First, the video from <a href="http://www.bbc.co.uk/topgear/">TopGear</a>:
+    
+        <div class="body">
+            
+                <p>First, the video from <a href="http://www.bbc.co.uk/topgear/">TopGear</a>:
 <blockquote><object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/bgfTG1wCHtg"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/bgfTG1wCHtg" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
 Title: <strong>Top Gear - <a href="http://www.carver-worldwide.com/">The Carver</a></strong>
 Abstract: <strong>The carver is perhaps the greatest gadget and coolest less then 4 wheel vehical on the planet. </strong><strong>Vanderbrink</strong> (no way to find out this brand over the Internet) is the brand if you want to look it up. They are available in the US but are classified as a motorcycle which means you need a helmet. and thats just wrong.
@@ -107,13 +115,15 @@ Abstract: <strong>The carver is perhaps the greatest gadget and coolest less the
 
 <p>It&#39;s INSANELY GREAT! Like a motocycle, but a car. Like a car, but a motocycle. It&#39;s also beauty and tiny (easy to park). I want one of it!</p>
 
-    </div>
+            
+        </div>
+    
+</article>
 
-</section>
 
                 </div>
 
-                <footer id="blog-footer">
+                <footer id="footer">
                     
                         <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
                     
@@ -132,8 +142,8 @@ Abstract: <strong>The carver is perhaps the greatest gadget and coolest less the
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
             YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-blog-navigation").on("click", function(e) {
-                    Y.one("#blog-navigation").toggleClass("open");
+                Y.one("#toggle-navigation").on("click", function(e) {
+                    Y.one("#navigation").toggleClass("open");
                     e.preventDefault();
                 });
             });

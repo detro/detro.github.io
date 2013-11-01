@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Migrated to WordPress 2.0 - Too much Coffee, too little Time</title>
+        <title>Migrated to WordPress 2.0 - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -26,18 +26,18 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
-                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
 
-                <header id="blog-header">
+                <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
-                    <nav id="blog-navigation">
+                    <nav id="navigation">
                         
-                            <ul id="blog-internal-links">
+                            <ul id="internal-links">
                                 
                                     <li class="current"><a href="http://detro.github.io/">blog</a></li>
                                 
@@ -51,7 +51,7 @@
                         
 
                         
-                            <ul id="blog-rel-me-links">
+                            <ul id="rel-me-links">
                                 
                                     <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
@@ -72,43 +72,42 @@
 
             <div id="main" class="pure-u-1">
 
-                <div id="blog-content">
-                    <section class="post">
-
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
     <header>
-        <h1>Migrated to WordPress 2.0</h1>
-
-        <p class="post-meta">
-            <time datetime="2005-12-29">Thursday, 29 December 2005</time>
-            <br>
-            <br>
+        <h1 class="title">
             
-                <a class="post-tag" href="http://detro.github.io/tag/personal"><i class="icon-tag"></i> personal</a>
-                &sdot;
+                Migrated to WordPress 2.0
             
-                <a class="post-tag" href="http://detro.github.io/tag/sw"><i class="icon-tag"></i> sw</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/it"><i class="icon-tag"></i> it</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/opensource"><i class="icon-tag"></i> opensource</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/english"><i class="icon-tag"></i> english</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/php"><i class="icon-tag"></i> php</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/projects"><i class="icon-tag"></i> projects</a>
+        </h1>
+        
+            <p class="meta">
                 
-            
-        </p>
+                    <i class="icon-calendar"></i>
+                    <time datetime="2005-12-29">Thursday, 29 Dec 2005</time>
+                
+                
+                    <i class="icon-user"></i>
+                    
+                        Ivan De Marino
+                    
+                
+                
+                    <i class="icon-tags"></i>
+                    personal &bull; sw &bull; it &bull; opensource &bull; english &bull; php &bull; projects
+                
+                
+                    <i class="icon-time"></i>
+                    78 words
+                
+            </p>
+        
     </header>
-
-    <div class="post-body">
-        <p><img width="35%" align="right" title="wp logo" alt="wp logo" src="http://wordpress.org/style/header-logo.png" /></p>
+    
+        <div class="body">
+            
+                <p><img width="35%" align="right" title="wp logo" alt="wp logo" src="http://wordpress.org/style/header-logo.png" /></p>
 
 <p>I have migrated my site to WordPress 2.0 today. But, as you can se, some changes are &quot;under the hood&quot;.</p>
 
@@ -118,13 +117,15 @@
 
 <p>If you loved the Administrative interface of WP for it&#39;s simplicity, this new interface, heavly based on <a target="_blank" href="http://en.wikipedia.org/wiki/Ajax">, will make you screaming. I&#39;m sure ;).</a></p>
 
-    </div>
+            
+        </div>
+    
+</article>
 
-</section>
 
                 </div>
 
-                <footer id="blog-footer">
+                <footer id="footer">
                     
                         <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
                     
@@ -143,8 +144,8 @@
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
             YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-blog-navigation").on("click", function(e) {
-                    Y.one("#blog-navigation").toggleClass("open");
+                Y.one("#toggle-navigation").on("click", function(e) {
+                    Y.one("#navigation").toggleClass("open");
                     e.preventDefault();
                 });
             });

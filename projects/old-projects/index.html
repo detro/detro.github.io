@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Old projects - Too much Coffee, too little Time</title>
+        <title>Old projects - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -26,18 +26,18 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
-                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
 
-                <header id="blog-header">
+                <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
-                    <nav id="blog-navigation">
+                    <nav id="navigation">
                         
-                            <ul id="blog-internal-links">
+                            <ul id="internal-links">
                                 
                                     <li class=""><a href="http://detro.github.io/">blog</a></li>
                                 
@@ -51,7 +51,7 @@
                         
 
                         
-                            <ul id="blog-rel-me-links">
+                            <ul id="rel-me-links">
                                 
                                     <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
@@ -72,15 +72,28 @@
 
             <div id="main" class="pure-u-1">
 
-                <div id="blog-content">
-                    <section class="page">
-
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
     <header>
-        <h1>Old projects</h1>
+        <h1 class="title">
+            
+                Old projects
+            
+        </h1>
+        
+            <p class="meta">
+                
+                
+                
+                
+            </p>
+        
     </header>
-
-    <div class="page-body">
-        <p>This page is a &quot;hub&quot; for old university projects that, for sentimental attachment, I don&#39;t want to bin. Here is a list with a short description and a link to get more information, in case you find yourself interested.</p>
+    
+        <div class="body">
+            
+                <p>This page is a &quot;hub&quot; for old university projects that, for sentimental attachment, I don&#39;t want to bin. Here is a list with a short description and a link to get more information, in case you find yourself interested.</p>
 
 <h2>JPound</h2>
 
@@ -103,13 +116,15 @@ Based on the <a href="http://www.voip-info.org/wiki/index.php?page=Asterisk+Real
 
 <p>This was more a &quot;documentary&quot; project. The essay describes what VLAN are, how are they normally implemented (down to the <code>bits</code>), the protocol used by <em>standard</em> and <em>proprietary</em> VLAN and some usage examples. <a href="http://cdn.ivandemarino.me/oldprojects/tesina_vlan/html/tesina_vlan.html">Link</a> (<a href="http://cdn.ivandemarino.me/oldprojects/tesina_vlan/tesina_vlan.pdf">PDF</a>) (<a href="http://cdn.ivandemarino.me/oldprojects/tesina_vlan/tesina_vlan-html.zip">HTML Zip</a>) (all links are in Italian).</p>
 
-    </div>
+            
+        </div>
+    
+</article>
 
-</section>
 
                 </div>
 
-                <footer id="blog-footer">
+                <footer id="footer">
                     
                         <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
                     
@@ -128,8 +143,8 @@ Based on the <a href="http://www.voip-info.org/wiki/index.php?page=Asterisk+Real
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
             YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-blog-navigation").on("click", function(e) {
-                    Y.one("#blog-navigation").toggleClass("open");
+                Y.one("#toggle-navigation").on("click", function(e) {
+                    Y.one("#navigation").toggleClass("open");
                     e.preventDefault();
                 });
             });

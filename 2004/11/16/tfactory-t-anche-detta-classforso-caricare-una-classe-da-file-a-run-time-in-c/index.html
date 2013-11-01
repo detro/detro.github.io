@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TFactory <T> (anche detta ClassForSO): caricare una classe da file a Run-Time in C++... - Too much Coffee, too little Time</title>
+        <title>TFactory <T> (anche detta ClassForSO): caricare una classe da file a Run-Time in C++... - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -26,18 +26,18 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
-                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
 
-                <header id="blog-header">
+                <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
-                    <nav id="blog-navigation">
+                    <nav id="navigation">
                         
-                            <ul id="blog-internal-links">
+                            <ul id="internal-links">
                                 
                                     <li class="current"><a href="http://detro.github.io/">blog</a></li>
                                 
@@ -51,7 +51,7 @@
                         
 
                         
-                            <ul id="blog-rel-me-links">
+                            <ul id="rel-me-links">
                                 
                                     <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
@@ -72,33 +72,52 @@
 
             <div id="main" class="pure-u-1">
 
-                <div id="blog-content">
-                    <section class="post">
-
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
     <header>
-        <h1>TFactory <T> (anche detta ClassForSO): caricare una classe da file a Run-Time in C++...</h1>
-
-        <p class="post-meta">
-            <time datetime="2004-11-16">Tuesday, 16 November 2004</time>
-            <br>
-            <br>
+        <h1 class="title">
             
-                <a class="post-tag" href="http://detro.github.io/tag/uncategorized"><i class="icon-tag"></i> uncategorized</a>
+                TFactory <T> (anche detta ClassForSO): caricare una classe da file a Run-Time in C++...
+            
+        </h1>
+        
+            <p class="meta">
                 
-            
-        </p>
+                    <i class="icon-calendar"></i>
+                    <time datetime="2004-11-16">Tuesday, 16 Nov 2004</time>
+                
+                
+                    <i class="icon-user"></i>
+                    
+                        Ivan De Marino
+                    
+                
+                
+                    <i class="icon-tags"></i>
+                    uncategorized
+                
+                
+                    <i class="icon-time"></i>
+                    202 words
+                
+            </p>
+        
     </header>
+    
+        <div class="body">
+            
+                <div style="clear:both;"></div>L'idea mi é venuta durante lo sviluppo di <a href="http://www.mandolinux.org/MGS/"><span style="font-weight: bold;">MGS</span></a>: sapevo che alcuni miei colleghi (<span style="font-weight: bold;">SbatMan</span>, <span style="font-weight: bold;">o'Troll</span>, <span style="font-weight: bold;">Sax</span>) avevano fatto una cosa in questa direzione per il loro progetto di OOP.<br />In particolare loro avevano realizzato una <u><span style="color: rgb(204, 0, 0); font-style: italic;">Template Factory</span><span style="color: rgb(0, 0, 0);"></span></u>: molto intelligente come approccio, dato che questo svincolava da una semplice Factory di Classi ad una ben più astratta <u><span style="color: rgb(204, 0, 0); font-style: italic;">Factory Parametrizzata</span></u>.<br />C'era però un limite legato ad alcune restrizioni sulle Gerarchie (alcuni <code> <span style="font-weight: bold;">typedef</span> </code> obbligatori per gestire gli handler delle SO) che una Classe che si voleva istanziare a Run-Time doveva rispettare: ho eliminato il tutto approfondendo un pò l'argomento:<br /><code><br /># man dlsym<br /></code><br />Avendo studiato il loro codice per benino (come fanno i programmatori seri...;-)), il risultato é stato una leggera trasformazione del Template che ora permette di:<br /><ul>   <li>Caricare una classe da una SO (Shared Object Library) a Run-Time (come prima);</li>   <li>Assegnare l'oggetto istanziato tramite UP-Casting ad una Super-Classe (come prima);</li>   <li>Nessuna restrizione sulle Gerarchie (unica differenza con il lavoro dei miei colleghi).</li> </ul> Cosa ho fatto quindi io di nuovo? La mia versione della <code><span style="font-weight: bold;">TFactory <t></t></span></code> (così il nome della Classe) può essere portata ovunque continuando a funzionare sempre.<br />Prossimamente posterò il codice completo o un link allo stesso.<br /><span style="font-size:78%;">Da notare che, al momeno, il sito ufficiale non é stato ancora aggiornato.</span><br /><div style="clear:both; padding-bottom: 0.25em;"></div>
 
-    <div class="post-body">
-        <div style="clear:both;"></div>L'idea mi é venuta durante lo sviluppo di <a href="http://www.mandolinux.org/MGS/"><span style="font-weight: bold;">MGS</span></a>: sapevo che alcuni miei colleghi (<span style="font-weight: bold;">SbatMan</span>, <span style="font-weight: bold;">o'Troll</span>, <span style="font-weight: bold;">Sax</span>) avevano fatto una cosa in questa direzione per il loro progetto di OOP.<br />In particolare loro avevano realizzato una <u><span style="color: rgb(204, 0, 0); font-style: italic;">Template Factory</span><span style="color: rgb(0, 0, 0);"></span></u>: molto intelligente come approccio, dato che questo svincolava da una semplice Factory di Classi ad una ben più astratta <u><span style="color: rgb(204, 0, 0); font-style: italic;">Factory Parametrizzata</span></u>.<br />C'era però un limite legato ad alcune restrizioni sulle Gerarchie (alcuni <code> <span style="font-weight: bold;">typedef</span> </code> obbligatori per gestire gli handler delle SO) che una Classe che si voleva istanziare a Run-Time doveva rispettare: ho eliminato il tutto approfondendo un pò l'argomento:<br /><code><br /># man dlsym<br /></code><br />Avendo studiato il loro codice per benino (come fanno i programmatori seri...;-)), il risultato é stato una leggera trasformazione del Template che ora permette di:<br /><ul>   <li>Caricare una classe da una SO (Shared Object Library) a Run-Time (come prima);</li>   <li>Assegnare l'oggetto istanziato tramite UP-Casting ad una Super-Classe (come prima);</li>   <li>Nessuna restrizione sulle Gerarchie (unica differenza con il lavoro dei miei colleghi).</li> </ul> Cosa ho fatto quindi io di nuovo? La mia versione della <code><span style="font-weight: bold;">TFactory <t></t></span></code> (così il nome della Classe) può essere portata ovunque continuando a funzionare sempre.<br />Prossimamente posterò il codice completo o un link allo stesso.<br /><span style="font-size:78%;">Da notare che, al momeno, il sito ufficiale non é stato ancora aggiornato.</span><br /><div style="clear:both; padding-bottom: 0.25em;"></div>
+            
+        </div>
+    
+</article>
 
-    </div>
-
-</section>
 
                 </div>
 
-                <footer id="blog-footer">
+                <footer id="footer">
                     
                         <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
                     
@@ -117,8 +136,8 @@
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
             YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-blog-navigation").on("click", function(e) {
-                    Y.one("#blog-navigation").toggleClass("open");
+                Y.one("#toggle-navigation").on("click", function(e) {
+                    Y.one("#navigation").toggleClass("open");
                     e.preventDefault();
                 });
             });

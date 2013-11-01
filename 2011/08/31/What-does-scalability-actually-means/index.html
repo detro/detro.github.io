@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>What does scalability actually means? - Too much Coffee, too little Time</title>
+        <title>What does scalability actually means? - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -26,18 +26,18 @@
         <div id="layout" class="pure-g-r">
 
             <div id="sidebar" class="pure-u">
-                <a id="toggle-blog-navigation" href="#"><i class="icon-reorder"></i></a>
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
 
-                <header id="blog-header">
+                <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much Coffee,<br/>too little Time</a></h1>
+                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
-                    <nav id="blog-navigation">
+                    <nav id="navigation">
                         
-                            <ul id="blog-internal-links">
+                            <ul id="internal-links">
                                 
                                     <li class="current"><a href="http://detro.github.io/">blog</a></li>
                                 
@@ -51,7 +51,7 @@
                         
 
                         
-                            <ul id="blog-rel-me-links">
+                            <ul id="rel-me-links">
                                 
                                     <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
                                 
@@ -72,52 +72,42 @@
 
             <div id="main" class="pure-u-1">
 
-                <div id="blog-content">
-                    <section class="post">
-
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
     <header>
-        <h1>What does scalability actually means?</h1>
-
-        <p class="post-meta">
-            <time datetime="2011-08-31">Wednesday, 31 August 2011</time>
-            <br>
-            <br>
+        <h1 class="title">
             
-                <a class="post-tag" href="http://detro.github.io/tag/google"><i class="icon-tag"></i> google</a>
-                &sdot;
+                What does scalability actually means?
             
-                <a class="post-tag" href="http://detro.github.io/tag/car"><i class="icon-tag"></i> car</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/number"><i class="icon-tag"></i> number</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/scalability"><i class="icon-tag"></i> scalability</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/googleplex"><i class="icon-tag"></i> googleplex</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/filling"><i class="icon-tag"></i> filling</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/book"><i class="icon-tag"></i> book</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/scale"><i class="icon-tag"></i> scale</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/listening"><i class="icon-tag"></i> listening</a>
-                &sdot;
-            
-                <a class="post-tag" href="http://detro.github.io/tag/reading"><i class="icon-tag"></i> reading</a>
+        </h1>
+        
+            <p class="meta">
                 
-            
-        </p>
+                    <i class="icon-calendar"></i>
+                    <time datetime="2011-08-31">Wednesday, 31 Aug 2011</time>
+                
+                
+                    <i class="icon-user"></i>
+                    
+                        Ivan De Marino
+                    
+                
+                
+                    <i class="icon-tags"></i>
+                    google &bull; car &bull; number &bull; scalability &bull; googleplex &bull; filling &bull; book &bull; scale &bull; listening &bull; reading
+                
+                
+                    <i class="icon-time"></i>
+                    877 words
+                
+            </p>
+        
     </header>
-
-    <div class="post-body">
-        <p>I was on the train to <a href="http://maps.google.co.uk/maps?cx=c&amp;q=portsmouth&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=0x487442a41814f1e9:0x45b683ea03373b79,Portsmouth&amp;gl=uk&amp;ei=hgNeTpbZFcSOswaqtNmwDw&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CCcQ8gEwAA">Portsmouth</a>, and listening-reading the book <a href="http://books.google.co.uk/books?id=V1u1f8sv3k8C">&quot;In the Plex&quot;</a>.
+    
+        <div class="body">
+            
+                <p>I was on the train to <a href="http://maps.google.co.uk/maps?cx=c&amp;q=portsmouth&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=0x487442a41814f1e9:0x45b683ea03373b79,Portsmouth&amp;gl=uk&amp;ei=hgNeTpbZFcSOswaqtNmwDw&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CCcQ8gEwAA">Portsmouth</a>, and listening-reading the book <a href="http://books.google.co.uk/books?id=V1u1f8sv3k8C">&quot;In the Plex&quot;</a>.
 In the Part 2 of the book, Chapter 2 if I recall correctly, the author is talking about Google and the Ocean project, what is later on going to be know as <a href="http://books.google.co.uk/books">Google Books</a>.</p>
 
 <p>The part that got me thinking is when Page, Brin and Mayer are trying to work out how actually they can scan the physical books, in a <em>scalable manner</em>. To the Googlers, hiring a lot of human beings and a lot of scanner didn&#39;t look like a <em>scalable</em> solution at all! So they decided to work on their own scanner, using the hardware building expertise that years of Google Data Center made them acquire.</p>
@@ -179,13 +169,15 @@ My servers do NOT scale!
 
 <p>I know that most of you will consider what I wrote as &quot;obvious&quot;, and it indeed is. But what I wanted to highlight was infact that we do use terms assuming that their full meaning is know and, again, obvious. But it might be useful sometimes to stop and think and what we say, how we say it, and how we ight find more meaning in the meaning itself.</p>
 
-    </div>
+            
+        </div>
+    
+</article>
 
-</section>
 
                 </div>
 
-                <footer id="blog-footer">
+                <footer id="footer">
                     
                         <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
                     
@@ -204,8 +196,8 @@ My servers do NOT scale!
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
             YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-blog-navigation").on("click", function(e) {
-                    Y.one("#blog-navigation").toggleClass("open");
+                Y.one("#toggle-navigation").on("click", function(e) {
+                    Y.one("#navigation").toggleClass("open");
                     e.preventDefault();
                 });
             });

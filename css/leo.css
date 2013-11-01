@@ -1,19 +1,16 @@
 @import url(highlight.css);
-
-@import url(fonts.css);
 .highlightFont {
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
 }
 .normalFont {
-  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: normal;
 }
 .codeFont {
   font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
   font-weight: normal;
   line-height: 1.5em;
-  white-space: pre;
 }
 * {
   text-rendering: optimizeLegibility;
@@ -21,10 +18,6 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: color 0.2s ease-out;
-  -moz-transition: color 0.2s ease-out;
-  -o-transition: color 0.2s ease-out;
-  transition: color 0.2s ease-out;
 }
 h1,
 h2,
@@ -32,8 +25,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
 }
 h1 a,
 h2 a,
@@ -41,8 +34,8 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
 }
 div.highlight,
 code,
@@ -50,7 +43,6 @@ pre {
   font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
   font-weight: normal;
   line-height: 1.5em;
-  white-space: pre;
 }
 div.highlight span,
 code span,
@@ -58,7 +50,7 @@ pre span {
   font-family: inherit;
 }
 #layout {
-  padding-left: 25%;
+  padding-left: 30%;
   /* "left col (nav + list)" width */
 
   position: relative;
@@ -67,8 +59,8 @@ pre span {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 25%;
-  margin-left: -25%;
+  width: 30%;
+  margin-left: -30%;
   background-color: #09293e;
   background-image: -webkit-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
   background-image: -moz-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
@@ -76,339 +68,244 @@ pre span {
   background-image: -ms-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
   background-image: linear-gradient(to bottom, #09293e 60%, #061a28 100%);
 }
-#layout #sidebar a#toggle-blog-navigation {
+#layout #sidebar a#toggle-navigation {
   display: none;
 }
-#layout #sidebar #blog-header {
-  margin: 4em 1em 0 0;
+#layout #sidebar #header {
+  padding: 0 1.2em;
   text-align: right;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
-#layout #sidebar #blog-header a {
+#layout #sidebar #header a {
   color: #ffffff;
   text-decoration: none;
   display: block;
 }
-#layout #sidebar #blog-header a:link,
-#layout #sidebar #blog-header a:visited,
-#layout #sidebar #blog-header a:active {
+#layout #sidebar #header a:link,
+#layout #sidebar #header a:visited,
+#layout #sidebar #header a:active {
   color: #ffffff;
 }
-#layout #sidebar #blog-header a:hover,
-#layout #sidebar #blog-header a:focus {
+#layout #sidebar #header a:hover,
+#layout #sidebar #header a:focus {
   color: #1f8dd6;
 }
-#layout #sidebar #blog-header hgroup h2 {
+#layout #sidebar #header hgroup h2 {
   color: #1f8dd6;
+  font-size: 1.2em;
 }
-#layout #sidebar #blog-header #blog-navigation ul {
+#layout #sidebar #header #navigation ul {
   padding: 0;
 }
-#layout #sidebar #blog-header #blog-navigation ul#blog-internal-links {
+#layout #sidebar #header #navigation ul#internal-links {
   font-size: 1.1em;
 }
-#layout #sidebar #blog-header #blog-navigation ul#blog-internal-links li a {
-  padding: 0.2em;
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+#layout #sidebar #header #navigation ul#internal-links li a {
+  padding: 0.2em 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
 }
-#layout #sidebar #blog-header #blog-navigation ul#blog-internal-links li.current a {
+#layout #sidebar #header #navigation ul#internal-links li.current a {
   color: #1f8dd6;
 }
-#layout #sidebar #blog-header #blog-navigation ul#blog-rel-me-links {
+#layout #sidebar #header #navigation ul#rel-me-links {
   font-size: 1.3em;
 }
-#layout #sidebar #blog-header #blog-navigation ul#blog-rel-me-links li {
+#layout #sidebar #header #navigation ul#rel-me-links li {
   display: inline-block;
   padding: 0.2em;
 }
 #layout #main {
-  background-color: #fafbff;
-  background-image: -webkit-linear-gradient(to bottom, #fafbff 70%, #ffffff 100%);
-  background-image: -moz-linear-gradient(to bottom, #fafbff 70%, #ffffff 100%);
-  background-image: -o-linear-gradient(to bottom, #fafbff 70%, #ffffff 100%);
-  background-image: -ms-linear-gradient(to bottom, #fafbff 70%, #ffffff 100%);
-  background-image: linear-gradient(to bottom, #fafbff 70%, #ffffff 100%);
+  background-color: #f8f9ff;
+  background-image: -webkit-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
+  background-image: -moz-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
+  background-image: -o-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
+  background-image: -ms-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
 }
-#layout #main #blog-content {
-  margin: 1.5em 1em 0;
+#layout #main #content {
+  padding: 1.2em;
 }
-#layout #main #blog-content a {
+#layout #main #content a {
   color: #1f8dd6;
   text-decoration: none;
 }
-#layout #main #blog-content a:link,
-#layout #main #blog-content a:visited,
-#layout #main #blog-content a:active {
+#layout #main #content a:link,
+#layout #main #content a:visited,
+#layout #main #content a:active {
   color: #1f8dd6;
 }
-#layout #main #blog-content a:hover,
-#layout #main #blog-content a:focus {
+#layout #main #content a:hover,
+#layout #main #content a:focus {
   color: #09293e;
 }
-#layout #main #blog-content section.page,
-#layout #main #blog-content section.post,
-#layout #main #blog-content section.post-summary {
-  padding: 0.2em 0.5em;
+#layout #main #content .entry {
+  background-color: white;
+  padding: 1em 1.2em;
+  margin-bottom: 1.2em;
+  -o-box-shadow: 0 2px 5px #999999;
+  -moz-box-shadow: 0 2px 5px #999999;
+  -webkit-box-shadow: 0 2px 5px #999999;
+  box-shadow: 0 2px 5px #999999;
 }
-#layout #main #blog-content section.page header h1,
-#layout #main #blog-content section.post header h1,
-#layout #main #blog-content section.post-summary header h1 {
-  margin: 0.1em 0;
+#layout #main #content .entry .title {
   color: #1f8dd6;
-  text-shadow: 1px 1px 2px #dddddd;
+  margin: 0;
 }
-#layout #main #blog-content section.page header h1 a,
-#layout #main #blog-content section.post header h1 a,
-#layout #main #blog-content section.post-summary header h1 a {
-  display: block;
-}
-#layout #main #blog-content section.page header .post-meta,
-#layout #main #blog-content section.post header .post-meta,
-#layout #main #blog-content section.post-summary header .post-meta {
-  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: normal;
-  color: #bbbbbb;
-  font-size: 0.9em;
-  line-height: 1.3em;
-}
-#layout #main #blog-content section.page header .post-meta a.post-tag,
-#layout #main #blog-content section.post header .post-meta a.post-tag,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag {
-  white-space: nowrap;
-  color: #bbbbbb;
-  text-decoration: none;
-}
-#layout #main #blog-content section.page header .post-meta a.post-tag:link,
-#layout #main #blog-content section.post header .post-meta a.post-tag:link,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag:link,
-#layout #main #blog-content section.page header .post-meta a.post-tag:visited,
-#layout #main #blog-content section.post header .post-meta a.post-tag:visited,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag:visited,
-#layout #main #blog-content section.page header .post-meta a.post-tag:active,
-#layout #main #blog-content section.post header .post-meta a.post-tag:active,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag:active {
-  color: #bbbbbb;
-}
-#layout #main #blog-content section.page header .post-meta a.post-tag:hover,
-#layout #main #blog-content section.post header .post-meta a.post-tag:hover,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag:hover,
-#layout #main #blog-content section.page header .post-meta a.post-tag:focus,
-#layout #main #blog-content section.post header .post-meta a.post-tag:focus,
-#layout #main #blog-content section.post-summary header .post-meta a.post-tag:focus {
-  color: #09293e;
-}
-#layout #main #blog-content section.page div.page-body,
-#layout #main #blog-content section.post div.page-body,
-#layout #main #blog-content section.post-summary div.page-body,
-#layout #main #blog-content section.page div.post-body,
-#layout #main #blog-content section.post div.post-body,
-#layout #main #blog-content section.post-summary div.post-body {
-  margin: 0 1em;
-  font-size: 1.3em;
-  font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: normal;
+#layout #main #content .entry .meta {
+  color: #999999;
   line-height: 1.5em;
   text-align: justify;
 }
-#layout #main #blog-content section.page div.page-body h1,
-#layout #main #blog-content section.post div.page-body h1,
-#layout #main #blog-content section.post-summary div.page-body h1,
-#layout #main #blog-content section.page div.post-body h1,
-#layout #main #blog-content section.post div.post-body h1,
-#layout #main #blog-content section.post-summary div.post-body h1,
-#layout #main #blog-content section.page div.page-body h2,
-#layout #main #blog-content section.post div.page-body h2,
-#layout #main #blog-content section.post-summary div.page-body h2,
-#layout #main #blog-content section.page div.post-body h2,
-#layout #main #blog-content section.post div.post-body h2,
-#layout #main #blog-content section.post-summary div.post-body h2,
-#layout #main #blog-content section.page div.page-body h3,
-#layout #main #blog-content section.post div.page-body h3,
-#layout #main #blog-content section.post-summary div.page-body h3,
-#layout #main #blog-content section.page div.post-body h3,
-#layout #main #blog-content section.post div.post-body h3,
-#layout #main #blog-content section.post-summary div.post-body h3 {
+#layout #main #content .entry .meta i {
+  color: #d4d4d4;
+}
+#layout #main #content .entry .body {
+  line-height: 1.5em;
+  text-align: justify;
+}
+#layout #main #content .entry .body img,
+#layout #main #content .entry .body iframe,
+#layout #main #content .entry .body object {
+  -o-box-shadow: 0 2px 5px #999999;
+  -moz-box-shadow: 0 2px 5px #999999;
+  -webkit-box-shadow: 0 2px 5px #999999;
+  box-shadow: 0 2px 5px #999999;
+  display: block;
+  margin: 2em auto 1em;
+}
+#layout #main #content .entry .body .img {
+  color: #bbbbbb;
+  text-align: center;
+  font-style: italic;
+}
+#layout #main #content .entry .body .highlight {
+  -o-box-shadow: 0 2px 5px #999999;
+  -moz-box-shadow: 0 2px 5px #999999;
+  -webkit-box-shadow: 0 2px 5px #999999;
+  box-shadow: 0 2px 5px #999999;
+  margin-left: -1.6em;
+  margin-right: -1.6em;
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+#layout #main #content .entry .body .highlight pre {
+  padding: 1em 0.5em;
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+#layout #main #content .entry .body .highlight pre code {
+  display: block;
+}
+#layout #main #content .entry .body h1,
+#layout #main #content .entry .body h2,
+#layout #main #content .entry .body h3 {
   text-align: center;
 }
-#layout #main #blog-content section.page div.page-body h4,
-#layout #main #blog-content section.post div.page-body h4,
-#layout #main #blog-content section.post-summary div.page-body h4,
-#layout #main #blog-content section.page div.post-body h4,
-#layout #main #blog-content section.post div.post-body h4,
-#layout #main #blog-content section.post-summary div.post-body h4,
-#layout #main #blog-content section.page div.page-body h5,
-#layout #main #blog-content section.post div.page-body h5,
-#layout #main #blog-content section.post-summary div.page-body h5,
-#layout #main #blog-content section.page div.post-body h5,
-#layout #main #blog-content section.post div.post-body h5,
-#layout #main #blog-content section.post-summary div.post-body h5,
-#layout #main #blog-content section.page div.page-body h6,
-#layout #main #blog-content section.post div.page-body h6,
-#layout #main #blog-content section.post-summary div.page-body h6,
-#layout #main #blog-content section.page div.post-body h6,
-#layout #main #blog-content section.post div.post-body h6,
-#layout #main #blog-content section.post-summary div.post-body h6 {
+#layout #main #content .entry .body h4,
+#layout #main #content .entry .body h5,
+#layout #main #content .entry .body h6 {
   border-bottom: 1px solid #e1e1e1;
   color: #999999;
 }
-#layout #main #blog-content section.page div.page-body img,
-#layout #main #blog-content section.post div.page-body img,
-#layout #main #blog-content section.post-summary div.page-body img,
-#layout #main #blog-content section.page div.post-body img,
-#layout #main #blog-content section.post div.post-body img,
-#layout #main #blog-content section.post-summary div.post-body img {
-  -o-box-shadow: 0 2px 5px #bbbbbb;
-  -moz-box-shadow: 0 2px 5px #bbbbbb;
-  -webkit-box-shadow: 0 2px 5px #bbbbbb;
-  box-shadow: 0 2px 5px #bbbbbb;
-  display: block;
-  margin: 2em auto;
-}
-#layout #main #blog-content section.page div.page-body div.highlight,
-#layout #main #blog-content section.post div.page-body div.highlight,
-#layout #main #blog-content section.post-summary div.page-body div.highlight,
-#layout #main #blog-content section.page div.post-body div.highlight,
-#layout #main #blog-content section.post div.post-body div.highlight,
-#layout #main #blog-content section.post-summary div.post-body div.highlight {
-  padding: 0.1em 1em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  -o-box-shadow: 0 2px 5px #bbbbbb;
-  -moz-box-shadow: 0 2px 5px #bbbbbb;
-  -webkit-box-shadow: 0 2px 5px #bbbbbb;
-  box-shadow: 0 2px 5px #bbbbbb;
-  background: #fafafa;
-  border: 1px solid #c8c8c8;
-  font-size: 0.7em;
-  line-height: 1.2em;
-  overflow-x: auto;
-}
-#layout #main #blog-content section.page div.page-body div.highlight pre,
-#layout #main #blog-content section.post div.page-body div.highlight pre,
-#layout #main #blog-content section.post-summary div.page-body div.highlight pre,
-#layout #main #blog-content section.page div.post-body div.highlight pre,
-#layout #main #blog-content section.post div.post-body div.highlight pre,
-#layout #main #blog-content section.post-summary div.post-body div.highlight pre {
-  min-width: 1024px;
-}
-#layout #main #blog-content section.page div.page-body blockquote,
-#layout #main #blog-content section.post div.page-body blockquote,
-#layout #main #blog-content section.post-summary div.page-body blockquote,
-#layout #main #blog-content section.page div.post-body blockquote,
-#layout #main #blog-content section.post div.post-body blockquote,
-#layout #main #blog-content section.post-summary div.post-body blockquote {
-  padding: 0.8em 0 0 0.5em;
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+#layout #main #content .entry .body blockquote {
+  padding: 0.6em 0 0.6em 0.5em;
+  margin: 1em -0.5em 1em 22px;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
   color: #999999;
   border-left: 1px solid #e1e1e1;
 }
-#layout #main #blog-content section.page div.page-body blockquote:before,
-#layout #main #blog-content section.post div.page-body blockquote:before,
-#layout #main #blog-content section.post-summary div.page-body blockquote:before,
-#layout #main #blog-content section.page div.post-body blockquote:before,
-#layout #main #blog-content section.post div.post-body blockquote:before,
-#layout #main #blog-content section.post-summary div.post-body blockquote:before,
-#layout #main #blog-content section.page div.page-body blockquote::before,
-#layout #main #blog-content section.post div.page-body blockquote::before,
-#layout #main #blog-content section.post-summary div.page-body blockquote::before,
-#layout #main #blog-content section.page div.post-body blockquote::before,
-#layout #main #blog-content section.post div.post-body blockquote::before,
-#layout #main #blog-content section.post-summary div.post-body blockquote::before {
+#layout #main #content .entry .body blockquote:before,
+#layout #main #content .entry .body blockquote::before {
   content: "\f10d";
   font-family: "FontAwesome";
   float: left;
   color: #e1e1e1;
-  font-size: 2em;
-  margin-top: -0.2em;
-  margin-left: -1.5em;
+  font-size: 30px;
+  margin-top: -10px;
+  margin-left: -45px;
 }
-#layout #main #blog-content section.page.post-latest,
-#layout #main #blog-content section.post.post-latest,
-#layout #main #blog-content section.post-summary.post-latest {
-  margin: 2em 0 5em;
-}
-#layout #main #blog-content section.page.post-latest header h1,
-#layout #main #blog-content section.post.post-latest header h1,
-#layout #main #blog-content section.post-summary.post-latest header h1 {
-  font-size: 3em;
-}
-#layout #main #blog-content section.page header,
-#layout #main #blog-content section.post header {
+#layout #main #content .entry .body .archive .years {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
+  color: #d4d4d4;
   text-align: center;
-  font-size: 1.2em;
-  padding: 2em 0 3em;
-  margin: 0;
-  border-bottom: 1px solid #bbbbbb;
 }
-#layout #main #blog-content section.page header h1,
-#layout #main #blog-content section.post header h1 {
-  font-size: 3em;
+#layout #main #content .entry .body .archive .year {
+  color: #d4d4d4;
+  font-weight: bold;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-links {
-  text-align: center;
-  font-size: 1em;
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+#layout #main #content .entry .body .archive .years-separator {
+  border-top: 1px solid #bbbbbb;
 }
-#layout #main #blog-content section#blog-archive div.blog-archive-links a {
-  padding: 0.5em;
+#layout #main #content .entry .body .archive .month {
+  padding: 0.3em;
 }
-#layout #main #blog-content section#blog-archive .blog-archive-month {
-  padding: 0.2em;
+#layout #main #content .entry .body .archive .month .day {
+  color: #d4d4d4;
+  font-weight: bold;
 }
-#layout #main #blog-content section#blog-archive .blog-archive-month .blog-archive-month-year {
-  color: #d9d9d9;
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
-}
-#layout #main #blog-content section#blog-archive .blog-archive-month ul {
-  text-align: justify;
+#layout #main #content .entry .body .archive .month ul {
+  text-align: left;
   font-size: 0.8em;
   list-style: none;
   padding: 0;
 }
-#layout #main #blog-content section#blog-archive .blog-archive-month ul li {
-  margin: 0.1em;
+#layout #main #content .entry.summary .body {
+  color: #666666;
+  font-size: 0.9em;
 }
-#layout #main #blog-content section#blog-archive .blog-archive-month ul li .blog-archive-day {
-  color: #999999;
+#layout #main #content .entry.full {
+  margin-bottom: 0;
 }
-#layout #main #blog-content #blog-paginator {
-  font-size: 1.2em;
-  margin: 1em 0;
+#layout #main #content .entry.full .title {
+  font-size: 2.2em;
   text-align: center;
 }
-#layout #main #blog-content #blog-paginator div a {
+#layout #main #content .entry.full .meta {
+  margin-bottom: 2em;
+}
+#layout #main #content .entry.full .body {
+  font-size: 1.2em;
+}
+#layout #main #content #paginator {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
+}
+#layout #main #content #paginator div a {
   display: block;
   padding: 1em;
 }
-#layout #main #blog-footer {
-  font-family: "Fira Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
+#layout #main #footer {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
   text-align: center;
-  padding: 1em 0;
   text-transform: uppercase;
-  zoom: 1;
-  font-size: 0.7em;
-  color: #bbbbbb;
+  font-size: 0.8em;
+  color: #999999;
+  text-shadow: 0 1px 1px #fafafa;
 }
-#layout #main #blog-footer span {
+#layout #main #footer span {
   white-space: nowrap;
 }
-#layout #main #blog-footer a {
+#layout #main #footer a {
   font-weight: bold;
   color: #999999;
   text-decoration: none;
 }
-#layout #main #blog-footer a:link,
-#layout #main #blog-footer a:visited,
-#layout #main #blog-footer a:active {
+#layout #main #footer a:link,
+#layout #main #footer a:visited,
+#layout #main #footer a:active {
   color: #999999;
 }
-#layout #main #blog-footer a:hover,
-#layout #main #blog-footer a:focus {
+#layout #main #footer a:hover,
+#layout #main #footer a:focus {
   color: #09293e;
 }
 @media (max-width: 768px) {
@@ -420,57 +317,37 @@ pre span {
     position: relative;
     margin: 0;
   }
-  #layout #sidebar a#toggle-blog-navigation {
+  #layout #sidebar a#toggle-navigation {
     display: inline-block;
     color: #ffffff;
     text-decoration: none;
-    padding: 0.5em 0.6em;
-    font-size: 2em;
+    padding: 0.4em 0.6em;
+    font-size: 1.5em;
     float: right;
   }
-  #layout #sidebar a#toggle-blog-navigation:link,
-  #layout #sidebar a#toggle-blog-navigation:visited,
-  #layout #sidebar a#toggle-blog-navigation:active {
+  #layout #sidebar a#toggle-navigation:link,
+  #layout #sidebar a#toggle-navigation:visited,
+  #layout #sidebar a#toggle-navigation:active {
     color: #ffffff;
   }
-  #layout #sidebar a#toggle-blog-navigation:hover,
-  #layout #sidebar a#toggle-blog-navigation:focus {
+  #layout #sidebar a#toggle-navigation:hover,
+  #layout #sidebar a#toggle-navigation:focus {
     color: #1f8dd6;
   }
-  #layout #sidebar #blog-header {
+  #layout #sidebar #header {
     text-align: center;
     top: auto;
-    margin: 3.5em 0 0;
+    margin: 0 3em;
     position: static;
+    font-size: 1.2em;
   }
-  #layout #sidebar #blog-header #blog-navigation {
+  #layout #sidebar #header #navigation {
     display: none;
   }
-  #layout #sidebar #blog-header #blog-navigation.open {
+  #layout #sidebar #header #navigation.open {
     display: block;
   }
-  #layout #main #blog-content {
-    margin: 0;
-  }
-  #layout #main #blog-content section.post-summary header {
-    text-align: center;
-    padding: 0.2em 0;
-  }
-  #layout #main #blog-content section.post-summary.post-latest {
-    margin: 1em 0;
-  }
-  #layout #main #blog-content section.page header,
-  #layout #main #blog-content section.post header {
-    padding: 1em 0;
-  }
-  #layout #main #blog-content section.page header h1,
-  #layout #main #blog-content section.post header h1 {
-    font-size: 2em;
-  }
-  #layout #main #blog-content section.page div.page-body,
-  #layout #main #blog-content section.post div.page-body,
-  #layout #main #blog-content section.page div.post-body,
-  #layout #main #blog-content section.post div.post-body {
-    margin: 0;
+  #layout #main #content .entry .body .highlight {
+    font-size: 0.7em;
   }
 }
