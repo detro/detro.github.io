@@ -24,6 +24,9 @@
         <!-- Theme CSS -->
         <link rel="stylesheet" href="/css/leo.css">
 
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
         {% if site.google_analytics %}
             <!-- google analytics async -->
             <script type="text/javascript">
@@ -97,14 +100,15 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
-            YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-navigation").on("click", function(e) {
-                    Y.one("#navigation").toggleClass("open");
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
                     e.preventDefault();
                 });
-            });
         </script>
     </body>
 </html>
