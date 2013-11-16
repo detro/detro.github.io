@@ -3,7 +3,6 @@ include:
     url:
     title:
     date:
-    author:
     tags:
     body:
     has_meta:
@@ -25,18 +24,12 @@ include:
                     <i class="icon-calendar"></i>
                     <time datetime="{{ include.date | date: "%Y-%m-%d" }}">{{ include.date | date: "%A, %d %b %Y" }}</time>
                 {% endif %}
-                {% if include.author %}
-                    <i class="icon-user"></i>
-                    {% if site.authors[include.author] %}
-                        {{ site.authors[include.author] }}
-                    {% else %}
-                        include.author
-                    {% endif %}
-                {% endif %}
+
                 {% if include.tags %}
                     <i class="icon-tags"></i>
                     {{ include.tags | join: ' &bull; ' }}
                 {% endif %}
+
                 {% if include.has_wordcount %}
                     <i class="icon-time"></i>
                     {{ include.body | strip_html | number_of_words }} words
