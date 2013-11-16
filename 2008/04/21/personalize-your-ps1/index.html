@@ -11,13 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <link href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
         <!--[if IE 7]>
-            <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet" >
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
         <![endif]-->
 
+        <!-- Theme CSS -->
         <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
 
         
     </head>
@@ -31,7 +39,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
@@ -39,13 +47,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://detro.github.io/">blog</a></li>
+                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/projects">projects</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/about-me">about me</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/archive">archive</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -87,16 +95,12 @@
                     <i class="icon-calendar"></i>
                     <time datetime="2008-04-21">Monday, 21 Apr 2008</time>
                 
-                
-                    <i class="icon-user"></i>
-                    
-                        Ivan De Marino
-                    
-                
+
                 
                     <i class="icon-tags"></i>
                     code &bull; prompt &bull; cli &bull; personal &bull; personalization &bull; howto &bull; it &bull; terminal &bull; curiosity &bull; english &bull; bash &bull; utility
                 
+
                 
                     <i class="icon-time"></i>
                     45 words
@@ -114,13 +118,13 @@ Fancy $PS1 setting
 
 <p>The code to make the <a href="http://www.gnu.org/software/bash/">Bash</a> prompt looks like mine is (<code>~/.bashrc</code>):</p>
 <div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="k">case</span> <span class="nv">$TERM</span> in
-    xterm*|rxvt*<span class="o">)</span>
+    xterm*<span class="p">|</span>rxvt*<span class="o">)</span>
         <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s1">&#39;\[\033]0;\u@\h:\w\007\]&#39;</span>
-        ;;
+        <span class="p">;;</span>
     *<span class="o">)</span>
         <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-        ;;
-<span class="k">esac</span>;
+        <span class="p">;;</span>
+<span class="k">esac</span><span class="p">;</span>
 
 <span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;${TITLEBAR}\n\[\033[0;0m\][\033[0;32m\]time: \</span>
 <span class="s2">\[\033[0m\]\[\033[1;31m\]\t\[\033[0m\]\[\033[0;0m\]]-\</span>
@@ -158,14 +162,15 @@ Fancy $PS1 setting
             </div>
         </div>
 
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
-            YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-navigation").on("click", function(e) {
-                    Y.one("#navigation").toggleClass("open");
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
                     e.preventDefault();
                 });
-            });
         </script>
     </body>
 </html>

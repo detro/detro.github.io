@@ -11,13 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <link href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
         <!--[if IE 7]>
-            <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet" >
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
         <![endif]-->
 
+        <!-- Theme CSS -->
         <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
 
         
     </head>
@@ -31,7 +39,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://detro.github.io/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
@@ -39,13 +47,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://detro.github.io/">blog</a></li>
+                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/projects">projects</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/about-me">about me</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://detro.github.io/archive">archive</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -87,16 +95,12 @@
                     <i class="icon-calendar"></i>
                     <time datetime="2013-02-10">Sunday, 10 Feb 2013</time>
                 
-                
-                    <i class="icon-user"></i>
-                    
-                        Ivan De Marino
-                    
-                
+
                 
                     <i class="icon-tags"></i>
                     sdparm &bull; spindown &bull; usb &bull; mediacenter &bull; diskstats &bull; hd &bull; xbmc &bull; external
                 
+
                 
                     <i class="icon-time"></i>
                     362 words
@@ -127,8 +131,8 @@
 <div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c"># !/bin/sh</span>
 
 <span class="c"># Only ROOT can run this</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(id -u)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">        </span><span class="nb">echo</span> “This script must be run as root” 1&gt;&amp;2
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(id -u)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">        </span><span class="nb">echo</span> “This script must be run as root” 1&gt;<span class="p">&amp;</span>2
         <span class="nb">exit </span>1
 <span class="k">fi</span>
 
@@ -136,16 +140,16 @@
 <span class="nv">PREV_STATE_FILENAME</span><span class="o">=</span>prev_state_<span class="nv">$1</span>.spindown
 
 <span class="c"># Get new state from diskstats</span>
-<span class="nv">NEWstate</span><span class="o">=</span><span class="k">$(</span>cat /proc/diskstats | grep <span class="nv">$1</span><span class="k">)</span>
+<span class="nv">NEWstate</span><span class="o">=</span><span class="k">$(</span>cat /proc/diskstats <span class="p">|</span> grep <span class="nv">$1</span><span class="k">)</span>
 <span class="nb">echo</span> <span class="nv">$NEWstate</span> &gt; <span class="s2">&quot;$STATE_FILENAME&quot;</span>
 
 <span class="c"># compare md5 sums</span>
-<span class="nv">md5new</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$STATE_FILENAME</span> | sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
-<span class="nv">md5old</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$PREV_STATE_FILENAME</span> | sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
+<span class="nv">md5new</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$STATE_FILENAME</span> <span class="p">|</span> sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
+<span class="nv">md5old</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$PREV_STATE_FILENAME</span> <span class="p">|</span> sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
 
 <span class="c"># if no changes, power down</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$md5new&quot;</span> <span class="o">=</span> <span class="s2">&quot;$md5old&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">        </span>sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> &amp;&gt;/dev/null
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$md5new&quot;</span> <span class="o">=</span> <span class="s2">&quot;$md5old&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="k">        </span>sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> <span class="p">&amp;</span>&gt;/dev/null
 <span class="k">fi</span>
 
 <span class="c"># Write current state to file</span>
@@ -191,14 +195,15 @@ What it does is just probe <code>/proc/diskstats</code> virtual file to get info
             </div>
         </div>
 
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.12.0/yui-base/yui-base-min.js&3.12.0/oop/oop-min.js&3.12.0/event-custom-base/event-custom-base-min.js&3.12.0/features/features-min.js&3.12.0/dom-core/dom-core-min.js&3.12.0/dom-base/dom-base-min.js&3.12.0/selector-native/selector-native-min.js&3.12.0/selector/selector-min.js&3.12.0/node-core/node-core-min.js&3.12.0/color-base/color-base-min.js&3.12.0/dom-style/dom-style-min.js&3.12.0/node-base/node-base-min.js&3.12.0/event-base/event-base-min.js"></script>
         <script>
-            YUI().use('node', 'event', function (Y) {
-                Y.one("#toggle-navigation").on("click", function(e) {
-                    Y.one("#navigation").toggleClass("open");
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
                     e.preventDefault();
                 });
-            });
         </script>
     </body>
 </html>
