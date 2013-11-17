@@ -167,23 +167,30 @@ div.highlight, code, pre {
         .linearGradient(to bottom, @lightBlue, white, 80%);
 
         #content {
-            padding: 15px;
-
             a {
                 .a(@blue, @darkBlue);
             }
 
             .entry {
+                .paddings(@amount: 15px) {
+                    padding-left: @amount;
+                    padding-right: @amount;
+                }
+
                 margin-bottom: 1.2em;
 
                 .title {
                     color: @blue;
-                    margin: 0;
+                    .paddings;
                 }
                 .meta {
+                    font-size: 0.9em;
+                    list-style: none;
                     color: @grey;
                     line-height: 1.5em;
-                    text-align: justify;
+                    .paddings;
+                    margin-top: 0.5em;
+                    margin-bottom: 0.5em;
 
                     i {
                         color: @lighterGrey;
@@ -192,6 +199,15 @@ div.highlight, code, pre {
                 .body {
                     line-height: 1.5em;
                     text-align: justify;
+
+                    p {
+                        .paddings;
+                    }
+
+                    ul, ol {
+                        .paddings;
+                        padding-left: 50px;
+                    }
 
                     img,
                     iframe,
@@ -210,11 +226,11 @@ div.highlight, code, pre {
 
                     .highlight {
                         .boxShadowHighlight;
-                        margin-left: -15px;
-                        margin-right: -15px;
 
                         font-size: 0.9em;
                         line-height: 1.2em;
+                        border-top: 1px solid @lightGrey;
+                        border-bottom: 1px solid @lightGrey;
 
                         pre {
                             padding: 1em 0.5em;
@@ -228,19 +244,27 @@ div.highlight, code, pre {
                         }
                     }
 
+                    h1, h2, h3, h4, h5, h6 {
+                        .paddings(5px);
+                    }
+
                     h4, h5, h6 {
                         border-bottom: 1px solid @evenLighterGrey;
                         color: @grey;
                     }
 
                     blockquote {
-                        padding: 0.6em 0 0.6em 0.5em;
-                        margin: 1em -0.5em 1em 22px;
+                        margin-left: 50px;
+                        margin-right: 0;
+                        .paddings;
 
                         .highlightFont;
 
                         color: @grey;
-                        border-left: 1px solid @evenLighterGrey;
+
+                        p {
+                            padding: 0;
+                        }
 
                         &:before,
                         &::before {
@@ -249,8 +273,8 @@ div.highlight, code, pre {
                             float: left;
                             color: @evenLighterGrey;
                             font-size: 30px;
-                            margin-top: -10px;
-                            margin-left: -45px;
+                            margin-top: 0px;
+                            margin-left: -40px;
                         }
                     }
 
@@ -297,15 +321,8 @@ div.highlight, code, pre {
                 &.full {
                     margin-bottom: 0;
 
-                    .title {
-                        font-size: 2.2em;
-                        text-align: center;
-                    }
-                    .meta {
-                        margin-bottom: 2em;
-                    }
                     .body {
-                        font-size: 1.2em;
+                        font-size: 1.1em;
                     }
                 }
             }
@@ -370,7 +387,11 @@ div.highlight, code, pre {
                 top: auto;
                 margin: 0 3em;
                 position: static;
-                font-size: 1.2em;
+                font-size: 1em;
+
+                hgroup h1 {
+                    font-size: 1.5em;
+                }
 
                 #navigation {
                     display: none;
@@ -384,8 +405,6 @@ div.highlight, code, pre {
         #main {
             #content {
                 .entry {
-                    .title {
-                    }
                     .body {
                         .highlight {
                             font-size: 0.7em;

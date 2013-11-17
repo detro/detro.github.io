@@ -20,30 +20,38 @@ include:
             {% endif %}
         </h1>
         {% if include.has_meta %}
-            <p class="meta">
+            <ul class="meta">
                 {% if include.date %}
-                    <i class="icon-calendar"></i>
-                    <time datetime="{{ include.date | date: "%Y-%m-%d" }}">{{ include.date | date: "%A, %d %b %Y" }}</time>
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="{{ include.date | date: "%Y-%m-%d" }}">{{ include.date | date: "%A, %d %b %Y" }}</time>
+                    </li>
                 {% endif %}
 
                 {% if include.tags %}
-                    <i class="icon-tags"></i>
-                    {{ include.tags | join: ' &bull; ' }}
+                    <li>
+                        <i class="icon-tags"></i>
+                        {{ include.tags | join: ' &bull; ' }}
+                    </li>
                 {% endif %}
 
                 {% if include.has_wordcount %}
-                    <i class="icon-time"></i>
-                    {{ include.body | strip_html | number_of_words }} words
+                    <li>
+                        <i class="icon-time"></i>
+                        {{ include.body | strip_html | number_of_words }} words
+                    </li>
                 {% endif %}
-            </p>
+            </ul>
         {% endif %}
     </header>
     {% if include.body %}
         <div class="body">
             {% if include.is_summary %}
-                {{ include.body | strip_html | truncatewords: 50 }}
-                <br>
-                <a href="{{ include.url }}"><em>read article</em></a>
+                <p>
+                    {{ include.body | strip_html | truncatewords: 50 }}
+                    <br>
+                    <a href="{{ include.url }}"><em>read article</em></a>
+                </p>
             {% else %}
                 {{ include.body }}
             {% endif %}
@@ -53,9 +61,7 @@ include:
         <div id="disqus_thread" class="comments"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "{{ site.disqus.shortname }}",
-                disqus_identifier = "{{ include.title }}",
-                disqus_title = "{{ include.title }}";
+            var disqus_shortname = "{{ site.disqus.shortname }}";
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function() {
