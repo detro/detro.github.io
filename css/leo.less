@@ -63,7 +63,8 @@
 }
 
 .normalFont {
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    // font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "Georgia", serif;
     font-weight: normal;
 }
 
@@ -167,12 +168,13 @@ div.highlight, code, pre {
         .linearGradient(to bottom, @lightBlue, white, 80%);
 
         #content {
+
             a {
                 .a(@blue, @darkBlue);
             }
 
             .entry {
-                .paddings(@amount: 15px) {
+                .paddings(@amount: 20px) {
                     padding-left: @amount;
                     padding-right: @amount;
                 }
@@ -197,6 +199,8 @@ div.highlight, code, pre {
                     }
                 }
                 .body {
+                    .normalFont;
+
                     line-height: 1.5em;
                     text-align: justify;
 
@@ -206,7 +210,7 @@ div.highlight, code, pre {
 
                     ul, ol {
                         .paddings;
-                        padding-left: 50px;
+                        padding-left: 55px;
                     }
 
                     img,
@@ -245,7 +249,12 @@ div.highlight, code, pre {
                     }
 
                     h1, h2, h3, h4, h5, h6 {
-                        .paddings(5px);
+                        .paddings;
+                        background: @darkBlue;
+                        .boxShadowHighlight;
+                        color: white;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
                     }
 
                     h4, h5, h6 {
@@ -257,8 +266,6 @@ div.highlight, code, pre {
                         margin-left: 50px;
                         margin-right: 0;
                         .paddings;
-
-                        .highlightFont;
 
                         color: @grey;
 
@@ -292,7 +299,14 @@ div.highlight, code, pre {
                             border-top: 1px solid @lightGrey;
                         }
                         .month {
-                            padding: 0.3em;
+                            padding: 0 0.3em;
+
+                            h3 {
+                                background: none;
+                                color: @darkGrey;
+                                box-shadow: none;
+                                padding: 0;
+                            }
 
                             .day {
                                 color: @lighterGrey;
@@ -315,7 +329,6 @@ div.highlight, code, pre {
                 &.summary {
                     .body {
                         color: @darkGrey;
-                        font-size: 0.9em;
                     }
                 }
                 &.full {
