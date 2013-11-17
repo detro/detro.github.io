@@ -57,7 +57,7 @@ permalink: /:year/:month/:title
 paginate: 10
 paginate_path: 'blog/:num'
 
-# google_analytics:
-#     account: UA-XXXXX-X
+google_analytics:
+    account: UA-136869-11
 
 # limit_posts: 50
