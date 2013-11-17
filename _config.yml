@@ -61,3 +61,6 @@ google_analytics:
     account: UA-136869-11
 
 # limit_posts: 50
+disqus:
+    shortname: "blogivandemarinome"
+
