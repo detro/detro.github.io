@@ -123,9 +123,6 @@ pre span {
   background-image: -ms-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
   background-image: linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
 }
-#layout #main #content {
-  padding: 15px;
-}
 #layout #main #content a {
   color: #1f8dd6;
   text-decoration: none;
@@ -144,12 +141,18 @@ pre span {
 }
 #layout #main #content .entry .title {
   color: #1f8dd6;
-  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 #layout #main #content .entry .meta {
+  font-size: 0.9em;
+  list-style: none;
   color: #999999;
   line-height: 1.5em;
-  text-align: justify;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 #layout #main #content .entry .meta i {
   color: #d4d4d4;
@@ -157,6 +160,16 @@ pre span {
 #layout #main #content .entry .body {
   line-height: 1.5em;
   text-align: justify;
+}
+#layout #main #content .entry .body p {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#layout #main #content .entry .body ul,
+#layout #main #content .entry .body ol {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 50px;
 }
 #layout #main #content .entry .body img,
 #layout #main #content .entry .body iframe,
@@ -178,10 +191,10 @@ pre span {
   -moz-box-shadow: 0 2px 5px #999999;
   -webkit-box-shadow: 0 2px 5px #999999;
   box-shadow: 0 2px 5px #999999;
-  margin-left: -15px;
-  margin-right: -15px;
   font-size: 0.9em;
   line-height: 1.2em;
+  border-top: 1px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
 }
 #layout #main #content .entry .body .highlight pre {
   padding: 1em 0.5em;
@@ -192,6 +205,15 @@ pre span {
 #layout #main #content .entry .body .highlight pre code {
   display: block;
 }
+#layout #main #content .entry .body h1,
+#layout #main #content .entry .body h2,
+#layout #main #content .entry .body h3,
+#layout #main #content .entry .body h4,
+#layout #main #content .entry .body h5,
+#layout #main #content .entry .body h6 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 #layout #main #content .entry .body h4,
 #layout #main #content .entry .body h5,
 #layout #main #content .entry .body h6 {
@@ -199,12 +221,16 @@ pre span {
   color: #999999;
 }
 #layout #main #content .entry .body blockquote {
-  padding: 0.6em 0 0.6em 0.5em;
-  margin: 1em -0.5em 1em 22px;
+  margin-left: 50px;
+  margin-right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 100;
   color: #999999;
-  border-left: 1px solid #e1e1e1;
+}
+#layout #main #content .entry .body blockquote p {
+  padding: 0;
 }
 #layout #main #content .entry .body blockquote:before,
 #layout #main #content .entry .body blockquote::before {
@@ -213,8 +239,8 @@ pre span {
   float: left;
   color: #e1e1e1;
   font-size: 30px;
-  margin-top: -10px;
-  margin-left: -45px;
+  margin-top: 0px;
+  margin-left: -40px;
 }
 #layout #main #content .entry .body .archive .years {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -252,15 +278,8 @@ pre span {
 #layout #main #content .entry.full {
   margin-bottom: 0;
 }
-#layout #main #content .entry.full .title {
-  font-size: 2.2em;
-  text-align: center;
-}
-#layout #main #content .entry.full .meta {
-  margin-bottom: 2em;
-}
 #layout #main #content .entry.full .body {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 #layout #main #content #paginator {
   font-size: 1.1em;
@@ -331,7 +350,10 @@ pre span {
     top: auto;
     margin: 0 3em;
     position: static;
-    font-size: 1.2em;
+    font-size: 1em;
+  }
+  #layout #sidebar #header hgroup h1 {
+    font-size: 1.5em;
   }
   #layout #sidebar #header #navigation {
     display: none;
