@@ -174,7 +174,7 @@ div.highlight, code, pre {
             }
 
             .entry {
-                .paddings(@amount: 20px) {
+                .horizPaddings(@amount: 20px) {
                     padding-left: @amount;
                     padding-right: @amount;
                 }
@@ -183,14 +183,14 @@ div.highlight, code, pre {
 
                 .title {
                     color: @blue;
-                    .paddings;
+                    .horizPaddings;
                 }
                 .meta {
                     font-size: 0.9em;
                     list-style: none;
                     color: @grey;
                     line-height: 1.5em;
-                    .paddings;
+                    .horizPaddings;
                     margin-top: 0.5em;
                     margin-bottom: 0.5em;
 
@@ -205,11 +205,11 @@ div.highlight, code, pre {
                     text-align: justify;
 
                     p {
-                        .paddings;
+                        .horizPaddings;
                     }
 
                     ul, ol {
-                        .paddings;
+                        .horizPaddings;
                         padding-left: 55px;
                     }
 
@@ -249,7 +249,7 @@ div.highlight, code, pre {
                     }
 
                     h1, h2, h3, h4, h5, h6 {
-                        .paddings;
+                        .horizPaddings;
                         background: @darkBlue;
                         .boxShadowHighlight;
                         color: white;
@@ -265,7 +265,7 @@ div.highlight, code, pre {
                     blockquote {
                         margin-left: 50px;
                         margin-right: 0;
-                        .paddings;
+                        .horizPaddings;
 
                         color: @grey;
 
@@ -324,6 +324,7 @@ div.highlight, code, pre {
                 }
                 .comments {
                     margin: 2em 0;
+                    .horizPaddings;
                 }
 
                 &.summary {
