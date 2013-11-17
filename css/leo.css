@@ -176,10 +176,10 @@ pre span {
 #layout #main #content .entry .body img,
 #layout #main #content .entry .body iframe,
 #layout #main #content .entry .body object {
-  -o-box-shadow: 0 2px 5px #999999;
-  -moz-box-shadow: 0 2px 5px #999999;
-  -webkit-box-shadow: 0 2px 5px #999999;
-  box-shadow: 0 2px 5px #999999;
+  -o-box-shadow: 0 2px 4px #999999;
+  -moz-box-shadow: 0 2px 4px #999999;
+  -webkit-box-shadow: 0 2px 4px #999999;
+  box-shadow: 0 2px 4px #999999;
   display: block;
   margin: 2em auto 1em;
 }
@@ -189,10 +189,10 @@ pre span {
   font-style: italic;
 }
 #layout #main #content .entry .body .highlight {
-  -o-box-shadow: 0 2px 5px #999999;
-  -moz-box-shadow: 0 2px 5px #999999;
-  -webkit-box-shadow: 0 2px 5px #999999;
-  box-shadow: 0 2px 5px #999999;
+  -o-box-shadow: 0 2px 4px #999999;
+  -moz-box-shadow: 0 2px 4px #999999;
+  -webkit-box-shadow: 0 2px 4px #999999;
+  box-shadow: 0 2px 4px #999999;
   font-size: 0.9em;
   line-height: 1.2em;
   border-top: 1px solid #bbbbbb;
@@ -216,10 +216,10 @@ pre span {
   padding-left: 20px;
   padding-right: 20px;
   background: #09293e;
-  -o-box-shadow: 0 2px 5px #999999;
-  -moz-box-shadow: 0 2px 5px #999999;
-  -webkit-box-shadow: 0 2px 5px #999999;
-  box-shadow: 0 2px 5px #999999;
+  -o-box-shadow: 0 2px 4px #999999;
+  -moz-box-shadow: 0 2px 4px #999999;
+  -webkit-box-shadow: 0 2px 4px #999999;
+  box-shadow: 0 2px 4px #999999;
   color: white;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -284,6 +284,8 @@ pre span {
 }
 #layout #main #content .entry .comments {
   margin: 2em 0;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 #layout #main #content .entry.summary .body {
   color: #666666;
