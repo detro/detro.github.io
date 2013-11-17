@@ -4,7 +4,7 @@
   font-weight: 100;
 }
 .normalFont {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Georgia", serif;
   font-weight: normal;
 }
 .codeFont {
@@ -141,16 +141,16 @@ pre span {
 }
 #layout #main #content .entry .title {
   color: #1f8dd6;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 #layout #main #content .entry .meta {
   font-size: 0.9em;
   list-style: none;
   color: #999999;
   line-height: 1.5em;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -158,18 +158,20 @@ pre span {
   color: #d4d4d4;
 }
 #layout #main #content .entry .body {
+  font-family: "Georgia", serif;
+  font-weight: normal;
   line-height: 1.5em;
   text-align: justify;
 }
 #layout #main #content .entry .body p {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 #layout #main #content .entry .body ul,
 #layout #main #content .entry .body ol {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-left: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-left: 55px;
 }
 #layout #main #content .entry .body img,
 #layout #main #content .entry .body iframe,
@@ -211,8 +213,16 @@ pre span {
 #layout #main #content .entry .body h4,
 #layout #main #content .entry .body h5,
 #layout #main #content .entry .body h6 {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #09293e;
+  -o-box-shadow: 0 2px 5px #999999;
+  -moz-box-shadow: 0 2px 5px #999999;
+  -webkit-box-shadow: 0 2px 5px #999999;
+  box-shadow: 0 2px 5px #999999;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 #layout #main #content .entry .body h4,
 #layout #main #content .entry .body h5,
@@ -223,10 +233,8 @@ pre span {
 #layout #main #content .entry .body blockquote {
   margin-left: 50px;
   margin-right: 0;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 100;
+  padding-left: 20px;
+  padding-right: 20px;
   color: #999999;
 }
 #layout #main #content .entry .body blockquote p {
@@ -256,7 +264,13 @@ pre span {
   border-top: 1px solid #bbbbbb;
 }
 #layout #main #content .entry .body .archive .month {
-  padding: 0.3em;
+  padding: 0 0.3em;
+}
+#layout #main #content .entry .body .archive .month h3 {
+  background: none;
+  color: #666666;
+  box-shadow: none;
+  padding: 0;
 }
 #layout #main #content .entry .body .archive .month .day {
   color: #d4d4d4;
@@ -273,7 +287,6 @@ pre span {
 }
 #layout #main #content .entry.summary .body {
   color: #666666;
-  font-size: 0.9em;
 }
 #layout #main #content .entry.full {
   margin-bottom: 0;
