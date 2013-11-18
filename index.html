@@ -6,7 +6,7 @@ navtitle: blog
 <div class="pure-g-r">
     {% for post in paginator.posts %}
 
-        {% include entry.html title=post.title url=post.url date=post.date body=post.content has_meta=true is_summary=true has_wordcount=false %}
+        {% include entry.html title=post.title url=post.url date=post.date body=post.content has_meta=true is_summary=true has_wordcount=true %}
 
     {% endfor %}
 </div>
