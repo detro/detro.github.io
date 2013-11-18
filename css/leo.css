@@ -61,12 +61,7 @@ pre span {
   bottom: 0;
   width: 30%;
   margin-left: -30%;
-  background-color: #09293e;
-  background-image: -webkit-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
-  background-image: -moz-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
-  background-image: -o-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
-  background-image: -ms-linear-gradient(to bottom, #09293e 60%, #061a28 100%);
-  background-image: linear-gradient(to bottom, #09293e 60%, #061a28 100%);
+  background: #09293e;
 }
 #layout #sidebar a#toggle-navigation {
   display: none;
@@ -115,14 +110,6 @@ pre span {
   display: inline-block;
   padding: 0.2em;
 }
-#layout #main {
-  background-color: #f8f9ff;
-  background-image: -webkit-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
-  background-image: -moz-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
-  background-image: -o-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
-  background-image: -ms-linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
-  background-image: linear-gradient(to bottom, #f8f9ff 80%, #ffffff 100%);
-}
 #layout #main #content a {
   color: #1f8dd6;
   text-decoration: none;
@@ -137,12 +124,29 @@ pre span {
   color: #09293e;
 }
 #layout #main #content .entry {
-  margin-bottom: 1.2em;
+  padding: 1em 0;
+  border-bottom: 1px solid #e0f0fb;
 }
 #layout #main #content .entry .title {
   color: #1f8dd6;
   padding-left: 20px;
   padding-right: 20px;
+  font-weight: bold;
+  margin-top: 0;
+}
+#layout #main #content .entry .title a {
+  color: #1f8dd6;
+  text-decoration: none;
+  font-weight: inherit;
+}
+#layout #main #content .entry .title a:link,
+#layout #main #content .entry .title a:visited,
+#layout #main #content .entry .title a:active {
+  color: #1f8dd6;
+}
+#layout #main #content .entry .title a:hover,
+#layout #main #content .entry .title a:focus {
+  color: #09293e;
 }
 #layout #main #content .entry .meta {
   font-size: 0.9em;
@@ -176,10 +180,10 @@ pre span {
 #layout #main #content .entry .body img,
 #layout #main #content .entry .body iframe,
 #layout #main #content .entry .body object {
-  -o-box-shadow: 0 2px 4px #999999;
-  -moz-box-shadow: 0 2px 4px #999999;
-  -webkit-box-shadow: 0 2px 4px #999999;
-  box-shadow: 0 2px 4px #999999;
+  -o-box-shadow: 0 2px 10px #999999;
+  -moz-box-shadow: 0 2px 10px #999999;
+  -webkit-box-shadow: 0 2px 10px #999999;
+  box-shadow: 0 2px 10px #999999;
   display: block;
   margin: 2em auto 1em;
 }
@@ -189,17 +193,17 @@ pre span {
   font-style: italic;
 }
 #layout #main #content .entry .body .highlight {
-  -o-box-shadow: 0 2px 4px #999999;
-  -moz-box-shadow: 0 2px 4px #999999;
-  -webkit-box-shadow: 0 2px 4px #999999;
-  box-shadow: 0 2px 4px #999999;
+  -o-box-shadow: 0 2px 10px #999999;
+  -moz-box-shadow: 0 2px 10px #999999;
+  -webkit-box-shadow: 0 2px 10px #999999;
+  box-shadow: 0 2px 10px #999999;
   font-size: 0.9em;
   line-height: 1.2em;
-  border-top: 1px solid #bbbbbb;
-  border-bottom: 1px solid #bbbbbb;
+  border-top: 1px solid #e0f0fb;
+  border-bottom: 1px solid #e0f0fb;
 }
 #layout #main #content .entry .body .highlight pre {
-  padding: 1em 0.5em;
+  padding: 1em 1em;
   overflow: auto;
   word-wrap: normal;
   white-space: pre;
@@ -215,20 +219,10 @@ pre span {
 #layout #main #content .entry .body h6 {
   padding-left: 20px;
   padding-right: 20px;
-  background: #09293e;
-  -o-box-shadow: 0 2px 4px #999999;
-  -moz-box-shadow: 0 2px 4px #999999;
-  -webkit-box-shadow: 0 2px 4px #999999;
-  box-shadow: 0 2px 4px #999999;
-  color: white;
+  color: #999999;
+  border-bottom: 1px solid #e1e1e1;
   padding-top: 5px;
   padding-bottom: 5px;
-}
-#layout #main #content .entry .body h4,
-#layout #main #content .entry .body h5,
-#layout #main #content .entry .body h6 {
-  border-bottom: 1px solid #e1e1e1;
-  color: #999999;
 }
 #layout #main #content .entry .body blockquote {
   margin-left: 50px;
@@ -292,6 +286,7 @@ pre span {
 }
 #layout #main #content .entry.full {
   margin-bottom: 0;
+  border-bottom: 0;
 }
 #layout #main #content .entry.full .body {
   font-size: 1.1em;
