@@ -2,6 +2,7 @@
 @blue: #1f8dd6;
 @lightBlue: #f8f9ff;
 @darkBlue: #09293e;
+@evenLighterBlue: lighten(@blue, 45%);
 @grey: #999;
 @lightGrey: #bbb;
 @lighterGrey: lighten(@lightGrey, 10%);
@@ -10,10 +11,10 @@
 @ultraLightGrey: #fafafa;
 
 .boxShadowHighlight (@color: @grey) {
-    -o-box-shadow: 0 2px 4px @color;
-    -moz-box-shadow: 0 2px 4px @color;
-    -webkit-box-shadow: 0 2px 4px @color;
-    box-shadow: 0 2px 4px @color;
+    -o-box-shadow: 0 2px 10px @color;
+    -moz-box-shadow: 0 2px 10px @color;
+    -webkit-box-shadow: 0 2px 10px @color;
+    box-shadow: 0 2px 10px @color;
 }
 
 .a(@color, @hoverColor) {
@@ -45,15 +46,6 @@
     box-sizing: @value;
 }
 
-.linearGradient(@dir: top, @color1, @color2, @stop1: 0, @stop2: 100%) {
-    background-color: @color1;
-    background-image: -webkit-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
-    background-image: -moz-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
-    background-image: -o-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
-    background-image: -ms-linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
-    background-image: linear-gradient(@dir, @color1 @stop1, @color2 @stop2);
-}
-
 // --------------------------------------------------------------------- General
 @import url(highlight.css);
 
@@ -63,7 +55,6 @@
 }
 
 .normalFont {
-    // font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-family: "Georgia", serif;
     font-weight: normal;
 }
@@ -107,8 +98,7 @@ div.highlight, code, pre {
         bottom: 0;
         width: @sidebarWidth;
         margin-left: -@sidebarWidth;
-
-        .linearGradient(to bottom, @darkBlue, darken(@darkBlue, 5%), 60%);
+        background: @darkBlue;
 
         a#toggle-navigation {
             display: none;
@@ -165,8 +155,6 @@ div.highlight, code, pre {
     }
 
     #main {
-        .linearGradient(to bottom, @lightBlue, white, 80%);
-
         #content {
 
             a {
@@ -179,11 +167,18 @@ div.highlight, code, pre {
                     padding-right: @amount;
                 }
 
-                margin-bottom: 1.2em;
+                padding: 1em 0;
+                border-bottom: 1px solid @evenLighterBlue;
 
                 .title {
                     color: @blue;
                     .horizPaddings;
+                    font-weight: bold;
+                    margin-top: 0;
+                    a {
+                        .a(@blue, @darkBlue);
+                        font-weight: inherit;
+                    }
                 }
                 .meta {
                     font-size: 0.9em;
@@ -233,11 +228,11 @@ div.highlight, code, pre {
 
                         font-size: 0.9em;
                         line-height: 1.2em;
-                        border-top: 1px solid @lightGrey;
-                        border-bottom: 1px solid @lightGrey;
+                        border-top: 1px solid @evenLighterBlue;
+                        border-bottom: 1px solid @evenLighterBlue;
 
                         pre {
-                            padding: 1em 0.5em;
+                            padding: 1em 1em;
                             overflow: auto;
                             word-wrap: normal;
                             white-space: pre;
@@ -250,16 +245,10 @@ div.highlight, code, pre {
 
                     h1, h2, h3, h4, h5, h6 {
                         .horizPaddings;
-                        background: @darkBlue;
-                        .boxShadowHighlight;
-                        color: white;
+                        color: @grey;
+                        border-bottom: 1px solid @evenLighterGrey;
                         padding-top: 5px;
                         padding-bottom: 5px;
-                    }
-
-                    h4, h5, h6 {
-                        border-bottom: 1px solid @evenLighterGrey;
-                        color: @grey;
                     }
 
                     blockquote {
@@ -334,6 +323,7 @@ div.highlight, code, pre {
                 }
                 &.full {
                     margin-bottom: 0;
+                    border-bottom: 0;
 
                     .body {
                         font-size: 1.1em;
