@@ -220,9 +220,13 @@ pre span {
   padding-left: 20px;
   padding-right: 20px;
   color: #999999;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+#layout #main #content .entry .body h1,
+#layout #main #content .entry .body h2,
+#layout #main #content .entry .body h3 {
   border-bottom: 1px solid #e1e1e1;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 #layout #main #content .entry .body blockquote {
   margin-left: 50px;
