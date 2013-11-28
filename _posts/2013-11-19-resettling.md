@@ -17,7 +17,10 @@ how to be parents, Leonardo will be learning how to be a baby. What now looks
 like a difficult, consuming and intense task, will at some point become
 "daily routine" (though, a much sweeter one with him at the center of it all).
 
-![Reset button](http://www.endlessicons.com/wp-content/uploads/2012/11/reset-icon-614x460.png)
+<div class="img">
+<img src="http://www.endlessicons.com/wp-content/uploads/2012/11/reset-icon-614x460.png" alt="Reset!">
+<span>Reset Button</span>
+</div>
 
 It is a full **RESET** to which we need to **SETTLE**. A **RESETTLE**. A new life,
 with many unknows to uncover, but also the will and need to be as united and as
@@ -64,12 +67,14 @@ talk about:
 1. I have bought and setup a [N54L](http://www8.hp.com/uk/en/products/proliant-servers/product-detail.html?oid=5336624#!tab=features)
 [ZFS](http://en.wikipedia.org/wiki/ZFS) NAS at home: some of the decisions
 I made during that are worth sharing
-2. I need to write an update on the status of the
+2. Give an update on the status of the
 [GhostDriver](https://github.com/detro/ghostdriver) and
 [PhantomJS](http://phantomjs.org) projects
-3. I have a satiric bible-related story that I want to publish (very short and
+3. A satiric bible-related story that I want to publish (very short and
 quite offensive :P)
-4. ... TODO ...
+4. [Sulfur](https://github.com/detro/sulfur), that I haven't introduced nor documented properly
+5. 2013 is the year I read the most in my life
+6. I'm leaving Amazon AIV to go to work at eBay
 
 ## Catching up with personal projects
 
