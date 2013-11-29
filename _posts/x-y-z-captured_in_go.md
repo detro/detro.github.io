@@ -1,6 +1,6 @@
 ---
 layout: post
-published: true
+published: false
 title: "Captured in game of Go"
 tags: []
 ---
