@@ -75,6 +75,7 @@ quite offensive :P)
 4. [Sulfur](https://github.com/detro/sulfur), that I haven't introduced nor documented properly
 5. 2013 is the year I read the most in my life
 6. I'm leaving Amazon AIV to go to work at eBay
+7. Coding exercises I have coded recently in JS
 
 ## Catching up with personal projects
 
