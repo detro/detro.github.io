@@ -2,6 +2,7 @@
 layout: post
 published: true
 title: "RESETtling..."
+date: "2013-11-30 23:36:12"
 tags: [personal, leonardo, life, reset, settling, blogging, opensource, ghostdriver, phantomjs, job, career]
 ---
 
