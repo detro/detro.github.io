@@ -8,7 +8,16 @@
     <title>Too much coffee, too little time</title>
     <link>http://ivandemarino.me</link>
     <description>RSS feed for Too much coffee, too little time</description>
-    <pubDate>Fri, 09 Aug 2013 16:03:47 +0100</pubDate>
+    <pubDate>Sat, 30 Nov 2013 23:36:12 +0000</pubDate>
+    <item>
+      <title>RESETtling...</title>
+      <link>http://ivandemarino.me/2013/11/resettling</link>
+      <description>&lt;p&gt;&lt;strong&gt;Puff, Pant!&lt;/strong&gt; THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too far
+away.&lt;/p&gt;
+</description>
+      <pubDate>Sat, 30 Nov 2013 23:36:12 +0000</pubDate>
+      <dc:date>2013-11-30T23:36:12+00:00</dc:date>
+    </item>
     <item>
       <title>GhostDriver 1.0.4, blog migration and blogging too little</title>
       <link>http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little</link>
@@ -12487,6 +12496,6 @@ Another test of another cms/weblog system/way-to-make-my-homepage.&lt;/p&gt;
       <pubDate>Mon, 15 Nov 2004 21:47:36 +0000</pubDate>
       <dc:date>2004-11-15T21:47:36+00:00</dc:date>
     </item>
-    <dc:date>2013-08-09T16:03:47+01:00</dc:date>
+    <dc:date>2013-11-30T23:36:12+00:00</dc:date>
   </channel>
 </rss>
