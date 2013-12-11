@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  version="2.0"
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
   <channel>
     <title>Too much coffee, too little time</title>
     <link>http://ivandemarino.me</link>
     <description>RSS feed for Too much coffee, too little time</description>
-    <pubDate>Sat, 30 Nov 2013 23:36:12 +0000</pubDate>
+    <pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate>
+    <item>
+      <title>Oldboy: 10 years later</title>
+      <link>http://ivandemarino.me/2013/12/oldboy-10-years-later</link>
+      <description>&lt;p&gt;It was 10 years ago. A night just like this one. Winter. Everyone in the house
+was asleep. Well, Leonardo isn&amp;#39;t really sleeping right now but you get the idea.
+I was alone in the kitchen. Alone with the TV, an &lt;code&gt;.avi&lt;/code&gt; file and an &lt;code&gt;.srt&lt;/code&gt; file.&lt;/p&gt;
+</description>
+      <pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate>
+      <dc:date>2013-12-11T00:00:00+00:00</dc:date>
+    </item>
     <item>
       <title>RESETtling...</title>
       <link>http://ivandemarino.me/2013/11/resettling</link>
@@ -12496,6 +12506,6 @@ Another test of another cms/weblog system/way-to-make-my-homepage.&lt;/p&gt;
       <pubDate>Mon, 15 Nov 2004 21:47:36 +0000</pubDate>
       <dc:date>2004-11-15T21:47:36+00:00</dc:date>
     </item>
-    <dc:date>2013-11-30T23:36:12+00:00</dc:date>
+    <dc:date>2013-12-11T00:00:00+00:00</dc:date>
   </channel>
 </rss>
