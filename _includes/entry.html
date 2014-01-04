@@ -48,7 +48,7 @@ include:
         <div class="body">
             {% if include.is_summary %}
                 <p>
-                    {{ include.body | strip_html | truncatewords: 40, "" }} ...
+                    {{ include.body | strip_html | truncatewords: 60, "" }} ...
                     <a class="readmore" href="{{ include.url }}">read more</a>
                 </p>
             {% else %}
