@@ -127,8 +127,10 @@ fully released:
 
 * <del>Commit 1.1.0 Java Bindings's JAR to the Selenium repository</del>
 [DONE](https://code.google.com/p/selenium/source/detail?r=6146f3a5bec6bd28747e91a07cacd75a3db589f2)
-* Import 1.1.0 into PhantomJS (most important, which one?)
-* Tag 1.1.0 on the repository
+* <del>Import 1.1.0 into PhantomJS</del>
+[DONE](https://github.com/ariya/phantomjs/pull/11877)
+* <del>Tag 1.1.0 on the repository</del>
+[DONE](https://github.com/detro/ghostdriver/releases/tag/1.1.0)
 
 I could have waited for those tasks to be complete... but I felt like this
 was overdue and I wanted to share a _status report_ as soon as I could.
