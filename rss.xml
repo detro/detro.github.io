@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/"
+<rss version="2.0"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  version="2.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
   <channel>
     <title>Too much coffee, too little time</title>
     <link>http://ivandemarino.me</link>
     <description>RSS feed for Too much coffee, too little time</description>
-    <pubDate>Wed, 11 Dec 2013 00:00:00 +0000</pubDate>
+    <pubDate>Fri, 03 Jan 2014 00:00:00 +0000</pubDate>
+    <item>
+      <title>GhostDriver 1.1.0: codename &quot;Banquo&quot;</title>
+      <link>http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</link>
+      <description>&lt;p&gt;It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver
+(&lt;a href=&quot;https://github.com/detro/ghostdriver/releases/tag/1.0.4&quot;&gt;1.0.4&lt;/a&gt;)
+was... July 2013.
+And &lt;a href=&quot;http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/&quot;&gt;blogged about it&lt;/a&gt;
+only in August!!!
+I gotta take a look at my GitHub commits over the 2013: something tells me that
+&lt;em&gt;year-in-commits&lt;/em&gt; nicely overlaps with my eventful 2013.
+But let&amp;#39;s try to stay on topic.&lt;/p&gt;
+</description>
+      <pubDate>Fri, 03 Jan 2014 00:00:00 +0000</pubDate>
+      <dc:date>2014-01-03T00:00:00+00:00</dc:date>
+    </item>
     <item>
       <title>Oldboy: 10 years later</title>
       <link>http://ivandemarino.me/2013/12/oldboy-10-years-later</link>
@@ -12506,6 +12521,6 @@ Another test of another cms/weblog system/way-to-make-my-homepage.&lt;/p&gt;
       <pubDate>Mon, 15 Nov 2004 21:47:36 +0000</pubDate>
       <dc:date>2004-11-15T21:47:36+00:00</dc:date>
     </item>
-    <dc:date>2013-12-11T00:00:00+00:00</dc:date>
+    <dc:date>2014-01-03T00:00:00+00:00</dc:date>
   </channel>
 </rss>

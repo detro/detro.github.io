@@ -4,7 +4,7 @@
   font-weight: 100;
 }
 .normalFont {
-  font-family: "Georgia", serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: normal;
 }
 .codeFont {
@@ -110,6 +110,9 @@ pre span {
   display: inline-block;
   padding: 0.2em;
 }
+#layout #main {
+  background-color: white;
+}
 #layout #main #content a {
   color: #1f8dd6;
   text-decoration: none;
@@ -149,7 +152,7 @@ pre span {
   color: #09293e;
 }
 #layout #main #content .entry .meta {
-  font-size: 0.9em;
+  font-size: 0.8em;
   list-style: none;
   color: #999999;
   line-height: 1.5em;
@@ -162,7 +165,7 @@ pre span {
   color: #d4d4d4;
 }
 #layout #main #content .entry .body {
-  font-family: "Georgia", serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: normal;
   line-height: 1.5em;
   text-align: justify;
@@ -233,8 +236,8 @@ pre span {
   padding-left: 20px;
   padding-right: 20px;
   color: #999999;
-  padding-top: 0.1em;
-  padding-bottom: 0.1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.3em;
 }
 #layout #main #content .entry .body h1,
 #layout #main #content .entry .body h2,
@@ -309,7 +312,7 @@ pre span {
   border-bottom: 0;
 }
 #layout #main #content .entry.full .body {
-  font-size: 1.1em;
+  font-size: 1.0em;
 }
 #layout #main #content #paginator {
   font-size: 1.1em;
