@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Too much coffee, too little time</title>
+        <title>PhantomJS 1.9.6 vs 1.9.7: what went wrong? - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -92,15 +92,12 @@
             <div id="main" class="pure-u-1">
 
                 <div id="content">
-                    <div class="pure-g-r">
-    
-
-        
-<article class="entry summary pure-u-1">
+                    
+<article class="entry full pure-u-1">
     <header>
         <h1 class="title">
             
-                <a href="/2004/11/15/imparare-un-nuovo-linguaggio/">Imparare un nuovo linguaggio...</a>
+                PhantomJS 1.9.6 vs 1.9.7: what went wrong?
             
         </h1>
         
@@ -108,16 +105,21 @@
                 
                     <li>
                         <i class="icon-calendar"></i>
-                        <time datetime="2004-11-15">Monday, 15 Nov 2004</time>
+                        <time datetime="2014-01-28">Tuesday, 28 Jan 2014</time>
                     </li>
                 
 
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        ghostdriver &bull; phantomjs &bull; release &bull; changes &bull; git &bull; misunderstanding
+                    </li>
                 
 
                 
                     <li>
                         <i class="icon-time"></i>
-                        130 words
+                        319 words
                     </li>
                 
             </ul>
@@ -126,72 +128,84 @@
     
         <div class="body">
             
-                <p>
-                    ...é, a parer mio, una cosa da affrontare con metodo, soprattutto quando sei uno studente universitario non più "matricola": non possono bastare le slides del prof. per capire una grammatica ed imparare ad usarla.Non sono nemmeno sufficienti poche ore di esercitazione.Ci vogliono: Buona volontà Interesse verso il linguaggio e la materia Sperimentazione sia in aula, sia personale, al di fuori ...
-                    <a class="readmore" href="/2004/11/15/imparare-un-nuovo-linguaggio/">read more</a>
-                </p>
+                <p><em>tl;dr;</em> Latest <strong>stable</strong> release of PhantomJS is <strong>1.9.7</strong>, and you
+should probably go and <a href="http://phantomjs.org/download.html">download it</a>.
+It contains <a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">GhostDriver 1.1.0 &quot;Banquo&quot;</a>,
+and that&#39;s it.</p>
+
+<p>1.9.6, released not more than 2 weeks ago (1 week?), was a <em>coordination went wrong</em>
+and I take part of the responsibility for it. Just discard that release.</p>
+
+<div class="img">
+    <img src="http://strangesounds.org/wp-content/uploads/2013/06/KA-BOOM-1.jpg"
+        alt="KA-BOOM!" />
+</div>
+
+<h1>What&#39;s the long story?</h1>
+
+<p>So, for a few days I was helping with testing and refining the
+<a href="https://github.com/ariya/phantomjs/pull/11535">new <code>cookiejar</code> module (#11535)</a>
+for PhantomJS that <a href="https://github.com/jtrollinson">Joseph Rollinson (jtrollinson)</a>
+contributed.
+I&#39;m very interested in this module because it allows to instantiate <strong>multiple
+Cookie Jar objects</strong> instead of having all the WebPage object use the same jar.
+Such feature would allow GhostDriver to finally support
+<a href="https://github.com/detro/ghostdriver/issues/170">Session Isolation (#170)</a>, a long
+overdue feature.</p>
+
+<p><a href="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo/">I had just released GhostDriver 1.1.0</a>,
+and so I was pretty much all setup to do an extra release.
+Having that feature supported would make PhantomJS/GhostDriver play better with
+Selenium Grid, allowing to register more than 1 session against one browser
+process instance.</p>
+
+<p>So, once the <code>cookijar</code> thing was merged, I cut
+<a href="https://github.com/detro/ghostdriver/releases/tag/1.1.1">GhostDriver 1.1.1 &quot;Okiku&quot;</a>
+and promptly made
+<a href="https://github.com/ariya/phantomjs/pull/11893">a PR against PhantomJS to merge that in</a>.</p>
+
+<p><a href="github.com/ariya">Ariya</a> was so kind to wait for me to do that and cut a <strong>minor</strong> release of
+PhantomJS: in his intention <em>just bugfixes and latest GhostDriver</em>.
+Little he knew that latest GhostDriver depended on the new <code>cookiejar</code> feature.</p>
+
+<p>So, when he prepared the release branch (by <code>git cherry-pick</code>-ing), left out
+the <code>cookiejar</code> module, but included GhostDriver 1.1.1.</p>
+
+<p>Result? KA-BOOM!</p>
+
+<h1>Lesson Learned</h1>
+
+<p>Next time I decide to add support to a major feature (even if it&#39;s not in my
+direct project but the one I&#39;m based upon), I should increase the
+<strong>minor version number</strong> or even the <strong>major</strong> (depending on the case).</p>
+
+<p>If I had done that, Ariya would have known that
+<em>it wasn&#39;t just a minor fix in GhostDriver</em>,
+and this mess would have been avoided.</p>
+
+<p>Happy <em>Ghosting</em>!</p>
+
             
         </div>
     
+    
+        <div id="disqus_thread" class="comments"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "blogivandemarinome";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
-
-    
-
-        
-<article class="entry summary pure-u-1">
-    <header>
-        <h1 class="title">
-            
-                <a href="/2004/11/15/il-mio-nuovo-blogger-my-new-blogger/">IL mio nuovo Blogger / My new Blogger</a>
-            
-        </h1>
-        
-            <ul class="meta">
-                
-                    <li>
-                        <i class="icon-calendar"></i>
-                        <time datetime="2004-11-15">Monday, 15 Nov 2004</time>
-                    </li>
-                
-
-                
-
-                
-                    <li>
-                        <i class="icon-time"></i>
-                        19 words
-                    </li>
-                
-            </ul>
-        
-    </header>
-    
-        <div class="body">
-            
-                <p>
-                    Grazie a Google e Blogger inizierò a pubblicare tutto quanto mi interessi.E' un esperimento... speriamo si riveli fruttifero.Un saluto. 
- ...
-                    <a class="readmore" href="/2004/11/15/il-mio-nuovo-blogger-my-new-blogger/">read more</a>
-                </p>
-            
-        </div>
-    
-    
-</article>
-
-
-    
-</div>
-
-<div id="paginator" class="pure-g">
-    
-        <div class="pure-u-1">
-            <a href="/blog/94">newer posts <i class="icon-angle-right"></i></a>
-        </div>
-    
-</div>
 
                 </div>
 
