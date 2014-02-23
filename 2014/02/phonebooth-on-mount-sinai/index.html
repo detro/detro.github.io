@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PhantomJS 1.9.6 vs 1.9.7: what went wrong? - Too much coffee, too little time</title>
+        <title>Phonebooth on Mount Sinai - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
@@ -97,7 +97,7 @@
     <header>
         <h1 class="title">
             
-                PhantomJS 1.9.6 vs 1.9.7: what went wrong?
+                Phonebooth on Mount Sinai
             
         </h1>
         
@@ -105,21 +105,21 @@
                 
                     <li>
                         <i class="icon-calendar"></i>
-                        <time datetime="2014-01-28">Tuesday, 28 Jan 2014</time>
+                        <time datetime="2014-02-23">Sunday, 23 Feb 2014</time>
                     </li>
                 
 
                 
                     <li>
                         <i class="icon-tags"></i>
-                        ghostdriver &bull; phantomjs &bull; release &bull; changes &bull; git &bull; misunderstanding
+                        satire &bull; sinai &bull; phonebooth &bull; god &bull; moses &bull; phonecall
                     </li>
                 
 
                 
                     <li>
                         <i class="icon-time"></i>
-                        319 words
+                        889 words
                     </li>
                 
             </ul>
@@ -128,62 +128,177 @@
     
         <div class="body">
             
-                <p><em>tl;dr;</em> Latest <strong>stable</strong> release of PhantomJS is <strong>1.9.7</strong>, and you
-should probably go and <a href="http://phantomjs.org/download.html">download it</a>.
-It contains <a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">GhostDriver 1.1.0 &quot;Banquo&quot;</a>,
-and that&#39;s it.</p>
-
-<p>1.9.6, released not more than 2 weeks ago (1 week?), was a <em>coordination went wrong</em>
-and I take part of the responsibility for it. Just discard that release.</p>
-
-<h1>What&#39;s the long story?</h1>
-
-<p>So, for a few days I was helping with testing and refining the
-<a href="https://github.com/ariya/phantomjs/pull/11535">new <code>cookiejar</code> module (#11535)</a>
-for PhantomJS that <a href="https://github.com/jtrollinson">Joseph Rollinson (jtrollinson)</a>
-contributed.
-I&#39;m very interested in this module because it allows to instantiate <strong>multiple
-Cookie Jar objects</strong> instead of having all the WebPage object use the same jar.
-Such feature would allow GhostDriver to finally support
-<a href="https://github.com/detro/ghostdriver/issues/170">Session Isolation (#170)</a>, a long
-overdue feature.</p>
-
-<p><a href="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo/">I had just released GhostDriver 1.1.0</a>,
-and so I was pretty much all setup to do an extra release.
-Having that feature supported would make PhantomJS/GhostDriver play better with
-Selenium Grid, allowing to register more than 1 session against one browser
-process instance.</p>
-
-<p>So, once the <code>cookijar</code> thing was merged, I cut
-<a href="https://github.com/detro/ghostdriver/releases/tag/1.1.1">GhostDriver 1.1.1 &quot;Okiku&quot;</a>
-and promptly made
-<a href="https://github.com/ariya/phantomjs/pull/11893">a PR against PhantomJS to merge that in</a>.</p>
-
-<p><a href="github.com/ariya">Ariya</a> was so kind to wait for me to do that and cut a <strong>minor</strong> release of
-PhantomJS: in his intention <em>just bugfixes and latest GhostDriver</em>.
-Little he knew that latest GhostDriver depended on the new <code>cookiejar</code> feature.</p>
-
-<p>So, when he prepared the release branch (by <code>git cherry-pick</code>-ing), left out
-the <code>cookiejar</code> module, but included GhostDriver 1.1.1.</p>
-
-<p>Result? KA-BOOM!</p>
+                <p>Moses didn&#39;t know what to do any more with those idiots. So he decides to go
+out for a wander. The pressure was too much. He knew that, sooner or later,
+they will just crash his skull with a stone. He needed a plan. He needed a way
+to survive (both him and them!), without ruining it all. Without having to look
+the fool he knew he was.</p>
 
 <div class="img">
-    <img src="http://strangesounds.org/wp-content/uploads/2013/06/KA-BOOM-1.jpg"
-        alt="KA-BOOM!" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Mount_Sinai_Egypt.jpg/800px-Mount_Sinai_Egypt.jpg" />
+    <span>Mount Sinai, Egypt</span>
 </div>
 
-<h1>Lesson Learned</h1>
+<p>To cool off, he decides to go up there. On that peak no one will follow him.
+They were all pretty much exhausted: no sane mind would follow him in a hike at
+this stage. Good, that would do!</p>
 
-<p>Next time I decide to add support to a major feature (even if it&#39;s not in my
-direct project but the one I&#39;m based upon), I should increase the
-<strong>minor version number</strong> or even the <strong>major</strong> (depending on the case).</p>
+<p>Also, on top of that no stupid idiot would yell at him how stupid was to leave
+the stupid Egyptians. Yes, slavery was bad, and building palaces, pyramids and
+the sort was getting boring, but they got something to eat there. A shelter.
+A mean to survive.</p>
 
-<p>If I had done that, Ariya would have known that
-<em>it wasn&#39;t just a minor fix in GhostDriver</em>,
-and this mess would have been avoided.</p>
+<p>When he is about to reach the top of the mountain, from far, he sees something
+&quot;sparkly&quot;. A big metal box, looking like made of gold, but was too far to
+distinguish it&#39;s details. So, he decided to look into it.</p>
 
-<p>Happy <em>Ghosting</em>!</p>
+<div class="img">
+    <img src="http://upload.wikimedia.org/wikipedia/commons/1/10/Lightmatter_phonebooths.jpg" />
+    <span>"THE" Phonebooth</span>
+</div>
+
+<p>Unbelievable! It was a... phonebooth. No keypad on it: just one button.
+On the button and engraved on it: <strong>&quot;Mr God&quot;</strong>.</p>
+
+<p>He picks the phone, pushes the button and waits...</p>
+
+<p>Meanwhile, in Heaven.</p>
+
+<p>(Phone ringing)</p>
+
+<p>God&gt; <em>Mmmhmhm...</em></p>
+
+<p>(Phone still ringing)</p>
+
+<p>God&gt; <em>Oh crap! Another idiot calling from Sinai. I don&#39;t have time for this shit today!</em></p>
+
+<p>Secretary&gt; <em>God, do you want me to take that?</em></p>
+
+<p>God&gt; <em>Yes, please. Tell him to fuck off.</em></p>
+
+<p>Secretary&gt; <em>OK!</em></p>
+
+<p>Secretary (whispering)&gt; <em>Such a tool...</em></p>
+
+<p>(Secretary answers the phone)</p>
+
+<p>Secretary&gt; <em>Heeeelllo!</em></p>
+
+<p>Moses&gt; <em>Hi. Is this God?</em></p>
+
+<p>Secretary&gt; <em>Actually, I&#39;m his secretary. Farrokh.</em></p>
+
+<p>Moses&gt; <em>Farrokh?</em></p>
+
+<p>Secretary&gt; <em>Yes, Farrokh. Farrokh Bulsara.</em></p>
+
+<p>Moses&gt; <em>You are a man! I would assumed God&#39;s secretary to be a hot girl</em></p>
+
+<p>Secretary&gt; <em>You haven&#39;t seen me, my dear!</em></p>
+
+<p>(Awkward silence)</p>
+
+<p>Secretary&gt; <em>So, how can I help?</em></p>
+
+<p>Moses&gt; <em>May I speak with Mr God, please.</em></p>
+
+<p>Secretary&gt; <em>God is quite busy at the moment. He is working on his latest play: &quot;Landing in America&quot;.</em></p>
+
+<p>Moses&gt; <em>Mmm... OK. Whatever. Can I speak with him?</em></p>
+
+<p>Secretary&gt; <em>Is is actually very busy. He hates being interrupted when he is testing new religious scenarios.</em></p>
+
+<p>Moses&gt; <em>It will only take a minute!</em></p>
+
+<p>Secretary&gt; <em>Mmm... wait please.</em></p>
+
+<p>(Secretary puts his hand on the phone and starts whispering to God)</p>
+
+<p>Secretary&gt; <em>He insists. He sounds quite like a rude guy. Do you want me to put him through?</em></p>
+
+<p>God&gt; <em>FUCK!!! I&#39;m never gonna finish this shit if I get interrupted all the time!</em></p>
+
+<p>God&gt; <em>OK. Let the fucker through. But fucking cut the line if I&#39;m not done in 2 minutes.
+Those South Americans can&#39;t be kept waiting. They already started building all
+sort of crazy shit to substitute me and I got to crash that pretty soon...</em></p>
+
+<p>(God coughs and deepens his voice)</p>
+
+<p>God&gt; <em>Hello child!</em></p>
+
+<p>Moses&gt; <em>Hello God. How have you been?</em></p>
+
+<p>God&gt; <em>Moses! It&#39;s been a while. Did you like the water trick?</em></p>
+
+<p>Moses&gt; <em>Impressive. For a second I thought you won&#39;t be paying attention and I&#39;d
+have looked like a tool, standing there with my harms in the air, and nothing
+actually happening.</em></p>
+
+<p>God&gt; <em>Glad to be helpful.</em></p>
+
+<p>(God picking his nose while talking)</p>
+
+<p>God&gt; <em>OK. It was nice to speak with you. I shall...</em></p>
+
+<p>Moses&gt; <em>Wait. I called to ask for your help. These people here, they are driving me crazy!</em></p>
+
+<p>Moses&gt; <em>One of them just started melting gold and he wants to make a cow! Or a Lamb, I don&#39;t know.</em></p>
+
+<p>God&gt; <em>Yes, I have seen it - I won&#39;t worry too much. You will probably be all dead pretty soon...</em></p>
+
+<p>Moses&gt; <em>But they want to worship it!!!</em></p>
+
+<p>God&gt; <em>Stupid dick-heads! That&#39;s why I&#39;m giving up on y&#39;all!</em></p>
+
+<p>Moses&gt; <em>&quot;Y&#39;all&quot;!?!?!</em></p>
+
+<p>God&gt; <em>Yeah. I started to pick up some of that American slang you know...</em></p>
+
+<p>Moses&gt; <em>No please. I need your help! Don&#39;t you have an advice or a message I could bring to them?</em></p>
+
+<p>God&gt; <em>Shit. I&#39;m tired. It has been a long day. Can&#39;t you call again tomorrow?</em></p>
+
+<p>Moses&gt; <em>Come on! You are usually so patronising? For once that I&#39;m actually asking for it?</em></p>
+
+<p>God&gt; <em>Mmmm... OK. Have you got a pen?</em></p>
+
+<p>Moses&gt; <em>No. Left it in the other trousers. I got a couple of stone slabs though...</em></p>
+
+<p>God&gt; <em>That would do!</em></p>
+
+<p>Moses&gt; <em>OK. Go ahead!</em></p>
+
+<p>God&gt; <em>First Commandment: <strong>NEVER CALL GOD IN VANE!</strong>
+He is a cranky old man and he can&#39;t really hear you anyway.
+He is busy having fun torturing minions all the time and no interest in helping them.
+So, leave him alone. Unless you are a hot gay version of David Jude Heyworth Law.</em></p>
+
+<p>Moses&gt; <em>Oh. OK. That&#39;s it?</em></p>
+
+<p>God&gt; <em>Of course not, fuck face. Here is number Two.</em></p>
+
+<p>(Click. Phone disconnects.)</p>
+
+<p>Moses&gt; <em>God? GOD? Holy shit, this guy! He is impossible.</em></p>
+
+<p>(Moses thinks a bit and then says...)</p>
+
+<p>Moses&gt; <em>Well, once again, I suppose I&#39;ll have to just make stuff up.</em></p>
+
+<p>(Meanwhile)</p>
+
+<p>God&gt; <em>Moses? MOSES? Whatever...</em></p>
+
+<p>Secretary&gt; <em>I cut the line. As you asked.</em></p>
+
+<p>God&gt; <em>Oh! It was YOU then. Well done. You are my saviour, as usual.</em></p>
+
+<p>Secretary&gt; <em>My pleasure Brian. Please go back to your plays now:
+those plagues are not going to make themselves.</em></p>
+
+<div class="img">
+    <iframe width="640" height="360" src="//www.youtube.com/embed/lBhPDxszukU?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
             
         </div>

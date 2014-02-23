@@ -8,7 +8,19 @@
     <title>Too much coffee, too little time</title>
     <link>http://ivandemarino.me</link>
     <description>RSS feed for Too much coffee, too little time</description>
-    <pubDate>Tue, 28 Jan 2014 00:00:00 +0000</pubDate>
+    <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+    <item>
+      <title>Phonebooth on Mount Sinai</title>
+      <link>http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</link>
+      <description>&lt;p&gt;Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to go
+out for a wander. The pressure was too much. He knew that, sooner or later,
+they will just crash his skull with a stone. He needed a plan. He needed a way
+to survive (both him and them!), without ruining it all. Without having to look
+the fool he knew he was.&lt;/p&gt;
+</description>
+      <pubDate>Sun, 23 Feb 2014 00:00:00 +0000</pubDate>
+      <dc:date>2014-02-23T00:00:00+00:00</dc:date>
+    </item>
     <item>
       <title>PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title>
       <link>http://ivandemarino.me/2014/01/phantomjs_196vs197</link>
@@ -12532,6 +12544,6 @@ Another test of another cms/weblog system/way-to-make-my-homepage.&lt;/p&gt;
       <pubDate>Mon, 15 Nov 2004 21:47:36 +0000</pubDate>
       <dc:date>2004-11-15T21:47:36+00:00</dc:date>
     </item>
-    <dc:date>2014-01-28T00:00:00+00:00</dc:date>
+    <dc:date>2014-02-23T00:00:00+00:00</dc:date>
   </channel>
 </rss>
