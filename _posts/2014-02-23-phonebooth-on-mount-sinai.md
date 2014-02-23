@@ -43,7 +43,7 @@ Meanwhile, in Heaven.
 
 (Phone ringing)
 
-God> <em>Mmmhmhm...</em>
+God> <em>Mmm...</em>
 
 (Phone still ringing)
 
@@ -83,7 +83,7 @@ Secretary> <em>God is quite busy at the moment. He is working on his latest play
 
 Moses> <em>Mmm... OK. Whatever. Can I speak with him?</em>
 
-Secretary> <em>Is is actually very busy. He hates being interrupted when he is testing new religious scenarios.</em>
+Secretary> <em>He is actually very busy. He hates being interrupted when he is testing new religious scenarios.</em>
 
 Moses> <em>It will only take a minute!</em>
 
@@ -117,7 +117,7 @@ God> <em>Glad to be helpful.</em>
 
 God> <em>OK. It was nice to speak with you. I shall...</em>
 
-Moses> <em>Wait. I called to ask for your help. These people here, they are driving me crazy!</em>
+Moses> <em>Wait. I called to ask for your help. Those people down there, they are driving me crazy!</em>
 
 Moses> <em>One of them just started melting gold and he wants to make a cow! Or a Lamb, I don't know.</em>
 
@@ -170,9 +170,5 @@ Secretary> <em>I cut the line. As you asked.</em>
 
 God> <em>Oh! It was YOU then. Well done. You are my saviour, as usual.</em>
 
-Secretary> <em>My pleasure Brian. Please go back to your plays now:
-those plagues are not going to make themselves.</em>
-
-<div class="img">
-    <iframe width="640" height="360" src="//www.youtube.com/embed/lBhPDxszukU?rel=0" frameborder="0" allowfullscreen></iframe>
-</div>
+Secretary> <em>My pleasure <a href="http://youtu.be/lBhPDxszukU" target="_blank">Brian</a>.
+Please go back to your plays now: those plagues are not going to make themselves.</em>
