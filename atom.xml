@@ -3,13 +3,163 @@
 <generator uri="http://jekyllrb.com" version="2.4.0">Jekyll</generator>
 <link href="http://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" />
 <link href="http://ivandemarino.me/" rel="alternate" type="text/html" />
-<updated>2015-07-02T21:39:35+01:00</updated>
+<updated>2015-07-03T00:23:48+01:00</updated>
 <id>http://ivandemarino.me/</id>
 <title>Too much coffee, too little time</title>
 <subtitle>Ivan De Marino&#39;s blog and personal website</subtitle>
 <author>
 <name>Ivan De Marino</name>
 </author>
+<entry>
+<title>Help to Buy means richer Builders</title>
+<link href="http://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" />
+<published>2015-07-03T00:00:00+01:00</published>
+<updated>2015-07-03T00:00:00+01:00</updated>
+<id>http://ivandemarino.me/2015/07/HTB-means-richer-builders</id>
+<content type="html" xml:base="http://ivandemarino.me/2015/07/HTB-means-richer-builders">&lt;p&gt;Britain, you have a problem: house prices in the East/South East have grown
+ridiculous. See
+&lt;a href=&quot;http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html&quot;&gt;2014 house pricing data by the Office for National Statistics (ONS)&lt;/a&gt; that compares prices
+with the pre-crisis ones.&lt;/p&gt;
+
+&lt;div class=&quot;img&quot;&gt;
+    &lt;img src=&quot;http://www.ons.gov.uk/ons/resources/hpifinal_tcm77-369630.png&quot; alt=&quot;Comparison of Regional House Prices Indices BEFORE and AFTER the Financial Crisis (2014)&quot;&gt;
+    &lt;span&gt;+31.6!?!?!?!&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We all know that UK is very much London centered, and this is reflected in the
+graph above. The government doesn&amp;#39;t shy away from policy that are openly &amp;quot;pro-London&amp;quot;
+and while there are complaints, as an immigrant since 2007, I can see not much
+more than some &amp;quot;grumpiness&amp;quot; about it. It&amp;#39;s like Britons are &lt;em&gt;&amp;quot;sort of ok with it&amp;quot;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Enter &amp;quot;Help to Buy&amp;quot; scheme&lt;/h2&gt;
+
+&lt;p&gt;To address the housing needs, the Tory government has come up with &lt;a href=&quot;http://www.helptobuy.org.uk/&quot;&gt;Help to Buy&lt;/a&gt;: you put 5% deposit (say £10k), the government puts 20% (say £40k) and you can now afford a home of up to £200k - you can easily find a bank that would give you
+a Mortgage for &lt;strong&gt;75% LTV&lt;/strong&gt;. It&amp;#39;s like asking them for a glass of water: of course
+they will have you as a customer.&lt;/p&gt;
+
+&lt;p&gt;This sounds great, but it&amp;#39;s actually a recipe for disaster.&lt;/p&gt;
+
+&lt;h2&gt;Can I buy any kind of home with the HTB scheme?&lt;/h2&gt;
+
+&lt;p&gt;HTB has been launched in 2 phases in 2013: &lt;strong&gt;HTB1&lt;/strong&gt; (&lt;em&gt;Equity Loan&lt;/em&gt;) and &lt;strong&gt;HTB2&lt;/strong&gt; (&lt;em&gt;Mortgage Guarantees&lt;/em&gt;) first only applied for newly built homes,
+now HTB can be used also to purchase pre-built homes. But ONLY in the formula HTB2:
+instead of giving you 20% of the money, the HTB2 just makes the government guarantor
+of your Mortgage.&lt;/p&gt;
+
+&lt;p&gt;All of those, capped to £600k.&lt;/p&gt;
+
+&lt;p&gt;Sounds good, right?
+Not a bit. But first let&amp;#39;s highlight the benefit.&lt;/p&gt;
+
+&lt;h2&gt;So, why everyone is buying so much if HTB is so bad?&lt;/h2&gt;
+
+&lt;p&gt;Because we are stupid. Humans rarely think long term.
+All of a sudden, Bob (fictional character) can afford a much bigger house, and he
+has to only provide 5% of deposit. Suddenly, life is amazing.&lt;/p&gt;
+
+&lt;p&gt;HTB works as a loan: once you buy, you are repaying the government a monthly installment
+(to define with a HMRC official). First 5 years are interest free (WOW!) and then
+it&amp;#39;s like 1.5% + some increase over time. It&amp;#39;s a great loan compared to any Mortgage.&lt;/p&gt;
+
+&lt;p&gt;If prices of houses were fair, this would be a great thing that would really
+allow people to buy a home.&lt;/p&gt;
+
+&lt;h2&gt;Beyond their means&lt;/h2&gt;
+
+&lt;p&gt;In short, people are buying beyond their means.
+Yes, you have taken 20% of the money with this great cheap loan, so in theory you
+are saving loads of money. But still, you now have 2 loans: a Mortgage and the HTB loan.
+Your credit score is affected. You are less &amp;quot;trust worthy&amp;quot; in case you need an emergency
+loan.&lt;/p&gt;
+
+&lt;p&gt;And if that 5% deposit was already hard to put together, you are most certainly now
+in a situation where ALL your income is taken by the repayments.
+You can make it, but just a glitch in your monthly INs/OUTs and you are in trouble.&lt;/p&gt;
+
+&lt;p&gt;I have made my calculation, so it&amp;#39;s possible to take the HTB and still be comfortably
+between your means. But as a Software Engineer, my income is way above the national
+average: I ought to be in this position.&lt;/p&gt;
+
+&lt;h2&gt;Builders are getting richer, at tax-payers expenses&lt;/h2&gt;
+
+&lt;p&gt;If house prices where a fixed value, this whole HTB thing would be great and Britain
+would have no housing problems.&lt;/p&gt;
+
+&lt;p&gt;But the market laws are well known: flood the market with money, and prices will soar.
+And that&amp;#39;s what&amp;#39;s happening. House prices are going drastically up because more people
+can afford them all of a sudden.&lt;/p&gt;
+
+&lt;p&gt;That would be &amp;quot;OK&amp;quot; if there wasn&amp;#39;t a party exploiting this.&lt;/p&gt;
+
+&lt;p&gt;What we forget to consider, is that Government&amp;#39;s Money is OUR money. Is what every
+month we pay in taxes. Is the the 20/30/40/50% of our monthly sweat that goes &amp;quot;puff&amp;quot;
+so that the &lt;em&gt;&amp;quot;Government Machine can keep cranking&amp;quot;&lt;/em&gt;. Mind you, I&amp;#39;m not complaining
+about this: this is what a government does - takes money from X to make Y happen.
+It&amp;#39;s sort-of an investment logic at play, on a country-scale.&lt;/p&gt;
+
+&lt;p&gt;The issue I have is that the HTB is being exploited BIG TIME by big house builders
+(i.e. not your average tiny builder - we are talking about market-floating companies like
+&lt;a href=&quot;http://www.bewley.co.uk/&quot;&gt;Bewley Homes&lt;/a&gt;, &lt;a href=&quot;http://www.barratthomes.co.uk/&quot;&gt;Barrat / David Wilson&lt;/a&gt;, &lt;a href=&quot;https://bloorhomes.com/&quot;&gt;Bloor Homes&lt;/a&gt;, &lt;a href=&quot;https://www.crestnicholson.com/&quot;&gt;Crest Nicholson&lt;/a&gt;...)
+to squeeze as much money as possible out of buyers and government&amp;#39;s pocket. That
+at the end of the day are the same pocket!&lt;/p&gt;
+
+&lt;p&gt;And how they do that? How they maximise their profit? &lt;strong&gt;Withholding properties!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Try to go to any site where they have set up a show-room and they are starting
+to sell the first plots. They will tell you that &amp;quot;only this much are available right now&amp;quot;.
+You will ask &amp;quot;what&amp;#39;s going to be available in X months?&amp;quot;. They will show you what
+but prices will not be available because, in X months, the very same house, built 50
+meters down the same road, might be able to go on the market for £10/20k extra!&lt;/p&gt;
+
+&lt;p&gt;New homes increase the market-demand for homes. Even pre-owned. This is basic
+economics that any university student has studied at some point. It&amp;#39;s called
+&amp;quot;Fabricated Demand&amp;quot;. You go down the street, and see signage of &amp;quot;New Luxury Homes&amp;quot; in
+your neighbourhood. Your mind now wants to buy, but the new homes are too costly.
+So you buy something else.&lt;/p&gt;
+
+&lt;p&gt;The houses on the market reduce in number, so what&amp;#39;s left can ask for more money.
+The builder knows that the customer can use HTB to &amp;quot;spend that little extra for their
+dream home&amp;quot;. So they are ready to release houses at the right time. At a price that
+maximise profit.&lt;/p&gt;
+
+&lt;p&gt;To prove that, check the price of homes that are above the HTB £600k threshold:
+because HTB doesn&amp;#39;t apply to them, their prices can&amp;#39;t move as much. They incur the
+risk of going &amp;quot;out of market&amp;quot;.&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s different from the usual &amp;quot;market rules&amp;quot;&lt;/h2&gt;
+
+&lt;p&gt;What&amp;#39;s different is that the HTB has injected money that have altered reality.
+More money means pushing prices beyond the &amp;quot;too expensive&amp;quot; point. The point that
+houses were supposed to reach, before demand will cease and sellers would be forced
+to rethink their pricing.&lt;/p&gt;
+
+&lt;p&gt;Ah, and consider also that UK has done massive &lt;a href=&quot;https://en.wikipedia.org/wiki/Quantitative_easing&quot;&gt;Quantitative Easing (QE)&lt;/a&gt;: pretty much printing money.
+This is where the Government gets the extra-edge to support HTB.&lt;/p&gt;
+
+&lt;p&gt;But QE is a dangerous thing to over-use: ultimately those extra money in the market
+will be paid by the tax-payers, through massively inflated prices (i.e. &lt;em&gt;inflation baby!&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h2&gt;What happens once you can&amp;#39;t repay your Mortgage?&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Who cares! The builder is happy!&lt;/strong&gt; Who is in trouble is the customer (that can&amp;#39;t
+repay the mortgage and loses his/her home) and the Government (that has lost
+tax-payers money).&lt;/p&gt;
+
+&lt;p&gt;In this game, the loser is always you.
+Unless you are a builder: in that case your third yacht is coming next week.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I&amp;#39;d call this ++a new house bubble++.&lt;/strong&gt; But in a country where media are very much influenced by
+government, mentioning bubble would probably get journalists fired...&lt;/p&gt;
+</content>
+<category term="help to buy" />
+<category term="uk" />
+<category term="politics" />
+<category term="affordable" />
+<category term="housing" />
+<category term="bubble" />
+<category term="pricing" />
+<summary>Britain, you have a problem: house prices in the East/South East have grownridiculous. See2014 house pricing data by the Office for National Statistics (ONS) that compares priceswith the pre-crisis ones.</summary>
+</entry>
 <entry>
 <title>Phonebooth on Mount Sinai</title>
 <link href="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" />
@@ -809,44 +959,5 @@ Here are the slides:
 <category term="presentation" />
 <category term="talk" />
 <summary>Selenium Camp 2013 has been a great experience. Not only I hanged out with great people, but, for the first time in my life, I also got to savour a little bit of Ukraine in Kiev.VERY friendly people (really friendly). GREAT food. WELL-ORGANISED conference.What else could I ask for?My talkThe title of my talk is Getting Started with GhostDriver (and my experience working on it!).UPDATE: here is the video:Videos of the other talks can be found here.Here are the slides:You can find them also on Google Drive and Speaker Deck.Video will be available soon: the organisers have recorded every session and I guess it&amp;#39;s just a matter of time. Added. Scroll above.</summary>
-</entry>
-<entry>
-<title>Console++ - enhance your console</title>
-<link href="http://ivandemarino.me/2013/02/18/Console---enhance-your-console" rel="alternate" type="text/html" title="Console++ - enhance your console" />
-<published>2013-02-18T01:05:48+00:00</published>
-<updated>2013-02-18T01:05:48+00:00</updated>
-<id>http://ivandemarino.me/2013/02/18/console-enhance-your-console</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/02/18/Console---enhance-your-console">&lt;p&gt;I need a logger for &lt;a href=&quot;https://github.com/detro/ghostdriver&quot;&gt;GhostDriver&lt;/a&gt; but I&amp;#39;m too lazy to figure out how to use a nice, proper logging library. Plus I&amp;#39;m a BIG fun of old-school-debugging: I just substituted all the &lt;code&gt;printf()&lt;/code&gt; calls with &lt;code&gt;console.log&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;So I decide to make every JavaScript developer &lt;em&gt;shiver in disgust&lt;/em&gt; and wrote a small library that enhances the global &lt;code&gt;console&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;p&gt;This tiny library is called &lt;a href=&quot;https://github.com/detro/consoleplusplus&quot;&gt;Console++&lt;/a&gt; and works with &lt;a href=&quot;http://nodejs.org&quot;&gt;NodeJS&lt;/a&gt;, &lt;a href=&quot;http://phantomjs.org&quot;&gt;PhantomJS&lt;/a&gt; and any decent JavaScript runtime.&lt;/p&gt;
-
-&lt;div class=&quot;img&quot;&gt;
-&lt;img src=&quot;https://raw.github.com/detro/consoleplusplus/master/README.pics/console++-1.png&quot; /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;It does output colouring, adds timestamps and log level to the lines, and can be used to redirect the output to other media than the console (just register a callback). On &lt;code&gt;node&lt;/code&gt;, just type &lt;code&gt;npm install consoleplusplus&lt;/code&gt; to get started.&lt;/p&gt;
-
-&lt;p&gt;It&amp;#39;s so simple that the &lt;a href=&quot;https://github.com/detro/consoleplusplus/blob/master/README.md&quot;&gt;README&lt;/a&gt; is more than enough to use it.&lt;/p&gt;
-
-&lt;p&gt;It&amp;#39;s under &lt;a href=&quot;http://en.wikipedia.org/wiki/BSD_licenses&quot;&gt;BSD license&lt;/a&gt;, so you can have fun with it.&lt;/p&gt;
-</content>
-<author>
-<name>detro</name>
-</author>
-<category term="npm" />
-<category term="console" />
-<category term="log" />
-<category term="phantomjs" />
-<category term="javascript" />
-<category term="nodejs" />
-<category term="colours" />
-<category term="library" />
-<category term="enhance" />
-<category term="level" />
-<category term="ghostdriver" />
-<category term="console++" />
-<summary>I need a logger for GhostDriver but I&amp;#39;m too lazy to figure out how to use a nice, proper logging library. Plus I&amp;#39;m a BIG fun of old-school-debugging: I just substituted all the printf() calls with console.log.So I decide to make every JavaScript developer shiver in disgust and wrote a small library that enhances the global console object.This tiny library is called Console++ and works with NodeJS, PhantomJS and any decent JavaScript runtime.It does output colouring, adds timestamps and log level to the lines, and can be used to redirect the output to other media than the console (just register a callback). On node, just type npm install consoleplusplus to get started.It&amp;#39;s so simple that the README is more than enough to use it.It&amp;#39;s under BSD license, so you can have fun with it.</summary>
 </entry>
 </feed>
