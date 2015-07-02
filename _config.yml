@@ -49,8 +49,8 @@ meta:
 destination: ../detro.github.io-destination
 
 markdown: redcarpet
-pygments: true
-lessc: /usr/local/share/npm/bin/lessc
+highlighter: pygments
+lessc: /usr/local/bin/lessc
 
 permalink: /:year/:month/:title
 
