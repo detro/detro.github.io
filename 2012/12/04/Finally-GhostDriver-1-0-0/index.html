@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -179,14 +180,14 @@ modules:</p>
 
 <p>You can download the source code from the repository
 (see <a href="https://github.com/detro/ghostdriver/blob/master/README.md">README.md</a>), and launch it with the following:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs ghostdriver/src/main.js <span class="o">[</span>LOCAL_IP:<span class="o">]</span>PORT
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs ghostdriver/src/main.js <span class="o">[</span>LOCAL_IP:<span class="o">]</span>PORT
 </code></pre></div>
 <p>This approach was and is <strong>for development only</strong> though: GhostDriver target, since the beginning,
 was to embed the driver into PhantomJS - a feature demanded
 <a href="http://code.google.com/p/phantomjs/issues/detail?id=49">since February 2011</a>(!!!).</p>
 
 <p>So, from next release of PhantomJS (<strong>1.8</strong> should come just before Christmas) you will be able to do instead:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs --webdriver<span class="o">=[</span>LOCAL_IP:<span class="o">]</span>PORT
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs --webdriver<span class="o">=[</span>LOCAL_IP:<span class="o">]</span>PORT
 </code></pre></div>
 <p>without the need to download anything but your favourite <em>single-binary-headless-browser</em>.
 If you are impatient though, just download latest PhantomJS <code>master</code> branch, compile with <code>./build.sh</code> and enjoy.</p>
@@ -206,13 +207,13 @@ and <a href="https://github.com/detro/ghostdriver/tree/master/binding/java/jars"
 to prepare the release.</p>
 
 <p>But I&#39;m sure you want to see some code. Here is a Java snippet:</p>
-<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.openqa.selenium.phantomjs.PhantomJSDriver</span><span class="o">;</span>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.openqa.selenium.phantomjs.PhantomJSDriver</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPhantomJSDriver</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">argv</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// prepare capabilities</span>
-        <span class="n">Capabilities</span> <span class="n">caps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DesiredCapabilities</span><span class="o">();</span>
+        <span class="n">Capabilities</span> <span class="n">caps</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DesiredCapabilities</span><span class="o">();</span>
         <span class="n">caps</span><span class="o">.</span><span class="na">setJavascriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>                <span class="c1">//&lt; not really needed: JS enabled by default</span>
         <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">&quot;takesScreenshot&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>    <span class="c1">//&lt; yeah, GhostDriver haz screenshotz!</span>
         <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span>
@@ -221,7 +222,7 @@ to prepare the release.</p>
         <span class="o">);</span>
 
         <span class="c1">// Launch driver (will take care and ownership of the phantomjs process)</span>
-        <span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhantomJSDriver</span><span class="o">(</span><span class="n">caps</span><span class="o">);</span>
+        <span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">PhantomJSDriver</span><span class="o">(</span><span class="n">caps</span><span class="o">);</span>
 
         <span class="c1">// Load Google.com</span>
         <span class="n">driver</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="o">);</span>

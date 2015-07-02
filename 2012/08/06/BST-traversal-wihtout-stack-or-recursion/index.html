@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -168,10 +169,10 @@
 <p>But then I had an idea: what about <a href="http://en.wikipedia.org/wiki/Binary_search_tree">BSTs (Binary Search Tree)</a>? In those trees, there is a strong order relationship between a node and its childs.</p>
 
 <p>This means that at any moment in time, once I&#39;m done visiting a branch, I can reconstruct <em>where I&#39;m coming from</em>, looking at the values of the parent and the child:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">parent-&gt;value &gt; child-&gt;value ? is_left_child : is_right_child
+<div class="highlight"><pre><code class="language-text" data-lang="text">parent-&gt;value &gt; child-&gt;value ? is_left_child : is_right_child
 </code></pre></div>
 <p>And, so I wrote the <strong>De Marino BST Post-Order Traversal</strong> algorithm:</p>
-<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">de_marino_bst_post_order_traversal</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">de_marino_bst_post_order_traversal</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">node</span> <span class="o">*</span><span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">//&lt; current node</span>
     <span class="n">node</span> <span class="o">*</span><span class="n">par</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>   <span class="c1">//&lt; parent of current node</span>
     <span class="n">node</span> <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">//&lt; next node to traversal (but sometimes, just temp variable)</span>
@@ -191,7 +192,7 @@
             <span class="n">par</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
             <span class="n">curr</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="nl">value</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="n">par</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&amp;&amp;</span> <span class="n">par</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// Go down right, coming from left</span>
@@ -222,7 +223,7 @@
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">par</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="nl">value</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Now, I&#39;m almost 100% sure that I&#39;m not the first one to <em>stumble</em> into something like this, but for now I&#39;m unable to find anything in literature - <em>cough</em> ... Google ... <em>cough</em> .</p>

@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -161,14 +162,14 @@ a 'cute' bundle
 <h2>Get Qt source and build it</h2>
 
 <p>It&#39;s advisable NOT to use Qt from the official repo for this. Instead, download latest stable source from <a href="http://qt.nokia.com/downloads">http://qt.nokia.com/downloads</a> and <em>untar</em> with the following command:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>mkdir ~/tmp
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mkdir ~/tmp
 <span class="nv">$ </span><span class="nb">cd</span> ~/tmp
 <span class="nv">$ </span>tar -xzf ~/Downloads/qt-everywhere-opensource-src-&lt;latest stable&gt;.tar.gz 
 </code></pre></div>
 <p>it will ensure that you build your code against the most stable Qt.</p>
 
 <p>Once finished downloading, build like this:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource
 <span class="nv">$ </span>./configure -universal -carbon -framework -release <span class="se">\</span>
    -opensource -no-exceptions -webkit -no-phonon <span class="se">\</span>
    -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl <span class="se">\</span>
@@ -184,29 +185,29 @@ a 'cute' bundle
 </ul>
 
 <p><strong>You should change those flags based on your needs</strong>. Refer to <a href="http://doc.trolltech.com/4.7/configure-options.html">this documentation</a> or just type:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>./configure --help
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./configure --help
 </code></pre></div>
 <p>After the build has finished without errors, just add the &quot;<code>/bin</code>&quot; directory in &quot;<code>~/tmp/qt-everywhere-opensource</code>&quot; to the &quot;<code>PATH</code>&quot; environment variable. Do something like:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/tmp/qt-everywhere-opensource/bin/:<span class="nv">$PATH</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/tmp/qt-everywhere-opensource/bin/:<span class="nv">$PATH</span>
 </code></pre></div>
 <h2>Build the <code>.app</code></h2>
 
 <p>I assume you know where to get your source code :-). I will use the path <strong><code>/sourcedir/</code></strong> to refer to it.</p>
 
 <p>In case you want to build for <code>x86</code> and <code>ppc</code>, you also need to add to your Qt project <code>.pro</code> file:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="p">...</span>
-<span class="nl">mac:</span> <span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">x86</span> <span class="n">ppc</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">...</span>
+<span class="nl">mac</span><span class="p">:</span> <span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">x86</span> <span class="n">ppc</span>
 <span class="p">...</span>
 </code></pre></div>
 <p>Time to compile:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>qmake -spec macx-g++ -config release <span class="o">&amp;&amp;</span> make
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qmake -spec macx-g++ -config release <span class="o">&amp;&amp;</span> make
 </code></pre></div>
 <p>Finger crossed, all compiled fine.</p>
 
 <h2>Tune it (optional)</h2>
 
 <p>For PhantomJS we didn&#39;t want the classical <em>bouncy icon</em> on the Dock to appear at every execution, given that PhantomJS is a command line tool. If you are in the same situation, edit &quot;<code>/sourcedir/bin/yourproject.app/Content/Info.plist</code>&quot; and add the attribute:</p>
-<div class="highlight"><pre><code class="xml language-xml" data-lang="xml"><span class="nt">&lt;key&gt;</span>LSUIElement<span class="nt">&lt;/key&gt;</span>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;key&gt;</span>LSUIElement<span class="nt">&lt;/key&gt;</span>
 <span class="nt">&lt;string&gt;</span>1<span class="nt">&lt;/string&gt;</span>
 </code></pre></div>
 <p><code>Info.plist</code> allows to control many more things than just the Dock icon. Apple documentation about this it&#39;s <a href="http://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/000-Introduction/introduction.html">here</a>. Tune it as you like/need.</p>
@@ -216,12 +217,12 @@ a 'cute' bundle
 <p>The Trolls provide a simple tool to convert a dynamically linked executable, in a self contained &quot;<code>.app</code>&quot; file. The tool is called &quot;<code>macdeployqt</code>&quot; and you can find a description <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html#the-mac-deployment-tool">here</a>.</p>
 
 <p>It&#39;s part of the Qt source code, but it&#39;s not built by default. So, assuming you still have the previously compiled Qt in your <code>PATH</code>, do the following:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource/tools/macdeployqt
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource/tools/macdeployqt
 <span class="nv">$ </span>qmake -spec macx-g++ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
 </code></pre></div>
 <p>We are ready to package. The last bit to do:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> /sourcedir/bin/
-<span class="nv">$ </span>macdeployqt phantomjs.app -verbose<span class="o">=</span>2 -dmg
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> /sourcedir/bin/
+<span class="nv">$ </span>macdeployqt phantomjs.app -verbose<span class="o">=</span><span class="m">2</span> -dmg
 </code></pre></div>
 <p><em>Done!</em> Now you have got a nice <code>.dmg</code> ready for deployment.</p>
 

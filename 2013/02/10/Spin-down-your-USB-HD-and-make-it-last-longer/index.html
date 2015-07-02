@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -145,11 +146,11 @@
 <h3>Step 2: scripting <code>FTW</code></h3>
 
 <p>Put a script like this somewhere in your system. I have it in my <code>~/bin</code>:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c"># !/bin/sh</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># !/bin/sh</span>
 
 <span class="c"># Only ROOT can run this</span>
 <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(id -u)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="k">        </span><span class="nb">echo</span> “This script must be run as root” 1&gt;<span class="p">&amp;</span>2
+        <span class="nb">echo</span> “This script must be run as root” 1&gt;<span class="p">&amp;</span>2
         <span class="nb">exit </span>1
 <span class="k">fi</span>
 
@@ -166,7 +167,7 @@
 
 <span class="c"># if no changes, power down</span>
 <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$md5new&quot;</span> <span class="o">=</span> <span class="s2">&quot;$md5old&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="k">        </span>sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> <span class="p">&amp;</span>&gt;/dev/null
+        sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> <span class="p">&amp;</span>&gt;/dev/null
 <span class="k">fi</span>
 
 <span class="c"># Write current state to file</span>
@@ -178,7 +179,7 @@ What it does is just probe <code>/proc/diskstats</code> virtual file to get info
 <h3>Step 3: Cron-it-up!</h3>
 
 <p>Add the following lines to your <code>/etc/crontab</code>:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdb
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdc
 */30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdd

@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -160,7 +161,7 @@ Functions call tree using a recursive algorithm
 
 <p>Result? An awful implementation. With a quick Big-Oh analysis I would say that the Time Complexity of this &quot;monster&quot; will be <strong>O(2<sup>n</sup>)</strong>.
 Don&#39;t believe it? Check out the implementation here:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio .h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio .h&gt;</span>
 
 <span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">fibonacci_slow</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">i</span><span class="p">)</span>
 <span class="p">{</span>
@@ -203,7 +204,7 @@ Don&#39;t believe it? Check out the implementation here:</p>
 <p>To be more precise, we need to modify the algorithm so that at every step it doesn&#39;t trow away a previous call to <code>f(n)</code>, unless we are sure it&#39;s not useful anymore. In this way problems that share sub-problems (as explained before), will enjoy the pleasure of using the previously calculated results.</p>
 
 <p>Because I assume most of my visitors are developers, I&#39;m going to put here the code: it explains itself better than I can do writing.</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;/stdio&gt;&lt;stdio .h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;/stdio&gt;&lt;stdio .h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
@@ -219,9 +220,9 @@ Don&#39;t believe it? Check out the implementation here:</p>
         <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="o">=</span> <span class="n">input</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
         <span class="p">{</span>
             <span class="n">curr</span> <span class="o">=</span> <span class="n">prevprev</span> <span class="o">+</span> <span class="n">prev</span><span class="p">;</span>
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d: %lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">curr</span><span class="p">);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
             <span class="n">prevprev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
             <span class="n">prev</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
        <span class="p">}</span>
@@ -236,15 +237,15 @@ Don&#39;t believe it? Check out the implementation here:</p>
 <h2>Fibonacci and Identity Matrix</h2>
 
 <p>Take a look now to this property of Matrices:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c">    <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span> <span class="n">n</span>      <span class="p">[</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>   <span class="p">]</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span> <span class="n">n</span>      <span class="p">[</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>   <span class="p">]</span>
     <span class="p">[</span> <span class="mi">1</span> <span class="mi">0</span> <span class="p">]</span>    <span class="o">=</span>   <span class="p">[</span> <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>   <span class="n">F</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
 </code></pre></div>
 <p>Given the formula for multiplying 2x2 Matrices</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c">    <span class="p">[</span> <span class="n">a</span> <span class="n">b</span> <span class="p">]</span> <span class="p">[</span> <span class="n">d</span> <span class="n">e</span> <span class="p">]</span>   <span class="p">[</span> <span class="n">ad</span> <span class="o">+</span> <span class="n">be</span>  <span class="n">bd</span> <span class="o">+</span> <span class="n">ce</span> <span class="p">]</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="p">[</span> <span class="n">a</span> <span class="n">b</span> <span class="p">]</span> <span class="p">[</span> <span class="n">d</span> <span class="n">e</span> <span class="p">]</span>   <span class="p">[</span> <span class="n">ad</span> <span class="o">+</span> <span class="n">be</span>  <span class="n">bd</span> <span class="o">+</span> <span class="n">ce</span> <span class="p">]</span>
     <span class="p">[</span> <span class="n">b</span> <span class="n">c</span> <span class="p">]</span> <span class="p">[</span> <span class="n">e</span> <span class="n">f</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">bd</span> <span class="o">+</span> <span class="n">ce</span>  <span class="n">be</span> <span class="o">+</span> <span class="n">cf</span> <span class="p">]</span>
 </code></pre></div>
 <p>You can then prove the result above by induction: Let</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c">   <span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span>   <span class="p">(</span><span class="n">identity</span> <span class="n">matrix</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c">   <span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">]</span>   <span class="p">(</span><span class="n">identity</span> <span class="n">matrix</span><span class="p">)</span>
        <span class="p">[</span> <span class="mi">1</span> <span class="mi">0</span> <span class="p">]</span>
 </code></pre></div>
 <p>assume by induction that the equation above is is true for some n,
@@ -265,7 +266,7 @@ same as the formula defining the Fibonacci numbers.</p>
 Yes, it&#39;s possible to do such a thing. And it made me feel stupid when I realized how simple it was.</p>
 
 <p>Isn&#39;t <strong><code>a<sup>n</sup></code> = <code>a<sup>floor(n/2)</sup></code> * <code>a<sup>ceil(n/2)</sup></code></strong>? So, you can calculate it with something like:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="kt">int</span> <span class="nf">exp</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">exp</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
    <span class="k">if</span> <span class="p">(</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">)</span>
@@ -288,7 +289,7 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
 <p>If you arrived this far, you probably already realized where I&#39;m heading: Using the Identity Matrix property explained before with this algorithm for calculating exponentials.</p>
 
 <p>After all, multiplying a Matrix M by itself n-1 times is like calculating </code><code>M<sup>n-1</sup></code>. And here is the code that implements all this:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cp">#include &lt;stdlib.h&gt;</span>
 
 <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="nf">matrix_2x2_multiply</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">B</span><span class="p">)</span>
@@ -309,10 +310,10 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
 
 <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="nf">matrix_2x2_power</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">input_matrix</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;INPUT MATRIX(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">input_matrix</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">result</span> <span class="o">=</span> <span class="n">input_matrix</span><span class="p">;</span>
     <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -324,10 +325,10 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
             <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">input_matrix</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
             <span class="n">temp</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
 
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER RECURSION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
         <span class="p">}</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
         <span class="c1">// Free a 2x2 Array that is not needed anymore</span>
@@ -337,26 +338,26 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
             <span class="n">temp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
         <span class="p">}</span>
 
-        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="cp">#ifdef DEBUG</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER MULTIPLICATION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
             <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-        <span class="err">#</span><span class="n">endif</span>
+        <span class="cp">#endif</span>
 
         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span>
         <span class="p">{</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER IDENTITY MULTIP.(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;resultULT(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
@@ -409,7 +410,7 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
 <p><strong>Yes, the allocation of all those matrices during the calculation is heavy.</strong> Even if they are just 2x2, it is still a lot of system calls to get and release memory from and to the Operating System (the <code>malloc</code> and the <code>free</code>).</p>
 
 <p>We could do the job with just 2 matrices, 1 holding the current Matrix, and 1 holding the next multiplication. <strong>A circular array of 2 matrices 2x2, swapping their role at every step?</strong> HERE WE GO:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">matrix_2x2_square</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">matrix_array</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
     <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">curr_matrix_index</span><span class="p">)</span>
@@ -454,11 +455,11 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
 <span class="kt">unsigned</span> <span class="kt">short</span> <span class="nf">matrix_2x2_power</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">matrix_array</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span>
     <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">curr_matrix_index</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;INPUT MATRIX(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
     <span class="p">{</span>
@@ -467,20 +468,20 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
             <span class="c1">// Recursive call for N/2</span>
             <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_power</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
 
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER RECURSION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
                 <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
         <span class="p">}</span>
         <span class="c1">// Matrix = Matrix * Matrix</span>
         <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_square</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">);</span>
 
-        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="cp">#ifdef DEBUG</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER MULTIPLICATION(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
             <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
             <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
-        <span class="err">#</span><span class="n">endif</span>
+        <span class="cp">#endif</span>
 
         <span class="c1">// If N is odd</span>
         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span>
@@ -488,19 +489,19 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
             <span class="c1">// Matrix = Matrix * IdentityMatrix (&quot;{1, 1, 1, 0}&quot;)</span>
             <span class="n">curr_matrix_index</span> <span class="o">=</span> <span class="n">matrix_2x2_multiply_identity</span><span class="p">(</span><span class="n">matrix_array</span><span class="p">,</span> <span class="n">curr_matrix_index</span><span class="p">);</span>
 
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER IDENTITY MULTIP.(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
                 <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;RESULT(%d)</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n</span><span class="s">[%lu</span><span class="se">\t</span><span class="s">%lu]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">matrix_array</span><span class="p">[</span><span class="n">curr_matrix_index</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="c1">// Return the index of the matrix carrying the current result</span>
     <span class="k">return</span> <span class="n">curr_matrix_index</span><span class="p">;</span>
@@ -538,7 +539,7 @@ Confused? Ok, try the other way round: it requires as much multiplication, as yo
 <p>If you arrived to read this far, I think you don&#39;t need conclusions. You already understood all what I meant to say here.</p>
 
 <p>What I invite you to do is to compile and run those solutions, testing their performances with growing inputs. On my system (<a href="http://en.wikipedia.org/wiki/Mac_OS_X_Snow_Leopard">Mac OS X Snow Leopard</a>), using <code>unsigned long</code> to carry the values I can calculate up to <code>f(93)</code>: after that it overflows and the generated numbers can&#39;t be stored with a base type.</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">   <span class="c"># ./fibonacci-v3 92</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">   <span class="c"># ./fibonacci-v3 92</span>
    RESULT: fibonacci-v2<span class="o">(</span>92<span class="o">)</span> <span class="o">=</span> 7540113804746346429
    <span class="c"># ./fibonacci-v3 93</span>
    RESULT: fibonacci-v2<span class="o">(</span>93<span class="o">)</span> <span class="o">=</span> 12200160415121876738

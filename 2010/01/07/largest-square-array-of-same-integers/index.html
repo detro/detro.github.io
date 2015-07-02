@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -162,10 +163,10 @@ Return:
 <p>I designed this algorithm on my way back from my previous trip to Paris. Was at least 2 months I had it in my head, but there was the only empty slot of time where I could sit, think and code... on a spare piece of paper. And, still, it performs a disappointing Time Complexity of <strong>O(n<sup>3</sup>)</strong>.</p>
 
 <p>It works like this:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">init</span> <span class="s">&quot;largest matrix&quot;</span> <span class="n">to</span> <span class="nb">NULL</span><span class="o">/</span><span class="n">NONE</span><span class="o">/-</span><span class="mi">1</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">init</span> <span class="s">&quot;largest matrix&quot;</span> <span class="n">to</span> <span class="nb">NULL</span><span class="o">/</span><span class="n">NONE</span><span class="o">/-</span><span class="mi">1</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">num_of_rows</span><span class="o">:</span>
-   <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">num_of_cols</span><span class="o">:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="nl">num_of_rows</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="nl">num_of_cols</span><span class="p">:</span>
       <span class="n">calculates</span> <span class="s">&quot;how big is the matrix that has TOP-LEFT corner in array[i][j]&quot;</span>
       <span class="k">if</span> <span class="s">&quot;what found is bigger then what found so far&quot;</span><span class="o">:</span>
          <span class="n">save</span> <span class="n">what</span> <span class="n">found</span> <span class="n">as</span> <span class="s">&quot;the new largest matrix&quot;</span>
@@ -177,7 +178,7 @@ Return:
 <p>In the case of the input given above, the steps that it will do for cell <code>[0, 0]</code> will be like:</p>
 
 <p><strong>STEP 1</strong></p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -186,7 +187,7 @@ Return:
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>STEP 2</strong></p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -195,7 +196,7 @@ Return:
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>STEP 3</strong></p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -216,7 +217,7 @@ Given the current location in the matrix <code>[x, y]</code>, if the maximum dia
 then we jump any calculation and move to the next element in the matrix.</p>
 
 <h2>The code</h2>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdlib.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdlib.h&gt;</span>
 <span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">measure_diagonal</span><span class="p">(</span>
@@ -230,10 +231,10 @@ then we jump any calculation and move to the next element in the matrix.</p>
     <span class="k">static</span> <span class="kt">int</span> <span class="n">curr_x</span><span class="p">;</span> <span class="c1">// I can&#39;t use unsigned because I need to detect &quot;out of bound&quot;</span>
     <span class="k">static</span> <span class="kt">int</span> <span class="n">curr_y</span><span class="p">;</span>
 
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Measure the Diagonal from cell: (%d, %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Matrix size: (%d, %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span><span class="p">);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="c1">// Base value: diagonal = 1 - matrix of 1 element</span>
     <span class="n">diagonal</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -242,9 +243,9 @@ then we jump any calculation and move to the next element in the matrix.</p>
     <span class="c1">//  of the inner matrix ALREADY discovered.</span>
     <span class="c1">//  The starting point is the element in position [x,y]</span>
     <span class="k">while</span> <span class="p">(</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Current Diagonal for (%d,%d): %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">diagonal</span><span class="p">);</span>
-        <span class="err">#</span><span class="n">endif</span>
+        <span class="cp">#endif</span>
         <span class="c1">// If the area we are going to scan is outside the main matrix boundaries...</span>
         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">diagonal</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">cols</span> <span class="o">||</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">diagonal</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">rows</span> <span class="p">)</span> <span class="p">{</span>
             <span class="c1">//... return the current diagonal as it is</span>
@@ -253,19 +254,19 @@ then we jump any calculation and move to the next element in the matrix.</p>
 
         <span class="n">curr_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">diagonal</span><span class="p">;</span>
         <span class="n">curr_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;curr_x(%d), curr_y(%d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">curr_x</span><span class="p">,</span> <span class="n">curr_y</span><span class="p">);</span>
-        <span class="err">#</span><span class="n">endif</span>
+        <span class="cp">#endif</span>
 
         <span class="k">do</span> <span class="p">{</span>
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
                 <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Comparing (%d, %d) with curr(%d, %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">curr_x</span><span class="p">,</span> <span class="n">curr_y</span><span class="p">);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
             <span class="c1">// Check current element is equal to the Top-Left corner one</span>
             <span class="k">if</span> <span class="p">(</span> <span class="n">matrix</span><span class="p">[</span><span class="n">y</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">curr_y</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="n">curr_x</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
-                <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+                <span class="cp">#ifdef DEBUG</span>
                     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Diagonal for cell(%d, %d) is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">diagonal</span><span class="p">);</span>
-                <span class="err">#</span><span class="n">endif</span>
+                <span class="cp">#endif</span>
                 <span class="c1">// If not, the diagonal calculated so far is the diagonal</span>
                 <span class="k">return</span> <span class="n">diagonal</span><span class="p">;</span>
             <span class="p">}</span>
@@ -310,11 +311,11 @@ then we jump any calculation and move to the next element in the matrix.</p>
                     <span class="n">best_number</span> <span class="o">=</span> <span class="n">altitude_map</span><span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="n">c</span><span class="p">];</span>
                 <span class="p">}</span>
             <span class="p">}</span>
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
                 <span class="k">else</span> <span class="p">{</span>
                     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Skipped useless calculation at (%d, %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
                 <span class="p">}</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
         <span class="p">}</span>
     <span class="p">}</span>
 

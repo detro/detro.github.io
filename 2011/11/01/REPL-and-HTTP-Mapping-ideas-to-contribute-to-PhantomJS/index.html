@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -174,7 +175,7 @@ A read–eval–print loop (REPL), also known as an interactive toplevel, is a s
 <p>PhantomJS source code is already structured to abstract the network access of the <a href="http://doc.qt.nokia.com/4.7/qwebpage.html">WebPage</a> through a <a href="http://doc.qt.nokia.com/4.7/qnetworkaccessmanager.html">NetworkAccessManager</a>. At the moment we are using it for monitoring and sniffing.</p>
 
 <p>I want to add a functionality to the <code>webpage</code> module so that given a file <code>httpmap.json</code> that looks like:</p>
-<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">[</span>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span>
      <span class="p">{</span>
           <span class="nt">&quot;method&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">],</span>
           <span class="nt">&quot;source&quot;</span> <span class="p">:</span> <span class="s2">&quot;http://*.betfair.com/bla/*/test&quot;</span><span class="p">,</span>
@@ -192,7 +193,7 @@ A read–eval–print loop (REPL), also known as an interactive toplevel, is a s
 <span class="p">]</span>
 </code></pre></div>
 <p>a tester that uses phantom could do something like:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
     <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;webpage&#39;</span><span class="p">).</span><span class="nx">create</span><span class="p">(),</span>
     <span class="nx">HTTP_MAP</span> <span class="o">=</span> <span class="s2">&quot;httpmap.json&quot;</span><span class="p">;</span>
 

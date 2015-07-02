@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -119,7 +120,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        936 words
+                        937 words
                     </li>
                 
             </ul>
@@ -130,7 +131,7 @@
             
                 <p>This article was originally <a href="http://blog.orangelabsuk.com/2010/06/03/extract-proxy-configuration-from-a-pac-file-with-qt/">written on another blog</a>. That blog was never <em>officially published</em>, and it will probably never be. It was written on the <strong>3rd of June 2010</strong>, but is still &quot;somewhat important&quot; and relevant.</p>
 
-<p>Since the post was published, <strong>Richard Moore <rich @linux…fpb.site></strong> has done <a href="http://gitorious.org/qt-examples/qt-examples/trees/master/pac-files">a commit in the Qt examples directory that resamples very closely my code below</a>.</p>
+<p>Since the post was published, <strong>Richard Moore <rich <a href='https://twitter.com/linux' class='user-mention'>@linux</a>…fpb.site&gt;</strong> has done <a href="http://gitorious.org/qt-examples/qt-examples/trees/master/pac-files">a commit in the Qt examples directory that resamples very closely my code below</a>.</p>
 
 <p>So, I decided to repost it here.</p>
 
@@ -152,7 +153,7 @@ Automatic Proxy Configuration on Mac OS X
 <p>Of course this can be worked out: in the case of Maemo, being it based on <a href="http://www.kernel.org/">Linux</a>, I will probably just have to find a way to interface with the <strong>gconftool</strong> or make use of <code>QProcess::systemEnvironment()</code>. But what if you are in a LAN where the Proxy configuration is distributed across different offices using a <a href="http://en.wikipedia.org/wiki/Proxy_auto-config">PAC file</a>? Well, you need to work by hand.</p>
 
 <p>A PAC file is a Javascript that looks like this:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
    <span class="c1">// our local URLs from the domains below example.com don&#39;t need a proxy:</span>
    <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="s2">&quot;*.example.com/*&quot;</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="s2">&quot;DIRECT&quot;</span><span class="p">;}</span>
    <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">&quot;*.example.com:*/*&quot;</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="s2">&quot;DIRECT&quot;</span><span class="p">;}</span>
@@ -168,12 +169,12 @@ Automatic Proxy Configuration on Mac OS X
    <span class="k">return</span> <span class="s2">&quot;PROXY proxy.example.com:8080; DIRECT&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Working by hand looks scary, because, like in our case, a script can be huge and complex. A <a href="http://en.wikipedia.org/wiki/Regular_expression">RegExp</a> is a very bad idea, and start from “square one” with <a href="http://en.wikipedia.org/wiki/Lex_(software">LEX</a>) and <a href="http://en.wikipedia.org/wiki/Yacc">YACC</a> would feel dumb… and an overkill.</p>
+<p>Working by hand looks scary, because, like in our case, a script can be huge and complex. A <a href="http://en.wikipedia.org/wiki/Regular_expression">RegExp</a> is a very bad idea, and start from “square one” with <a href="http://en.wikipedia.org/wiki/Lex_(software)">LEX</a> and <a href="http://en.wikipedia.org/wiki/Yacc">YACC</a> would feel dumb… and an overkill.</p>
 
 <h1><code>QtScript</code> to the rescue</h1>
 
 <p>Fortunately, Qt provides a lot of help. The <a href="http://doc.qt.nokia.com/4.7-snapshot/network-programming.html">QtNetwork</a> and <a href="http://doc.qt.nokia.com/4.7-snapshot/qtscript.html">QtScript</a> (<a href="http://labs.qt.nokia.com/2009/11/23/qtscript-in-46/">now based on WebKit’s JavascriptCore</a>) have what it takes to solve the problem. What I show here is a usage of the QtScript Engine, that takes the PAC file and executes it to extract the right configuration.</p>
-<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="cp">#include &lt;QtCore/QCoreApplication&gt;</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include &lt;QtCore/QCoreApplication&gt;</span>
 <span class="cp">#include &lt;QScriptEngine&gt;</span>
 <span class="cp">#include &lt;QIODevice&gt;</span>
 <span class="cp">#include &lt;QFile&gt;</span>
@@ -293,7 +294,7 @@ Automatic Proxy Configuration on Mac OS X
 <h1>Contributing back?</h1>
 
 <p>Maybe I’ll should see if the Trolls are interested in getting something like that added to Qt. Maybe a method like</p>
-<div class="highlight"><pre><code class="cpp language-cpp" data-lang="cpp"><span class="n">QNetworkProxyFactory</span><span class="o">::</span><span class="n">proxyForPac</span><span class="p">(</span><span class="k">const</span> <span class="n">QIODevice</span> <span class="o">&amp;</span><span class="n">pacFile</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">QNetworkProxyFactory</span><span class="o">::</span><span class="n">proxyForPac</span><span class="p">(</span><span class="k">const</span> <span class="n">QIODevice</span> <span class="o">&amp;</span><span class="n">pacFile</span><span class="p">)</span>
 </code></pre></div>
 <p>could be added to the current QNetworkProxyFactory.</p>
 

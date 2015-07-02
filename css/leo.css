@@ -52,7 +52,6 @@ pre span {
 #layout {
   padding-left: 30%;
   /* "left col (nav + list)" width */
-
   position: relative;
 }
 #layout #sidebar {
@@ -72,14 +71,14 @@ pre span {
   font-size: 1.5em;
 }
 #layout #sidebar #header a {
-  color: #ffffff;
+  color: white;
   text-decoration: none;
   display: block;
 }
 #layout #sidebar #header a:link,
 #layout #sidebar #header a:visited,
 #layout #sidebar #header a:active {
-  color: #ffffff;
+  color: white;
 }
 #layout #sidebar #header a:hover,
 #layout #sidebar #header a:focus {
@@ -363,7 +362,7 @@ pre span {
   }
   #layout #sidebar a#toggle-navigation {
     display: inline-block;
-    color: #ffffff;
+    color: white;
     text-decoration: none;
     padding: 0.4em 0.6em;
     font-size: 1.5em;
@@ -372,7 +371,7 @@ pre span {
   #layout #sidebar a#toggle-navigation:link,
   #layout #sidebar a#toggle-navigation:visited,
   #layout #sidebar a#toggle-navigation:active {
-    color: #ffffff;
+    color: white;
   }
   #layout #sidebar a#toggle-navigation:hover,
   #layout #sidebar a#toggle-navigation:focus {

@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -141,7 +142,7 @@ One day will understand why it can make your life much easier.</p>
 <p>Today I got this new colleague having to rename a lot of specific directories in a deep directory tree, and I decided to help.</p>
 
 <p>Here is the full code:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
 <span class="c"># Simple Bash script to recursively rename Subdirectories in a Tree.</span>
 <span class="c"># Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;</span>
 <span class="c">#</span>
@@ -158,18 +159,18 @@ usage <span class="o">()</span> <span class="o">{</span>
    <span class="nb">exit </span>1
 <span class="o">}</span>
 
-<span class="o">[</span> <span class="s2">&quot;$#&quot;</span> -eq 3 <span class="o">]</span> <span class="o">||</span> usage
+<span class="o">[</span> <span class="s2">&quot;$#&quot;</span> -eq <span class="m">3</span> <span class="o">]</span> <span class="o">||</span> usage
 
 recursive<span class="o">()</span>
 <span class="o">{</span>
    <span class="nb">cd</span> <span class="s2">&quot;$1&quot;</span>
-   <span class="k">for </span>dir in *
+   <span class="k">for</span> dir in *
    <span class="k">do</span>
-<span class="k">      if</span> <span class="o">[</span> -d <span class="s2">&quot;$dir&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="k">         </span><span class="nb">echo</span> <span class="s2">&quot;Directory found: &#39;$dir&#39;&quot;</span>
+      <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;$dir&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+         <span class="nb">echo</span> <span class="s2">&quot;Directory found: &#39;$dir&#39;&quot;</span>
          <span class="o">(</span> recursive <span class="s2">&quot;$dir&quot;</span> <span class="s2">&quot;$2&quot;</span> <span class="s2">&quot;$3&quot;</span> <span class="o">)</span>
          <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> <span class="o">==</span> <span class="s2">&quot;$2&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-<span class="k">            </span><span class="nb">echo</span> <span class="s2">&quot;Renaming &#39;$2&#39; in &#39;$3&#39;&quot;</span>
+            <span class="nb">echo</span> <span class="s2">&quot;Renaming &#39;$2&#39; in &#39;$3&#39;&quot;</span>
             mv <span class="s2">&quot;$2&quot;</span> <span class="s2">&quot;$3&quot;</span>
          <span class="k">fi</span><span class="p">;</span>
       <span class="k">fi</span><span class="p">;</span>

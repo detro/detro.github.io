@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -135,7 +136,7 @@
 <p>Yes, without using any &quot;<code>if ( a &lt; 0 )...</code>&quot;. To do that, you need to refresh how <a href="http://en.wikipedia.org/wiki/Two's_complement">Two&#39;s Complement works</a>, then come back.</p>
 
 <p>What we really need to focus on is that, given a <code>signed int A</code>, the negative of that number is: <code>B = ~A + 1</code>. BUT, we are trying to calculate the Absolute Value, not the negative. So, something like:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">RESULT</span> <span class="o">=</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">RESULT</span> <span class="o">=</span>
     <span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="k">if</span> <span class="n">positive</span><span class="p">,</span> <span class="n">or</span> <span class="n">NEGATE_INPUT</span><span class="p">,</span> <span class="k">if</span> <span class="n">negative</span><span class="p">)</span>
     <span class="o">+</span>
     <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">if</span> <span class="n">positive</span><span class="p">,</span> <span class="n">or</span> <span class="mi">1</span><span class="p">,</span> <span class="k">if</span> <span class="n">negative</span><span class="p">)</span>
@@ -165,17 +166,17 @@
 <h3>Ladies and Gentleman, all shift please</h3>
 
 <p>Now, let&#39;s see some shifting in action. <strong>If A is a Positive number, then:</strong></p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0x00000000</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0x00000000</span> <span class="o">=&gt;</span> <span class="mi">0</span>
 <span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mh">0x00000000</span> <span class="o">=&gt;</span> <span class="mi">0</span>
 </code></pre></div>
 <p><strong>While if A is a Negative number, then:</strong></p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0xFFFFFFFF</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">A</span> <span class="o">=</span> <span class="n">INPUT</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span> <span class="o">=&gt;</span> <span class="mh">0xFFFFFFFF</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span>
 <span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span> <span class="o">=&gt;</span> <span class="mh">0x00000001</span> <span class="o">=&gt;</span> <span class="mi">1</span>
 </code></pre></div>
 <h2>Putting all together</h2>
 
 <p>So, this means that we can calculate the absolute value using the new variables we have produced, A and B. Here is how:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 
 <span class="kt">int</span> <span class="nf">abs</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
    <span class="kt">int</span> <span class="n">A</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">;</span>     <span class="c1">// 0x00000000 if Positive, 0xFFFFFFFF if Negative</span>

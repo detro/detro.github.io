@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -148,7 +149,7 @@
 <h3>How I implemented Minification and Templating in Bloggart</h3>
 
 <p>The magic is made of 3 parts. First, a new URL handler in the <a href="https://github.com/detro/bloggart/blob/master/app.yaml">app.yaml</a> file:</p>
-<div class="highlight"><pre><code class="yaml language-yaml" data-lang="yaml"><span class="c1"># ...</span>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># ...</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/.*\.(css|js)</span>
   <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">minifier.py</span>
 
@@ -158,7 +159,7 @@
 <span class="c1"># ...</span>
 </code></pre></div>
 <p>This routes requests to CSS and JS files to a new Request Handler, <a href="https://github.com/detro/bloggart/blob/master/minifier.py">minifier.py</a>:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># ...</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># ...</span>
 <span class="k">class</span> <span class="nc">CssMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">requestedCssFilename</span> <span class="p">):</span>
       <span class="n">cssPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">),</span> <span class="s">&#39;themes/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedCssFilename</span><span class="p">)</span> <span class="p">);</span>
@@ -210,7 +211,7 @@
 <span class="c"># ...</span>
 </code></pre></div>
 <p>The minification is done using a couple of libraries that I&#39;ll mention in a second. Templating is transparently applied <strong>BEFORE Minification</strong>, so that the Theme developer (me most probably) can use code like the following to Bundle JS and CSS in as less HTTP Requests as possible:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">/* CSS code... */
+<div class="highlight"><pre><code class="language-text" data-lang="text">/* CSS code... */
 { % include &quot;another_file.css&quot; % }
 /* more CSS code */
 </code></pre></div>

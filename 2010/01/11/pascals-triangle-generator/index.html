@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -140,7 +141,7 @@ Pascal's Triangle first 6 rows
 <h2>How does it work</h2>
 
 <p>The result is generated <em>&quot;filling the row from right to left&quot;</em>. I start initiating the element on the right hand side to <code>&#39;1&#39;</code>. Then, I run something like:</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="n">init</span> <span class="n">result</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span> <span class="n">requested_row</span><span class="p">]</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">init</span> <span class="n">result</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span> <span class="n">requested_row</span><span class="p">]</span>
 
 <span class="n">result</span><span class="p">[</span><span class="n">requested_row</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -151,7 +152,7 @@ Pascal's Triangle first 6 rows
 <span class="n">endfor</span>
 </code></pre></div>
 <p>Clearly this is nothing special. Just a little trick to avoid to use a triangular matrix. <a href="http://www.google.co.uk/products?hl=en&safe=off&q=memory%20prices&lr=&um=1&ie=UTF-8&sa=N&tab=wf">Memory is not cheap</a>, you know! ;-)</p>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cp">#include &lt;stdlib.h&gt;</span>
 
 <span class="kt">void</span> <span class="nf">print_row</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="o">*</span> <span class="n">row</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
@@ -169,16 +170,16 @@ Pascal's Triangle first 6 rows
         <span class="n">result</span><span class="p">[</span><span class="n">pascal_row</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// First element on the right is always &#39;1&#39;</span>
         <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">pascal_row</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
 
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
             <span class="n">print_row</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">pascal_row</span><span class="p">);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
 
             <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="n">pascal_row</span><span class="o">-</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pascal_row</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span> <span class="p">)</span> <span class="p">{</span>
                 <span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// Calculate the &#39;j&#39;-th element</span>
 
-                <span class="err">#</span><span class="n">ifdef</span> <span class="n">VERBOSE</span>
+                <span class="cp">#ifdef VERBOSE</span>
                 <span class="n">printf</span><span class="p">(</span><span class="s">&quot;(row: %d, element: %d) =&gt; %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-                <span class="err">#</span><span class="n">endif</span>
+                <span class="cp">#endif</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>

@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -128,7 +129,7 @@
     
         <div class="body">
             
-                <p>I believe I don&#39;t have to describe what <a href="http://en.wikipedia.org/wiki/Prime_number">primes</a> are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (<a href="http://twitter.com/lucabox">@lucabox</a>) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) .</p>
+                <p>I believe I don&#39;t have to describe what <a href="http://en.wikipedia.org/wiki/Prime_number">primes</a> are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (<a href="http://twitter.com/lucabox"><a href='https://twitter.com/lucabox' class='user-mention'>@lucabox</a></a>) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) .</p>
 
 <div class="img">
 <img src="http://scottthong.files.wordpress.com/2006/08/optimus_prime.jpg" alt="Optimus Prime" width="250" />
@@ -147,7 +148,7 @@ Optimus Prime :-P - yeah yeah, a stupid joke
 </ol></p>
 
 <h2>Code</h2>
-<div class="highlight"><pre><code class="c language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
 <span class="cp">#include &lt;stdlib.h&gt;</span>
 <span class="cp">#include &lt;math.h&gt;</span>
 
@@ -164,9 +165,9 @@ Optimus Prime :-P - yeah yeah, a stupid joke
     <span class="c1">// Limit - Never check for primes larger then the sqrt(value)</span>
     <span class="n">ull</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">(</span><span class="n">ull</span><span class="p">)</span><span class="n">sqrt</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
 
-    <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+    <span class="cp">#ifdef DEBUG</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value: %llu - Primes found so far: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">primes_found</span><span class="p">);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">primes_found</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Check if the value is divisible by this prime</span>
@@ -191,14 +192,14 @@ Optimus Prime :-P - yeah yeah, a stupid joke
 
     <span class="n">primes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Let&#39;s start testing &#39;3&#39; for primality ;)</span>
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+        <span class="cp">#ifdef DEBUG</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;i: %llu - Potential Prime: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-        <span class="err">#</span><span class="n">endif</span>
+        <span class="cp">#endif</span>
         <span class="c1">// Check if &#39;primes[i]&#39; is a prime</span>
         <span class="k">if</span> <span class="p">(</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">primes</span><span class="p">,</span> <span class="n">primes_found</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span>
+            <span class="cp">#ifdef DEBUG</span>
                 <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Found a new Prime: %llu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-            <span class="err">#</span><span class="n">endif</span>
+            <span class="cp">#endif</span>
             <span class="c1">// Increment num of primes found so far</span>
             <span class="o">++</span><span class="n">primes_found</span><span class="p">;</span>
             <span class="c1">// Move to the next odd number</span>
@@ -220,13 +221,13 @@ Optimus Prime :-P - yeah yeah, a stupid joke
     <span class="n">primes</span> <span class="o">=</span> <span class="n">prime_numbers_generator</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">primes</span> <span class="p">)</span> <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
 
-    <span class="err">#</span><span class="n">ifndef</span> <span class="n">FAST</span>
+    <span class="cp">#ifndef FAST</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;All the first %llu Primes are:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%llu &quot;</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="err">#</span><span class="n">endif</span>
+    <span class="cp">#endif</span>
 
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The Prime #%llu is %llu</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">primes</span><span class="p">[</span><span class="n">input</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
 

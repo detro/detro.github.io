@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -158,7 +159,7 @@ _301 Redirection_
 </ul>
 
 <p>It&#39;s a very very simple application, but I think serves well it&#39;s purpose. See here the main code:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /main.py</span>
 <span class="c"># ...</span>
 <span class="c"># Main Request Handler</span>
 <span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
@@ -194,7 +195,7 @@ _301 Redirection_
 <h4>URL generation</h4>
 
 <p>To generate the URL, it uses the mapping from the <code>config.py</code> file. Here is a portion of an example configuration:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /config.py</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /config.py</span>
 <span class="c"># ...</span>
 <span class="c"># Default URL: if no Redirect URL can be generated, traffic will be diverted here</span>
 <span class="n">DEFAULT_URL</span> <span class="o">=</span> <span class="s">&#39;http://default.new-domain.com/&#39;</span>
@@ -214,7 +215,7 @@ _301 Redirection_
 <span class="c"># ...</span>
 </code></pre></div>
 <p>The code that actually generates the URL is:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /main.py</span>
 <span class="c"># ...</span>
 <span class="c"># Generates the URL to redirect to</span>
 <span class="k">def</span> <span class="nf">get_redirect_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -262,7 +263,7 @@ _301 Redirection_
 <h4>How do you check the URL?</h4>
 
 <p>Yes, I also said that I added a check to see if a Destination URL actually exists, before serving the Redirect. Well, App Engine provides a very nice package, <code>google.appengine.api.urlfetch</code>, and I used it this way:</p>
-<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># /main.py</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># /main.py</span>
 <span class="c"># ...</span>
 <span class="c"># Check if a URL exists, trying a URL Fetch</span>
 <span class="k">def</span> <span class="nf">check_url_exists</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>

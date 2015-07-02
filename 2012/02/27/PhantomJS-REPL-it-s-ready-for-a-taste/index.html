@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -137,7 +138,7 @@
 </div>
 
 <p>First thing first: <strong>how do you get to try it?</strong> Well, you can get my fork, switch to the <code>dev-repl</code> branch and try it out:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/detro/phantomjs.git
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/detro/phantomjs.git
 <span class="nv">$ </span><span class="nb">cd </span>phantomjs
 <span class="nv">$ </span>git checkout -b dev-repl origin/dev-repl
 <span class="nv">$ </span>qmake <span class="o">&amp;&amp;</span> make
@@ -145,7 +146,7 @@
 <p>You can <a href="https://github.com/detro/phantomjs/zipball/dev-repl">download this tarball</a>. Or you just can come up with your own way to <a href="https://github.com/detro/phantomjs/tree/dev-repl">checkout my branch</a>.</p>
 
 <p>To launch it, just type:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>./bin/phantomjs
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./bin/phantomjs
 &gt;
 </code></pre></div>
 <p>You will be welcomed by a prompt, waiting for your JavaScript code to be evaluated on the spot. Line by line. Like a proper REPL. The ideal companion for your <strong>quick-and-dirty phantomjs-hack-sessions</strong> or <strong>live-coding keynotes</strong>.</p>

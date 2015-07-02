@@ -6,6 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
                                 
                                     <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/rss.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
                             </ul>
                         
@@ -151,13 +152,13 @@ PhantomJS is an optimal solution for headless testing of web-based applications,
 <p>The mind behind PhantomJS is <a href="http://ariya.blogspot.com/">Ariya Hidayat</a>, a brilliant guy that I first met when he was still working for Trolltech/Nokia. I will not spend a lot of time here explaining why it&#39;s idea is so great: for that there is <a href="http://code.google.com/p/phantomjs/w/list">the official wiki</a>.</p>
 
 <p>To share some awesomeness, here is my favourite example. <em>Do you want to know what&#39;s the weather like in London from your command line?</em> Type something like this:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs examples/weather.js London, UK
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>phantomjs examples/weather.js London, UK
 
 City: London, UK
 Current condition: Clear
-Temperature: 61 F
+Temperature: <span class="m">61</span> F
 Humidity: 45%
-Wind: N at 4 mph
+Wind: N at <span class="m">4</span> mph
 
 Thu: 52-66 F  Partly Sunny
 Fri: 57-72 F  Partly Sunny
@@ -165,7 +166,7 @@ Sat: 55-72 F  Partly Sunny
 Sun: 50-70 F  Chance of Rain
 </code></pre></div>
 <p>How does that work? Here is the PhantomJS script source:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">length</span> <span class="nx">is</span> <span class="mi">0</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">length</span> <span class="nx">is</span> <span class="mi">0</span>
     <span class="nx">city</span> <span class="o">=</span> <span class="s1">&#39;Mountain View&#39;</span>
     <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="nx">city</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span> <span class="s1">&#39; &#39;</span>
@@ -214,7 +215,7 @@ Sun: 50-70 F  Chance of Rain
 <p>Qt also provides other great modules, and one of them is <a href="http://doc.qt.nokia.com/latest/qtscript.html">QtScript</a>. Based on? Yes, it&#39;s based on Javascript! Actually, it wraps in a great API the &quot;standard&quot; <a href="http://www.webkit.org/projects/javascript/">WebKit JavascriptCode</a>.</p>
 
 <p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a &quot;resource&quot;, like any other object. The developer could do thinks like:</p>
-<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;WebPage&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;WebPage&quot;</span><span class="p">);</span>
 <span class="nx">page</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&quot;www.google.com&quot;</span><span class="p">);</span>
 <span class="nx">page</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s2">&quot;Lady Gaga&quot;</span><span class="p">,</span> <span class="s2">&quot;#inputTextField&quot;</span><span class="p">);</span>
 <span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="s2">&quot;#submitSearch&quot;</span><span class="p">);</span>
