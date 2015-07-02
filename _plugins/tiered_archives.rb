@@ -31,5 +31,4 @@ module TieredArchives
     def self.find_years(posts)
         posts.group_by {|post| post.date.year}.values.map {|year| year.group_by {|post| post.date.month}.values};
     end
-
 end

@@ -2,14 +2,17 @@
 # url: http://localhost:4000
 url: http://ivandemarino.me
 
+# Basics
 name: "Too much coffee, too little time"
+description: "Ivan De Marino's blog and personal website"
+title: "Too much <strong>coffee</strong><br/>too little <strong>time</strong>"
+subtitle: "Ivan<strong>DeMarino</strong>"
 author: "Ivan De Marino"
 authors:
     detro: "Ivan De Marino"
 
-title: "Too much <strong>coffee</strong><br/>too little <strong>time</strong>"
-subtitle: "Ivan<strong>DeMarino</strong>"
-
+# Links
+## Internal links
 internal-links:
     - title: blog
       link: /
@@ -19,7 +22,7 @@ internal-links:
       link: /about-me
     - title: archive
       link: /archive
-
+## Related-to-me links
 rel-me-links:
     - icon: twitter
       link: https://twitter.com/detronizator
@@ -30,8 +33,8 @@ rel-me-links:
     - icon: instagram
       link: http://instagram.com/detronizator
     - icon: rss
-      link: http://ivandemarino.me/rss.xml
-
+      link: http://ivandemarino.me/atom.xml
+## Other links
 meta:
     host:
         name: GitHub Pages
@@ -46,16 +49,36 @@ meta:
         name: CC ASA 3.0
         link: http://creativecommons.org/licenses/by-sa/3.0/
 
-destination: ../detro.github.io-destination
+destination: ../detro.github.io-target
+exclude:
+  - Gemfile
+  - Gemfile.lock
 
+# HTML/CSS generation options
 markdown: redcarpet
 highlighter: pygments
 lessc: /usr/local/bin/lessc
+encoding: utf-8
 
 permalink: /:year/:month/:title
-
 paginate: 10
 paginate_path: 'blog/:num'
+
+# GitHub Pages gems
+gems:
+  - jekyll-mentions
+  - jemoji
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Jekyll feed plugin
+feed:
+  path: atom.xml
+
+# Jekyll mentions plugin
+jekyll-mentions:
+  base_url: https://twitter.com
 
 # Google Analytics Configuration
 google_analytics:
