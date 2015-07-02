@@ -68,7 +68,7 @@ paginate_path: 'blog/:num'
 gems:
   - jekyll-mentions
   - jemoji
-  - jekyll-redirect-from
+  - jekyll-redirect-from #< https://github.com/jekyll/jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-feed
 
@@ -88,4 +88,4 @@ google_analytics:
 disqus:
     shortname: "blogivandemarinome"
 
-# limit_posts: 50
+# limit_posts: 50 #< Useful when developing
