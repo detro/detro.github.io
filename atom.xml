@@ -3,7 +3,7 @@
 <generator uri="http://jekyllrb.com" version="2.4.0">Jekyll</generator>
 <link href="http://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" />
 <link href="http://ivandemarino.me/" rel="alternate" type="text/html" />
-<updated>2015-07-03T00:23:48+01:00</updated>
+<updated>2015-07-17T21:16:38-07:00</updated>
 <id>http://ivandemarino.me/</id>
 <title>Too much coffee, too little time</title>
 <subtitle>Ivan De Marino&#39;s blog and personal website</subtitle>
@@ -11,10 +11,42 @@
 <name>Ivan De Marino</name>
 </author>
 <entry>
+<title>Ugly, expensive Housing</title>
+<link href="http://ivandemarino.me/2015/07/ugly-expensive-housing" rel="alternate" type="text/html" title="Ugly, expensive Housing" />
+<published>2015-07-17T00:00:00-07:00</published>
+<updated>2015-07-17T00:00:00-07:00</updated>
+<id>http://ivandemarino.me/2015/07/ugly-expensive-housing</id>
+<content type="html" xml:base="http://ivandemarino.me/2015/07/ugly-expensive-housing">&lt;p&gt;Yet &lt;a href=&quot;/2015/07/HTB-means-richer-builders/&quot;&gt;another&lt;/a&gt; take on expensive housing.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#39;m not sure I fully agree with the idea that poor aesthetic (actually, &lt;em&gt;ugliness&lt;/em&gt;)
+has a dominating role in the pricing bubble. I still believe the the biggest issue
+is with political choices, that most probably are driven by lobbist interests.&lt;/p&gt;
+
+&lt;p&gt;Nevertheless this video is an interesting and watch-worth perspective.&lt;/p&gt;
+
+&lt;div class=&quot;img&quot;&gt;
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/dcbjWGj3jBk?rel=0&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After watching this video I subscribed to &lt;a href=&quot;https://www.youtube.com/channel/UC7IcJI8PUf5Z3zKxnZvTBog&quot;&gt;&amp;quot;The School of Life&amp;quot;&lt;/a&gt;
+channel. And frankly you should too.&lt;/p&gt;
+</content>
+<category term="help to buy" />
+<category term="uk" />
+<category term="politics" />
+<category term="housing" />
+<category term="bubble" />
+<category term="pricing" />
+<category term="ugly" />
+<category term="expensive" />
+<category term="aesthetic" />
+<summary>Yet another take on expensive housing.</summary>
+</entry>
+<entry>
 <title>Help to Buy means richer Builders</title>
 <link href="http://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" />
-<published>2015-07-03T00:00:00+01:00</published>
-<updated>2015-07-03T00:00:00+01:00</updated>
+<published>2015-07-03T00:00:00-07:00</published>
+<updated>2015-07-03T00:00:00-07:00</updated>
 <id>http://ivandemarino.me/2015/07/HTB-means-richer-builders</id>
 <content type="html" xml:base="http://ivandemarino.me/2015/07/HTB-means-richer-builders">&lt;p&gt;Britain, you have a problem: house prices in the East/South East have grown
 ridiculous. See
@@ -163,8 +195,8 @@ government, mentioning bubble would probably get journalists fired...&lt;/p&gt;
 <entry>
 <title>Phonebooth on Mount Sinai</title>
 <link href="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" />
-<published>2014-02-23T00:00:00+00:00</published>
-<updated>2014-02-23T00:00:00+00:00</updated>
+<published>2014-02-23T00:00:00-08:00</published>
+<updated>2014-02-23T00:00:00-08:00</updated>
 <id>http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</id>
 <content type="html" xml:base="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai">&lt;p&gt;Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to go
 out for a wander. The pressure was too much. He knew that, sooner or later,
@@ -345,8 +377,8 @@ Please go back to your plays now: those plagues are not going to make themselves
 <entry>
 <title>PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title>
 <link href="http://ivandemarino.me/2014/01/phantomjs_196vs197" rel="alternate" type="text/html" title="PhantomJS 1.9.6 vs 1.9.7: what went wrong?" />
-<published>2014-01-28T00:00:00+00:00</published>
-<updated>2014-01-28T00:00:00+00:00</updated>
+<published>2014-01-28T00:00:00-08:00</published>
+<updated>2014-01-28T00:00:00-08:00</updated>
 <id>http://ivandemarino.me/2014/01/phantomjs_196vs197</id>
 <content type="html" xml:base="http://ivandemarino.me/2014/01/phantomjs_196vs197">&lt;p&gt;&lt;em&gt;tl;dr;&lt;/em&gt; Latest &lt;strong&gt;stable&lt;/strong&gt; release of PhantomJS is &lt;strong&gt;1.9.7&lt;/strong&gt;, and you
 should probably go and &lt;a href=&quot;http://phantomjs.org/download.html&quot;&gt;download it&lt;/a&gt;.
@@ -416,8 +448,8 @@ and this mess would have been avoided.&lt;/p&gt;
 <entry>
 <title>GhostDriver 1.1.0: codename &amp;quot;Banquo&amp;quot;</title>
 <link href="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo" rel="alternate" type="text/html" title="GhostDriver 1.1.0: codename &quot;Banquo&quot;" />
-<published>2014-01-03T00:00:00+00:00</published>
-<updated>2014-01-03T00:00:00+00:00</updated>
+<published>2014-01-03T00:00:00-08:00</published>
+<updated>2014-01-03T00:00:00-08:00</updated>
 <id>http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</id>
 <content type="html" xml:base="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo">&lt;p&gt;It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver
 (&lt;a href=&quot;https://github.com/detro/ghostdriver/releases/tag/1.0.4&quot;&gt;1.0.4&lt;/a&gt;)
@@ -563,8 +595,8 @@ was overdue and I wanted to share a &lt;em&gt;status report&lt;/em&gt; as soon a
 <entry>
 <title>Oldboy: 10 years later</title>
 <link href="http://ivandemarino.me/2013/12/oldboy-10-years-later" rel="alternate" type="text/html" title="Oldboy: 10 years later" />
-<published>2013-12-11T00:00:00+00:00</published>
-<updated>2013-12-11T00:00:00+00:00</updated>
+<published>2013-12-11T00:00:00-08:00</published>
+<updated>2013-12-11T00:00:00-08:00</updated>
 <id>http://ivandemarino.me/2013/12/oldboy-10-years-later</id>
 <content type="html" xml:base="http://ivandemarino.me/2013/12/oldboy-10-years-later">&lt;p&gt;It was 10 years ago. A night just like this one. Winter. Everyone in the house
 was asleep. Well, Leonardo isn&amp;#39;t really sleeping right now but you get the idea.
@@ -643,8 +675,8 @@ Still, the actors involved are very good so I don&amp;#39;t expect to be disappo
 <entry>
 <title>RESETtling...</title>
 <link href="http://ivandemarino.me/2013/11/resettling" rel="alternate" type="text/html" title="RESETtling..." />
-<published>2013-11-30T23:36:12+00:00</published>
-<updated>2013-11-30T23:36:12+00:00</updated>
+<published>2013-11-30T23:36:12-08:00</published>
+<updated>2013-11-30T23:36:12-08:00</updated>
 <id>http://ivandemarino.me/2013/11/resettling</id>
 <content type="html" xml:base="http://ivandemarino.me/2013/11/resettling">&lt;p&gt;&lt;strong&gt;Puff, Pant!&lt;/strong&gt; THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too far
 away.&lt;/p&gt;
@@ -792,8 +824,8 @@ package a full release.&lt;/p&gt;
 <entry>
 <title>GhostDriver 1.0.4, blog migration and blogging too little</title>
 <link href="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" />
-<published>2013-08-09T16:03:47+01:00</published>
-<updated>2013-08-09T16:03:47+01:00</updated>
+<published>2013-08-09T16:03:47-07:00</published>
+<updated>2013-08-09T16:03:47-07:00</updated>
 <id>http://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id>
 <content type="html" xml:base="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little">&lt;p&gt;Yes, I&amp;#39;m not blogging enough.
 Yes, it&amp;#39;s a shame that the world can&amp;#39;t read my terrible English on a more regular basis.
@@ -843,8 +875,8 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 <entry>
 <title>I&amp;#39;m off. See you in 2 weeks.</title>
 <link href="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I&#39;m off. See you in 2 weeks." />
-<published>2013-03-28T17:53:06+00:00</published>
-<updated>2013-03-28T17:53:06+00:00</updated>
+<published>2013-03-28T17:53:06-07:00</published>
+<updated>2013-03-28T17:53:06-07:00</updated>
 <id>http://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id>
 <content type="html" xml:base="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks">&lt;p&gt;This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on &lt;a href=&quot;https://github.com/detro/ghostdriver&quot;&gt;GhostDriver&lt;/a&gt; or &lt;a href=&quot;https://github.com/ariya/phantomjs&quot;&gt;PhantomJS&lt;/a&gt; (for the latter you have coverage, as the team on that is rich of geniuses - so you won&amp;#39;t miss my average-hood).&lt;/p&gt;
 
@@ -872,8 +904,8 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 <entry>
 <title>GhostDriver 1.0.3 is out!</title>
 <link href="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out" rel="alternate" type="text/html" title="GhostDriver 1.0.3 is out!" />
-<published>2013-03-18T18:25:19+00:00</published>
-<updated>2013-03-18T18:25:19+00:00</updated>
+<published>2013-03-18T18:25:19-07:00</published>
+<updated>2013-03-18T18:25:19-07:00</updated>
 <id>http://ivandemarino.me/2013/03/19/updated-phantomjs-1-9-0-ghostdriver-1-0-3-is-out</id>
 <content type="html" xml:base="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out">&lt;p&gt;After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release &lt;strong&gt;GhostDriver 1.0.3&lt;/strong&gt; into the wild.&lt;/p&gt;
 
@@ -912,52 +944,5 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 <category term="1.9.0" />
 <category term="ghostdriver" />
 <summary>After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release GhostDriver 1.0.3 into the wild.This release is an hardening release: this means that it&amp;#39;s focused on bug-fixing and very little new features have been added.GhostDriver 1.0.3 will be part of the upcoming PhantomJS 1.9 release, do in few days is now part of PhantomJS 1.9.0, and you can download binaries for various platform from https://code.google.com/p/phantomjs/downloads/list.If you want to know what made it for the 1.0.3 cut, take a look at the Changelog.I apologise in advance for whom have seen his &amp;quot;pet issue&amp;quot; not being implemented/fixed/addressed for this release, but it&amp;#39;s only one of me.I&amp;#39;d like to take the time to thank the few brave souls that have contributed to this release with their code. In chronological contribution order:garyd203Christoph NeurothNathan DaceLoduis Madariaga BarriosBen McCannThanks guys! Keep being awesome!</summary>
-</entry>
-<entry>
-<title>Me @ Selenium Camp 2013</title>
-<link href="http://ivandemarino.me/2013/03/03/Me-Selenium-Camp-2013" rel="alternate" type="text/html" title="Me @ Selenium Camp 2013" />
-<published>2013-03-03T15:44:11+00:00</published>
-<updated>2013-03-03T15:44:11+00:00</updated>
-<id>http://ivandemarino.me/2013/03/03/me-selenium-camp-2013</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/03/03/Me-Selenium-Camp-2013">&lt;p&gt;&lt;a href=&quot;http://seleniumcamp.com/&quot;&gt;Selenium Camp 2013&lt;/a&gt; has been a great experience. Not only I hanged out with great people, but, for the first time in my life, I also got to &lt;em&gt;savour&lt;/em&gt; a little bit of &lt;a href=&quot;http://en.wikipedia.org/wiki/Ukraine&quot;&gt;Ukraine&lt;/a&gt; in &lt;a href=&quot;http://en.wikipedia.org/wiki/Kiev&quot;&gt;Kiev&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;VERY friendly people (really friendly). GREAT food. WELL-ORGANISED conference.&lt;/p&gt;
-
-&lt;p&gt;What else could I ask for?&lt;/p&gt;
-
-&lt;h3&gt;My talk&lt;/h3&gt;
-
-&lt;p&gt;The title of my talk is &lt;strong&gt;Getting Started with GhostDriver (and my experience working on it!)&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;UPDATE: here is the video:
-&lt;div class=&quot;img&quot;&gt;
-&lt;iframe width=&quot;450&quot; height=&quot;254&quot; frameborder=&quot;0&quot; src=&quot;http://video.yandex.ru/iframe/xpinjection/3cjz2f3n8c.7028/&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;Videos of the other talks can be found &lt;a href=&quot;http://video.yandex.ru/users/xpinjection/collection/11/&quot;&gt;here&lt;/a&gt;.
-Here are the slides:
-&lt;div class=&quot;img&quot;&gt;
-&lt;iframe src=&quot;https://docs.google.com/presentation/d/11-AQ9PvdjffoAT5Gqbczmgth9afGo_8zsYlCUpu5rDI/embed?start=false&amp;loop=false&amp;delayms=5000&quot; frameborder=&quot;0&quot; width=&quot;480&quot; height=&quot;389&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;You can find them also on &lt;a href=&quot;http://bit.ly/VgKsYm&quot;&gt;Google Drive&lt;/a&gt; and &lt;a href=&quot;https://speakerdeck.com/detronizator/getting-started-with-ghostdriver&quot;&gt;Speaker Deck&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;del&gt;&lt;strong&gt;Video will be available soon&lt;/strong&gt;: the organisers have recorded every session and I guess it&amp;#39;s just a matter of time.&lt;/del&gt; Added. Scroll above.&lt;/p&gt;
-</content>
-<author>
-<name>detro</name>
-</author>
-<category term="ukraine" />
-<category term="kiev" />
-<category term="seleniumcamp" />
-<category term="ghostdriver" />
-<category term="phantomjs" />
-<category term="selenium" />
-<category term="experience" />
-<category term="slides" />
-<category term="link" />
-<category term="presentation" />
-<category term="talk" />
-<summary>Selenium Camp 2013 has been a great experience. Not only I hanged out with great people, but, for the first time in my life, I also got to savour a little bit of Ukraine in Kiev.VERY friendly people (really friendly). GREAT food. WELL-ORGANISED conference.What else could I ask for?My talkThe title of my talk is Getting Started with GhostDriver (and my experience working on it!).UPDATE: here is the video:Videos of the other talks can be found here.Here are the slides:You can find them also on Google Drive and Speaker Deck.Video will be available soon: the organisers have recorded every session and I guess it&amp;#39;s just a matter of time. Added. Scroll above.</summary>
 </entry>
 </feed>
