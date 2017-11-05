@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -137,7 +137,7 @@
 </div>
 
 <p>The first version of the code looked like:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">).</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">).</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#chars_num&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span> <span class="nx">new_len</span> <span class="p">);</span>
    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#sms_num&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">161</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span>
 <span class="p">});</span>
@@ -145,7 +145,7 @@
 <p>Working good, but was clearly slow: every keystroke was &quot;giving back the cursor&quot; too slowly for a fast typer like me. I went to take a look at <a href="http://www.twitter.com/">twitter</a>, and their text box was WAY FASTER.
 &lt;!--more--&gt;
 Well, a decent programmer (not like me at 3 o&#39;clock in the morning) will do something like:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">obj_message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">obj_message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">);</span>
 <span class="nx">obj_chars_num</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#chars_num&#39;</span><span class="p">);</span>
 <span class="nx">obj_sms_num</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#sms_num&#39;</span><span class="p">);</span>
 <span class="nx">obj_message</span><span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>

@@ -1,22 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="2.4.0">Jekyll</generator>
-<link href="http://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" />
-<link href="http://ivandemarino.me/" rel="alternate" type="text/html" />
-<updated>2015-07-17T21:16:38-07:00</updated>
-<id>http://ivandemarino.me/</id>
-<title>Too much coffee, too little time</title>
-<subtitle>Ivan De Marino&#39;s blog and personal website</subtitle>
-<author>
-<name>Ivan De Marino</name>
-</author>
-<entry>
-<title>Ugly, expensive Housing</title>
-<link href="http://ivandemarino.me/2015/07/ugly-expensive-housing" rel="alternate" type="text/html" title="Ugly, expensive Housing" />
-<published>2015-07-17T00:00:00-07:00</published>
-<updated>2015-07-17T00:00:00-07:00</updated>
-<id>http://ivandemarino.me/2015/07/ugly-expensive-housing</id>
-<content type="html" xml:base="http://ivandemarino.me/2015/07/ugly-expensive-housing">&lt;p&gt;Yet &lt;a href=&quot;/2015/07/HTB-means-richer-builders/&quot;&gt;another&lt;/a&gt; take on expensive housing.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="http://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2017-11-05T22:33:36+00:00</updated><id>http://ivandemarino.me/</id><title type="html">Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br /&gt;too little &lt;strong&gt;time&lt;/strong&gt;</title><subtitle>Ivan De Marino's blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Ugly, expensive Housing</title><link href="http://ivandemarino.me/2015/07/ugly-expensive-housing" rel="alternate" type="text/html" title="Ugly, expensive Housing" /><published>2015-07-17T00:00:00+01:00</published><updated>2015-07-17T00:00:00+01:00</updated><id>http://ivandemarino.me/2015/07/ugly-expensive-housing</id><content type="html" xml:base="http://ivandemarino.me/2015/07/ugly-expensive-housing">&lt;p&gt;Yet &lt;a href=&quot;/2015/07/HTB-means-richer-builders/&quot;&gt;another&lt;/a&gt; take on expensive housing.&lt;/p&gt;
 
 &lt;p&gt;I&amp;#39;m not sure I fully agree with the idea that poor aesthetic (actually, &lt;em&gt;ugliness&lt;/em&gt;)
 has a dominating role in the pricing bubble. I still believe the the biggest issue
@@ -29,26 +11,7 @@ is with political choices, that most probably are driven by lobbist interests.&l
 &lt;/div&gt;
 
 &lt;p&gt;After watching this video I subscribed to &lt;a href=&quot;https://www.youtube.com/channel/UC7IcJI8PUf5Z3zKxnZvTBog&quot;&gt;&amp;quot;The School of Life&amp;quot;&lt;/a&gt;
-channel. And frankly you should too.&lt;/p&gt;
-</content>
-<category term="help to buy" />
-<category term="uk" />
-<category term="politics" />
-<category term="housing" />
-<category term="bubble" />
-<category term="pricing" />
-<category term="ugly" />
-<category term="expensive" />
-<category term="aesthetic" />
-<summary>Yet another take on expensive housing.</summary>
-</entry>
-<entry>
-<title>Help to Buy means richer Builders</title>
-<link href="http://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" />
-<published>2015-07-03T00:00:00-07:00</published>
-<updated>2015-07-03T00:00:00-07:00</updated>
-<id>http://ivandemarino.me/2015/07/HTB-means-richer-builders</id>
-<content type="html" xml:base="http://ivandemarino.me/2015/07/HTB-means-richer-builders">&lt;p&gt;Britain, you have a problem: house prices in the East/South East have grown
+channel. And frankly you should too.&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="housing" /><category term="bubble" /><category term="pricing" /><category term="ugly" /><category term="expensive" /><category term="aesthetic" /><summary type="html">Yet another take on expensive housing.</summary></entry><entry><title type="html">Help to Buy means richer Builders</title><link href="http://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" /><published>2015-07-03T00:00:00+01:00</published><updated>2015-07-03T00:00:00+01:00</updated><id>http://ivandemarino.me/2015/07/HTB-means-richer-builders</id><content type="html" xml:base="http://ivandemarino.me/2015/07/HTB-means-richer-builders">&lt;p&gt;Britain, you have a problem: house prices in the East/South East have grown
 ridiculous. See
 &lt;a href=&quot;http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html&quot;&gt;2014 house pricing data by the Office for National Statistics (ONS)&lt;/a&gt; that compares prices
 with the pre-crisis ones.&lt;/p&gt;
@@ -181,24 +144,7 @@ tax-payers money).&lt;/p&gt;
 Unless you are a builder: in that case your third yacht is coming next week.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;I&amp;#39;d call this ++a new house bubble++.&lt;/strong&gt; But in a country where media are very much influenced by
-government, mentioning bubble would probably get journalists fired...&lt;/p&gt;
-</content>
-<category term="help to buy" />
-<category term="uk" />
-<category term="politics" />
-<category term="affordable" />
-<category term="housing" />
-<category term="bubble" />
-<category term="pricing" />
-<summary>Britain, you have a problem: house prices in the East/South East have grownridiculous. See2014 house pricing data by the Office for National Statistics (ONS) that compares priceswith the pre-crisis ones.</summary>
-</entry>
-<entry>
-<title>Phonebooth on Mount Sinai</title>
-<link href="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" />
-<published>2014-02-23T00:00:00-08:00</published>
-<updated>2014-02-23T00:00:00-08:00</updated>
-<id>http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</id>
-<content type="html" xml:base="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai">&lt;p&gt;Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to go
+government, mentioning bubble would probably get journalists fired...&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="affordable" /><category term="housing" /><category term="bubble" /><category term="pricing" /><summary type="html">Britain, you have a problem: house prices in the East/South East have grown ridiculous. See 2014 house pricing data by the Office for National Statistics (ONS) that compares prices with the pre-crisis ones.</summary></entry><entry><title type="html">Phonebooth on Mount Sinai</title><link href="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" /><published>2014-02-23T00:00:00+00:00</published><updated>2014-02-23T00:00:00+00:00</updated><id>http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</id><content type="html" xml:base="http://ivandemarino.me/2014/02/phonebooth-on-mount-sinai">&lt;p&gt;Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to go
 out for a wander. The pressure was too much. He knew that, sooner or later,
 they will just crash his skull with a stone. He needed a plan. He needed a way
 to survive (both him and them!), without ruining it all. Without having to look
@@ -364,23 +310,7 @@ So, leave him alone. Unless you are a hot gay version of David Jude Heyworth Law
 &lt;p&gt;God&amp;gt; &lt;em&gt;Oh! It was YOU then. Well done. You are my saviour, as usual.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Secretary&amp;gt; &lt;em&gt;My pleasure &lt;a href=&quot;http://youtu.be/lBhPDxszukU&quot; target=&quot;_blank&quot;&gt;Brian&lt;/a&gt;.
-Please go back to your plays now: those plagues are not going to make themselves.&lt;/em&gt;&lt;/p&gt;
-</content>
-<category term="satire" />
-<category term="sinai" />
-<category term="phonebooth" />
-<category term="god" />
-<category term="moses" />
-<category term="phonecall" />
-<summary>Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to goout for a wander. The pressure was too much. He knew that, sooner or later,they will just crash his skull with a stone. He needed a plan. He needed a wayto survive (both him and them!), without ruining it all. Without having to lookthe fool he knew he was.</summary>
-</entry>
-<entry>
-<title>PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title>
-<link href="http://ivandemarino.me/2014/01/phantomjs_196vs197" rel="alternate" type="text/html" title="PhantomJS 1.9.6 vs 1.9.7: what went wrong?" />
-<published>2014-01-28T00:00:00-08:00</published>
-<updated>2014-01-28T00:00:00-08:00</updated>
-<id>http://ivandemarino.me/2014/01/phantomjs_196vs197</id>
-<content type="html" xml:base="http://ivandemarino.me/2014/01/phantomjs_196vs197">&lt;p&gt;&lt;em&gt;tl;dr;&lt;/em&gt; Latest &lt;strong&gt;stable&lt;/strong&gt; release of PhantomJS is &lt;strong&gt;1.9.7&lt;/strong&gt;, and you
+Please go back to your plays now: those plagues are not going to make themselves.&lt;/em&gt;&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="satire" /><category term="sinai" /><category term="phonebooth" /><category term="god" /><category term="moses" /><category term="phonecall" /><summary type="html">Moses didn&amp;#39;t know what to do any more with those idiots. So he decides to go out for a wander. The pressure was too much. He knew that, sooner or later, they will just crash his skull with a stone. He needed a plan. He needed a way to survive (both him and them!), without ruining it all. Without having to look the fool he knew he was.</summary></entry><entry><title type="html">PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title><link href="http://ivandemarino.me/2014/01/phantomjs_196vs197" rel="alternate" type="text/html" title="PhantomJS 1.9.6 vs 1.9.7: what went wrong?" /><published>2014-01-28T00:00:00+00:00</published><updated>2014-01-28T00:00:00+00:00</updated><id>http://ivandemarino.me/2014/01/phantomjs_196vs197</id><content type="html" xml:base="http://ivandemarino.me/2014/01/phantomjs_196vs197">&lt;p&gt;&lt;em&gt;tl;dr;&lt;/em&gt; Latest &lt;strong&gt;stable&lt;/strong&gt; release of PhantomJS is &lt;strong&gt;1.9.7&lt;/strong&gt;, and you
 should probably go and &lt;a href=&quot;http://phantomjs.org/download.html&quot;&gt;download it&lt;/a&gt;.
 It contains &lt;a href=&quot;https://github.com/detro/ghostdriver/releases/tag/1.1.0&quot;&gt;GhostDriver 1.1.0 &amp;quot;Banquo&amp;quot;&lt;/a&gt;,
 and that&amp;#39;s it.&lt;/p&gt;
@@ -435,23 +365,7 @@ direct project but the one I&amp;#39;m based upon), I should increase the
 &lt;em&gt;it wasn&amp;#39;t just a minor fix in GhostDriver&lt;/em&gt;,
 and this mess would have been avoided.&lt;/p&gt;
 
-&lt;p&gt;Happy &lt;em&gt;Ghosting&lt;/em&gt;!&lt;/p&gt;
-</content>
-<category term="ghostdriver" />
-<category term="phantomjs" />
-<category term="release" />
-<category term="changes" />
-<category term="git" />
-<category term="misunderstanding" />
-<summary>tl;dr; Latest stable release of PhantomJS is 1.9.7, and youshould probably go and download it.It contains GhostDriver 1.1.0 &amp;quot;Banquo&amp;quot;,and that&amp;#39;s it.</summary>
-</entry>
-<entry>
-<title>GhostDriver 1.1.0: codename &amp;quot;Banquo&amp;quot;</title>
-<link href="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo" rel="alternate" type="text/html" title="GhostDriver 1.1.0: codename &quot;Banquo&quot;" />
-<published>2014-01-03T00:00:00-08:00</published>
-<updated>2014-01-03T00:00:00-08:00</updated>
-<id>http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</id>
-<content type="html" xml:base="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo">&lt;p&gt;It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver
+&lt;p&gt;Happy &lt;em&gt;Ghosting&lt;/em&gt;!&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="git" /><category term="misunderstanding" /><summary type="html">tl;dr; Latest stable release of PhantomJS is 1.9.7, and you should probably go and download it. It contains GhostDriver 1.1.0 &amp;quot;Banquo&amp;quot;, and that&amp;#39;s it.</summary></entry><entry><title type="html">GhostDriver 1.1.0: codename “Banquo”</title><link href="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo" rel="alternate" type="text/html" title="GhostDriver 1.1.0: codename &quot;Banquo&quot;" /><published>2014-01-03T00:00:00+00:00</published><updated>2014-01-03T00:00:00+00:00</updated><id>http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</id><content type="html" xml:base="http://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo">&lt;p&gt;It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver
 (&lt;a href=&quot;https://github.com/detro/ghostdriver/releases/tag/1.0.4&quot;&gt;1.0.4&lt;/a&gt;)
 was... July 2013.
 And &lt;a href=&quot;http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/&quot;&gt;blogged about it&lt;/a&gt;
@@ -550,7 +464,7 @@ interpreted within the context of a WebDriver Page. In other words, for the give
 script the &lt;code&gt;this&lt;/code&gt; variable is initialized to be the current Page.&lt;/p&gt;
 
 &lt;p&gt;The format of this &lt;em&gt;WebDriver Protocol Extension&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;HTTP POST /session/:id/phantom/execute
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;&lt;/span&gt;HTTP POST /session/:id/phantom/execute
 {
     &amp;quot;script&amp;quot;    : SCRIPT_SCRIPT
     &amp;quot;args&amp;quot;      : [ARRAY_OF_JS_BASIC_TYPES]
@@ -582,23 +496,7 @@ fully released:&lt;/p&gt;
 &lt;p&gt;I could have waited for those tasks to be complete... but I felt like this
 was overdue and I wanted to share a &lt;em&gt;status report&lt;/em&gt; as soon as I could.&lt;/p&gt;
 
-&lt;p&gt;Also, it gives me &lt;em&gt;closure&lt;/em&gt; for this blog post.&lt;/p&gt;
-</content>
-<category term="ghostdriver" />
-<category term="phantomjs" />
-<category term="release" />
-<category term="changes" />
-<category term="info" />
-<category term="banquo" />
-<summary>It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver(1.0.4)was... July 2013.And blogged about itonly in August!!!I gotta take a look at my GitHub commits over the 2013: something tells me thatyear-in-commits nicely overlaps with my eventful 2013.But let&amp;#39;s try to stay on topic.</summary>
-</entry>
-<entry>
-<title>Oldboy: 10 years later</title>
-<link href="http://ivandemarino.me/2013/12/oldboy-10-years-later" rel="alternate" type="text/html" title="Oldboy: 10 years later" />
-<published>2013-12-11T00:00:00-08:00</published>
-<updated>2013-12-11T00:00:00-08:00</updated>
-<id>http://ivandemarino.me/2013/12/oldboy-10-years-later</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/12/oldboy-10-years-later">&lt;p&gt;It was 10 years ago. A night just like this one. Winter. Everyone in the house
+&lt;p&gt;Also, it gives me &lt;em&gt;closure&lt;/em&gt; for this blog post.&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="info" /><category term="banquo" /><summary type="html">It&amp;#39;s long overdue. Last time I have cut a release of GhostDriver (1.0.4) was... July 2013. And blogged about it only in August!!! I gotta take a look at my GitHub commits over the 2013: something tells me that year-in-commits nicely overlaps with my eventful 2013. But let&amp;#39;s try to stay on topic.</summary></entry><entry><title type="html">Oldboy: 10 years later</title><link href="http://ivandemarino.me/2013/12/oldboy-10-years-later" rel="alternate" type="text/html" title="Oldboy: 10 years later" /><published>2013-12-11T00:00:00+00:00</published><updated>2013-12-11T00:00:00+00:00</updated><id>http://ivandemarino.me/2013/12/oldboy-10-years-later</id><content type="html" xml:base="http://ivandemarino.me/2013/12/oldboy-10-years-later">&lt;p&gt;It was 10 years ago. A night just like this one. Winter. Everyone in the house
 was asleep. Well, Leonardo isn&amp;#39;t really sleeping right now but you get the idea.
 I was alone in the kitchen. Alone with the TV, an &lt;code&gt;.avi&lt;/code&gt; file and an &lt;code&gt;.srt&lt;/code&gt; file.&lt;/p&gt;
 
@@ -658,27 +556,7 @@ years instead...&lt;/p&gt;
 has just been released, but that&amp;#39;s an almost total coincidence.
 I&amp;#39;m going to eventually watch this &lt;em&gt;USA edition&lt;/em&gt;, but I don&amp;#39;t expect it to make
 me happy - remakes are usually badly executed.
-Still, the actors involved are very good so I don&amp;#39;t expect to be disappointed either.&lt;/p&gt;
-</content>
-<category term="oldboy" />
-<category term="movie" />
-<category term="south korea" />
-<category term="personal" />
-<category term="growth" />
-<category term="life" />
-<category term="change" />
-<category term="italy" />
-<category term="uk" />
-<category term="night" />
-<summary>It was 10 years ago. A night just like this one. Winter. Everyone in the housewas asleep. Well, Leonardo isn&amp;#39;t really sleeping right now but you get the idea.I was alone in the kitchen. Alone with the TV, an .avi file and an .srt file.</summary>
-</entry>
-<entry>
-<title>RESETtling...</title>
-<link href="http://ivandemarino.me/2013/11/resettling" rel="alternate" type="text/html" title="RESETtling..." />
-<published>2013-11-30T23:36:12-08:00</published>
-<updated>2013-11-30T23:36:12-08:00</updated>
-<id>http://ivandemarino.me/2013/11/resettling</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/11/resettling">&lt;p&gt;&lt;strong&gt;Puff, Pant!&lt;/strong&gt; THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too far
+Still, the actors involved are very good so I don&amp;#39;t expect to be disappointed either.&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="oldboy" /><category term="movie" /><category term="south korea" /><category term="personal" /><category term="growth" /><category term="life" /><category term="change" /><category term="italy" /><category term="uk" /><category term="night" /><summary type="html">It was 10 years ago. A night just like this one. Winter. Everyone in the house was asleep. Well, Leonardo isn&amp;#39;t really sleeping right now but you get the idea. I was alone in the kitchen. Alone with the TV, an .avi file and an .srt file.</summary></entry><entry><title type="html">RESETtling…</title><link href="http://ivandemarino.me/2013/11/resettling" rel="alternate" type="text/html" title="RESETtling..." /><published>2013-11-30T23:36:12+00:00</published><updated>2013-11-30T23:36:12+00:00</updated><id>http://ivandemarino.me/2013/11/resettling</id><content type="html" xml:base="http://ivandemarino.me/2013/11/resettling">&lt;p&gt;&lt;strong&gt;Puff, Pant!&lt;/strong&gt; THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too far
 away.&lt;/p&gt;
 
 &lt;p&gt;Many things have happened in the recent months: we got &lt;strong&gt;married&lt;/strong&gt;; I helped my
@@ -806,28 +684,7 @@ package a full release.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;That&amp;#39;s all for now.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;P.S.&lt;/strong&gt; I still haven&amp;#39;t told you what&amp;#39;s my next job, have I? :)&lt;/p&gt;
-</content>
-<category term="personal" />
-<category term="leonardo" />
-<category term="life" />
-<category term="reset" />
-<category term="settling" />
-<category term="blogging" />
-<category term="opensource" />
-<category term="ghostdriver" />
-<category term="phantomjs" />
-<category term="job" />
-<category term="career" />
-<summary>Puff, Pant! THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too faraway.</summary>
-</entry>
-<entry>
-<title>GhostDriver 1.0.4, blog migration and blogging too little</title>
-<link href="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" />
-<published>2013-08-09T16:03:47-07:00</published>
-<updated>2013-08-09T16:03:47-07:00</updated>
-<id>http://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little">&lt;p&gt;Yes, I&amp;#39;m not blogging enough.
+&lt;p&gt;&lt;strong&gt;P.S.&lt;/strong&gt; I still haven&amp;#39;t told you what&amp;#39;s my next job, have I? :)&lt;/p&gt;</content><author><name>Ivan De Marino</name></author><category term="personal" /><category term="leonardo" /><category term="life" /><category term="reset" /><category term="settling" /><category term="blogging" /><category term="opensource" /><category term="ghostdriver" /><category term="phantomjs" /><category term="job" /><category term="career" /><summary type="html">Puff, Pant! THAT was not easy! But finally, &amp;quot;normality&amp;quot; seems not too far away.</summary></entry><entry><title type="html">GhostDriver 1.0.4, blog migration and blogging too little</title><link href="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" /><published>2013-08-09T16:03:47+01:00</published><updated>2013-08-09T16:03:47+01:00</updated><id>http://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id><content type="html" xml:base="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little">&lt;p&gt;Yes, I&amp;#39;m not blogging enough.
 Yes, it&amp;#39;s a shame that the world can&amp;#39;t read my terrible English on a more regular basis.
 Yes, I&amp;#39;m lazy.&lt;/p&gt;
 
@@ -857,28 +714,7 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 
 &lt;p&gt;So that might make me blog more. Or not. I don&amp;#39;t know. Will see.&lt;/p&gt;
 
-&lt;p&gt;Cheers.&lt;/p&gt;
-</content>
-<author>
-<name>detro</name>
-</author>
-<category term="github" />
-<category term="phantomjs" />
-<category term="blog" />
-<category term="jekyll" />
-<category term="migration" />
-<category term="release" />
-<category term="bloggart" />
-<category term="ghostdriver" />
-<summary>Yes, I&amp;#39;m not blogging enough.Yes, it&amp;#39;s a shame that the world can&amp;#39;t read my terrible English on a more regular basis.Yes, I&amp;#39;m lazy.Well, here is a quick update for the few eager souls I have let down.GhostDriverI have release GhostDriver 1.0.4 - &amp;quot;Arghan Div&amp;quot;. It should be released in the upcoming PhantomJS 1.9.2.The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch.Blog migrationI&amp;#39;m planning to abandon my fork of Bloggart. I have written a &amp;quot;backupper&amp;quot; that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to &amp;quot;leave&amp;quot; as well, look in here.I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I&amp;#39;m going to use Jekyll. First tests look promising. I hope I&amp;#39;ll get around to do it. And I want to use GitHub Pages to host it.I&amp;#39;ll probably have to make sure URLs are redirected properly, as I don&amp;#39;t know how much of my current hostname structure I can use on GitHub pages.Blogging too littleOne reason to migrate is that I think I&amp;#39;ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays.So that might make me blog more. Or not. I don&amp;#39;t know. Will see.Cheers.</summary>
-</entry>
-<entry>
-<title>I&amp;#39;m off. See you in 2 weeks.</title>
-<link href="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I&#39;m off. See you in 2 weeks." />
-<published>2013-03-28T17:53:06-07:00</published>
-<updated>2013-03-28T17:53:06-07:00</updated>
-<id>http://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks">&lt;p&gt;This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on &lt;a href=&quot;https://github.com/detro/ghostdriver&quot;&gt;GhostDriver&lt;/a&gt; or &lt;a href=&quot;https://github.com/ariya/phantomjs&quot;&gt;PhantomJS&lt;/a&gt; (for the latter you have coverage, as the team on that is rich of geniuses - so you won&amp;#39;t miss my average-hood).&lt;/p&gt;
+&lt;p&gt;Cheers.&lt;/p&gt;</content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html">Yes, I&amp;#39;m not blogging enough. Yes, it&amp;#39;s a shame that the world can&amp;#39;t read my terrible English on a more regular basis. Yes, I&amp;#39;m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - &amp;quot;Arghan Div&amp;quot;. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I&amp;#39;m planning to abandon my fork of Bloggart. I have written a &amp;quot;backupper&amp;quot; that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to &amp;quot;leave&amp;quot; as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I&amp;#39;m going to use Jekyll. First tests look promising. I hope I&amp;#39;ll get around to do it. And I want to use GitHub Pages to host it. I&amp;#39;ll probably have to make sure URLs are redirected properly, as I don&amp;#39;t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I&amp;#39;ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don&amp;#39;t know. Will see. Cheers.</summary></entry><entry><title type="html">I’m off. See you in 2 weeks.</title><link href="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I'm off. See you in 2 weeks." /><published>2013-03-28T17:53:06+00:00</published><updated>2013-03-28T17:53:06+00:00</updated><id>http://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id><content type="html" xml:base="http://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks">&lt;p&gt;This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on &lt;a href=&quot;https://github.com/detro/ghostdriver&quot;&gt;GhostDriver&lt;/a&gt; or &lt;a href=&quot;https://github.com/ariya/phantomjs&quot;&gt;PhantomJS&lt;/a&gt; (for the latter you have coverage, as the team on that is rich of geniuses - so you won&amp;#39;t miss my average-hood).&lt;/p&gt;
 
 &lt;p&gt;I&amp;#39;m &lt;strong&gt;getting married&lt;/strong&gt; (crazy, right?) and will be mostly off-line. I should be back from the second week of April.&lt;/p&gt;
 
@@ -888,26 +724,7 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 
 &lt;p&gt;Surely there will be the usual &lt;em&gt;casual-tweet&lt;/em&gt; but nothing major.&lt;/p&gt;
 
-&lt;p&gt;See ya!&lt;/p&gt;
-</content>
-<author>
-<name>detro</name>
-</author>
-<category term="phantomjs" />
-<category term="personal" />
-<category term="off-line" />
-<category term="marriage" />
-<category term="wedding" />
-<category term="ghostdriver" />
-<summary>This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on GhostDriver or PhantomJS (for the latter you have coverage, as the team on that is rich of geniuses - so you won&amp;#39;t miss my average-hood).I&amp;#39;m getting married (crazy, right?) and will be mostly off-line. I should be back from the second week of April.Surely there will be the usual casual-tweet but nothing major.See ya!</summary>
-</entry>
-<entry>
-<title>GhostDriver 1.0.3 is out!</title>
-<link href="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out" rel="alternate" type="text/html" title="GhostDriver 1.0.3 is out!" />
-<published>2013-03-18T18:25:19-07:00</published>
-<updated>2013-03-18T18:25:19-07:00</updated>
-<id>http://ivandemarino.me/2013/03/19/updated-phantomjs-1-9-0-ghostdriver-1-0-3-is-out</id>
-<content type="html" xml:base="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out">&lt;p&gt;After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release &lt;strong&gt;GhostDriver 1.0.3&lt;/strong&gt; into the wild.&lt;/p&gt;
+&lt;p&gt;See ya!&lt;/p&gt;</content><author><name>detro</name></author><category term="phantomjs" /><category term="personal" /><category term="off-line" /><category term="marriage" /><category term="wedding" /><category term="ghostdriver" /><summary type="html">This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on GhostDriver or PhantomJS (for the latter you have coverage, as the team on that is rich of geniuses - so you won&amp;#39;t miss my average-hood). I&amp;#39;m getting married (crazy, right?) and will be mostly off-line. I should be back from the second week of April. Surely there will be the usual casual-tweet but nothing major. See ya!</summary></entry><entry><title type="html">GhostDriver 1.0.3 is out!</title><link href="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out" rel="alternate" type="text/html" title="GhostDriver 1.0.3 is out!" /><published>2013-03-18T18:25:19+00:00</published><updated>2013-03-18T18:25:19+00:00</updated><id>http://ivandemarino.me/2013/03/19/updated-phantomjs-1-9-0-ghostdriver-1-0-3-is-out</id><content type="html" xml:base="http://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out">&lt;p&gt;After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release &lt;strong&gt;GhostDriver 1.0.3&lt;/strong&gt; into the wild.&lt;/p&gt;
 
 &lt;p&gt;This release is an &lt;em&gt;hardening release&lt;/em&gt;: this means that it&amp;#39;s focused on bug-fixing and very little new features have been added.&lt;/p&gt;
 
@@ -931,18 +748,4 @@ Yes, I&amp;#39;m lazy.&lt;/p&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/benmccann&quot;&gt;Ben McCann&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Thanks guys! &lt;em&gt;Keep being awesome!&lt;/em&gt;&lt;/p&gt;
-</content>
-<author>
-<name>detro</name>
-</author>
-<category term="webdriver" />
-<category term="contributors" />
-<category term="phantomjs" />
-<category term="1.0.3" />
-<category term="release" />
-<category term="1.9.0" />
-<category term="ghostdriver" />
-<summary>After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release GhostDriver 1.0.3 into the wild.This release is an hardening release: this means that it&amp;#39;s focused on bug-fixing and very little new features have been added.GhostDriver 1.0.3 will be part of the upcoming PhantomJS 1.9 release, do in few days is now part of PhantomJS 1.9.0, and you can download binaries for various platform from https://code.google.com/p/phantomjs/downloads/list.If you want to know what made it for the 1.0.3 cut, take a look at the Changelog.I apologise in advance for whom have seen his &amp;quot;pet issue&amp;quot; not being implemented/fixed/addressed for this release, but it&amp;#39;s only one of me.I&amp;#39;d like to take the time to thank the few brave souls that have contributed to this release with their code. In chronological contribution order:garyd203Christoph NeurothNathan DaceLoduis Madariaga BarriosBen McCannThanks guys! Keep being awesome!</summary>
-</entry>
-</feed>
+&lt;p&gt;Thanks guys! &lt;em&gt;Keep being awesome!&lt;/em&gt;&lt;/p&gt;</content><author><name>detro</name></author><category term="webdriver" /><category term="contributors" /><category term="phantomjs" /><category term="1.0.3" /><category term="release" /><category term="1.9.0" /><category term="ghostdriver" /><summary type="html">After few months of endless nights trying to figure out what I screwed up and where, I&amp;#39;m finally happy (enough) to release GhostDriver 1.0.3 into the wild. This release is an hardening release: this means that it&amp;#39;s focused on bug-fixing and very little new features have been added. GhostDriver 1.0.3 will be part of the upcoming PhantomJS 1.9 release, do in few days is now part of PhantomJS 1.9.0, and you can download binaries for various platform from https://code.google.com/p/phantomjs/downloads/list. If you want to know what made it for the 1.0.3 cut, take a look at the Changelog. I apologise in advance for whom have seen his &amp;quot;pet issue&amp;quot; not being implemented/fixed/addressed for this release, but it&amp;#39;s only one of me. I&amp;#39;d like to take the time to thank the few brave souls that have contributed to this release with their code. In chronological contribution order: garyd203 Christoph Neuroth Nathan Dace Loduis Madariaga Barrios Ben McCann Thanks guys! Keep being awesome!</summary></entry></feed>

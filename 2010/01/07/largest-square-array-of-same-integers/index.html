@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -163,7 +163,7 @@ Return:
 <p>I designed this algorithm on my way back from my previous trip to Paris. Was at least 2 months I had it in my head, but there was the only empty slot of time where I could sit, think and code... on a spare piece of paper. And, still, it performs a disappointing Time Complexity of <strong>O(n<sup>3</sup>)</strong>.</p>
 
 <p>It works like this:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">init</span> <span class="s">&quot;largest matrix&quot;</span> <span class="n">to</span> <span class="nb">NULL</span><span class="o">/</span><span class="n">NONE</span><span class="o">/-</span><span class="mi">1</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="n">init</span> <span class="s">&quot;largest matrix&quot;</span> <span class="n">to</span> <span class="nb">NULL</span><span class="o">/</span><span class="n">NONE</span><span class="o">/-</span><span class="mi">1</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="nl">num_of_rows</span><span class="p">:</span>
    <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="nl">num_of_cols</span><span class="p">:</span>
@@ -178,7 +178,7 @@ Return:
 <p>In the case of the input given above, the steps that it will do for cell <code>[0, 0]</code> will be like:</p>
 
 <p><strong>STEP 1</strong></p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -187,7 +187,7 @@ Return:
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>STEP 2</strong></p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -196,7 +196,7 @@ Return:
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>STEP 3</strong></p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="p">{</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="mi">8</span> <span class="mi">8</span> <span class="mi">8</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
  <span class="p">{</span> <span class="o">-</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">-</span> <span class="o">-</span> <span class="p">},</span>
@@ -217,8 +217,8 @@ Given the current location in the matrix <code>[x, y]</code>, if the maximum dia
 then we jump any calculation and move to the next element in the matrix.</p>
 
 <h2>The code</h2>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdlib.h&gt;</span>
-<span class="cp">#include &lt;stdio.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
 <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">measure_diagonal</span><span class="p">(</span>
         <span class="c1">// Need to treet the matrix as an mono-dimensinal array</span>

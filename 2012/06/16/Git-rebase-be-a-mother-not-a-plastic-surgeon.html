@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Git rebase: be a mother, not a plastic surgeon - Too much coffee, too little time</title>
+
+        <meta name="author" content="Ivan De Marino">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <!-- google universal analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-136869-11', 'ivandemarino.me');
+                ga('send', 'pageview');
+            </script>
+        
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                Git rebase: be a mother, not a plastic surgeon
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2012-06-16">Saturday, 16 Jun 2012</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        development &bull; git &bull; log &bull; rebase &bull; github &bull; opensource &bull; mother &bull; contribution &bull; surgeon &bull; history
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        845 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>Today I&#39;m going to share a little tip about the use of Git.</p>
+
+<p>In contributing to open source projects, it happens sometimes that I have
+a long running <code>branch</code>; something on which I need to work for more than just
+few hours. The kind of work that goes on for weeks, sometimes months.</p>
+
+<p>*<em>UPDATE: *</em> Matt suggested a <a href="http://git-scm.com/book/en/Git-Branching-Rebasing">great doc about rebasing</a>.</p>
+
+<div class="img">
+<img src="http://www.desktopocean.com/file/101/480x800/crop/caring-mother.jpg" alt="Caring mother" height="500" />
+There is lol-cat-picture for every need
+</div>
+
+<p>Working on a branch is great: it let&#39;s you work on a feature, a fix, an
+extension in total isolation, being sure you don&#39;t disrupt anyone (and don&#39;t
+embarrass yourself).</p>
+
+<h2>Catching Up</h2>
+
+<p>One thing I learned to do in my carrer, is to make sure to keep my development
+branch always up to date with what is happening on the <code>master branch</code>.
+I call it (and I&#39;m not the one that invented it) <strong><em>catching up</em></strong>.</p>
+
+<p>The frequency of it depends stricktly on how fast the development
+flows in your project.</p>
+
+<p>This gives you multiple benefits:</p>
+
+<ul>
+<li><strong>no surprises</strong> - test your changes against master as early as posssible</li>
+<li><strong>no merge-conflict-hell</strong> - solve the conflicts as they happen, small
+chunks at a time</li>
+<li><strong>no waste of time</strong> - if someone else commits stuff that makes your
+change useless, you waste no time and go find something else to do</li>
+</ul>
+
+<h2>I&#39;m ready to merge!</h2>
+
+<p>At this point, you are excited and can&#39;t wait to put your code to good use.
+All those hours spent tirelessly on that stupid bug: now I&#39;m ready
+for the pay off, the glory, the Nobel (sorry, got too excited there!).</p>
+
+<p>But wait, there is a &quot;small&quot; issue: when you do your <code>pull request</code> on
+GitHub your <strong>history</strong> is a mess! Commits about the stuff you were working on
+is <em>intertwined</em> (nice word this one!) with other people&#39;s code.
+Plus, every time you did a <code>catch up</code>, is now
+<strong>a merge from <code>master</code> to <code>master</code></strong>. A true mess. I hate it when it happens.</p>
+
+<p>Yes, of course: ultimately your code is clean and all, it&#39;s not like
+&quot;the code is broken&quot;. But it&#39;s just very <strong>&quot;ugly&quot;</strong>.</p>
+
+<h2>Why you should care about History</h2>
+
+<p>History is more than just a meaningless memorandum that gives a description
+to a bunch of bytes you throw to the keyboard and down the repo. History is:</p>
+
+<ul>
+<li><strong>documentation</strong> - people can grasp your code better, if they can understand
+how the <em>heck</em> did you came up with it</li>
+<li><strong>personal notes</strong> - do you always remember what you do and why? I don&#39;t; I need an aid</li>
+<li><strong><em>curriculum vitae</em></strong> - it tells people (or at least me) what is your line of
+thought. How do you work, what are your logical steps</li>
+</ul>
+
+<p>Before you start throwing tomato at me: <strong>I&#39;m not going to suggest you
+rewrite your history to cover your shame!</strong></p>
+
+<p>What I&#39;m getting at is that is part of your work to make sure that others can
+read your history and understand clearly what&#39;s going on.</p>
+
+<p>If that commit with that shameful <em>fuck up</em> is what keeps you awake at night,
+I think you have primarily maturity issues to take care of. So maybe the quality
+of your history is the least of your concerns right now, and you should focus
+on growing up.</p>
+
+<p>If you commit a <em>fuck up</em>, leave it there. Fix it with another commit and in
+the body of the message explain why that was indeed a fuck up and how great
+your code is now.</p>
+
+<h2>Let&#39;s sort things out, shall we?</h2>
+
+<p>Now, what I&#39;m getting at is that you want to avoid having your commits all
+messed up with others work, and you definitely want to avoid useless merge
+messages in your history.</p>
+
+<p>Also, you might want to <code>squash</code> a couple of your commits while at it: if you
+have just added that cool <em>feature x</em>, maybe you want the test for that into
+the same commit: <em>it&#39;s only logical!</em></p>
+
+<p>So, what I suggest you do is you take the branch, starting from it&#39;s root, and
+<strong>change it&#39;s base</strong> - indeed, <code>rebase</code> it on the master:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git fetch upstream
+...
+$ git status
+<span class="c1"># On branch the-coolest-feature-ever</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+$ git rebase upstream/master
+</code></pre></div>
+<p>What this does, is taking all the commits of your branch, remove
+them from where they are, and re-apply them one by one on the top of the current
+master (that&#39;s why I had that <code>git fetch upstream</code>).</p>
+
+<p>If you are not luckly, you will have to re-resolve some conflicts (harden-up!),
+but your history will look clean and ready for a <em>kick-ass pull request</em>.</p>
+
+<p>Trust me, whoever is going to read that pull request will be happy and grateful.
+Particularly the maintainer that is reviewing it!</p>
+
+<h3>While you are at it, fix that typo in the message</h3>
+
+<p><code>git rebase</code> is also awesome for fixing the body of your commit messages.
+Use:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git rebase -i &lt;COMMIT HASH&gt;
+</code></pre></div>
+<p>to be able to re-touch your history. But
+be careful and don&#39;t overdue: <strong>don&#39;t be a plastic surgeon - just a
+mother taking care of it&#39;s child</strong>. No one will be upset.</p>
+
+            
+        </div>
+    
+    
+        <div id="disqus_thread" class="comments"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "blogivandemarinome";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>

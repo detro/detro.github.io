@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Find the non repeating char in O(n) time and O(1) space - v2 - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,16 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong>
+</h2>
                     </hgroup>
 
                     <nav id="navigation">
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -113,7 +114,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        better &bull; c &bull; code &bull; asymptotic &bull; algorithm &bull; space &bull; personal &bull; english &bull; char &bull; optimization &bull; time &bull; first &bull; string
+                        better • c • code • asymptotic • algorithm • space • personal • english • char • optimization • time • first • string
                     </li>
                 
 
@@ -129,25 +130,25 @@
     
         <div class="body">
             
-                <p>My colleague and friend Luca (<a href="http://twitter.com/lucabox"><a href='https://twitter.com/lucabox' class='user-mention'>@lucabox</a></a>) described a better solution to the problem of <em>&quot;<a href="http://www.detronizator.org/2009/12/13/find-the-non-repeating-char-in-on-time-and-o1-space/">Finding the first non repearing char in a string in O(n) time and O(1) space</a>&quot;</em>. It uses smartly the space, making the solution nicer and slicker.
+                <p>My colleague and friend Luca (<a href="http://twitter.com/lucabox">@lucabox</a>) described a better solution to the problem of <em>"<a href="http://www.detronizator.org/2009/12/13/find-the-non-repeating-char-in-on-time-and-o1-space/">Finding the first non repearing char in a string in O(n) time and O(1) space</a>"</em>. It uses smartly the space, making the solution nicer and slicker.
 Or we are just 2 geeks that need to give more attention to their girlfriends :P</p>
 
-<h2>Luca&#39;s solution description</h2>
+<h2>Luca's solution description</h2>
 
 <p>The logic of this solution is based on the usage of an array of unsigned chars.
-Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, &quot;<em>present once in the input string</em>&quot; and &quot;<em>present multiple times in the input string</em>&quot;. After the input is &quot;scanned&quot; once, and every letter is marked with the correspondent &quot;<em>presence bit</em>&quot; (once, multiple or none), it get&#39;s scanned a second time to find the first char of the input which has the bit &quot;present once&quot; set to &quot;1&quot;.</p>
+Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, "<em>present once in the input string</em>" and "<em>present multiple times in the input string</em>". After the input is "scanned" once, and every letter is marked with the correspondent "<em>presence bit</em>" (once, multiple or none), it get's scanned a second time to find the first char of the input which has the bit "present once" set to "1".</p>
 
 <h2>Before I show you the code</h2>
 
 <p>Again, this comes from Luca Colantonio (<a href="http://uk.linkedin.com/in/lucacolantonio">http://uk.linkedin.com/in/lucacolantonio</a>), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;)</p>
 
 <p>Now, the code.</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;string.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#define PRESENCE_ONCE_BIT       0x1</span>
 <span class="cp">#define PRESENCE_MULTIPLE_BIT   0x2</span>
-<span class="cp">#define NORMALIZE_CHAR(C)       (C-&#39;a&#39;)</span>
+<span class="cp">#define NORMALIZE_CHAR(C)       (C-'a')</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
@@ -162,25 +163,25 @@ Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bit
     <span class="k">if</span> <span class="p">(</span> <span class="n">argc</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="n">input</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
     <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
-    <span class="c1">// Search for every character &quot;present only once&quot;</span>
+    <span class="c1">// Search for every character "present only once"</span>
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">// Avoid use of &quot;strlen&quot;, just to look cooler</span>
-        <span class="k">if</span> <span class="p">(</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span> <span class="p">)</span>
+        <span class="c1">// Avoid use of "strlen", just to look cooler</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">'\0'</span> <span class="p">)</span>
         <span class="p">{</span>
-            <span class="c1">// If the current char is not already marked as &quot;present multiple times&quot;</span>
+            <span class="c1">// If the current char is not already marked as "present multiple times"</span>
             <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="p">(</span> <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">&amp;</span> <span class="n">PRESENCE_MULTIPLE_BIT</span><span class="p">)</span> <span class="p">)</span>
             <span class="p">{</span>
-                <span class="c1">// It it is already marked as &quot;present once&quot;</span>
+                <span class="c1">// It it is already marked as "present once"</span>
                 <span class="k">if</span> <span class="p">(</span> <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">&amp;</span> <span class="n">PRESENCE_ONCE_BIT</span> <span class="p">)</span>
                 <span class="p">{</span>
-                    <span class="c1">// Then mark it as &quot;present multiple times&quot; and unmark it&#39;s &quot;present once&quot; bits</span>
+                    <span class="c1">// Then mark it as "present multiple times" and unmark it's "present once" bits</span>
                     <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">|=</span> <span class="n">PRESENCE_MULTIPLE_BIT</span><span class="p">;</span>
                     <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PRESENCE_ONCE_BIT</span><span class="p">;</span>
                 <span class="p">}</span>
                 <span class="k">else</span>
                 <span class="p">{</span>
-                    <span class="c1">// Otherwise, mark it as &quot;present once&quot;</span>
+                    <span class="c1">// Otherwise, mark it as "present once"</span>
                     <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">|=</span> <span class="n">PRESENCE_ONCE_BIT</span><span class="p">;</span>
                 <span class="p">}</span>
             <span class="p">}</span>
@@ -193,16 +194,16 @@ Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bit
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="c1">// Look for the first char that is marked as &quot;present only once&quot; =&gt; that&#39;s the solution</span>
+    <span class="c1">// Look for the first char that is marked as "present only once" =&gt; that's the solution</span>
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input_length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span>
     <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span> <span class="n">char_presence_bitmask</span><span class="p">[</span><span class="n">NORMALIZE_CHAR</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">&amp;</span> <span class="n">PRESENCE_ONCE_BIT</span> <span class="p">)</span>
         <span class="p">{</span>
-            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;=== FINAL RESULT: %c ===</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"=== FINAL RESULT: %c ===</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
             <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;=== FINAL RESULT: no char appears only once ===</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"=== FINAL RESULT: no char appears only once ===</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -222,7 +223,8 @@ Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bit
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>

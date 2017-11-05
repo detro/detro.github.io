@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GhostDriver 1.1.0: codename "Banquo" - Too much coffee, too little time</title>
+
+        <meta name="author" content="Ivan De Marino">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <!-- google universal analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-136869-11', 'ivandemarino.me');
+                ga('send', 'pageview');
+            </script>
+        
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                GhostDriver 1.1.0: codename "Banquo"
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2014-01-03">Friday, 03 Jan 2014</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        ghostdriver &bull; phantomjs &bull; release &bull; changes &bull; info &bull; banquo
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        769 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>It&#39;s long overdue. Last time I have cut a release of GhostDriver
+(<a href="https://github.com/detro/ghostdriver/releases/tag/1.0.4">1.0.4</a>)
+was... July 2013.
+And <a href="http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/">blogged about it</a>
+only in August!!!
+I gotta take a look at my GitHub commits over the 2013: something tells me that
+<em>year-in-commits</em> nicely overlaps with my eventful 2013.
+But let&#39;s try to stay on topic.</p>
+
+<p>So, <a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">GhostDriver 1.1.0</a>,
+codename <em><a href="http://en.wikipedia.org/wiki/Banquo">&quot;Banquo&quot;</a></em>.
+This time the codename was picked by my wife - fitting, given how important she
+has become this year for Leonardo and Me.</p>
+
+<p>I know, I keep going off topic. Sorry...</p>
+
+<p>As I&#39;m writing, this new version hasn&#39;t been imported into PhantomJS yet,
+but it will be very soon. Definitely before next release of PhantomJS. And please,
+don&#39;t ask me about that - there is the
+<a href="https://groups.google.com/d/forum/phantomjs">PhantomJS Google Group</a>
+for this kind of questions (I have
+<a href="https://groups.google.com/forum/#!topic/phantomjs/ouFiiB1UoLw">just opened a discussion</a>
+about this).</p>
+
+<h1>What&#39;s new in 1.1.0</h1>
+
+<p>For a complete, up-to-date list of changes in the releases of
+GhostDriver, please DO take a look at the
+<a href="https://github.com/detro/ghostdriver/blob/master/CHANGELOG.md"><code>CHANGELOG</code></a>.</p>
+
+<p>Here is a <em>cut&amp;paste</em> for 1.1.0:</p>
+
+<ul>
+<li>ENHANCEMENT #293: Import Selenium 2.39.0 WebDriver Atoms</li>
+<li>ENHANCEMENT: <code>/maximize</code> window will set the window size to 1336x768,
+currently most common resolution online (see <a href="http://gs.statcounter.com/#resolution-ww-monthly-201307-201312">statcounter</a>)</li>
+<li>ENHANCEMENT #275: <strong>Implemented Browser and Network (HAR) Logging types</strong></li>
+<li>FIXED #284: Attempt to wait for Page to Load if input causes form submit</li>
+<li>FIXED #291: Throw exception when attempting to set invalid timeout value</li>
+<li>FIXED #259: Fix issue regarding mouse clicks</li>
+<li>ENHANCEMENT #290: Enabled support for &quot;Keep Alive&quot; HTTP connections</li>
+<li>ENHANCEMENT #262: <strong>Allow access to PhantomJS API from WebDriver (Driver part)</strong></li>
+</ul>
+
+<p>As you might have noticed, I have highlighted 2 entries above...</p>
+
+<h2>Browser and Network (HAR) Logging</h2>
+
+<p>One <em>difficulty</em> of working with an headless browser is: there is no
+direct way to look at the browser and try to understand what it&#39;s doing. It&#39;s
+pretty much a black-box and debugging your tests against it might be hard.</p>
+
+<p>Logging was already implemented, but the only way to grab the output was via
+<strong>standard output/error redirect</strong>. Not always suitable for the client-server
+architecture of WebDriver.</p>
+
+<p>The WebDriver WireProtocol defines a
+<a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/log">set of API to access LOGs</a>
+of different type.
+The <em>logtype</em> <code>client</code> is implemented by the binding. The <code>driver</code> should
+provide a view into the <em>inner guts</em> of the WebDriver implementation. The
+<code>browser</code> essentially is the <em>console</em> of the browser. The <code>server</code>... I&#39;m
+not sure.
+In GhostDriver 1.1.0 we have added support for 2: <code>browser</code> and <code>har</code>.</p>
+
+<p><em>HAR???</em> Yes, <a href="http://www.softwareishard.com/blog/har-12-spec/">HAR - HTTP Archive</a>.
+While I explained already the browser log-type, <code>har</code> will return a single-entry
+log, with the HAR of the current webpage, since the first load (it&#39;s cleared
+at every <code>unload</code> event).</p>
+
+<p>Support for the other logtypes might come in the future (the <code>driver</code> type should
+be simple enough).</p>
+
+<p>A great <strong>THANK YOU</strong> goes to <a href="https://github.com/torinaki">Dmitry Balabka (torinaki)</a>
+and <a href="https://github.com/wgroeneveld">Wouter Groeneveld (wgroeneveld)</a> for their
+key contributions. <em>Keep it coming guys!</em></p>
+
+<h2>Access to PhantomJS API</h2>
+
+<p>This feature that has been requested SO MANY FREAKING TIMES!!!</p>
+
+<p>PhantomJS has <a href="https://github.com/ariya/phantomjs/wiki/API-Reference">a rich set of API</a>
+to control and tune the internal WebKit core.
+Access to the plethora of API that PhantomJS has was always high, since the
+beginning of the GhostDriver project.</p>
+
+<p>While some see GhostDriver/PhantomJS as <em>just</em> a WebDriver implementation against
+a non-production browser, others see this as a way to easily control PhantomJS
+from another software.
+The issue was that the WebDriver Protocol is <em>tuned</em> for a specific scenario: emulate
+user interaction with a browser. PhantomJS is a bit less of a browser, and more
+of a <strong>scriptable browser engine</strong>. And it&#39;s very useful in scenarios also not
+strictly related to testing and user interaction.</p>
+
+<p>This API allows to send a string of JavaScript, written for PhantomJS, and be
+interpreted within the context of a WebDriver Page. In other words, for the given
+script the <code>this</code> variable is initialized to be the current Page.</p>
+
+<p>The format of this <em>WebDriver Protocol Extension</em>:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>HTTP POST /session/:id/phantom/execute
+{
+    &quot;script&quot;    : SCRIPT_SCRIPT
+    &quot;args&quot;      : [ARRAY_OF_JS_BASIC_TYPES]
+}
+</code></pre></div>
+<p>To see an example use of this API, check out
+<a href="https://github.com/detro/ghostdriver/blob/master/test/java/src/test/java/ghostdriver/PhantomJSCommandTest.java">this example</a>.</p>
+
+<p>This new API was <strong>entirely developed</strong> by
+<a href="https://github.com/watsonmw">Mark Watson (watsonmw)</a>,
+ex-colleague of mine at
+<a href="http://ivandemarino.me/2011/12/14/Crossing-the-pond/">Neustar</a>
+and awesome chap.</p>
+
+<h1>What do I have left to do</h1>
+
+<p>As I write this, I still have to finish up a couple of tasks to consider 1.1.0
+fully released:</p>
+
+<ul>
+<li><del>Commit 1.1.0 Java Bindings&#39;s JAR to the Selenium repository</del>
+<a href="https://code.google.com/p/selenium/source/detail?r=6146f3a5bec6bd28747e91a07cacd75a3db589f2">DONE</a></li>
+<li><del>Import 1.1.0 into PhantomJS</del>
+<a href="https://github.com/ariya/phantomjs/pull/11877">DONE</a></li>
+<li><del>Tag 1.1.0 on the repository</del>
+<a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">DONE</a></li>
+</ul>
+
+<p>I could have waited for those tasks to be complete... but I felt like this
+was overdue and I wanted to share a <em>status report</em> as soon as I could.</p>
+
+<p>Also, it gives me <em>closure</em> for this blog post.</p>
+
+            
+        </div>
+    
+    
+        <div id="disqus_thread" class="comments"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "blogivandemarinome";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>

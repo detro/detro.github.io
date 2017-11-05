@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PhantomJS REPL: it's ready for a taste - Too much coffee, too little time</title>
+
+        <meta name="author" content="Ivan De Marino">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <!-- google universal analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-136869-11', 'ivandemarino.me');
+                ga('send', 'pageview');
+            </script>
+        
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                PhantomJS REPL: it's ready for a taste
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2012-02-27">Monday, 27 Feb 2012</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        personal &bull; source &bull; REPL &bull; opensource &bull; phantomjs
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        305 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>After 2 months of on-off working on this, I finally managed to make something I&#39;m happy with: a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> for <a href="http://www.phantomjs.org">PhantomJS</a>.</p>
+
+<p>The <a href="http://blog.ivandemarino.me/2011/11/01/REPL-and-HTTP-Mapping-ideas-to-contribute-to-PhantomJS">last post I wrote about this</a> was in November 2011 (!!!). But I started putting code together only in Jan 2012. So, overall, from the first commit until today is almost 2 months.</p>
+
+<div class="img">
+<img src="http://ubik.cc/MAOW-Firenze-09/images/repl-loop.png" />
+</div>
+
+<p>First thing first: <strong>how do you get to try it?</strong> Well, you can get my fork, switch to the <code>dev-repl</code> branch and try it out:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git clone git://github.com/detro/phantomjs.git
+$ <span class="nb">cd</span> phantomjs
+$ git checkout -b dev-repl origin/dev-repl
+$ qmake <span class="o">&amp;&amp;</span> make
+</code></pre></div>
+<p>You can <a href="https://github.com/detro/phantomjs/zipball/dev-repl">download this tarball</a>. Or you just can come up with your own way to <a href="https://github.com/detro/phantomjs/tree/dev-repl">checkout my branch</a>.</p>
+
+<p>To launch it, just type:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ./bin/phantomjs
+&gt;
+</code></pre></div>
+<p>You will be welcomed by a prompt, waiting for your JavaScript code to be evaluated on the spot. Line by line. Like a proper REPL. The ideal companion for your <strong>quick-and-dirty phantomjs-hack-sessions</strong> or <strong>live-coding keynotes</strong>.</p>
+
+<p>The REPL is packed with some good features that I&#39;m sure will please command-line junkies:</p>
+
+<ul>
+<li>Context-sensitive auto-completions (i.e. push on <code>TAB</code> to cycle through suggestions)</li>
+<li>Arrow navigation through the history of what you type</li>
+<li>Permanent history (yes, like any &quot;modern&quot; CLI)</li>
+<li>Editable command line (use <code>Left</code> and <code>Right</code> to insert characters where you need them)</li>
+<li>Pretty-print of expression result (great to quickly recall the name of a method)</li>
+</ul>
+
+<p>It&#39;s not part of the latest PhantomJS, but I plan to file a pull request very soon.</p>
+
+<p>Please, help yourself to it and share your view and feedback.
+I did this work specifically to make PhantomJS users happy: so, help me make you happy :)</p>
+
+<p><em>Happy REPL-coding!</em></p>
+
+<p><strong>P.S.:</strong> This whole branch would have not made it without the great <a href="https://github.com/antirez/linenoise">linenoise library</a>. In the specific case, I&#39;m using <a href="https://github.com/tadmarshall/linenoise">this fork</a> because it has more maintenance. <strong>Kudos to everyone involved</strong>.</p>
+
+            
+        </div>
+    
+    
+        <div id="disqus_thread" class="comments"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "blogivandemarinome";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>

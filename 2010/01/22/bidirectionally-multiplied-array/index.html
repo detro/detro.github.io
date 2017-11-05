@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -144,7 +144,7 @@ will be multiplication of A[0] and from A[2] to A[N-1].</p>
 <p>What is funny of the problem, is the fact that the <strong>O(n)</strong> constraint, makes it sound like is going to be hard to solve. Doesn&#39;t it? Well, it&#39;s not.</p>
 
 <p>The solution is quite simple, so I suggest you take your 10 minutes to think about it, then continue to see the code.</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="o">*</span><span class="nf">bidirectionally_multiplied_array</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size_A</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">int</span> <span class="o">*</span><span class="nf">bidirectionally_multiplied_array</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size_A</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="o">*</span><span class="n">multi_left_to_right</span><span class="p">,</span> <span class="o">*</span><span class="n">multi_right_to_left</span><span class="p">,</span> <span class="o">*</span><span class="n">output</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
 

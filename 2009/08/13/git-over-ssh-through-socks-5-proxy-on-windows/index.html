@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Git-over-SSH through Socks 5 Proxy on Windows - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,16 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong>
+</h2>
                     </hgroup>
 
                     <nav id="navigation">
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -113,7 +114,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        git &bull; script &bull; personal &bull; work &bull; it &bull; tunnelling &bull; windows &bull; socks5 &bull; proxy &bull; english &bull; utility &bull; bash &bull; ssh
+                        git • script • personal • work • it • tunnelling • windows • socks5 • proxy • english • utility • bash • ssh
                     </li>
                 
 
@@ -134,13 +135,16 @@
 <p>So, how do you do if you need to pull/push code with Git-over-SSH in this scenario? You need a Socks 5 that passes the firewall, and some scripting.</p>
 
 <p>First, you need to install:
+</p>
 <ul>
-<li>Git on Windows - <a href="http://code.google.com/p/msysgit/">http://code.google.com/p/msysgit/</a></li>
-<li>Connect.c - <a href="http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html">http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html</a></li>
-</ul></p>
+<li>Git on Windows - <a href="http://code.google.com/p/msysgit/">http://code.google.com/p/msysgit/</a>
+</li>
+<li>Connect.c - <a href="http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html">http://bent.latency.net/bent/darcs/goto-san-connect-1.85/src/connect.html</a>
+</li>
+</ul>
 
 <p>Then, you need a script that connects to the Socks 5 server. Like:
-[sourcecode lang=&#39;bash&#39;]</p>
+[sourcecode lang='bash']</p>
 
 <h1>!/bin/sh</h1>
 
@@ -152,7 +156,7 @@
 ```</p>
 
 <p>A script that opens an SSH connection using the connection opened by the previous script:
-[sourcecode lang=&#39;bash&#39;]</p>
+[sourcecode lang='bash']</p>
 
 <h1>!/bin/sh</h1>
 
@@ -160,11 +164,11 @@
 
 <h1>This script opens an SSH connection through a SOCKS server</h1>
 
-<p>ssh -o ProxyCommand=&quot;/path/to/socks-gw.sh %h %p&quot; $@
+<p>ssh -o ProxyCommand="/path/to/socks-gw.sh %h %p" $@
 ```</p>
 
 <p>Finally, another script that you need to source in the same Bash session you are going to use Git:
-[sourcecode lang=&#39;bash&#39;]</p>
+[sourcecode lang='bash']</p>
 
 <h1>!/bin/sh</h1>
 
@@ -172,11 +176,11 @@
 
 <h1>This script sets Git to use the SOCKS proxy</h1>
 
-<p>export GIT<em>SSH=&quot;/path/to/socks-ssh.sh&quot;
-export GIT</em>PROXY_COMMAND=&quot;/path/to/socks-gw.sh&quot;
+<p>export GIT<em>SSH="/path/to/socks-ssh.sh"
+export GIT</em>PROXY_COMMAND="/path/to/socks-gw.sh"
 ```</p>
 
-<p>Again, don&#39;t forget to source this script before using Git.</p>
+<p>Again, don't forget to source this script before using Git.</p>
 
 <p>Thanks to <a href="http://threebytesfull.com/2008/04/git-with-and-without-proxy/">ThreeBytesFull</a>, from which I re-adapted the scripts to work on Windows.</p>
 
@@ -196,7 +200,8 @@ export GIT</em>PROXY_COMMAND=&quot;/path/to/socks-gw.sh&quot;
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>

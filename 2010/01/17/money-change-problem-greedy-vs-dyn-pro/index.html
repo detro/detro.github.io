@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -205,7 +205,7 @@ change<em>coins</em>greedy(D[], A):
 <li><strong>M[A] = min<sub>[i = 0 -&gt; n-1]</sub> { M[ A - D[i] ] +1 , M[A] }</strong></li>
 </ul>
 Here is the code:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="nf">change_coins_dynpro</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">D</span><span class="p">[],</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="nf">change_coins_dynpro</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">D</span><span class="p">[],</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">D_size</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Min. num. of coins for the given &#39;amount&#39;</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">min_num_coins</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">cur_min_num_coins</span><span class="p">;</span>

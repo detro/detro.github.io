@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class="current"><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
                                 
                                     <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
                                 
@@ -141,7 +141,7 @@ Pascal's Triangle first 6 rows
 <h2>How does it work</h2>
 
 <p>The result is generated <em>&quot;filling the row from right to left&quot;</em>. I start initiating the element on the right hand side to <code>&#39;1&#39;</code>. Then, I run something like:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">init</span> <span class="n">result</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span> <span class="n">requested_row</span><span class="p">]</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="n">init</span> <span class="n">result</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span> <span class="n">requested_row</span><span class="p">]</span>
 
 <span class="n">result</span><span class="p">[</span><span class="n">requested_row</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -152,8 +152,8 @@ Pascal's Triangle first 6 rows
 <span class="n">endfor</span>
 </code></pre></div>
 <p>Clearly this is nothing special. Just a little trick to avoid to use a triangular matrix. <a href="http://www.google.co.uk/products?hl=en&safe=off&q=memory%20prices&lr=&um=1&ie=UTF-8&sa=N&tab=wf">Memory is not cheap</a>, you know! ;-)</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;stdlib.h&gt;</span>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
 
 <span class="kt">void</span> <span class="nf">print_row</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="o">*</span> <span class="n">row</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>

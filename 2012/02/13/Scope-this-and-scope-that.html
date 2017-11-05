@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Scope 'this', and scope 'that' - Too much coffee, too little time</title>
+
+        <meta name="author" content="Ivan De Marino">
+        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <!-- original: href="http://yui.yahooapis.com/combo?pure/0.3.0/base-min.css&pure/0.3.0/grids-min.css&pure/0.3.0/forms-min.css&pure/0.3.0/buttons-min.css&pure/0.3.0/menus-min.css" -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" -->
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- original: href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" -->
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <!-- google universal analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-136869-11', 'ivandemarino.me');
+                ga('send', 'pageview');
+            </script>
+        
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong>
+</h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                Scope 'this', and scope 'that'
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2012-02-12">Sunday, 12 Feb 2012</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        c/c++ • script • this • pattern • phantomjs • javascript • that • invocation • scope • example
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        1436 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>As a guy that tries to live his professional life in the middle of the dichotomy "C/C++ - JavaScript", I often find myself discussing the discrepancies, differences and implementation details of the <em>latter</em> (an half-assed prototypal language) using the <em>former</em>.</p>
+
+<p>The other day I was chatting with Luca (<a href="https://twitter.com/lucabox" class="user-mention">@lucabox</a>) about <strong>scope</strong> in JS, and we were describing the different situations you can end up with... and how we work our way out of those culprits.</p>
+
+<p>What I did later on, was picking up <a href="http://www.amazon.co.uk/exec/obidos/ASIN/0596517742/">JS-Bible</a> and go to Chapter 4, <em>Functions</em>. I strongly advice you get yourself one and read that chapter again and again, as I did now for the 3rd time. Every time there is a little bit of news to grow your knowledge. That book has to stay on your desk, at any time.</p>
+
+<p>After that I did the obvious: <code>git checkout master &amp;&amp; qmake &amp;&amp; make</code> my beloved <a href="http://www.phantomjs.org/">PhantomJS</a> and started fiddling around.</p>
+
+<p>In Chapter 4 of Crockford's there is a section called <em>"Invocation"</em>: there The Man highlights the 4 Invocation Patterns that can be used in JavaScript. What I wrote was a practical demonstration of those patterns: this way it would be an easy documentation of how <strong>functional scoping is such a tricky <em>bitch</em> to handle</strong>.</p>
+
+<h2>The "subject"</h2>
+
+<p>First, I wrote this function:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">that</span><span class="p">,</span> <span class="nx">Constructor</span><span class="p">,</span> <span class="nx">ClosuredScope</span><span class="p">;</span>
+<span class="nx">aVariable</span> <span class="o">=</span> <span class="s2">"I'm a String in a global (attached to 'window')"</span><span class="p">;</span>
+
+<span class="c1">// 'foo', but no 'bar'</span>
+<span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callMessage</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"\n\033[0;32m"</span> <span class="o">+</span> <span class="nx">callMessage</span> <span class="o">+</span> <span class="s2">" {\033[0m"</span><span class="p">);</span>    <span class="c1">//&lt; console.log(callMessage + "{");</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">that</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">"undefined"</span> <span class="o">&amp;&amp;</span> <span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="s2">" (passed via \033[0;31m'that'\033[0m)"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Here \033[0;31m'this'\033[0m resolves to \033[0;31m'window'\033[0m"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"\033[0;32m}\033[0m\n"</span><span class="p">);</span>                        <span class="c1">//&lt; console.log("}");</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>What this those is reading the value of <code>aVariable</code>, taking it <strong>implicitly from the current scope</strong> and <strong>explicitly from <code>this</code></strong> (i.e. pointer to the current <em>scope</em>) and ** from <code>window</code>** (i.e. the gloval <em>scope</em>). Also, it does a couple of extra bits:</p>
+
+<ul>
+<li>Checks if there is <code>that.aVariable</code> in the current scope (in case we are using the famous <code>that = this</code> trick)</li>
+<li>Highlights when the magical JS Runtime is using the global scope (<code>window</code>) as local scope (<code>this</code>)</li>
+</ul>
+
+<p>Yes, and I added some bash colouring to my print-out: I like to have the key stuff highlighted to me.</p>
+
+<h2>Function Invocation Pattern</h2>
+
+<p>I started with something very easy:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// Function Invocation Pattern</span>
+<span class="nx">foo</span><span class="p">(</span><span class="s2">"*** Proving the 'Function Invocation Pattern' ***"</span><span class="p">);</span>
+</code></pre></div>
+<p>that will print out:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'Function Invocation Pattern' *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">Here 'this' is equal to 'window'</span>
+<span class="go">}</span>
+</code></pre></div>
+<p>What's happening here is obvious: <strong>the scope in which the invocation is executed, is parent of the internal scope of the callee</strong>. Hence, if a variable is not found in the local scope, will be looked-up in the parent scopes(s).</p>
+
+<p>But we all knew that, didn't we?</p>
+
+<h2>Method Invocation Pattern</h2>
+
+<p>Now, let's start to have some fun:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// Method Invocation Pattern</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">aVariable</span> <span class="o">:</span> <span class="s2">"I'm a String in an object (i.e. scope/'this')"</span><span class="p">,</span>
+    <span class="nx">foo</span> <span class="o">:</span> <span class="nx">foo</span>
+<span class="p">};</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="s2">"*** Proving the 'Method Invocation Pattern' ***"</span><span class="p">);</span>
+</code></pre></div>
+<p>the above will print:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'Method Invocation Pattern' *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in an object (i.e. scope/'this')</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">}</span>
+</code></pre></div>
+<p>The object <code>obj</code> to which we added a reference to foo, now acts as the scope parenting the internal function scope. Hence, <code>aVariable</code> is found in <code>obj</code>, set to something different. In other words, during the invocation the function run in a scope where <code>obj === this</code>.</p>
+
+<h2>Constructor Invocation Pattern + Prototype Inheritance</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// Constructor Invocation Pattern + Prototype Inheritance</span>
+<span class="nx">Constructor</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">Constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Constructor</span><span class="p">(</span><span class="s2">"I'm a String in an object (i.e. scope/'this'), assigned via a Constructor"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="s2">"*** Proving the 'Constructor Invocation Pattern + Prototype Inheritance' ***"</span><span class="p">);</span>
+</code></pre></div>
+<p>predictably this prints:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'Constructor Invocation Pattern + Prototype Inheritance' *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in an object (i.e. scope/'this'), assigned via a Constructor</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">}</span>
+</code></pre></div>
+<p>when I was working at Betfair, I found this kind of inheritance in the hierarchy we used, and all was based on <a href="http://developer.yahoo.com/yui/2/">YUI2</a>. Than moved to more Closure-based inheritances with <a href="http://yuilibrary.com/">YUI3</a>.</p>
+
+<p>It's not a bad pattern per se, and makes it pretty clear to understand what's going on, but it does not offer the protection of Closures.</p>
+
+<h2>Constructor Invocation Pattern + Closure</h2>
+
+<p>Here I have to take a bit of "liberty" and make some ugly detour:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">ClosuredScope</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fooWrapper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="s2">" (from the wrapper)"</span><span class="p">);</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fooOriginal</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="s2">"I'm a String in an object (i.e. scope/'this'), accessible via Closure"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooOriginal</span><span class="p">(</span><span class="s2">"*** Proving the 'Constructor Invocation Pattern + Closure' (original) ***"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooWrapper</span><span class="p">(</span><span class="s2">"*** Proving the 'Constructor Invocation Pattern + Closure' (wrapper) ***"</span><span class="p">);</span>
+</code></pre></div>
+<p>that prints out:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'Constructor Invocation Pattern + Closure' (original) *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in an object (i.e. scope/'this'), accessible via Closure</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">}</span>
+
+
+<span class="go">*** Proving the 'Constructor Invocation Pattern + Closure' (wrapper) *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">Here 'this' resolves to 'window'</span>
+<span class="go">}</span>
+
+<span class="go">I'm a String in an object (i.e. scope/'this'), accessible via Closure (from the wrapper)</span>
+</code></pre></div>
+<p>In the first invocation (i.e. <code>obj.fooOriginal(...)</code>) the callee acts as expected: same printout as per the Prototype Inheritance. But when invoked by <code>obj.fooWrapper(...)</code> <code>obj</code>'s scope is not made parent of the callee scope, as it is invoked <em>as-is</em> (i.e. <code>foo(m);</code>).</p>
+
+<p>A Closure though was indeed created: <code>console.log(aVariable + " (from the wrapper)");</code> proves just that.</p>
+
+<h2>Apply Invocation Pattern</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
+    <span class="nx">aVariable</span> <span class="o">:</span> <span class="s2">"I'm a String set via the 'apply' method: scope/'this' is passed to 'apply()'"</span>
+<span class="p">},</span> <span class="p">[</span><span class="s2">"*** Proving the 'Apply Invocation Pattern' ***"</span><span class="p">]);</span>
+</code></pre></div>
+<p>obviously produces:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'Apply Invocation Pattern' *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String set via the 'apply' method: scope/'this' is passed to 'apply()'</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">}</span>
+</code></pre></div>
+<p>this is the easiest one, as the scope manipulation is made very explicit, and controlled by the developer. Useful when you want to tightly control what your callee receives.</p>
+
+<h2>
+<code>var that = this</code> Invocation Pattern</h2>
+
+<p>If you wrote a lot of JavaScript, you have written one of this. Somewhere in time, you had a piece of code that drove you nuts for a little while, because the scope was just like <a href="http://en.wikipedia.org/wiki/Frank_Abagnale">Frank Abagnale</a>. Hence, to trap it, you created a fixed reference to it, an <em>"alias"</em> some would say.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// 'that' = 'this' Invocation Pattern</span>
+<span class="nx">ClosuredScope</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">aVariable</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">,</span>
+        <span class="nx">that</span> <span class="o">:</span> <span class="k">this</span><span class="p">,</span>
+        <span class="nx">fooThat</span> <span class="o">:</span> <span class="nx">foo</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="s2">"I'm a String set in another Closure"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">fooThat</span><span class="p">(</span><span class="s2">"*** Proving the 'That = This Invocation Pattern' ***"</span><span class="p">);</span>
+</code></pre></div>
+<p>and this one comes out with:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span></span><span class="go">*** Proving the 'That = This Invocation Pattern' *** {</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String set in another Closure</span>
+<span class="go">I'm a String in a global (attached to 'window')</span>
+<span class="go">I'm a String set in another Closure (passed via 'that')</span>
+<span class="go">}</span>
+</code></pre></div>
+<p>what's the reason? it's the only way to <em>"catch and hold"</em> <code>this</code>, the scope. <code>that</code> is than a reference to <code>this</code>, to ensure the callee can still get hold of it. And yes, this is a Closure.</p>
+
+<p>What do you say? Too messy? Well, the <code>that = this</code>-for-dummies is:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="c1">// ...</span>
+<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+ <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+     <span class="nx">that</span><span class="p">.</span><span class="nx">doStuff</span><span class="p">();</span>
+ <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>but the same applies.</p>
+
+<h2>Conclusions</h2>
+
+<p>Well, after all this the only real conclusion I can give you is: be careful when writing JavaScript, and make sure you really understand what's going on.</p>
+
+<p>Tools like PhantomJS, <a href="http://getfirebug.com">Firebug</a>, <a href="http://trac.webkit.org/wiki/WebInspector">WebKit Inspector</a> or <a href="http://www.opera.com/dragonfly/">Opera Dragonfly</a> (choose your favourite), are your best friends to workout what's going on. When your code grows, it's not always YOUR code: breakpointing and analysing in details what's going on it's often the only way to solve this kind of issues.</p>
+
+<p>And you, tweeps: please share your wisdom. I'm sure you guys will have loads to say about this ;-) .</p>
+
+<p><em>Happy scoping!</em></p>
+
+<p><strong>UPDATE</strong>: here is the full gist <a href="https://gist.github.com/1810899">invocation_patterns.js</a>.</p>
+
+            
+        </div>
+    
+    
+        <div id="disqus_thread" class="comments"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "blogivandemarinome";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>
