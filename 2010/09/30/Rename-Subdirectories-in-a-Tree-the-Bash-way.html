@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rename Subdirectories in a Tree: the Bash way - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,9 +51,8 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong>
-</h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -114,7 +113,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        rename • task • script • subdirectory • tree • automation • easy • directory • bash
+                        rename &bull; task &bull; script &bull; subdirectory &bull; tree &bull; automation &bull; easy &bull; directory &bull; bash
                     </li>
                 
 
@@ -138,7 +137,7 @@ Be sure you learn it.
 One day will understand why it can make your life much easier.</p>
 </blockquote>
 
-<p>And she was right! I'm not an <a href="http://tiswww.case.edu/php/chet/bash/bashtop.html">Bash</a> expert, but when I spend that <em>10 minutes</em> putting together that scripts that <em>makes that tedious task _piece of cake</em>, the satisfaction is as tick as a Mug of Coffee.</p>
+<p>And she was right! I&#39;m not an <a href="http://tiswww.case.edu/php/chet/bash/bashtop.html">Bash</a> expert, but when I spend that <em>10 minutes</em> putting together that scripts that <em>makes that tedious task _piece of cake</em>, the satisfaction is as tick as a Mug of Coffee.</p>
 
 <p>Today I got this new colleague having to rename a lot of specific directories in a deep directory tree, and I decided to help.</p>
 
@@ -151,34 +150,34 @@ One day will understand why it can make your life much easier.</p>
 <span class="c1">#    rename_subdirs.sh &lt;starting directory&gt; &lt;new dir name&gt; &lt;old dir name&gt;</span>
 
 usage <span class="o">()</span> <span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">"Simple Bash script to recursively rename Subdirectories in a Tree."</span>
-   <span class="nb">echo</span> <span class="s2">"Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;"</span>
+   <span class="nb">echo</span> <span class="s2">&quot;Simple Bash script to recursively rename Subdirectories in a Tree.&quot;</span>
+   <span class="nb">echo</span> <span class="s2">&quot;Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;&quot;</span>
    <span class="nb">echo</span>
-   <span class="nb">echo</span> <span class="s2">"Usage:"</span>
-   <span class="nb">echo</span> <span class="s2">"   rename_subdirs.sh &lt;starting directory&gt; &lt;old dir name&gt; &lt;new dir name&gt;"</span>
+   <span class="nb">echo</span> <span class="s2">&quot;Usage:&quot;</span>
+   <span class="nb">echo</span> <span class="s2">&quot;   rename_subdirs.sh &lt;starting directory&gt; &lt;old dir name&gt; &lt;new dir name&gt;&quot;</span>
 
    <span class="nb">exit</span> <span class="m">1</span>
 <span class="o">}</span>
 
-<span class="o">[</span> <span class="s2">"</span><span class="nv">$#</span><span class="s2">"</span> -eq <span class="m">3</span> <span class="o">]</span> <span class="o">||</span> usage
+<span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span> -eq <span class="m">3</span> <span class="o">]</span> <span class="o">||</span> usage
 
 recursive<span class="o">()</span>
 <span class="o">{</span>
-   <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+   <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
    <span class="k">for</span> dir in *
    <span class="k">do</span>
-      <span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-         <span class="nb">echo</span> <span class="s2">"Directory found: '</span><span class="nv">$dir</span><span class="s2">'"</span>
-         <span class="o">(</span> recursive <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span> <span class="o">)</span>
-         <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-            <span class="nb">echo</span> <span class="s2">"Renaming '</span><span class="nv">$2</span><span class="s2">' in '</span><span class="nv">$3</span><span class="s2">'"</span>
-            mv <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span>
+      <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+         <span class="nb">echo</span> <span class="s2">&quot;Directory found: &#39;</span><span class="nv">$dir</span><span class="s2">&#39;&quot;</span>
+         <span class="o">(</span> recursive <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span> <span class="o">)</span>
+         <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nb">echo</span> <span class="s2">&quot;Renaming &#39;</span><span class="nv">$2</span><span class="s2">&#39; in &#39;</span><span class="nv">$3</span><span class="s2">&#39;&quot;</span>
+            mv <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
          <span class="k">fi</span><span class="p">;</span>
       <span class="k">fi</span><span class="p">;</span>
    <span class="k">done</span>
 <span class="o">}</span>
 
-recursive <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span>
+recursive <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
 </code></pre></div>
 <p>Clean and Fun: I learned how to do recursion in Bash.</p>
 
@@ -200,8 +199,7 @@ recursive <span class="s2">"</span><span class="nv">$1</span><span class="s2">"<
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>

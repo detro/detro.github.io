@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Snippet: fix Screen Orientation in a Qt/S60 app - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,9 +51,8 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong>
-</h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -114,7 +113,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        snippet • orientation • screen • nokia • howto • it • symbian • english • s60 • qt
+                        snippet &bull; orientation &bull; screen &bull; nokia &bull; howto &bull; it &bull; symbian &bull; english &bull; s60 &bull; qt
                     </li>
                 
 
@@ -130,7 +129,7 @@
     
         <div class="body">
             
-                <p>I follow the <a href="mailto:qts60-feedback@trolltech.com">Qt/S60 Mailing list</a>, that is turning out to be a very interesting and active ML, and the <a href="http://labs.trolltech.com/blogs/">Qt Labs blog</a>, always full of very good code, written directly by the guys of <a href="http://www.qtsoftware.com/">Qt Software</a>. I thought could be nice to start to post some of the stuff I'm learning.</p>
+                <p>I follow the <a href="mailto:qts60-feedback@trolltech.com">Qt/S60 Mailing list</a>, that is turning out to be a very interesting and active ML, and the <a href="http://labs.trolltech.com/blogs/">Qt Labs blog</a>, always full of very good code, written directly by the guys of <a href="http://www.qtsoftware.com/">Qt Software</a>. I thought could be nice to start to post some of the stuff I&#39;m learning.</p>
 
 <div class="highlight"><pre><span class="cp">#include &lt;eikenv .h&gt;</span>
 <span class="cp">#include &lt;eikappui .h&gt;</span>
@@ -139,14 +138,14 @@
 <span class="c1">// ...</span>
 <span class="c1">// lock orientation</span>
 <span class="n">CAknAppUi</span><span class="o">*</span> <span class="n">appUi</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">caknappui</span> <span class="o">*&gt;</span><span class="p">(</span> <span class="n">CEikonEnv</span><span class="o">::</span><span class="n">Static</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">AppUi</span><span class="p">()</span> <span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span> <span class="n">appUi</span> <span class="p">)</span> <span class="c1">//&lt; Actually, this will always pass. It's a "static_cast" after all...</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">appUi</span> <span class="p">)</span> <span class="c1">//&lt; Actually, this will always pass. It&#39;s a &quot;static_cast&quot; after all...</span>
 <span class="p">{</span>
    <span class="n">appUi</span><span class="o">-&gt;</span><span class="n">SetOrientationL</span><span class="p">(</span> <span class="n">CAknAppUi</span><span class="o">::</span><span class="n">EAppUiOrientationPortrait</span> <span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// ...</span>
 </pre></div>
 
-<p>Today's source is: <a href="http://discussion.forum.nokia.com/forum/showthread.php?t=164499">Nokia Forum</a>.</p>
+<p>Today&#39;s source is: <a href="http://discussion.forum.nokia.com/forum/showthread.php?t=164499">Nokia Forum</a>.</caknappui></aknappui></aknenv></eikappui></eikenv></p>
 
             
         </div>
@@ -164,8 +163,7 @@
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>

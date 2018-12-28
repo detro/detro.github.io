@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Andiamoci piano con la sicurezza - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,9 +51,8 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong>
-</h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -114,7 +113,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        curiosity • personal • javascript • it • laugh • italian
+                        curiosity &bull; personal &bull; javascript &bull; it &bull; laugh &bull; italian
                     </li>
                 
 
@@ -130,41 +129,39 @@
     
         <div class="body">
             
-                <p><strong>Edit 23 Marzo 2006</strong>: Io ho torto e lui ha ragione. Lascio il post per chi volesse ridere della mia gaffe. Sono stato freagato dal fatto che la libreria JS che uso si occupava "di suo" ad ovviare alle limitazioni di security. </p>
+                <p><strong>Edit 23 Marzo 2006</strong>: Io ho torto e lui ha ragione. Lascio il post per chi volesse ridere della mia gaffe. Sono stato freagato dal fatto che la libreria JS che uso si occupava &quot;di suo&quot; ad ovviare alle limitazioni di security. </p>
 
 <p>Su <a href="http://groups.google.com/group/spaghettiajax?lnk=li">SpaghettiAjax</a> un tizio ha fatto una domanda:
-</p>
 <blockquote>...
-Dunque mi sto documentando da poco su ajax e vorrei farmi un'idea sulla
+Dunque mi sto documentando da poco su ajax e vorrei farmi un&#39;idea sulla
 fattibilità di quanto segue: attualmente ho un WebService che espone
 determinati metodi. Poi ho una web application che sostanzialmente
 tramite una jsp richiama una servlet. Questa servlet richiede delle
 info al WS (tramite un metodo esposto) ed una volta ottenute le passa
-alla jsp che le visualizza.
+alla jsp che le visualizza.</p>
 
 <p>Ora mi chiedo se la parte utente può essere reimplementata usando
 ajax: in particolare sarebbe ottimo se tramite javascript potessi
 richiamare quella servlet (o addirittura direttamente il WS) ed esporre
-quindi all'utente i risultati.
+quindi all&#39;utente i risultati.
 Per esempio alla jsp attualmente arriva una lista di oggetti, che io
 stampo poi a video in modo opportuno. Come ci si comporta in ajax
 (javascript) con collezioni ed oggetti (classi java)?...
-</p>
 </blockquote>
 Risposta di un tizio:
-<blockquote>
+<blockquote></p>
 
 <blockquote>
 <p>Ora mi chiedo se la parte utente può essere reimplementata usando
 ajax: in particolare sarebbe ottimo se tramite javascript potessi
 richiamare quella servlet (o addirittura direttamente il WS) ed esporre
-quindi all'utente i risultati.</p>
+quindi all&#39;utente i risultati.</p>
 </blockquote>
 
 <p>Primo limite di Ajax: non si possono fare richieste a server diversi
-da quello in cui l'applicazione Ajax risiede, dunque per far funzionare
-il tutto e' necessario installare Ajax nello stesso dominio in cui
-c'e' l'applicazione server-side che poi esporta i dati in qualche modo.</p>
+da quello in cui l&#39;applicazione Ajax risiede, dunque per far funzionare
+il tutto e&#39; necessario installare Ajax nello stesso dominio in cui
+c&#39;e&#39; l&#39;applicazione server-side che poi esporta i dati in qualche modo.</p>
 
 <blockquote>
 <p>Per esempio alla jsp attualmente arriva una lista di oggetti, che io
@@ -174,35 +171,33 @@ stampo poi a video in modo opportuno. Come ci si comporta in ajax
 
 <p>Javascript e Java hanno in comune solo le prime 4 lettere del nome :)
 In seguito ad una decisione commerciale. javascript nativamente non ha
-alcun modo di leggere oggetti java, dunque e' necessario che l'applicazione
+alcun modo di leggere oggetti java, dunque e&#39; necessario che l&#39;applicazione
 lato server serializzi in qualche modo i dati, ad esempio in XML o in qualunque
-altro formato opportuno, cosi' che javascript possa leggerli e visualizzarli
+altro formato opportuno, cosi&#39; che javascript possa leggerli e visualizzarli
 a video...
-</p>
-</blockquote>
+</blockquote></p>
 
 <p>La mia risposta (dovuta):
-</p>
-<blockquote>&gt; On 3/17/06, sloop <apett ...> wrote:
+<blockquote>&gt; On 3/17/06, sloop <apett ...@gmail.com> wrote:</p>
 
 <blockquote>
 <blockquote>
 <p>Ora mi chiedo se la parte utente può essere reimplementata usando
 ajax: in particolare sarebbe ottimo se tramite javascript potessi
 richiamare quella servlet (o addirittura direttamente il WS) ed esporre
-quindi all'utente i risultati.</p>
+quindi all&#39;utente i risultati.</p>
 </blockquote>
 
 <p>Primo limite di Ajax: non si possono fare richieste a server diversi
-da quello in cui l'applicazione Ajax risiede, dunque per far funzionare
-il tutto e' necessario installare Ajax nello stesso dominio in cui
-c'e' l'applicazione server-side che poi esporta i dati in qualche modo.</p>
+da quello in cui l&#39;applicazione Ajax risiede, dunque per far funzionare
+il tutto e&#39; necessario installare Ajax nello stesso dominio in cui
+c&#39;e&#39; l&#39;applicazione server-side che poi esporta i dati in qualche modo.</p>
 </blockquote>
 
 <p>???
 Me la spieghi questa?
 No perché se no la roba che manipoli in Ajax da una vita che mi arriva
-dall'altra parte del globo non funziona ma io non lo so!
+dall&#39;altra parte del globo non funziona ma io non lo so!
 No, a parte la mia battuta, ti rendi conto che secondo questa
 affermazione cose tipo le GMap usate con le GMap API non hanno alcun
 motivo di esistere perché non possono funzionare?
@@ -225,26 +220,25 @@ con logiche ben diverse.</p>
 
 <blockquote>
 <p>javascript nativamente non ha
-alcun modo di leggere oggetti java, dunque e' necessario che l'applicazione
+alcun modo di leggere oggetti java, dunque e&#39; necessario che l&#39;applicazione
 lato server serializzi in qualche modo i dati, ad esempio in XML o in qualunque
-altro formato opportuno, cosi' che javascript possa leggerli e visualizzarli
+altro formato opportuno, cosi&#39; che javascript possa leggerli e visualizzarli
 a video.</p>
 </blockquote>
 
 <p>I WS più evoluti (quelli dello standard 2.0 non ancora definito
-"reccomended" definiscono
-il formato XML XSD per l'invio di interi Oggetti e non solo di "tipi
-primitivi"+Array come é ora.
+&quot;reccomended&quot; definiscono
+il formato XML XSD per l&#39;invio di interi Oggetti e non solo di &quot;tipi
+primitivi&quot;+Array come é ora.
 Questo permetterà quindi di serializzare oggetti in un linguaggio e
 riutilizzarli (nei limiti definiti dallo stesso standard) in un altro.
 Per esempio, il ho fatto sistemi in cui il backend é una servlet che
 espone un WS fatto con WSCompile ed il client era una pagina PHP5 che
 interrogava tale WS.
-Per potermi spedire dati "complessi" ho utilizzato un formato XML
+Per potermi spedire dati &quot;complessi&quot; ho utilizzato un formato XML
 comune a Client e Server.
 In attesa di WS2.0 consiglio CALDAMENTE questa soluzione. Veloce,
-sicura e pienamente controllabile dallo sviluppatore. </p></apett>
-</blockquote>
+sicura e pienamente controllabile dallo sviluppatore. </apett></blockquote></p>
 
             
         </div>
@@ -262,8 +256,7 @@ sicura e pienamente controllabile dallo sviluppatore. </p></apett>
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>

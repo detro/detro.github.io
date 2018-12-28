@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Personalize your $PS1 - Too much coffee, too little time</title>
 
         <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll" rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much &lt;strong&gt;coffee&lt;/strong&gt;&lt;br/&gt;too little &lt;strong&gt;time&lt;/strong&gt;">
+        <meta name="generator" content="Jekyll"
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,9 +51,8 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong>
-</h2>
+                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan<strong>DeMarino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -114,7 +113,7 @@
                 
                     <li>
                         <i class="icon-tags"></i>
-                        code • prompt • cli • personal • personalization • howto • it • terminal • curiosity • english • bash • utility
+                        code &bull; prompt &bull; cli &bull; personal &bull; personalization &bull; howto &bull; it &bull; terminal &bull; curiosity &bull; english &bull; bash &bull; utility
                     </li>
                 
 
@@ -131,21 +130,21 @@
         <div class="body">
             
                 <div class="img">
-<img src="http://4.bp.blogspot.com/_Zfnd5XZP80Y/S8S8ZPTdVvI/AAAAAAAABg8/dfnIlEXmDJM/s1600/Picture+2.png">
+<img src="http://4.bp.blogspot.com/_Zfnd5XZP80Y/S8S8ZPTdVvI/AAAAAAAABg8/dfnIlEXmDJM/s1600/Picture+2.png" />
 Fancy $PS1 setting
 </div>
 
 <p>The code to make the <a href="http://www.gnu.org/software/bash/">Bash</a> prompt looks like mine is (<code>~/.bashrc</code>):</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="k">case</span> <span class="nv">$TERM</span> in
     xterm*<span class="p">|</span>rxvt*<span class="o">)</span>
-        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s1">'\[\033]0;\u@\h:\w\007\]'</span>
+        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s1">&#39;\[\033]0;\u@\h:\w\007\]&#39;</span>
         <span class="p">;;</span>
     *<span class="o">)</span>
-        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s2">""</span>
+        <span class="nv">TITLEBAR</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
         <span class="p">;;</span>
 <span class="k">esac</span><span class="p">;</span>
 
-<span class="nv">PS1</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">TITLEBAR</span><span class="si">}</span><span class="s2">\n\[\033[0;0m\][\033[0;32m\]time: \</span>
+<span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TITLEBAR</span><span class="si">}</span><span class="s2">\n\[\033[0;0m\][\033[0;32m\]time: \</span>
 <span class="s2">\[\033[0m\]\[\033[1;31m\]\t\[\033[0m\]\[\033[0;0m\]]-\</span>
 <span class="s2">[\[\033[0m\]\[\033[0;32m\]host: \[\033[0m\]\</span>
 <span class="s2">\[\033[1;31m\]\h\[\033[0m\]\[\033[0;0m\]]-\</span>
@@ -153,7 +152,7 @@ Fancy $PS1 setting
 <span class="s2">\[\033[0m\]\[\033[0;0m\]]-[\[\033[0m\]\[\033[0;32m\]bash: \</span>
 <span class="s2">\[\033[0m\]\[\033[1;31m\]\v\[\033[0;0m\]]\n\</span>
 <span class="s2">\[\033[0;0m\][\[\033[0;32m\]cwd: \[\033[0m\]\[\033[1;31m\]\w\</span>
-<span class="s2">\[\033[0m\]\[\033[0;0m\]]# "</span>
+<span class="s2">\[\033[0m\]\[\033[0;0m\]]# &quot;</span>
 </code></pre></div>
 <p>Thanks to <a href="http://www.gilesorr.com/bashprompt/howto/">Bash Prompt HOWTO</a>.</p>
 
@@ -173,8 +172,7 @@ Fancy $PS1 setting
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
