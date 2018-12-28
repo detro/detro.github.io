@@ -53,11 +53,12 @@ destination: ../detro.github.io-target
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
 
 # HTML/CSS generation options
 markdown: redcarpet
 highlighter: pygments
-lessc: /Users/idemarino/.nvm/versions/node/v6.11.3/bin/lessc
+lessc: lessc
 encoding: utf-8
 
 permalink: /:year/:month/:title
@@ -68,7 +69,7 @@ paginate_path: 'blog/:num'
 plugins:
   - jekyll-mentions
   - jemoji
-  - jekyll-redirect-from #< https://github.com/jekyll/jekyll-redirect-from
+  - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
