@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/ivandemarino
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ivandemarino.me
+  * I am ivandemarino (https://keybase.io/ivandemarino) on keybase.
+  * I have a public key ASDtf0cqBYy0mExtgZbLKQbmKjJrQrSmDpPKQ6ORrqUbuwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01202a96ea9f77111efe9fff6a004e62914a03fae794f7599a2dd8588a72b7dd30f20a",
+      "host": "keybase.io",
+      "kid": "0120ed7f472a058cb4984c6d8196cb2906e62a326b42b4a60e93ca43a391aea51bbb0a",
+      "uid": "88d10a000db83364b6004b04be64b019",
+      "username": "ivandemarino"
+    },
+    "merkle_root": {
+      "ctime": 1546693978,
+      "hash": "c098fc4ad87fea8dd156128a18ee9c72ecba82e991c893353324759ac4e96fd15798d96c61f2018b48ae2338cebfab4baa9008a363d94cf701e50aed66aa3e35",
+      "hash_meta": "88c95404e00604b8b4dbd2e6f31353f1d569f38f08e9580bb382d3e559077196",
+      "seqno": 4236138
+    },
+    "service": {
+      "entropy": "gdAUhZOjjm7zuK62Bm8ZNvCq",
+      "hostname": "ivandemarino.me",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.47"
+  },
+  "ctime": 1546694028,
+  "expire_in": 504576000,
+  "prev": "c54ecad206e8a45dc0d65ac1c4d68a4873118deba2ecb5e95bf4f9f7cf4b95a0",
+  "seqno": 55,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg7X9HKgWMtJhMbYGWyykG5ioya0K0pg6TykOjka6lG7sKp3BheWxvYWTESpcCN8QgxU7K0gbopF3A1lrBxNaKSHMRjeui7LXpW/T5989LlaDEIK1/Za2qUBdiJDYsGWcnAzBjWn1covS1jIzTuu5dm9L+AgHCo3NpZ8RApTkSumMtIVTZQhdBmYlFQMvMNTMM/IPTKK0+2aIgaq9x1njClH+iNUDJ9O0bxUvmEm+/7SjO32RYxUoa5pAmAqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIGTPTXj3A9qM+nMfMC6XpPDtUqnz8mIC7LgtsDcmWF/9o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ivandemarino
+
+==================================================================
