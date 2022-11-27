@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Prime Numbers Generator - Too much coffee, too little time</title>
-
-        <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
@@ -36,6 +32,26 @@
               gtag('config', 'G-K0JQTBH0J9');
             </script>
         
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Prime Numbers Generator | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="Prime Numbers Generator" />
+<meta name="author" content="detro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I believe I don’t have to describe what primes are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (@lucabox) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) . Optimus Prime :-P - yeah yeah, a stupid joke Briefing This code is based on the assumption that we want to generate very very large primes, so it uses unsigned long long to store the values, instead of classical unsigned int. Live with that. Also, give that there is nothing much better then a “try-dividing-by-every-previous-prime” out there (there are alternatives, but I’m not aware of more complex ones), I took a look to some properties of Primes, and putted into the algorithm those properties as conditions for early stop: Say P[i] are the previously calculated Primes; If trying dividing value V by every P[i] we find that P[i] &gt; sqrt(V), stop dividing and classify V as a newly found prime No need to check any even number: they are divisible by 2, so no primes by definition No need to allocate more space then an array of the size of the requested prime ordinality: everything can be done in place Code" />
+<meta property="og:description" content="I believe I don’t have to describe what primes are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (@lucabox) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) . Optimus Prime :-P - yeah yeah, a stupid joke Briefing This code is based on the assumption that we want to generate very very large primes, so it uses unsigned long long to store the values, instead of classical unsigned int. Live with that. Also, give that there is nothing much better then a “try-dividing-by-every-previous-prime” out there (there are alternatives, but I’m not aware of more complex ones), I took a look to some properties of Primes, and putted into the algorithm those properties as conditions for early stop: Say P[i] are the previously calculated Primes; If trying dividing value V by every P[i] we find that P[i] &gt; sqrt(V), stop dividing and classify V as a newly found prime No need to check any even number: they are divisible by 2, so no primes by definition No need to allocate more space then an array of the size of the requested prime ordinality: everything can be done in place Code" />
+<link rel="canonical" href="http://ivandemarino.me/2010/01/23/prime-numbers-generator/" />
+<meta property="og:url" content="http://ivandemarino.me/2010/01/23/prime-numbers-generator/" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-01-23T13:34:33+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Prime Numbers Generator" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-01-23T13:34:33+00:00","datePublished":"2010-01-23T13:34:33+00:00","description":"I believe I don’t have to describe what primes are, what are their properties and what not. This post is more a tribute to geek-ness of 2 friends-and-colleagues (@lucabox) that have fun thinking of algorithms to solve stupid (or less stupid), and always useless problems ;-) . Optimus Prime :-P - yeah yeah, a stupid joke Briefing This code is based on the assumption that we want to generate very very large primes, so it uses unsigned long long to store the values, instead of classical unsigned int. Live with that. Also, give that there is nothing much better then a “try-dividing-by-every-previous-prime” out there (there are alternatives, but I’m not aware of more complex ones), I took a look to some properties of Primes, and putted into the algorithm those properties as conditions for early stop: Say P[i] are the previously calculated Primes; If trying dividing value V by every P[i] we find that P[i] &gt; sqrt(V), stop dividing and classify V as a newly found prime No need to check any even number: they are divisible by 2, so no primes by definition No need to allocate more space then an array of the size of the requested prime ordinality: everything can be done in place Code","headline":"Prime Numbers Generator","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2010/01/23/prime-numbers-generator/"},"url":"http://ivandemarino.me/2010/01/23/prime-numbers-generator/"}</script>
+<!-- End Jekyll SEO tag -->
+
     </head>
 
     <body>
@@ -77,6 +93,8 @@
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

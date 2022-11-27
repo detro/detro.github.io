@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Installing a Bind9 Master/Slave DNS System - Too much coffee, too little time</title>
-
-        <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
@@ -36,6 +32,26 @@
               gtag('config', 'G-K0JQTBH0J9');
             </script>
         
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Installing a Bind9 Master/Slave DNS System | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="Installing a Bind9 Master/Slave DNS System" />
+<meta name="author" content="detro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Welcome In this howto we will install 2 bind dns servers, one as the master and the other as a slave server. For security reasons we will chroot bind9 in its own jail. Using two servers for a domain is a commonly used setup and in order to host your own domain you are required to have at least 2 domain servers. If one breaks, the other can continue to serve your domain. Our setup will use Debian Sarge 3.1 (stable) for its base. A simple clean and up2date install will be enough since we will install the required packages with this howto. In this howto I will use the fictional domain &quot;linux.lan&quot;. The nameservers will use 192.168.254.1 and 192.168.254.2 as there ip." />
+<meta property="og:description" content="Welcome In this howto we will install 2 bind dns servers, one as the master and the other as a slave server. For security reasons we will chroot bind9 in its own jail. Using two servers for a domain is a commonly used setup and in order to host your own domain you are required to have at least 2 domain servers. If one breaks, the other can continue to serve your domain. Our setup will use Debian Sarge 3.1 (stable) for its base. A simple clean and up2date install will be enough since we will install the required packages with this howto. In this howto I will use the fictional domain &quot;linux.lan&quot;. The nameservers will use 192.168.254.1 and 192.168.254.2 as there ip." />
+<link rel="canonical" href="http://ivandemarino.me/2006/08/27/installing-a-bind9-masterslave-dns-system/" />
+<meta property="og:url" content="http://ivandemarino.me/2006/08/27/installing-a-bind9-masterslave-dns-system/" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2006-08-27T22:57:38+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Installing a Bind9 Master/Slave DNS System" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2006-08-27T22:57:38+01:00","datePublished":"2006-08-27T22:57:38+01:00","description":"Welcome In this howto we will install 2 bind dns servers, one as the master and the other as a slave server. For security reasons we will chroot bind9 in its own jail. Using two servers for a domain is a commonly used setup and in order to host your own domain you are required to have at least 2 domain servers. If one breaks, the other can continue to serve your domain. Our setup will use Debian Sarge 3.1 (stable) for its base. A simple clean and up2date install will be enough since we will install the required packages with this howto. In this howto I will use the fictional domain &quot;linux.lan&quot;. The nameservers will use 192.168.254.1 and 192.168.254.2 as there ip.","headline":"Installing a Bind9 Master/Slave DNS System","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2006/08/27/installing-a-bind9-masterslave-dns-system/"},"url":"http://ivandemarino.me/2006/08/27/installing-a-bind9-masterslave-dns-system/"}</script>
+<!-- End Jekyll SEO tag -->
+
     </head>
 
     <body>
@@ -76,6 +92,8 @@
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

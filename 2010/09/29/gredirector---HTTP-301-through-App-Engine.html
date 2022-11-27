@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>gredirector - 'HTTP 301' through App Engine - Too much coffee, too little time</title>
-
-        <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
@@ -36,6 +32,26 @@
               gtag('config', 'G-K0JQTBH0J9');
             </script>
         
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>gredirector - ‘HTTP 301’ through App Engine | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="gredirector - ‘HTTP 301’ through App Engine" />
+<meta name="author" content="detro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When I decided to migrate to this new blog I was confronted by a very important issue: how do I make sure that the (already modest) traffic going to http://www.detronizator.org/* would be redirected to this new URL? _301 Redirection_ I started searching and I found this article by Danny Tuppeny on how to use a Google App Engine application to do the trick. So, what I did was to take his code and started putting it in place for me at http://redirector.ivandemarino.me. But because I’m a Software Developer that likes to make elegant stuff, I noticed that quite few things were missing: It didn’t use any Memcache, so Destination URL were always regenerated Logging was poor Was not really configurable Destination URL were not Checked (i.e. test if it exists) before Redirection Introducing gredirector gredirector is an App Engine project that lets you set up your personal HTTP Redirect HUB, with a lot of emphasys on: Speed Configurability (but it could be pushed a even more) Logging It’s a very very simple application, but I think serves well it’s purpose. See here the main code:" />
+<meta property="og:description" content="When I decided to migrate to this new blog I was confronted by a very important issue: how do I make sure that the (already modest) traffic going to http://www.detronizator.org/* would be redirected to this new URL? _301 Redirection_ I started searching and I found this article by Danny Tuppeny on how to use a Google App Engine application to do the trick. So, what I did was to take his code and started putting it in place for me at http://redirector.ivandemarino.me. But because I’m a Software Developer that likes to make elegant stuff, I noticed that quite few things were missing: It didn’t use any Memcache, so Destination URL were always regenerated Logging was poor Was not really configurable Destination URL were not Checked (i.e. test if it exists) before Redirection Introducing gredirector gredirector is an App Engine project that lets you set up your personal HTTP Redirect HUB, with a lot of emphasys on: Speed Configurability (but it could be pushed a even more) Logging It’s a very very simple application, but I think serves well it’s purpose. See here the main code:" />
+<link rel="canonical" href="http://ivandemarino.me/2010/09/29/gredirector---HTTP-301-through-App-Engine" />
+<meta property="og:url" content="http://ivandemarino.me/2010/09/29/gredirector---HTTP-301-through-App-Engine" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-09-29T00:00:29+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="gredirector - ‘HTTP 301’ through App Engine" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-09-29T00:00:29+01:00","datePublished":"2010-09-29T00:00:29+01:00","description":"When I decided to migrate to this new blog I was confronted by a very important issue: how do I make sure that the (already modest) traffic going to http://www.detronizator.org/* would be redirected to this new URL? _301 Redirection_ I started searching and I found this article by Danny Tuppeny on how to use a Google App Engine application to do the trick. So, what I did was to take his code and started putting it in place for me at http://redirector.ivandemarino.me. But because I’m a Software Developer that likes to make elegant stuff, I noticed that quite few things were missing: It didn’t use any Memcache, so Destination URL were always regenerated Logging was poor Was not really configurable Destination URL were not Checked (i.e. test if it exists) before Redirection Introducing gredirector gredirector is an App Engine project that lets you set up your personal HTTP Redirect HUB, with a lot of emphasys on: Speed Configurability (but it could be pushed a even more) Logging It’s a very very simple application, but I think serves well it’s purpose. See here the main code:","headline":"gredirector - ‘HTTP 301’ through App Engine","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2010/09/29/gredirector---HTTP-301-through-App-Engine"},"url":"http://ivandemarino.me/2010/09/29/gredirector---HTTP-301-through-App-Engine"}</script>
+<!-- End Jekyll SEO tag -->
+
     </head>
 
     <body>
@@ -76,6 +92,8 @@
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

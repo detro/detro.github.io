@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>How-To per PostgreSQL su MacOSX - Too much coffee, too little time</title>
-
-        <meta name="author" content="Ivan De Marino">
-        <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
@@ -36,6 +32,26 @@
               gtag('config', 'G-K0JQTBH0J9');
             </script>
         
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How-To per PostgreSQL su MacOSX | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="How-To per PostgreSQL su MacOSX" />
+<meta name="author" content="detro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chi mi conosce un pochino di più, sa che adoro questo RDBMS (anche se ad alcuni piace di più “ORDBMS” ;-) ).Non voglio dilungarmi, internet é stracolma in proposito.Vi segnalo solo questo how-to made in Apple che guida passo passo alla corretta configurazione di PostgreSQL su una macchina MacOSX.Ci sono anche degli esempi di interfacciamento con:&lt;ul&gt; &lt;li&gt; PHP &lt;/li&gt; &lt;li&gt; Perl &lt;/li&gt; &lt;li&gt; Python &lt;/li&gt; &lt;li&gt; Java &lt;/li&gt;&lt;/ul&gt;Inoltre, c’é un accenno anche a phpPgAdmin.In più, il link ad uno scriptino semplice semplice (derivato dal ben più complesso pg_ctl) per lo S-S-R (Start-Stop-Restart): pg-start-stop.sh.Link Correlati:&lt;ul&gt; &lt;li&gt;Homepage of Marc Liyanage&lt;/li&gt; &lt;li&gt;PostgreSQL Homepage&lt;/li&gt; &lt;li&gt;Paul Naro has written PostMan Query, a GUI application for querying PostgreSQL databases.&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;clear:both; padding-bottom: 0.25em;&quot;&gt;&lt;/div&gt;" />
+<meta property="og:description" content="Chi mi conosce un pochino di più, sa che adoro questo RDBMS (anche se ad alcuni piace di più “ORDBMS” ;-) ).Non voglio dilungarmi, internet é stracolma in proposito.Vi segnalo solo questo how-to made in Apple che guida passo passo alla corretta configurazione di PostgreSQL su una macchina MacOSX.Ci sono anche degli esempi di interfacciamento con:&lt;ul&gt; &lt;li&gt; PHP &lt;/li&gt; &lt;li&gt; Perl &lt;/li&gt; &lt;li&gt; Python &lt;/li&gt; &lt;li&gt; Java &lt;/li&gt;&lt;/ul&gt;Inoltre, c’é un accenno anche a phpPgAdmin.In più, il link ad uno scriptino semplice semplice (derivato dal ben più complesso pg_ctl) per lo S-S-R (Start-Stop-Restart): pg-start-stop.sh.Link Correlati:&lt;ul&gt; &lt;li&gt;Homepage of Marc Liyanage&lt;/li&gt; &lt;li&gt;PostgreSQL Homepage&lt;/li&gt; &lt;li&gt;Paul Naro has written PostMan Query, a GUI application for querying PostgreSQL databases.&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;clear:both; padding-bottom: 0.25em;&quot;&gt;&lt;/div&gt;" />
+<link rel="canonical" href="http://ivandemarino.me/2005/01/05/how-to-per-postgresql-su-macosx/" />
+<meta property="og:url" content="http://ivandemarino.me/2005/01/05/how-to-per-postgresql-su-macosx/" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2005-01-05T13:52:12+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How-To per PostgreSQL su MacOSX" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2005-01-05T13:52:12+00:00","datePublished":"2005-01-05T13:52:12+00:00","description":"Chi mi conosce un pochino di più, sa che adoro questo RDBMS (anche se ad alcuni piace di più “ORDBMS” ;-) ).Non voglio dilungarmi, internet é stracolma in proposito.Vi segnalo solo questo how-to made in Apple che guida passo passo alla corretta configurazione di PostgreSQL su una macchina MacOSX.Ci sono anche degli esempi di interfacciamento con:&lt;ul&gt; &lt;li&gt; PHP &lt;/li&gt; &lt;li&gt; Perl &lt;/li&gt; &lt;li&gt; Python &lt;/li&gt; &lt;li&gt; Java &lt;/li&gt;&lt;/ul&gt;Inoltre, c’é un accenno anche a phpPgAdmin.In più, il link ad uno scriptino semplice semplice (derivato dal ben più complesso pg_ctl) per lo S-S-R (Start-Stop-Restart): pg-start-stop.sh.Link Correlati:&lt;ul&gt; &lt;li&gt;Homepage of Marc Liyanage&lt;/li&gt; &lt;li&gt;PostgreSQL Homepage&lt;/li&gt; &lt;li&gt;Paul Naro has written PostMan Query, a GUI application for querying PostgreSQL databases.&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;clear:both; padding-bottom: 0.25em;&quot;&gt;&lt;/div&gt;","headline":"How-To per PostgreSQL su MacOSX","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2005/01/05/how-to-per-postgresql-su-macosx/"},"url":"http://ivandemarino.me/2005/01/05/how-to-per-postgresql-su-macosx/"}</script>
+<!-- End Jekyll SEO tag -->
+
     </head>
 
     <body>
@@ -76,6 +92,8 @@
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         
