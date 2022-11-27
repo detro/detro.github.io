@@ -84,16 +84,16 @@
 
                 <footer id="footer">
                     {% if site.meta.host %}
-                        <span>Hosted on <a href="{{ site.meta.host.link }}">{{ site.meta.host.name }}</a></span>
+                        <span>Hosted on <a href="{{ site.meta.host.link }}" target="_blank">{{ site.meta.host.name }}</a></span>
                     {% endif %}
                     {% if site.meta.engine %}
-                        <span>Powered by <a href="{{ site.meta.engine.link }}">{{ site.meta.engine.name }}</a></span>
+                        <span>Powered by <a href="{{ site.meta.engine.link }}" target="_blank">{{ site.meta.engine.name }}</a></span>
                     {% endif %}
                     {% if site.meta.theme-by %}
-                        <span>Theme by <a href="{{ site.meta.theme-by.link }}">{{ site.meta.theme-by.name }}</a></span>
+                        <span>Theme by <a href="{{ site.meta.theme-by.link }}" target="_blank">{{ site.meta.theme-by.name }}</a></span>
                     {% endif %}
                     {% if site.meta.license %}
-                        <span>Licensed under <a href="{{ site.meta.license.link }}">{{ site.meta.license.name }}</a></span>
+                        <span>Licensed under <a href="{{ site.meta.license.link }}" target="_blank">{{ site.meta.license.name }}</a></span>
                     {% endif %}
                 </footer>
 
