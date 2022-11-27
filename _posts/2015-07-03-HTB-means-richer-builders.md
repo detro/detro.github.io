@@ -6,12 +6,11 @@ tags: [help to buy, uk, politics, affordable, housing, bubble, pricing]
 ---
 
 Britain, you have a problem: house prices in the East/South East have grown
-ridiculous. See
-[2014 house pricing data by the Office for National Statistics (ONS)](http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html) that compares prices
-with the pre-crisis ones.
+ridiculous. See 2014 house pricing data by the 
+[Office for National Statistics (ONS)](https://webarchive.nationalarchives.gov.uk/ukgwa/20160105200947/http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html) that compares prices with the pre-crisis ones.
 
 <div class="img">
-    <img src="http://www.ons.gov.uk/ons/resources/hpifinal_tcm77-369630.png" alt="Comparison of Regional House Prices Indices BEFORE and AFTER the Financial Crisis (2014)">
+    <img src="/img/hpifinal_tcm77-369630.png" alt="Comparison of Regional House Prices Indices BEFORE and AFTER the Financial Crisis (2014)">
     <span>+31.6!?!?!?!</span>
 </div>
 

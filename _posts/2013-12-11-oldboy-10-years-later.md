@@ -14,7 +14,7 @@ stumbled upon [Old Boy](http://www.imdb.com/title/tt0364569/).
 I wasn't really in the mode of staying up late, but something made me.
 
 <div class="img">
-    <img src="/img/oldboy-poster-korean.jpg" alt="Oldboy (2003)">
+    <img src="/img/oldboy-poster.jpg" alt="Oldboy (2003)">
     <span>Oldboy (Korean poster)</span>
 </div>
 
