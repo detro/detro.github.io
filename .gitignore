@@ -9,3 +9,4 @@ _site/
 
 # Jekyll
 .jekyll-cache
+.jekyll-metadata

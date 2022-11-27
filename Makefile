@@ -8,9 +8,9 @@ uninstall:
 	rm -rf .vendor
 
 serve:
-	bundle exec jekyll serve
+	bundle exec jekyll serve --incremental --open-url
 
 build:
-	bundle exec jekyll build
+	bundle exec jekyll build --incremental
 
 .PHONY: install uninstall serve build
