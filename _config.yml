@@ -45,8 +45,8 @@ meta:
         name: Ivan De Marino
         link: http://ivandemarino.me
     license:
-        name: CC ASA 3.0
-        link: http://creativecommons.org/licenses/by-sa/3.0/
+        name: CC BY 4.0
+        link: https://creativecommons.org/licenses/by/4.0/
 
 destination: ../master
 exclude:
