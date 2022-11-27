@@ -88,8 +88,8 @@ feed:
 jekyll-mentions:
   base_url: https://twitter.com
 
-# Google Analytics Configuration
-google_analytics:
-    account: UA-136869-11
+# Google Analytics 4 Configuration
+google_analytics_4:
+  config: G-K0JQTBH0J9
 
 # limit_posts: 50 #< Useful when developing
