@@ -10,45 +10,45 @@ title-display: "Too much <strong>coffee</strong><br/>too little <strong>time</st
 subtitle-display: "Ivan <strong>De Marino</strong>"
 author: "Ivan De Marino"
 authors:
-    detro: "Ivan De Marino"
+  detro: "Ivan De Marino"
 
 # Links
 ## Internal links
 internal-links:
-    - title: blog
-      link: /
-    - title: projects
-      link: /projects
-    - title: about me
-      link: /about-me
-    - title: archive
-      link: /archive
+  - title: blog
+    link: /
+  - title: projects
+    link: /projects
+  - title: about me
+    link: /about-me
+  - title: archive
+    link: /archive
 ## Related-to-me links
 rel-me-links:
-    - icon: twitter
-      link: https://twitter.com/detronizator
-    - icon: github
-      link: https://github.com/detro
-    - icon: linkedin
-      link: http://linkedin.com/in/ivandemarino
-    - icon: rss
-      link: http://ivandemarino.me/atom.xml
-    - icon: sitemap
-      link: http://ivandemarino.me/sitemap.xml
+  - icon: twitter
+    link: https://twitter.com/detronizator
+  - icon: github
+    link: https://github.com/detro
+  - icon: linkedin
+    link: http://linkedin.com/in/ivandemarino
+  - icon: rss
+    link: http://ivandemarino.me/atom.xml
+  - icon: sitemap
+    link: http://ivandemarino.me/sitemap.xml
 ## Other links
 meta:
-    host:
-        name: GitHub Pages
-        link: http://pages.github.com/
-    engine:
-        name: Jekyll
-        link: http://jekyllrb.com/
-    theme-author:
-        name: Ivan De Marino
-        link: http://ivandemarino.me
-    license:
-        name: CC BY 4.0
-        link: https://creativecommons.org/licenses/by/4.0/
+  host:
+    name: GitHub Pages
+    link: http://pages.github.com/
+  engine:
+    name: Jekyll
+    link: http://jekyllrb.com/
+  theme-author:
+    name: Ivan De Marino
+    link: http://ivandemarino.me
+  license:
+    name: CC BY 4.0
+    link: https://creativecommons.org/licenses/by/4.0/
 
 destination: ../gh-pages
 exclude:
