@@ -26,8 +26,16 @@ Jekyll, Jekyll plugins, Less. And with this, you are all set.
 
 * `make install`: install dependencies (as above)
 * `make uninstall`: cleanup dependencies
-* `make build`: generates the website and stores it in `../gh-pages` sibling directory
 * `make serve`: serve the website on http://localhost:4000/
+* `make ghp.generate`: generates the site into the `../gh-pages` sibling directory, hosting the `gh-pages` branch
+* `make ghp.commit`: usually used after `ghp.generate`, it commits the generated site into the `gh-pages` branch
+* `make ghp.push`: it pushes the committed changes from the local `gh-pages` branch, to `origin/gh-pages`
+
+The typical "dev-cycle" is:
+
+```
+serve -> MAKE CHANGES UNTIL HAPPY -> ghp.generate -> ghp.commit -> ghp.push
+```
 
 ## License
 

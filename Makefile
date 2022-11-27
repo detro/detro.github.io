@@ -10,14 +10,16 @@ uninstall:
 serve:
 	bundle exec jekyll serve --incremental --open-url
 
-build:
+ghp.build:
 	bundle exec jekyll build --incremental
 
-commit:
+ghp.commit:
 	git -C ../gh-pages add .
 	git -C ../gh-pages commit -m "From 'main' branch: $$(git log -1 --oneline)"
+	git -C ../gh-pages status
 
-push:
+ghp.push:
 	git -C ../gh-pages push
+	git -C ../gh-pages status
 
-.PHONY: install uninstall serve build commit push
+.PHONY: install uninstall serve ghp.build ghp.commit ghp.push
