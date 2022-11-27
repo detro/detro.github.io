@@ -1,2 +1,11 @@
+# Where the generated site goes
 _site/
-.idea
+
+# Jetbrains IDE
+.idea/
+
+# Configured Bundler vendoring directory
+.vendor/
+
+# Jekyll
+.jekyll-cache

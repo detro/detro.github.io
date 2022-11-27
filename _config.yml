@@ -54,10 +54,17 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - .nvmrc
+  - .ruby-version
+  - Makefile
 
 # HTML/CSS generation options
-markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
 lessc: lessc
 encoding: utf-8
 
