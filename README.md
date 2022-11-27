@@ -20,7 +20,7 @@ Jekyll, Jekyll plugins, Less. And with this, you are all set.
 
 * `make install`: install dependencies (as above)
 * `make uninstall`: cleanup dependencies
-* `make build`: generates the website and stores it in `_config.yml > destination`
+* `make build`: generates the website and stores it in `../gh-pages` sibling directory
 * `make serve`: serve the website on http://localhost:4000/
 
 ## License
