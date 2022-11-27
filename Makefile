@@ -13,4 +13,11 @@ serve:
 build:
 	bundle exec jekyll build --incremental
 
-.PHONY: install uninstall serve build
+commit:
+	git -C ../gh-pages add .
+	git -C ../gh-pages commit -m "From 'main' branch: $$(git log -1 --oneline)"
+
+push:
+	git -C ../gh-pages push
+
+.PHONY: install uninstall serve build commit push
