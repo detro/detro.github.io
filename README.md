@@ -1,4 +1,10 @@
-# ivandemarino.me - Personal blog
+# [ivandemarino.me](https://ivandemarino.me)
+
+[![pages-build-deployment](https://github.com/detro/detro.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/detro/detro.github.io/actions/workflows/pages/pages-build-deployment)
+
+This is the source code of [my blog](https://ivandemarino.me). The website
+is statically generated using [Jekyll](https://jekyllrb.com/), and served
+from the [`gh-pages`](https://github.com/detro/detro.github.io/tree/gh-pages) branch.
 
 ## Requirements
 
