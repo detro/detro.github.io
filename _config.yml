@@ -5,8 +5,9 @@ url: http://ivandemarino.me
 # Basics
 name: "Too much coffee, too little time"
 description: "Ivan De Marino's blog and personal website"
-title: "Too much <strong>coffee</strong><br/>too little <strong>time</strong>"
-subtitle: "Ivan<strong>DeMarino</strong>"
+title: "Too much coffee, too little time"
+title-display: "Too much <strong>coffee</strong><br/>too little <strong>time</strong>"
+subtitle-display: "Ivan <strong>De Marino</strong>"
 author: "Ivan De Marino"
 authors:
     detro: "Ivan De Marino"
