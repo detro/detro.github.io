@@ -8,7 +8,7 @@ tags: [ghostdriver, phantomjs, release, changes, info, banquo]
 It's long overdue. Last time I have cut a release of GhostDriver
 ([1.0.4](https://github.com/detro/ghostdriver/releases/tag/1.0.4))
 was... July 2013.
-And [blogged about it](http://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/)
+And [blogged about it](https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/)
 only in August!!!
 I gotta take a look at my GitHub commits over the 2013: something tells me that
 _year-in-commits_ nicely overlaps with my eventful 2013.
@@ -117,7 +117,7 @@ To see an example use of this API, check out
 This new API was **entirely developed** by
 [Mark Watson (watsonmw)](https://github.com/watsonmw),
 ex-colleague of mine at
-[Neustar](http://ivandemarino.me/2011/12/14/Crossing-the-pond/)
+[Neustar](https://ivandemarino.me/2011/12/14/Crossing-the-pond/)
 and awesome chap.
 
 # What do I have left to do
