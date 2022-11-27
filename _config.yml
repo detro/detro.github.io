@@ -33,6 +33,8 @@ rel-me-links:
       link: http://linkedin.com/in/ivandemarino
     - icon: rss
       link: http://ivandemarino.me/atom.xml
+    - icon: sitemap
+      link: http://ivandemarino.me/sitemap.xml
 ## Other links
 meta:
     host:
