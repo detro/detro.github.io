@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        1251 words
+                        1262 words
                     </li>
                 
             </ul>
@@ -129,47 +127,51 @@
     
         <div class="body">
             
-                <p>This time it&#39;s not something I make myself. Indeed, I still can&#39;t &quot;see&quot; it 100%: I got it, but it&#39;s a bit complex.</p>
+                <p>This time it’s not something I make myself. Indeed, I still can’t “see” it 100%: I got it, but it’s a bit complex.</p>
 
 <div class="img">
 <img src="http://www.familyhelptree.com/blog/wp-content/uploads/2007/10/counting.jpg" alt="Counting kid" />
 A cute little lady counting (bits? ;-) )
 </div>
 
-<p>It&#39;s a method to count the number of bits in a number in O(1), in just 5 lines of code. <strong>INHUMAN.</strong></p>
+<p>It’s a method to count the number of bits in a number in O(1), in just 5 lines of code. <strong>INHUMAN.</strong></p>
 
-<h2>The &quot;human&quot; solutions</h2>
+<h2 id="the-human-solutions">The “human” solutions</h2>
+<p>Of course, there are methods that look way more easy and, given that the size of a number in memory is “fixed”, the O(1) still stands. For example:
+<strong>0. Based on the “evenness/oddness” of the number</strong></p>
 
-<p>Of course, there are methods that look way more easy and, given that the size of a number in memory is &quot;fixed&quot;, the O(1) still stands. For example:
-<strong>0. Based on the &quot;evenness/oddness&quot; of the number</strong></p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v0</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v0</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// If odd, add 1</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-
+    
     <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>1. Counting one bit at a time (always the least significant one)</strong></p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v1</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v1</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// If least-significant bit is 1, add 1</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-
+    
     <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p><strong>2. Counting 4 bit at a time with max 8 shifts, using an &quot;hashmap&quot; with precalculated results</strong>
-The fact that it can count the bits in <em>&quot;max 8 shifts&quot;</em> has the trade off of the memory used by the hashmap.</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v2</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<p><strong>2. Counting 4 bit at a time with max 8 shifts, using an “hashmap” with precalculated results</strong>
+The fact that it can count the bits in <em>“max 8 shifts”</em> has the trade off of the memory used by the hashmap.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v2</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="c1">// &quot;Hashmap&quot; of the values for the least significant 4 bits</span>
+    <span class="c1">// "Hashmap" of the values for the least significant 4 bits</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">int_to_bits_count</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0  00</span>
         <span class="mi">1</span><span class="p">,</span> <span class="c1">// 1  01</span>
@@ -188,22 +190,23 @@ The fact that it can count the bits in <em>&quot;max 8 shifts&quot;</em> has the
         <span class="mi">3</span><span class="p">,</span> <span class="c1">// 14 1110</span>
         <span class="mi">4</span>  <span class="c1">// 15 1111</span>
     <span class="p">};</span>
-
+    
     <span class="k">while</span> <span class="p">(</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Add the bits count of the least significant 4 bits</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="n">int_to_bits_count</span><span class="p">[</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="mi">15</span> <span class="p">];</span>
         <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="mi">4</span><span class="p">;</span>
     <span class="p">}</span>
-
+    
     <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Let&#39;s see what some insane people made. &lt;!--more--&gt;</p>
+</code></pre></div></div>
 
-<h2>The &quot;weird&quot; solution</h2>
+<p>Let’s see what some insane people made. <!--more--></p>
 
-<p>This solution is not impressive, until you analyse how it does actually works, and think <em>&quot;How the hell did they come out with this thing?&quot;</em>.</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v3</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+<h2 id="the-weird-solution">The “weird” solution</h2>
+<p>This solution is not impressive, until you analyse how it does actually works, and think <em>“How the hell did they come out with this thing?”</em>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v3</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="c1">// strip one set bit per iteration</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -212,8 +215,9 @@ The fact that it can count the bits in <em>&quot;max 8 shifts&quot;</em> has the
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>The explaination, from the <a href="http://bits.stephan-brumme.com/countBits.html">source where I took it</a> (thanks <a href="http://twitter.com/lucabox">Luca</a> for highlighting it to me):
+</code></pre></div></div>
+
+<p>The explaination, from the <a href="http://bits.stephan-brumme.com/countBits.html">source where I took it</a> (thanks <a href="http://twitter.com/lucabox">Luca</a> for highlighting it to me):</p>
 <blockquote>
 The main trick, stripping a single bit with x &amp;= x − 1 (line 21), deserves some attention:
 <ul>
@@ -223,14 +227,14 @@ The main trick, stripping a single bit with x &amp;= x − 1 (line 21), deserves
 </ul>
 Hence, x &amp;= x − 1 clears all bits except for the ones represented as dots, they remain the same. Again, exactly one bit was cleared.
 In general, x &amp;= x − 1 always sets the rightmost bit which was 1 to 0.
-</blockquote></p>
+</blockquote>
 
-<p>I mean, method 0 and 1 above are practically doing the same thing. This one is just &quot;weird&quot;.</p>
+<p>I mean, method 0 and 1 above are practically doing the same thing. This one is just “weird”.</p>
 
-<h2>The INHUMAN solution: Counting bits set in Parallel</h2>
-
+<h2 id="the-inhuman-solution-counting-bits-set-in-parallel">The INHUMAN solution: Counting bits set in Parallel</h2>
 <p><em>Ladies and Gentlemen</em>, the algorithm that is still making my mind go banana:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v4</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">bits_counter_v4</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// count bits of each 2-bit chunk</span>
     <span class="n">x</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">);</span>
     <span class="c1">// count bits of each 4-bit chunk</span>
@@ -242,93 +246,108 @@ In general, x &amp;= x − 1 always sets the rightmost bit which was 1 to 0.
     <span class="c1">// add all four 8-bit chunks</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mh">0x01010101</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Again, from the same source:
+</code></pre></div></div>
+
+<p>Again, from the same source:</p>
 <blockquote>
-Counting all set bits of an integer was part of many mainframe CPU&#39;s assembler language but somehow
-x86 CPUs ignored it for decades. Apparently Intel introduced the POPCNT opcode in its Core i7 design.</p>
+Counting all set bits of an integer was part of many mainframe CPU's assembler language but somehow
+x86 CPUs ignored it for decades. Apparently Intel introduced the POPCNT opcode in its Core i7 design.
 
-<p>Meanwhile, the population count has to be implemented by other means.
+Meanwhile, the population count has to be implemented by other means.
 The main observations lies in the fact that you can subdivide any bitblock into smaller chunks,
-compute their population count and add all intermediate results.</p>
+compute their population count and add all intermediate results.
 
-<p>First, the code counts the bits of two adjacent bits:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="mi">0</span><span class="n">b</span> <span class="n">and</span> <span class="mi">0</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">00</span><span class="n">b</span>
-<span class="mi">0</span><span class="n">b</span> <span class="n">and</span> <span class="mi">1</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">1</span><span class="n">b</span> <span class="n">and</span> <span class="mi">0</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">1</span><span class="n">b</span> <span class="n">and</span> <span class="mi">1</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">10</span><span class="n">b</span>
-</code></pre></div>
-<p>The whole algorithm modifies the input in order to generate the output, that means it works in-place.
-Line 3 performs the 2-bit count at once based on the observation:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">unchanged</span><span class="p">,</span> <span class="n">still</span> <span class="mo">00</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">unchanged</span><span class="p">,</span> <span class="n">still</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">must</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">to</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">11</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">must</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">to</span> <span class="mi">10</span><span class="n">b</span>
-</code></pre></div>
-<p>Whenever the higher bit of each 2-bit group is set, subtracting <code>01b</code> gives the desired outcome.
+First, the code counts the bits of two adjacent bits:
+
+
+```c
+0b and 0b &gt;&gt; 00b
+0b and 1b &gt;&gt; 01b
+1b and 0b &gt;&gt; 01b
+1b and 1b &gt;&gt; 10b
+```
+
+
+The whole algorithm modifies the input in order to generate the output, that means it works in-place.
+Line 3 performs the 2-bit count at once based on the observation:
+
+
+```c
+00b &gt;&gt; unchanged, still 00b
+01b &gt;&gt; unchanged, still 01b
+10b &gt;&gt; must be converted to 01b
+11b &gt;&gt; must be converted to 10b
+```
+
+
+Whenever the higher bit of each 2-bit group is set, subtracting <code>01b</code> gives the desired outcome.
 Looks like branching ... but as it turns out, the subtraction can be done always: just subtract the higher bit !
 If it is <code>0</code>, the result remains unchanged, if it is <code>1</code>, then we get the right numbers, too.
-The shift <code>x &gt;&gt; 1</code> and the following mask of all odd bits (<code>0x55</code> is <code>01010101b</code>):</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">shifted</span><span class="p">:</span> <span class="o">?</span><span class="mi">0</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">masked</span><span class="p">:</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">subtraction</span><span class="p">:</span> <span class="mo">00</span><span class="n">b</span> <span class="o">-</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">00</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">shifted</span><span class="p">:</span> <span class="o">?</span><span class="mi">0</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">masked</span><span class="p">:</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">subtraction</span><span class="p">:</span> <span class="mo">01</span><span class="n">b</span> <span class="o">-</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">shifted</span><span class="p">:</span> <span class="o">?</span><span class="mi">1</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">masked</span><span class="p">:</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">subtraction</span><span class="p">:</span> <span class="mi">10</span><span class="n">b</span> <span class="o">-</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">01</span><span class="n">b</span>
-<span class="mi">11</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">shifted</span><span class="p">:</span> <span class="o">?</span><span class="mi">1</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">masked</span><span class="p">:</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="nl">subtraction</span><span class="p">:</span> <span class="mi">11</span><span class="n">b</span> <span class="o">-</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">10</span><span class="n">b</span>
-</code></pre></div>
-<p>Now the 2-bit count is done. As you can see, there are just three possible decimal results: <code>0, 1 or 2</code>.</p>
+The shift <code>x &gt;&gt; 1</code> and the following mask of all odd bits (<code>0x55</code> is <code>01010101b</code>):
 
-<p>Then, two adjacent 2-bit groups are joined to 4-bit groups (line 5):</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="mo">00</span><span class="n">b</span> <span class="n">and</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0000</span><span class="n">b</span>
-<span class="mo">00</span><span class="n">b</span> <span class="n">and</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0001</span><span class="n">b</span>
-<span class="mo">00</span><span class="n">b</span> <span class="n">and</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="n">and</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0001</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="n">and</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="n">and</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0011</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="n">and</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="n">and</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0011</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="n">and</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0100</span><span class="n">b</span>
-</code></pre></div>
-<p>This time, the 2-bit groups are masked and shifted to match and then simply added. No overflow is possible.</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="mo">00</span><span class="n">b</span> <span class="o">+</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0000</span><span class="n">b</span>
-<span class="mo">00</span><span class="n">b</span> <span class="o">+</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0001</span><span class="n">b</span>
-<span class="mo">00</span><span class="n">b</span> <span class="o">+</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="o">+</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0001</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="o">+</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mo">01</span><span class="n">b</span> <span class="o">+</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0011</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="o">+</span> <span class="mo">00</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0010</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="o">+</span> <span class="mo">01</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0011</span><span class="n">b</span>
-<span class="mi">10</span><span class="n">b</span> <span class="o">+</span> <span class="mi">10</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mo">0100</span><span class="n">b</span>
-</code></pre></div>
-<p>The same procedure is done for all 4-bit groups yielding the bit counts for each of the four bytes (line 7)
+
+```c
+00b &gt;&gt; shifted: ?0b &gt;&gt; masked: 00b &gt;&gt; subtraction: 00b - 00b &gt;&gt; 00b
+01b &gt;&gt; shifted: ?0b &gt;&gt; masked: 00b &gt;&gt; subtraction: 01b - 00b &gt;&gt; 01b
+10b &gt;&gt; shifted: ?1b &gt;&gt; masked: 01b &gt;&gt; subtraction: 10b - 01b &gt;&gt; 01b
+11b &gt;&gt; shifted: ?1b &gt;&gt; masked: 01b &gt;&gt; subtraction: 11b - 01b &gt;&gt; 10b
+```
+
+
+Now the 2-bit count is done. As you can see, there are just three possible decimal results: <code>0, 1 or 2</code>.
+
+Then, two adjacent 2-bit groups are joined to 4-bit groups (line 5):
+
+
+```c
+00b and 00b &gt;&gt; 0000b
+00b and 01b &gt;&gt; 0001b
+00b and 10b &gt;&gt; 0010b
+01b and 00b &gt;&gt; 0001b
+01b and 01b &gt;&gt; 0010b
+01b and 10b &gt;&gt; 0011b
+10b and 00b &gt;&gt; 0010b
+10b and 01b &gt;&gt; 0011b
+10b and 10b &gt;&gt; 0100b
+```
+
+
+This time, the 2-bit groups are masked and shifted to match and then simply added. No overflow is possible.
+
+
+```c
+00b + 00b &gt;&gt; 0000b
+00b + 01b &gt;&gt; 0001b
+00b + 10b &gt;&gt; 0010b
+01b + 00b &gt;&gt; 0001b
+01b + 01b &gt;&gt; 0010b
+01b + 10b &gt;&gt; 0011b
+10b + 00b &gt;&gt; 0010b
+10b + 01b &gt;&gt; 0011b
+10b + 10b &gt;&gt; 0100b
+```
+
+
+The same procedure is done for all 4-bit groups yielding the bit counts for each of the four bytes (line 7)
 in their lower four bits. That means, each byte contains its bit count, however, the upper four bits may
-contain junk and are masked out (line 9).</p>
+contain junk and are masked out (line 9).
 
-<p>Multiplying by <code>0x01010101</code> has an interesting property if we name the four bytes A, B, C, D:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span> <span class="o">&gt;&gt;</span> <span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="o">+</span><span class="n">C</span><span class="o">+</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="o">+</span><span class="n">C</span><span class="o">+</span><span class="n">D</span><span class="p">,</span> <span class="n">C</span><span class="o">+</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span>
-</code></pre></div>
-<p>Obviously the highest byte is what we are looking for. The right shift (line 11) returns just it.
-</blockquote></p>
+Multiplying by <code>0x01010101</code> has an interesting property if we name the four bytes A, B, C, D:
+
+
+```c
+A, B, C, D &gt;&gt; A+B+C+D, B+C+D, C+D, D
+```
+
+
+Obviously the highest byte is what we are looking for. The right shift (line 11) returns just it.
+</blockquote>
 
 <p>Of course, this method has a big limitation: it works only with 32-bit numbers.
 To use other sizes (64-bit) needs to be adapted. Still, it blows my mind.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -344,7 +363,7 @@ To use other sizes (64-bit) needs to be adapted. Still, it blows my mind.</p>
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

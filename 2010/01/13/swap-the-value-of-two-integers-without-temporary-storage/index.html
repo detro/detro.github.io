@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,54 +127,39 @@
     
         <div class="body">
             
-                <p>Someone says this is an old lame trick. I think it&#39;s simple and clever use of XOR.</p>
+                <p>Someone says this is an old lame trick. I think it’s simple and clever use of XOR.</p>
 
-<h2>How/Why does it work?</h2>
-
-<p>It&#39;s built around the properties of the <code>XOR ^</code> operator, who has the following properties:
+<h2 id="howwhy-does-it-work">How/Why does it work?</h2>
+<p>It’s built around the properties of the <code>XOR ^</code> operator, who has the following properties:</p>
 <ul>
 <li><code>A ^ B = B ^ A</code> (commutative)</li>
 <li><code>A ^ 0 = A</code></li>
 <li><code>A ^ 1 = ~A</code></li>
 <li><code>A ^ A = 0</code></li>
-</ul></p>
+</ul>
 
-<p>So, you can see how it get&#39;s applied here:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio .h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<p>So, you can see how it get’s applied here:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio .h&gt;</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-   <span class="c1">// ... populate somehow &quot;a&quot; and &quot;b&quot;...</span>
+   <span class="c1">// ... populate somehow "a" and "b"...</span>
+   
+   <span class="n">printf</span><span class="p">(</span><span class="s">"a = %d - b = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 
-   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d - b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in "a" the value of "a XOR b"</span>
+   <span class="n">b</span> <span class="o">^=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// store in "b" the value of "a XOR b XOR b" = "a XOR 0" = "a"</span>
+   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in "a" the velue of "a XOR b XOR a" = "b XOR 0" = "b"</span>
 
-   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in &quot;a&quot; the value of &quot;a XOR b&quot;</span>
-   <span class="n">b</span> <span class="o">^=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// store in &quot;b&quot; the value of &quot;a XOR b XOR b&quot; = &quot;a XOR 0&quot; = &quot;a&quot;</span>
-   <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// store in &quot;a&quot; the velue of &quot;a XOR b XOR a&quot; = &quot;b XOR 0&quot; = &quot;b&quot;</span>
-
-   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d - b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">"a = %d - b = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Neat.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -192,7 +175,7 @@
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

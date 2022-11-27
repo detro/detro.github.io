@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -136,40 +134,38 @@
 Merge Sort Algorithm
 </div>
 
-<h2>The problem of the classical implementation</h2>
+<h2 id="the-problem-of-the-classical-implementation">The problem of the classical implementation</h2>
+<p>The whole algorithm is explained in the wikipedia link above, so I’ll focus on the problem here.</p>
 
-<p>The whole algorithm is explained in the wikipedia link above, so I&#39;ll focus on the problem here.</p>
+<p>The Merge Sort is an<strong> in-place-sorting-algorithm</strong> that requires some support memory to do it’s calculations. At the <em>“merge step”</em>, an amount of memory as large as the current portion of array being merged is allocated to be used as <strong>priority queue</strong> (again, the why is easy to find on the web).
+After this memory is used, normally get’s released.</p>
 
-<p>The Merge Sort is an<strong> in-place-sorting-algorithm</strong> that requires some support memory to do it&#39;s calculations. At the <em>&quot;merge step&quot;</em>, an amount of memory as large as the current portion of array being merged is allocated to be used as <strong>priority queue</strong> (again, the why is easy to find on the web).
-After this memory is used, normally get&#39;s released.</p>
+<p>Theoretically speaking, the amount of memory that at every recursive call get’s created is always <strong><code>&lt;= size-of-input-array</code></strong>. So, no big deal: we knew it.</p>
 
-<p>Theoretically speaking, the amount of memory that at every recursive call get&#39;s created is always <strong><code>&lt;= size-of-input-array</code></strong>. So, no big deal: we knew it.</p>
+<p>Unfortunately in practice this is not always a good idea: <code>malloc(...)</code> and <code>free(...)</code> are <a href="http://en.wikipedia.org/wiki/System_call">System Calls</a>, and those are expensive to do. They <em>normally</em> require <a href="http://en.wikipedia.org/wiki/Context_switch">Context Switches</a> and other system operations that I can’t advice to do without properly thinking through your code.</p>
 
-<p>Unfortunately in practice this is not always a good idea: <code>malloc(...)</code> and <code>free(...)</code> are <a href="http://en.wikipedia.org/wiki/System_call">System Calls</a>, and those are expensive to do. They <em>normally</em> require <a href="http://en.wikipedia.org/wiki/Context_switch">Context Switches</a> and other system operations that I can&#39;t advice to do without properly thinking through your code.</p>
+<h2 id="a-more-polite-merge-sort">A more <em>“Polite”</em> Merge Sort</h2>
+<p>So, because we know the amount of memory that is going to be needed by this algorithm, why don’t we design one that takes it in the beginning and doesn’t bother the <a href="http://en.wikipedia.org/wiki/Operating_system">Operating System</a> anymore? Good idea!</p>
 
-<h2>A more <em>&quot;Polite&quot;</em> Merge Sort</h2>
+<p><strong>The thing we need is an array of the same size of the input.</strong> Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this “support array”.</p>
 
-<p>So, because we know the amount of memory that is going to be needed by this algorithm, why don&#39;t we design one that takes it in the beginning and doesn&#39;t bother the <a href="http://en.wikipedia.org/wiki/Operating_system">Operating System</a> anymore? Good idea!</p>
-
-<p><strong>The thing we need is an array of the same size of the input.</strong> Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this &quot;support array&quot;.</p>
-
-<h3>Not Polite Enough?</h3>
-
+<h3 id="not-polite-enough">Not Polite Enough?</h3>
 <p>A small tweak: <strong>when the <strong>size</strong> input array of the <em>K<sub>th</sub></em> is <code>2</code>, I avoid to do another recursive call.</strong> Instead, I just swap the 2 values if they are not already sorted.
-Very &quot;basical&quot; tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid.
-...
-Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this algorithm will normally generate, I avoid <code>M/2</code> calls.</strong> The logical structure of the calls of this problem, as in the example image above, is a <strong>Balanced Binary Tree</strong>. And in such structure the number of Leaf is equal to M/2, if M are the nodes. <strong>Quite a relieve for the call stack, isn&#39;t it! ;)</strong></p>
+Very “basical” tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid.
+…
+Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this algorithm will normally generate, I avoid <code>M/2</code> calls.</strong> The logical structure of the calls of this problem, as in the example image above, is a <strong>Balanced Binary Tree</strong>. And in such structure the number of Leaf is equal to M/2, if M are the nodes. <strong>Quite a relieve for the call stack, isn’t it! ;)</strong></p>
 
-<h2>The code</h2>
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<h2 id="the-code">The code</h2>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
 <span class="c1">// === Polite Merge Sort ===</span>
-<span class="c1">// This implementation of Merge Sort is defined &quot;polite&quot;, because it tries</span>
+<span class="c1">// This implementation of Merge Sort is defined "polite", because it tries</span>
 <span class="c1">// to bother the Operating Systems as less as possible.</span>
 <span class="c1">//</span>
 <span class="c1">// Instead of allocating and freeing memory at every intermediate step</span>
-<span class="c1">// to implement a the priority queue required to sort do the &quot;MERGE STEP&quot;,</span>
+<span class="c1">// to implement a the priority queue required to sort do the "MERGE STEP",</span>
 <span class="c1">// it requires to pass at input an empty support array of the same size</span>
 <span class="c1">// of the input array.</span>
 <span class="c1">//</span>
@@ -177,19 +173,19 @@ Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this 
 
 <span class="kt">void</span> <span class="nf">polite_merge</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">l_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">m_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">r_limit</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">support_array</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Create 3 Peace Marker</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// For the &#39;array&#39;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// For the &#39;left part of the array already ordered&#39;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// For the &#39;right part of the array already ordered&#39;</span>
-
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// For the 'array'</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">// For the 'left part of the array already ordered'</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// For the 'right part of the array already ordered'</span>
+    
     <span class="c1">// Copy the portion of sorted arrays in the support array (like a static priority queue)</span>
     <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l_limit</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r_limit</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
         <span class="n">support_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
     <span class="p">}</span>
-
+    
     <span class="c1">// Set the Peace Markers</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l_limit</span><span class="p">;</span> <span class="c1">// &#39;i&#39; and &#39;j&#39; both start from the Left</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="n">m_limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// &#39;k&#39; starts from the Middle + 1 </span>
-
+    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l_limit</span><span class="p">;</span> <span class="c1">// 'i' and 'j' both start from the Left</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">m_limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 'k' starts from the Middle + 1 </span>
+    
     <span class="c1">// Merge the 2 sorted portions</span>
     <span class="k">while</span> <span class="p">(</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">m_limit</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span> <span class="n">support_array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">support_array</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">)</span>
@@ -202,9 +198,9 @@ Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this 
     <span class="k">while</span> <span class="p">(</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">support_array</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">];</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">polite_merge_sort</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">l_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">r_limit</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">support_array</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">polite_merge_sort</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">l_limit</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">r_limit</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">support_array</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">middle</span><span class="p">;</span>
-
+    
     <span class="k">if</span> <span class="p">(</span> <span class="n">l_limit</span> <span class="o">==</span> <span class="n">r_limit</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Nothing to do =&gt; Only 1 element - already sorted</span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">r_limit</span> <span class="o">-</span> <span class="n">l_limit</span> <span class="p">)</span> <span class="p">{</span>
@@ -222,27 +218,12 @@ Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this 
         <span class="n">polite_merge</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">l_limit</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">r_limit</span><span class="p">,</span> <span class="n">support_array</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>This is designed to handle only Integers&#39; Array, but it can easily adapted to whatever kind of data you mean to sort.</p>
+</code></pre></div></div>
+
+<p>This is designed to handle only Integers’ Array, but it can easily adapted to whatever kind of data you mean to sort.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -258,7 +239,7 @@ Done? Yes, i<strong>f <code>M</code> is the number of recursive calls that this 
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

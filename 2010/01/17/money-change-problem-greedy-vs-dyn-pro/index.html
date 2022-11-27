@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        678 words
+                        690 words
                     </li>
                 
             </ul>
@@ -129,39 +127,36 @@
     
         <div class="body">
             
-                <p>This is a classical problem of <a href="http://en.wikipedia.org/wiki/Computer_science">Computer Science</a>: it&#39;s used to study both <a href="http://en.wikipedia.org/wiki/Greedy_algorithm">Greedy</a> and <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Dynamic Programming</a> algorithmic techniques.</p>
+                <p>This is a classical problem of <a href="http://en.wikipedia.org/wiki/Computer_science">Computer Science</a>: it’s used to study both <a href="http://en.wikipedia.org/wiki/Greedy_algorithm">Greedy</a> and <a href="http://en.wikipedia.org/wiki/Dynamic_programming">Dynamic Programming</a> algorithmic techniques.</p>
 
 <div class="img">
 <img src="http://www.freephotosbank.com/photographers/photos1/45/med_53ff4957d796d0ff0a7d3151ec4e4a20.jpg" alt="Coins" />
 I hate having my pocket full of copper!!! -_-
 </div>
 
-<h2>Definition</h2>
-
-<p>Given:
+<h2 id="definition">Definition</h2>
+<p>Given:</p>
 <ul>
 <li>A set of <code>n</code> Denominations <code>D[0...n-1]</code> in ascending order, representing a Monetary Coin System</li>
 <li>An money amount <code>A</code>, as input</li>
 </ul>
-calculate a solution:
+<p>calculate a solution:</p>
 <ul>
-    <li><strong><code>S[0...n-1]</code></strong>, with <code>0 &lt;= S[i] &lt;= (A/S[i])</code> and <code>0 &lt; i &lt; n-1</code></li>
+	<li><strong><code>S[0...n-1]</code></strong>, with <code>0 &lt;= S[i] &lt;= (A/S[i])</code> and <code>0 &lt; i &lt; n-1</code></li>
 </ul>
-where:
+<p>where:</p>
 <ul>
-    <li><strong><code>A = Sum<sub>[i=0 -&gt; n-1]</sub> { D[i] * S[i] }</code></strong></li>
-    <li><strong><code>Min{ Sum<sub>[i=0 -&gt; n-1]</sub> { S[i] } }</code></strong></li>
-</ul></p>
+	<li><strong><code>A = Sum<sub>[i=0 -&gt; n-1]</sub> { D[i] * S[i] }</code></strong></li>
+	<li><strong><code>Min{ Sum<sub>[i=0 -&gt; n-1]</sub> { S[i] } }</code></strong></li>
+</ul>
 
-<h2>In other words</h2>
-
+<h2 id="in-other-words">In other words</h2>
 <p>Find the smallest amount of coins to make the given amount.</p>
 
-<h2>First, the Greedy solution</h2>
-
+<h2 id="first-the-greedy-solution">First, the Greedy solution</h2>
 <p>The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy.
 [soucecode:c]
-change<em>coins</em>greedy(D[], A):
+change_coins_greedy(D[], A):
    init S[n]
    i = n-1
    // Pick as much largest coins as possible
@@ -171,115 +166,96 @@ change<em>coins</em>greedy(D[], A):
       i = i - 1
    endwhile</p>
 
-<p>// Set to &#39;0&#39; the result for all the other coins
+<p>// Set to ‘0’ the result for all the other coins
    while ( i &gt;= 0 ) do:
       S[i] = 0
       i = i - 1
-   endwhile
-```</p>
+   endwhile</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+This algorithm, of time complexity &lt;strong&gt;O(A)&lt;/strong&gt;, doesn't work for some (rare) situations.
 
-<p>This algorithm, of time complexity <strong>O(A)</strong>, doesn&#39;t work for some (rare) situations.</p>
+## When Greedy is not enough
+&lt;del datetime="2010-01-18T10:41:49+00:00"&gt;The Greedy algorithm doesn't work for Denominations where if &lt;strong&gt;2 denominations D[i] and D[j] exists&lt;/strong&gt; with:&lt;/del&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;del datetime="2010-01-18T10:41:49+00:00"&gt;&lt;strong&gt;i &amp;lt; j&lt;/strong&gt;&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del datetime="2010-01-18T10:41:49+00:00"&gt;&lt;strong&gt;D[i] &amp;lt; D[j]&lt;/strong&gt;&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del datetime="2010-01-18T10:41:49+00:00"&gt;&lt;strong&gt;2 * D[i] &amp;gt; D[j]&lt;/strong&gt;&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;del datetime="2010-01-18T10:41:49+00:00"&gt;For example, taken &lt;strong&gt;D = {1, 10, 30, 40}&lt;/strong&gt; and amount &lt;strong&gt;A = 63&lt;/strong&gt;, the Greedy algorithm will build a solution &lt;strong&gt;S = {3, 2, 0, 1}&lt;/strong&gt;, that is sub-optimal. The optimal solution in this case is &lt;strong&gt;S = {3, 0, 2, 0}&lt;/strong&gt;.&lt;/del&gt;
+&lt;strong&gt;UPDATE:&lt;/strong&gt; &lt;a href="#comment-11505"&gt;In the comments Vincenzo&lt;/a&gt; gives an example where this condition doesn't still stand but the Greedy Algorithm still produces the best solution.
 
-<h2>When Greedy is not enough</h2>
+## Dynamically Programmed Solution
+In real life the Greedy algorithm should be always enough: I couldn't find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being "normally" applies when changing money.
 
-<del datetime="2010-01-18T10:41:49+00:00">The Greedy algorithm doesn't work for Denominations where if <strong>2 denominations D[i] and D[j] exists</strong> with:</del>
+But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one.
 
-<ul>
-<li><del datetime="2010-01-18T10:41:49+00:00"><strong>i &lt; j</strong></del></li>
-<li><del datetime="2010-01-18T10:41:49+00:00"><strong>D[i] &lt; D[j]</strong></del></li>
-<li><del datetime="2010-01-18T10:41:49+00:00"><strong>2 * D[i] &gt; D[j]</strong></del></li>
-</ul>
+Given the function &lt;strong&gt;M[j], that is the minimum number of coins to make the amount 'j'&lt;/strong&gt;, it looks like:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;M[A] = min&lt;sub&gt;[i = 0 -&gt; n-1]&lt;/sub&gt; { M[ A - D[i] ] +1 , M[A] }&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+Here is the code:
 
-<del datetime="2010-01-18T10:41:49+00:00">For example, taken <strong>D = {1, 10, 30, 40}</strong> and amount <strong>A = 63</strong>, the Greedy algorithm will build a solution <strong>S = {3, 2, 0, 1}</strong>, that is sub-optimal. The optimal solution in this case is <strong>S = {3, 0, 2, 0}</strong>.</del>
+```c
+unsigned int* change_coins_dynpro(unsigned short int D[],
+    unsigned int D_size, unsigned int amount) {
+    // Min. num. of coins for the given 'amount'
+    unsigned int min_num_coins[amount], cur_min_num_coins;
+    // Biggest coin used for the given 'amount'
+    unsigned int biggest_coin_at[amount], cur_biggest_coin_at;
+    
+    unsigned int i, j;
+    unsigned int* solution = NULL;
+    
+    // Ensure the Denomination System can represent any value
+    if ( D[0] != 1 ) return NULL;
+    
+    // Initialize the solution array to Zero
+    solution = (unsigned int*)calloc(D_size, sizeof(unsigned int));
+    if ( NULL == solution ) {
+        return NULL;
+    }
 
-<p><strong>UPDATE:</strong> <a href="#comment-11505">In the comments Vincenzo</a> gives an example where this condition doesn&#39;t still stand but the Greedy Algorithm still produces the best solution.</p>
+    // Amount '0' requires '0' coins
+    min_num_coins[0] = 0;
+    biggest_coin_at[0] = 0;
+    
+    // For Amounts from '1' to 'amount'
+    for ( i = 1; i &lt;= amount; ++i ) {
+        // Start taking 'D[0]' 'i-times'
+        cur_min_num_coins = (i / D[0]);
+        cur_biggest_coin_at = 0;
 
-<h2>Dynamically Programmed Solution</h2>
+        // For coins from 'D[1]' to 'D[D_size -1]'
+        for ( j = 1; j &lt; D_size; ++j ) {
+            // If 'D[j]' minimizes the num. of coins to take for amount 'i'
+            if ( (i &gt;= D[j]) &amp;&amp; (cur_min_num_coins &gt;= (min_num_coins[ i - D[j] ] +1)) ) {
+                cur_min_num_coins = min_num_coins[ i - D[j] ] +1;
+                cur_biggest_coin_at = j;
+            }
+        }
+        
+        // Store the minimum just found
+        min_num_coins[i] = cur_min_num_coins;
+        biggest_coin_at[i] = cur_biggest_coin_at;
+    }
+    
+    // Let's build the solution array
+    while ( amount &gt; 0 ) {
+        cur_biggest_coin_at = biggest_coin_at[amount];
+        
+        solution[ cur_biggest_coin_at ] += 1; // Add '1' of this coin to the solution
+        amount -= D[cur_biggest_coin_at]; // Amount left when picking this coin
+    }
+    
+    return solution;
+}
+</code></pre></div></div>
 
-<p>In real life the Greedy algorithm should be always enough: I couldn&#39;t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being &quot;normally&quot; applies when changing money.</p>
-
-<p>But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one.</p>
-
-<p>Given the function <strong>M[j], that is the minimum number of coins to make the amount &#39;j&#39;</strong>, it looks like:
-<ul>
-<li><strong>M[A] = min<sub>[i = 0 -&gt; n-1]</sub> { M[ A - D[i] ] +1 , M[A] }</strong></li>
-</ul>
-Here is the code:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="nf">change_coins_dynpro</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">D</span><span class="p">[],</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">D_size</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Min. num. of coins for the given &#39;amount&#39;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">min_num_coins</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">cur_min_num_coins</span><span class="p">;</span>
-    <span class="c1">// Biggest coin used for the given &#39;amount&#39;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">amount</span><span class="p">],</span> <span class="n">cur_biggest_coin_at</span><span class="p">;</span>
-
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="n">solution</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-
-    <span class="c1">// Ensure the Denomination System can represent any value</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-
-    <span class="c1">// Initialize the solution array to Zero</span>
-    <span class="n">solution</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="n">D_size</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">));</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">solution</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Amount &#39;0&#39; requires &#39;0&#39; coins</span>
-    <span class="n">min_num_coins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">biggest_coin_at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="c1">// For Amounts from &#39;1&#39; to &#39;amount&#39;</span>
-    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Start taking &#39;D[0]&#39; &#39;i-times&#39;</span>
-        <span class="n">cur_min_num_coins</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-        <span class="c1">// For coins from &#39;D[1]&#39; to &#39;D[D_size -1]&#39;</span>
-        <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">D_size</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// If &#39;D[j]&#39; minimizes the num. of coins to take for amount &#39;i&#39;</span>
-            <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">cur_min_num_coins</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">min_num_coins</span><span class="p">[</span> <span class="n">i</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="p">)</span> <span class="p">{</span>
-                <span class="n">cur_min_num_coins</span> <span class="o">=</span> <span class="n">min_num_coins</span><span class="p">[</span> <span class="n">i</span> <span class="o">-</span> <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-                <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="c1">// Store the minimum just found</span>
-        <span class="n">min_num_coins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_min_num_coins</span><span class="p">;</span>
-        <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_biggest_coin_at</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Let&#39;s build the solution array</span>
-    <span class="k">while</span> <span class="p">(</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="n">cur_biggest_coin_at</span> <span class="o">=</span> <span class="n">biggest_coin_at</span><span class="p">[</span><span class="n">amount</span><span class="p">];</span>
-
-        <span class="n">solution</span><span class="p">[</span> <span class="n">cur_biggest_coin_at</span> <span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Add &#39;1&#39; of this coin to the solution</span>
-        <span class="n">amount</span> <span class="o">-=</span> <span class="n">D</span><span class="p">[</span><span class="n">cur_biggest_coin_at</span><span class="p">];</span> <span class="c1">// Amount left when picking this coin</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">solution</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Time complexity for this algorithm is <strong>O( Amount * num<em>of</em>denominations )</strong>.
+<p>Time complexity for this algorithm is <strong>O( Amount * num_of_denominations )</strong>.
 <em>Pretty heavy algorithm, but do you want to compare with the satisfaction of carrying the minimum amount of coins with you? :P</em></p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -295,7 +271,7 @@ Here is the code:</p>
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

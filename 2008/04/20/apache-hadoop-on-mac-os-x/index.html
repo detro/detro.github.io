@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        301 words
+                        300 words
                     </li>
                 
             </ul>
@@ -130,52 +128,36 @@
         <div class="body">
             
                 <p><img src="http://hadoop.apache.org/images/hadoop-logo.jpg" alt="Hadoop" align="right" width="200" />
-For some reasons I started to play with <a href="http://hadoop.apache.org/core/">Apache Hadoop (Core)</a>:
-<blockquote>Hadoop is a software platform that lets one easily write and run applications that process vast amounts of data.</p>
+For some reasons I started to play with <a href="http://hadoop.apache.org/core/">Apache Hadoop (Core)</a>:</p>
+<blockquote>Hadoop is a software platform that lets one easily write and run applications that process vast amounts of data.
 
-<p>Here&#39;s what makes Hadoop especially useful:
+Here's what makes Hadoop especially useful:
 <ul>
 <li><strong>Scalable:</strong> Hadoop can reliably store and process petabytes.</li>
 <li><strong>Economical</strong>: It distributes the data and processing across clusters of commonly available computers. These clusters can number into the thousands of nodes.</li>
 <li><strong>Efficient:</strong> By distributing the data, Hadoop can process it in parallel on the nodes where the data is located. This makes it extremely rapid.</li>
 <li><strong>Reliable</strong>: Hadoop automatically maintains multiple copies of data and automatically redeploys computing tasks based on failures.</li>
-</ul></p>
+</ul>
 
-<p>Hadoop implements <a href="http://wiki.apache.org/hadoop/HadoopMapReduce">MapReduce</a>, using the<a href="http://hadoop.apache.org/core/docs/current/hdfs_design.html"> Hadoop Distributed File System (HDFS)</a>. MapReduce divides applications into many small blocks of work. HDFS creates multiple replicas of data blocks for reliability, placing them on compute nodes around the cluster. MapReduce can then process the data where it is located.</p>
+Hadoop implements <a href="http://wiki.apache.org/hadoop/HadoopMapReduce">MapReduce</a>, using the<a href="http://hadoop.apache.org/core/docs/current/hdfs_design.html"> Hadoop Distributed File System (HDFS)</a>. MapReduce divides applications into many small blocks of work. HDFS creates multiple replicas of data blocks for reliability, placing them on compute nodes around the cluster. MapReduce can then process the data where it is located.
 
-<p>Hadoop has been demonstrated on clusters with 2000 nodes. The current design target is 10,000 node clusters.
-</blockquote></p>
+Hadoop has been demonstrated on clusters with 2000 nodes. The current design target is 10,000 node clusters.
+</blockquote>
 
-<p>I followed the <a href="http://hadoop.apache.org/core/docs/current/quickstart.html">Quickstart</a> guide and I can confirm that it works on [en:Mac OS X] too, but I managed only to make it run in &quot;<a href="http://hadoop.apache.org/core/docs/current/quickstart.html#Standalone+Operation">standalone</a>&quot; mode: usefull for first-stage development and debugging.
-&lt;!--more--&gt;</p>
+<p>I followed the <a href="http://hadoop.apache.org/core/docs/current/quickstart.html">Quickstart</a> guide and I can confirm that it works on [en:Mac OS X] too, but I managed only to make it run in “<a href="http://hadoop.apache.org/core/docs/current/quickstart.html#Standalone+Operation">standalone</a>” mode: usefull for first-stage development and debugging.
+<!--more--></p>
 
 <p>To understand a bit more how it work, I decided to do also the <a href="http://hadoop.apache.org/core/docs/current/mapred_tutorial.html">Map-Reduce Tutorial</a>: I took the code of the example <a href="http://hadoop.apache.org/core/docs/current/mapred_tutorial.html#Example%3A+WordCount+v1.0">Word Counter (v1.0)</a> and I wrote a Character Counter: same code but with one <code>for</code> more and more internal documentation.</p>
 
-<p>Assumed it can&#39;t help you without a minimum of study of what <a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a> is, I would like to share the code of what I did:
+<p>Assumed it can’t help you without a minimum of study of what <a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a> is, I would like to share the code of what I did:</p>
 <ul>
 <li>CharacterCount.java [<a href="http://www.detronizator.org/wp-content/uploads/2008/04/charactercount.java">src</a>|<a href="http://www.detronizator.org/wp-content/uploads/2008/04/charactercountjava.html">src2html</a>]</li>
-</ul> </p>
+</ul>
 
-<p>If interested, the first thing to read is &quot;<a href="http://labs.google.com/papers/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>&quot;, a publication by <a href="http://labs.google.com/people/jeff/">Jeffrey Dean</a> and<a href="http://labs.google.com/people/sanjay/"> Sanjay Ghemawat</a> sponsored by <a href="http://labs.google.com/">Google Labs</a>.</p>
+<p>If interested, the first thing to read is “<a href="http://labs.google.com/papers/mapreduce.html">MapReduce: Simplified Data Processing on Large Clusters</a>”, a publication by <a href="http://labs.google.com/people/jeff/">Jeffrey Dean</a> and<a href="http://labs.google.com/people/sanjay/"> Sanjay Ghemawat</a> sponsored by <a href="http://labs.google.com/">Google Labs</a>.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -191,7 +173,7 @@ For some reasons I started to play with <a href="http://hadoop.apache.org/core/"
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

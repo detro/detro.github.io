@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        1616 words
+                        1618 words
                     </li>
                 
             </ul>
@@ -129,75 +127,73 @@
     
         <div class="body">
             
-                <p><img src="http://3.bp.blogspot.com/_X224WPCBE5o/STsl8k5fpKI/AAAAAAAAAis/qYHiU6r9LQI/s400/android-dev-phone-1.jpg" alt="Android Dev Phone 1" align="right" width="200"/>If you, like me, have a <a href="http://developer.android.com/guide/developing/device.html#dev-phone-1">Android Dev Phone 1</a> (&quot;ADP1&quot; from now on), you are probably wondering how to take the latest version of the <a href="http://source.android.com/">Android Source Code</a>, the <a href="http://android.git.kernel.org/">&quot;GIT Master&quot;</a>, compile and put on your device.</p>
+                <p><img src="http://3.bp.blogspot.com/_X224WPCBE5o/STsl8k5fpKI/AAAAAAAAAis/qYHiU6r9LQI/s400/android-dev-phone-1.jpg" alt="Android Dev Phone 1" align="right" width="200" />If you, like me, have a <a href="http://developer.android.com/guide/developing/device.html#dev-phone-1">Android Dev Phone 1</a> (“ADP1” from now on), you are probably wondering how to take the latest version of the <a href="http://source.android.com/">Android Source Code</a>, the <a href="http://android.git.kernel.org/">“GIT Master”</a>, compile and put on your device.</p>
 
-<p>I googled and googled and googled, finding some sparse material. But it&#39;s all messed up: sometimes it was incomplete or partial, sometimes it was a matter of formatting/style, it could get very difficult to read. So, this post is my way of making it organic and organized.</p>
+<p>I googled and googled and googled, finding some sparse material. But it’s all messed up: sometimes it was incomplete or partial, sometimes it was a matter of formatting/style, it could get very difficult to read. So, this post is my way of making it organic and organized.</p>
 
-<p>Let&#39;s get it started!
-&lt;!--more--&gt;</p>
+<p>Let’s get it started!
+<!--more--></p>
 
 <h3>Prepare the Instruments</h3>
-
 <p>To build Android and flash the ADP1 we need different tools and set up some stuff.
-Because it would be redundant to explain here how to do every single one of those steps, I will just say what you need and where you find the official documentation to do it:
+Because it would be redundant to explain here how to do every single one of those steps, I will just say what you need and where you find the official documentation to do it:</p>
 <ol>
 <li><a href="http://d.android.com/sdk/1.1_r1/index.html">Download</a> and <a href="http://d.android.com/sdk/1.1_r1/installing.html">Install</a> the Android SDK</li>
-<li><a href="http://d.android.com/guide/developing/device.html#setting-up">Configure the Android SDK for &quot;On Hardware Debuging&quot;</a></li>
-<li><a href="http://source.android.com/download">Get the Source of the &quot;GIT Master&quot; from the Official Repository, get ready for Compilation <strong>BUT DO NOT COMPILE YET</strong></a>; this means stop when the how to says to execute the <code>make</code> command</li>
-<li>Download and Unzip <a href="http://jf.andblogs.net/">JesusFreke</a> (nice name, isn&#39;t it ;-) ) for ADP1; sometimes the ADP1 is also known as &quot;Holiday&quot; device</li>
-</ol></p>
+<li><a href="http://d.android.com/guide/developing/device.html#setting-up">Configure the Android SDK for "On Hardware Debuging"</a></li>
+<li><a href="http://source.android.com/download">Get the Source of the "GIT Master" from the Official Repository, get ready for Compilation <strong>BUT DO NOT COMPILE YET</strong></a>; this means stop when the how to says to execute the <code>make</code> command</li>
+<li>Download and Unzip <a href="http://jf.andblogs.net/">JesusFreke</a> (nice name, isn't it ;-) ) for ADP1; sometimes the ADP1 is also known as "Holiday" device</li>
+</ol>
 
-<p>A couple of notes about the last task:
+<p>A couple of notes about the last task:</p>
 <ul>
 <li>JesusFreke is an great hacker that maintain an interesting firmware for both T-Mobile G1 and ADP1</li>
-<li>the ADP1 is also known as &quot;Holiday&quot; because is the same device that the Google Employees received during some holiday period from their company as gift; and from there the first unlocked firmware were ripped ;)</li>
-</ul></p>
+<li>the ADP1 is also known as "Holiday" because is the same device that the Google Employees received during some holiday period from their company as gift; and from there the first unlocked firmware were ripped ;)</li>
+</ul>
 
 <h3>Access Points</h3>
-
-<p>Your current devices has the Access Points (APN) already configured. It would be a good idea to bring them on the firmware we are going to build too. Connect your device if you didn&#39;t do it already and execute on the command line:
-[code lang=&quot;bash&quot;]
-$ cd [YOUR<em>ANDROID</em>SOURCE<em>ROOT]
-$ adb pull /system/etc/apns-conf.xml development/data/etc/apns-conf</em>sdk.xml
+<p>Your current devices has the Access Points (APN) already configured. It would be a good idea to bring them on the firmware we are going to build too. Connect your device if you didn’t do it already and execute on the command line:
+[code lang=”bash”]
+$ cd [YOUR_ANDROID_SOURCE_ROOT]
+$ adb pull /system/etc/apns-conf.xml development/data/etc/apns-conf_sdk.xml
 [/code]
-This will use the <code>adb</code> command to pull the APNs from the phone: that&#39;s why we needed the Android SDK.
-<strong>Update:</strong> I think this doesn&#39;t really work. But it doesn&#39;t matter, does it? We are going to do a full backup of the phone anyway.</p>
+This will use the <code>adb</code> command to pull the APNs from the phone: that’s why we needed the Android SDK.
+<strong>Update:</strong> I think this doesn’t really work. But it doesn’t matter, does it? We are going to do a full backup of the phone anyway.</p>
 
 <h3>Terminal Emulator (optional step)</h3>
-
 <p>There is a Terminal Emulator application that is installed by default, however it does not appear in the launcher. To <em>stop this madness</em>, edit the file <code>./development/apps/Term/AndroidManifest.xml</code> and add a new <code>&lt;category&gt;</code> to the <code>&lt;intent-filter&gt;</code> section to make it look like:
-[code lang=&quot;xml&quot;]...
-<intent -filter>
-   <action android:name="android.intent.action.MAIN" />
-   <category android:name="android.intent.category.TEST" />
-   <category android:name="android.intent.category.LAUNCHER" />
-</intent>
-...[/code]
+[code lang=”xml”]…
+&lt;intent -filter&gt;</p>
+<action android:name="android.intent.action.MAIN" />
+
+<category android:name="android.intent.category.TEST" />
+
+<category android:name="android.intent.category.LAUNCHER" />
+
+<p>&lt;/intent&gt;
+…[/code]
 What kind of geek would go around with a Linux-based phone and no Terminal Emulator? ;-)</p>
 
-<p>By the way, inside the directory <code>./development/apps/</code> there are more applications that are probably not &quot;enabled&quot; during the build: feel free to try this out to see if you discover something interesting; and don&#39;t forget to let us know in the comments.</p>
+<p>By the way, inside the directory <code>./development/apps/</code> there are more applications that are probably not “enabled” during the build: feel free to try this out to see if you discover something interesting; and don’t forget to let us know in the comments.</p>
 
 <h3>Build for <em>HTC Dream</em> aka <em>T-Mobile G1</em> aka <em>ADP1</em></h3>
-
 <p>The Android uses as default build profile the SDK: means that if you do a build now (remember? the <code>make</code> command), it will build the system image for the <a href="http://www.nongnu.org/qemu/">QEMU Emulator</a> (the one the Android Emulator is based upon).</p>
 
-<p>So, to build for our phone, we need to play a little bit with the build profile. To do so just follow the official how to page about &quot;<a href="http://source.android.com/documentation/building-for-dream">Building for Dream</a>&quot;. Of course, &quot;<a href="http://en.wikipedia.org/wiki/HTC_Dream">Dream</a>&quot; is the code name of the device used by <a href="http://en.wikipedia.org/wiki/HTC_Corporation">HTC</a>.</p>
+<p>So, to build for our phone, we need to play a little bit with the build profile. To do so just follow the official how to page about “<a href="http://source.android.com/documentation/building-for-dream">Building for Dream</a>”. Of course, “<a href="http://en.wikipedia.org/wiki/HTC_Dream">Dream</a>” is the code name of the device used by <a href="http://en.wikipedia.org/wiki/HTC_Corporation">HTC</a>.</p>
 
-<p>Once ready, <strong>it&#39;s time to build!</strong> Give a nice <code>make</code> inside the source root directory and give it <em>10 minutes</em> or <em>several hours</em>: it really depends on your hardware. On my MacBook Unibody 2.0Ghz+4GB Ram it took just 20 minutes ;-)</p>
+<p>Once ready, <strong>it’s time to build!</strong> Give a nice <code>make</code> inside the source root directory and give it <em>10 minutes</em> or <em>several hours</em>: it really depends on your hardware. On my MacBook Unibody 2.0Ghz+4GB Ram it took just 20 minutes ;-)</p>
 
 <h3>Fastboot: the tweezers</h3>
+<p>Let’s assume that you downloaded the Android’s source into the directory <code>/home/me/mydroid</code>: this means that you will then have the built stuff under <code>/home/me/mydroid/out/...</code>; During the building process, one particular executable has been built. It’s name is <strong>fastboot</strong> and it sits under [code lang=”bash”]/home/me/mydroid/out/host/[your computer platform]/bin/fastboot[/code]</p>
 
-<p>Let&#39;s assume that you downloaded the Android&#39;s source into the directory <code>/home/me/mydroid</code>: this means that you will then have the built stuff under <code>/home/me/mydroid/out/...</code>; During the building process, one particular executable has been built. It&#39;s name is <strong>fastboot</strong> and it sits under [code lang=&quot;bash&quot;]/home/me/mydroid/out/host/[your computer platform]/bin/fastboot[/code]</p>
-
-<p>Why is it really important? I&#39;ll report here the output of the executable when no parameter is passed:
-[code lang=&quot;bash&quot;]
+<p>Why is it really important? I’ll report here the output of the executable when no parameter is passed:
+[code lang=”bash”]
 $ ./fastboot
 usage: fastboot [ {option} ] {command}</p>
 
 <p>commands:
   update {filename}   reflash device from update.zip
-  flashall                      &#39;flash boot&#39; + &#39;flash system&#39;
-  ...
+  flashall                      ‘flash boot’ + ‘flash system’
+  …
   devices                      list all connected devices
   reboot                       reboot device normally
   reboot-bootloader    reboot device into bootloader</p>
@@ -210,11 +206,11 @@ usage: fastboot [ {option} ] {command}</p>
   -i {vendor id|         specify a custom USB vendor id
 [/code]</p>
 
-<p>As you can understand, this is used to flash, reboot, erase, ... the ADP1. To do so, the device needs to be booted in &quot;<em>fastboot mode</em>&quot;.</p>
+<p>As you can understand, this is used to flash, reboot, erase, … the ADP1. To do so, the device needs to be booted in “<em>fastboot mode</em>”.</p>
 
-<p><em><strong>IMPORTANT: You don&#39;t need to do this YET, but I explain it here so you can learn how to do it &quot;regardlessly&quot; the usage you make of it.</strong></em>
-Anyway, <strong>that&#39;s how you go in &quot;fastboot&quot; mode</strong>: from power off, <strong>hold the &quot;camera&quot; button AND the &quot;red/on&quot; button</strong>; this will get you into a mode that says &quot;serial0&quot; with androids on skateboards. Plug in the USB cable and <strong>press the &quot;back&quot; button</strong>; now you should see that the screen shows &quot;fastboot&quot; instead of &quot;serial0&quot;.
-Try the back button a few more times (and wait a few seconds in between) if you don&#39;t see &quot;fastboot&quot;.</p>
+<p><em><strong>IMPORTANT: You don’t need to do this YET, but I explain it here so you can learn how to do it “regardlessly” the usage you make of it.</strong></em>
+Anyway, <strong>that’s how you go in “fastboot” mode</strong>: from power off, <strong>hold the “camera” button AND the “red/on” button</strong>; this will get you into a mode that says “serial0” with androids on skateboards. Plug in the USB cable and <strong>press the “back” button</strong>; now you should see that the screen shows “fastboot” instead of “serial0”.
+Try the back button a few more times (and wait a few seconds in between) if you don’t see “fastboot”.</p>
 
 <div align="center">
 <img src="http://farm4.static.flickr.com/3017/3249806989_43c89e7571.jpg" alt="Android in fastboot mode" />
@@ -224,42 +220,40 @@ Try the back button a few more times (and wait a few seconds in between) if you 
 <p>Understood? Ok, now get ready because we are going to need this stuff.</p>
 
 <h3>Backup: because you never know</h3>
-
-<p>Now, it&#39;s time to pay out your curiosity. You are probably puzzling  «<em>WHY THE HELL we need JesusFreke&#39;s Images?</em>». Simply because JF distributes his/her (who knows?) image with a recovery image that we can use to boot the phone from like a &quot;live cd&quot; (so, no installation), and use this image to do a complete backup of the current status of the phone. <em>Very handy when the cold times of failure comes</em>.</p>
+<p>Now, it’s time to pay out your curiosity. You are probably puzzling  «<em>WHY THE HELL we need JesusFreke’s Images?</em>». Simply because JF distributes his/her (who knows?) image with a recovery image that we can use to boot the phone from like a “live cd” (so, no installation), and use this image to do a complete backup of the current status of the phone. <em>Very handy when the cold times of failure comes</em>.</p>
 
 <div align="center">
 <img src="http://farm4.static.flickr.com/3258/3156192431_930b92e59e.jpg" alt="The menu of JesusFreke recovery.img" />
 The menu of JesusFreke recovery.img
 </div>
 
-<p>What you have to do is:
+<p>What you have to do is:</p>
 <ol>
-<li>Unzip the JesusFreke you previously downloaded and bear in mind where you put it (for example [code lang=&quot;bash&quot;]/home/me/jf/[/code]</li>
-<li>Put your ADP1 in &quot;fastboot mode&quot; as shown in the previous section</li>
-<li>Now, it&#39;s time to boot the phone from the recovery image of JF
-[code lang=&quot;bash&quot;]
+<li>Unzip the JesusFreke you previously downloaded and bear in mind where you put it (for example [code lang="bash"]/home/me/jf/[/code]</li>
+<li>Put your ADP1 in "fastboot mode" as shown in the previous section</li>
+<li>Now, it's time to boot the phone from the recovery image of JF
+[code lang="bash"]
 $ cd /home/me/jf/data
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot boot recovery.img
 [/code]
 </li>
-<li>Wait for the recovery.img to finish booting and <strong>use the menu on screen to create a backup</strong>; it will be created on the SD card under [code lang=&quot;bash&quot;]/nandroid/[/code]</li>
+<li>Wait for the recovery.img to finish booting and <strong>use the menu on screen to create a backup</strong>; it will be created on the SD card under [code lang="bash"]/nandroid/[/code]</li>
 <li>Once done, use the right option on the menu screen to reboot the phone, mount the SD card on your computer and save the backup somewhere safe</li>
-</ol></p>
+</ol>
 
 <h3><em>Let's Roc</em>k, ehm... flash the Phone</h3>
-
-<p>Now we are ready to go! Everything should be already built and we can flash the phone with the latest build. <strong>Put the phone in &quot;fastboot mode&quot;</strong> again and do as follows:
-[code lang=&quot;bash&quot;]
+<p>Now we are ready to go! Everything should be already built and we can flash the phone with the latest build. <strong>Put the phone in “fastboot mode”</strong> again and do as follows:
+[code lang=”bash”]
 $ cd /home/me/mydroid/out/target/product/dream
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash system system.img
-sending &#39;system&#39; (51086 KB)... OKAY
-writing &#39;system&#39;... OKAY
+sending ‘system’ (51086 KB)… OKAY
+writing ‘system’… OKAY
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash boot boot.img
-sending &#39;boot&#39; (1418 KB)... OKAY
-writing &#39;boot&#39;... OKAY
+sending ‘boot’ (1418 KB)… OKAY
+writing ‘boot’… OKAY
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash userdata userdata.img
-sending &#39;userdata&#39; (2 KB)... OKAY
-writing &#39;userdata&#39;... OKAY
+sending ‘userdata’ (2 KB)… OKAY
+writing ‘userdata’… OKAY
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot reboot
 [/code]</p>
 
@@ -267,44 +261,42 @@ $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot reboot
 <strong>Enjoy your Geekyness!</strong></p>
 
 <h3>Ehm, cooooool! Now <em>how I go back?</em></h3>
+<p>Yes, a build made from the repository is not what you would define “a stable release”: most probably a lot of stuff doesn’t not work (like home button and back button in my case), and applications are missing. <strong>But you can go to your friend and show how “ahead” you are with your “<em>not-yet-released version of Android</em>”</strong>.</p>
 
-<p>Yes, a build made from the repository is not what you would define &quot;a stable release&quot;: most probably a lot of stuff doesn&#39;t not work (like home button and back button in my case), and applications are missing. <strong>But you can go to your friend and show how &quot;ahead&quot; you are with your &quot;<em>not-yet-released version of Android</em>&quot;</strong>.</p>
-
-<p>But one you are satisfied... or you just have enough of a faulty, incomplete, non-functioning phone, most probably you would like to restore your old, working phone. <strong>Nothing can be easier</strong>:
-[code lang=&quot;bash&quot;]
+<p>But one you are satisfied… or you just have enough of a faulty, incomplete, non-functioning phone, most probably you would like to restore your old, working phone. <strong>Nothing can be easier</strong>:
+[code lang=”bash”]
 $ cd [wherever you stored your nandroid backup]
 $ cd [your phone serial name]/[backup timestamp]
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash system system.img
-...
+…
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash boot boot.img
-...
+…
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot flash userdata userdata.img (or data.img)
-...
+…
 $ sudo /home/me/mydroid/out/host/[your computer platform]/bin/fastboot reboot
 [/code]</p>
 
 <p>Yes, as you should have expected, exactly the same procedure you followed to flash it with the build you made.
-It&#39;s called &quot;coherence&quot;, and it&#39;s normally a great feature ;)</p>
+It’s called “coherence”, and it’s normally a great feature ;)</p>
 
 <h3>Now, the easy way for lazy cowards</h3>
-
-<p>There is of course the &quot;<em>do it for me, please</em>&quot; version. The one for &quot;lazy cowards&quot;! :-P
+<p>There is of course the “<em>do it for me, please</em>” version. The one for “lazy cowards”! :-P
 People like JesusFreke, already been very useful here, can really make stuff easier for the rest of us.
-<a href="http://jf.andblogs.net/">He/She maintains a blog</a> with regular releases of his Android built, based on the stable releases of Google, but enhanced with some &quot;spicy and yummy&quot; stuff. While I&#39;m writing this the latest build for ADP1 is <a href="http://jf.andblogs.net/2009/03/03/jfv143-rc9/">JFv1.43RC9</a>.</p>
+<a href="http://jf.andblogs.net/">He/She maintains a blog</a> with regular releases of his Android built, based on the stable releases of Google, but enhanced with some “spicy and yummy” stuff. While I’m writing this the latest build for ADP1 is <a href="http://jf.andblogs.net/2009/03/03/jfv143-rc9/">JFv1.43RC9</a>.</p>
 
-<p>To install it, he decided to make it <em>very very easy</em>: he just uses the procedure that Google made for us. So, what you have to do is:
+<p>To install it, he decided to make it <em>very very easy</em>: he just uses the procedure that Google made for us. So, what you have to do is:</p>
 <ol>
 <li>Download the latest JesusFreke</li>
-<li>Rename it as &quot;update.zip&quot;</li>
+<li>Rename it as "update.zip"</li>
 <li>Put on the root directory of the SD Card of your ADP1</li>
 <li>Turn off the Phone</li>
 <li>Turn it on <strong>while holding the home button</strong></li>
 <li>Open the keyboard if closed</li>
-<li><strong>Type ALT+L to enable the &quot;logging&quot;</strong></li>
-<li><strong>Type ALT+W to wipe your data from the phone (sorry, it&#39;s necessary at the first upgrade)</strong></li>
+<li><strong>Type ALT+L to enable the "logging"</strong></li>
+<li><strong>Type ALT+W to wipe your data from the phone (sorry, it's necessary at the first upgrade)</strong></li>
 <li><strong>Type ALT+S to apply the update.zip</strong></li>
 <li>When done, click HOME+BACK to reboot</li>
-</ol></p>
+</ol>
 
 <p>Now you have the l<strong>atest, official and <u>stable</u></strong> build of Android on your ADP1!!! ;)
 This features stuff like Latitude and more!</p>
@@ -312,31 +304,15 @@ This features stuff like Latitude and more!</p>
 <p><strong>Enjoy it for good!</strong> ;-)</p>
 
 <h3>Sources</h3>
-
 <ul>
 <li><a href="http://blog.makezine.com/archive/2009/01/taking_android_cupcake_for_a_spin.html">Taking Android "cupcake" out for a spi</a>n</li>
 <li><a href="http://antonmelser.org/open-source/backup-install-restore-adp1.html">Backup/install/restore Android on an Android Developer Phone 1 (ADP1)</a></li>
 <li><a href="http://jf.andblogs.net/">JesusFreke's AndBlog</a></li>
 </ul>
 
+
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -352,7 +328,7 @@ This features stuff like Latitude and more!</p>
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

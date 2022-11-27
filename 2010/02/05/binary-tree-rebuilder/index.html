@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,50 +127,49 @@
     
         <div class="body">
             
-                <p>Imagine you have a <a href="http://en.wikipedia.org/wiki/Binary_tree">Binary Tree</a>, with those characteristics:
+                <p>Imagine you have a <a href="http://en.wikipedia.org/wiki/Binary_tree">Binary Tree</a>, with those characteristics:</p>
 <ul>
-    <li>Nodes do not respect any order relation - In other words: it&#39;s <strong>not</strong> a <a href="http://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> of any kind</li>
-    <li>Every node appears <em>once and only once</em> within the tree</li>
-</ul></p>
+	<li>Nodes do not respect any order relation - In other words: it's <strong>not</strong> a <a href="http://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree</a> of any kind</li>
+	<li>Every node appears <em>once and only once</em> within the tree</li>
+</ul>
 
 <div align="center">
 <img src="http://www.drunkmenworkhere.org/bintree/pagerank.png" alt="A nice Binary Tree" />
 <em>A nice Binary Tree</em>
 </div>
 
-<p>Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I&#39;m pathetic at inventing hypothetical situations :-P ).</p>
+<p>Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I’m pathetic at inventing hypothetical situations :-P ).</p>
 
 <p>Fortunately though, you previously did a <a href="http://en.wikipedia.org/wiki/Tree_traversal">Pre-Order and an In-Order visit of your tree</a>, and stored the result in an 2 nice array.</p>
 
 <p><strong>Can you rebuild the original tree structure out of this 2 array?</strong></p>
 
 <h3>How are you going to rebuild it?</h3>
-
-<p>Yes, you can! (Sorry, I couldn&#39;t resist). And it&#39;s quite easy as well. What you have to do, is the following: 
+<p>Yes, you can! (Sorry, I couldn’t resist). And it’s quite easy as well. What you have to do, is the following:</p>
 <ul>
 <li>Take the first element of the PreOrder Array and use it as root of a new tree</li>
 <li>Find the position of this New Node in the InOrder Array, scanning it from <code>0</code> to <code>n-1</code> (<code>n</code> is the number of Nodes)</li>
 <li>IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from <code>0</code> to the <code>position of the New Node in the InOrder Array -1</code>.</li>
 <li>IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the<code> position of the New Node in the InOrder Array +1</code> to <code>n-1</code>.</li>
 <li>Return the New Node</li>
-</ul></p>
+</ul>
 
-<p>By the way, this doesn&#39;t work. To fix it we should be more generic, specifying things a little bit better. Things like:
+<p>By the way, this doesn’t work. To fix it we should be more generic, specifying things a little bit better. Things like:</p>
 <ul>
-    <li>Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array</li>
-    <li>There is going to be as much recursive calls as the number of elements in the PreOrder array</li>
-</ul></p>
+	<li>Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it's the entire array</li>
+	<li>There is going to be as much recursive calls as the number of elements in the PreOrder array</li>
+</ul>
 
-<p>Of course, is a tree what we are talking about here: <strong>recursion is a MUST</strong>.&lt;!--more--&gt;</p>
+<p>Of course, is a tree what we are talking about here: <strong>recursion is a MUST</strong>.<!--more--></p>
 
 <h3>The solution</h3>
-
 <p>Well, after the crappiest algorithmic explanation I have ever written, here it comes the code.</p>
 
-<p>This time it&#39;s not pure <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>: I wanted to use the beautiful <a href="http://qt.nokia.com/">Qt Framework</a> that I&#39;m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:</p>
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&quot;TreeRebuilder.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QDebug&gt;</span><span class="cp"></span>
+<p>This time it’s not pure <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>: I wanted to use the beautiful <a href="http://qt.nokia.com/">Qt Framework</a> that I’m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:</p>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"TreeRebuilder.h"</span><span class="cp">
+#include</span> <span class="cpf">&lt;QDebug&gt;</span><span class="cp">
+</span>
 <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">TreeRebuilder</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 
 
@@ -184,12 +181,12 @@
 
     <span class="n">mapNodePosInInOrderVisit</span><span class="p">();</span>
 
-    <span class="k">return</span> <span class="nf">doRebuild</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m_inOrderVisit</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">doRebuild</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m_inOrderVisit</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">mapNodePosInInOrderVisit</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">m_inOrderVisit</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="n">qCritical</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;InOrder Visit not provided&quot;</span><span class="p">;</span>
+        <span class="n">qCritical</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"InOrder Visit not provided"</span><span class="p">;</span>
     <span class="p">}</span>
 
     <span class="c1">// Memorize the Position in the InOrder Visit of every element for quick-lookup</span>
@@ -201,24 +198,24 @@
 <span class="n">TreeNode</span> <span class="o">*</span><span class="n">TreeRebuilder</span><span class="o">::</span><span class="n">doRebuild</span><span class="p">(</span><span class="k">const</span> <span class="n">qint32</span> <span class="o">&amp;</span><span class="n">inOrderLeftLimit</span><span class="p">,</span> <span class="k">const</span> <span class="n">qint32</span> <span class="o">&amp;</span><span class="n">inOrderRightLimit</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">TreeNode</span> <span class="o">*</span><span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">;</span>
 
-    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[Node:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_preOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span> <span class="n">m_currRootInPreOrderVisit</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"[Node:</span><span class="se">\t</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">m_preOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span> <span class="n">m_currRootInPreOrderVisit</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">"]"</span><span class="p">;</span>
     <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">m_preOrderVisit</span><span class="o">-&gt;</span><span class="n">at</span><span class="p">(</span> <span class="n">m_currRootInPreOrderVisit</span><span class="o">++</span> <span class="p">);</span> <span class="c1">// Post-increment used to select the next New Node value, taken from the PreOrder Visit</span>
 
     <span class="k">if</span> <span class="p">(</span> <span class="n">inOrderLeftLimit</span> <span class="o">&lt;</span> <span class="n">inOrderRightLimit</span> <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// If the current Node Value is not the first in the InOrderVisit current range, means there is a Left Child</span>
         <span class="k">if</span> <span class="p">(</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">inOrderLeftLimit</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Found Left Child&quot;</span><span class="p">;</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"   Found Left Child"</span><span class="p">;</span>
             <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">doRebuild</span><span class="p">(</span><span class="n">inOrderLeftLimit</span><span class="p">,</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
         <span class="p">}</span>
 
         <span class="c1">// If the current Node Value is not the last in the InOrderVisit current range, means there is a Right Child</span>
         <span class="k">if</span> <span class="p">(</span> <span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">inOrderRightLimit</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;   Found Right Child&quot;</span><span class="p">;</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"   Found Right Child"</span><span class="p">;</span>
             <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">doRebuild</span><span class="p">(</span><span class="n">m_nodePosInInOrderVisit</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inOrderRightLimit</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[/Node:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"[/Node:</span><span class="se">\t</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">newNode</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="s">"]"</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="n">newNode</span><span class="p">;</span>
 <span class="p">}</span>
@@ -261,29 +258,14 @@
         <span class="n">doGeneratePreOrderVisit</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">rightChild</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>Mmm, I can see that the code doesn&#39;t look very clear in here. Well, again, the code is downloadable from: <a href='http://www.detronizator.org/wp-content/uploads/2010/02/TreeRebuilder.tar.gz'>TreeRebuilder.tar.gz</a></p>
+</code></pre></div></div>
 
-<p>For Qt experts: yes, I&#39;m using just the build-mechanism of Qt and the containers. All the rest is just plain <a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a>. But using <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Signals and Slots</a> for this would have been a massive overkill, don&#39;t you think? ;)</p>
+<p>Mmm, I can see that the code doesn’t look very clear in here. Well, again, the code is downloadable from: <a href="http://www.detronizator.org/wp-content/uploads/2010/02/TreeRebuilder.tar.gz">TreeRebuilder.tar.gz</a></p>
+
+<p>For Qt experts: yes, I’m using just the build-mechanism of Qt and the containers. All the rest is just plain <a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a>. But using <a href="http://doc.trolltech.com/4.6/signalsandslots.html">Signals and Slots</a> for this would have been a massive overkill, don’t you think? ;)</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -299,7 +281,7 @@
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -131,7 +129,7 @@
             
                 <p>I have built for myself a simple Media Center, based on <a href="http://www.zotacusa.com/zbox-id41-plus.html">Zotac ZBOX ID41 Plus</a>, <a href="http://wiki.xbmc.org/index.php?title=XBMCbuntu">XBMC-Live</a>, <a href="http://www.transmissionbt.com/">Transmission</a>, <a href="http://flirc.tv/">Flirc</a> and other useful stuff. The idea is having a low-energy consumption machine that I control with a remote. And it has to be always on.</p>
 
-<p>One thing I was concerned about is how to deal with my external HD connected to it: I&#39;m of course expecting those to eventually fail if they are always spinning.</p>
+<p>One thing I was concerned about is how to deal with my external HD connected to it: I’m of course expecting those to eventually fail if they are always spinning.</p>
 
 <div class="img">
 <img src="http://www.colourbox.com/preview/2111168-646188-read-data-on-hard-disk-with-spinning-hard-disk.jpg" />
@@ -139,74 +137,63 @@
 
 <p>Well, a bit of scripting and cron can go a long way. Here is my solution.</p>
 
-<h3>Step 1: dependencies</h3>
+<h3 id="step-1-dependencies">Step 1: dependencies</h3>
 
-<p>Just install <a href="http://linux.die.net/man/8/sdparm">sdparm</a> and you should be all set, at least on a &quot;normal&quot; Linux box where <a href="http://en.wikipedia.org/wiki/Cron">Cron</a> is already configured.</p>
+<p>Just install <a href="http://linux.die.net/man/8/sdparm">sdparm</a> and you should be all set, at least on a “normal” Linux box where <a href="http://en.wikipedia.org/wiki/Cron">Cron</a> is already configured.</p>
 
-<h3>Step 2: scripting <code>FTW</code></h3>
+<h3 id="step-2-scripting-ftw">Step 2: scripting <code class="language-plaintext highlighter-rouge">FTW</code></h3>
 
-<p>Put a script like this somewhere in your system. I have it in my <code>~/bin</code>:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># !/bin/sh</span>
+<p>Put a script like this somewhere in your system. I have it in my <code class="language-plaintext highlighter-rouge">~/bin</code>:</p>
 
-<span class="c1"># Only ROOT can run this</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> “This script must be run as root” <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-        <span class="nb">exit</span> <span class="m">1</span>
-<span class="k">fi</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># !/bin/sh</span>
 
-<span class="nv">STATE_FILENAME</span><span class="o">=</span>state_<span class="nv">$1</span>.spindown
+<span class="c"># Only ROOT can run this</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"0"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> “This script must be run as root” 1&gt;&amp;2
+        <span class="nb">exit </span>1
+<span class="k">fi
+
+</span><span class="nv">STATE_FILENAME</span><span class="o">=</span>state_<span class="nv">$1</span>.spindown
 <span class="nv">PREV_STATE_FILENAME</span><span class="o">=</span>prev_state_<span class="nv">$1</span>.spindown
 
-<span class="c1"># Get new state from diskstats</span>
-<span class="nv">NEWstate</span><span class="o">=</span><span class="k">$(</span>cat /proc/diskstats <span class="p">|</span> grep <span class="nv">$1</span><span class="k">)</span>
-<span class="nb">echo</span> <span class="nv">$NEWstate</span> &gt; <span class="s2">&quot;</span><span class="nv">$STATE_FILENAME</span><span class="s2">&quot;</span>
+<span class="c"># Get new state from diskstats</span>
+<span class="nv">NEWstate</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> /proc/diskstats | <span class="nb">grep</span> <span class="nv">$1</span><span class="si">)</span>
+<span class="nb">echo</span> <span class="nv">$NEWstate</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$STATE_FILENAME</span><span class="s2">"</span>
 
-<span class="c1"># compare md5 sums</span>
-<span class="nv">md5new</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$STATE_FILENAME</span> <span class="p">|</span> sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
-<span class="nv">md5old</span><span class="o">=</span><span class="k">$(</span>md5sum <span class="nv">$PREV_STATE_FILENAME</span> <span class="p">|</span> sed <span class="s1">&#39;s/ .*//&#39;</span><span class="k">)</span>
+<span class="c"># compare md5 sums</span>
+<span class="nv">md5new</span><span class="o">=</span><span class="si">$(</span><span class="nb">md5sum</span> <span class="nv">$STATE_FILENAME</span> | <span class="nb">sed</span> <span class="s1">'s/ .*//'</span><span class="si">)</span>
+<span class="nv">md5old</span><span class="o">=</span><span class="si">$(</span><span class="nb">md5sum</span> <span class="nv">$PREV_STATE_FILENAME</span> | <span class="nb">sed</span> <span class="s1">'s/ .*//'</span><span class="si">)</span>
 
-<span class="c1"># if no changes, power down</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$md5new</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="nv">$md5old</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        sdparm --flexible --command<span class="o">=</span>stop /dev/<span class="nv">$1</span> <span class="p">&amp;</span>&gt;/dev/null
+<span class="c"># if no changes, power down</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$md5new</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$md5old</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span>sdparm <span class="nt">--flexible</span> <span class="nt">--command</span><span class="o">=</span>stop /dev/<span class="nv">$1</span> &amp;&gt;/dev/null
 <span class="k">fi</span>
 
-<span class="c1"># Write current state to file</span>
-<span class="nb">echo</span> <span class="nv">$NEWstate</span> &gt; <span class="s2">&quot;</span><span class="nv">$PREV_STATE_FILENAME</span><span class="s2">&quot;</span>
-</code></pre></div>
-<p>A very basic and simple one, isn&#39;t it?
-What it does is just probe <code>/proc/diskstats</code> virtual file to get info about the recent activity of a disk. If it has not changed in the last 30 minutes, than it&#39;s time to use <code>sdparm</code> to send a stop command <code>--command=stop</code>. That&#39;s it.</p>
+<span class="c"># Write current state to file</span>
+<span class="nb">echo</span> <span class="nv">$NEWstate</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$PREV_STATE_FILENAME</span><span class="s2">"</span>
+</code></pre></div></div>
 
-<h3>Step 3: Cron-it-up!</h3>
+<p>A very basic and simple one, isn’t it?
+What it does is just probe <code class="language-plaintext highlighter-rouge">/proc/diskstats</code> virtual file to get info about the recent activity of a disk. If it has not changed in the last 30 minutes, than it’s time to use <code class="language-plaintext highlighter-rouge">sdparm</code> to send a stop command <code class="language-plaintext highlighter-rouge">--command=stop</code>. That’s it.</p>
 
-<p>Add the following lines to your <code>/etc/crontab</code>:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sda
-*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdb
-*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdc
-*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sdd
-*/30 *   * * *   root   sh /home/xbmc/bin/spindown/spindown.sh sde
-</code></pre></div>
-<p>The above lines execute the script against <code>sda</code>, <code>sdb</code>, <code>sdc</code>, <code>sdd</code> and <code>sde</code>.</p>
+<h3 id="step-3-cron-it-up">Step 3: Cron-it-up!</h3>
 
-<p>That&#39;s it. I have been using this method for almost 2 years not, and  thought it might be helpful to others.</p>
+<p>Add the following lines to your <code class="language-plaintext highlighter-rouge">/etc/crontab</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">*</span>/30 <span class="k">*</span>   <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>   root   sh /home/xbmc/bin/spindown/spindown.sh sda
+<span class="k">*</span>/30 <span class="k">*</span>   <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>   root   sh /home/xbmc/bin/spindown/spindown.sh sdb
+<span class="k">*</span>/30 <span class="k">*</span>   <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>   root   sh /home/xbmc/bin/spindown/spindown.sh sdc
+<span class="k">*</span>/30 <span class="k">*</span>   <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>   root   sh /home/xbmc/bin/spindown/spindown.sh sdd
+<span class="k">*</span>/30 <span class="k">*</span>   <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>   root   sh /home/xbmc/bin/spindown/spindown.sh sde
+</code></pre></div></div>
+
+<p>The above lines execute the script against <code class="language-plaintext highlighter-rouge">sda</code>, <code class="language-plaintext highlighter-rouge">sdb</code>, <code class="language-plaintext highlighter-rouge">sdc</code>, <code class="language-plaintext highlighter-rouge">sdd</code> and <code class="language-plaintext highlighter-rouge">sde</code>.</p>
+
+<p>That’s it. I have been using this method for almost 2 years not, and  thought it might be helpful to others.</p>
+
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -222,7 +209,7 @@ What it does is just probe <code>/proc/diskstats</code> virtual file to get info
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,14 +127,14 @@
     
         <div class="body">
             
-                <p><a href="http://www.detronizator.org/2008/05/11/unslung-on-my-nslu2/">After some playing</a> with <a href="http://www.nslu2-linux.org/wiki/Unslung/HomePage">Unslung</a> on my <a href="http://www.google.com/search?hl=en&q=linksys+nslu2&btnG=Google+Search&meta=">Linksys NSLU2</a>, I realize it was a &quot;very limited solution&quot; for our needs. We need to share 4 (sometimes 5) NTFS (or others) volumes, where everyone of them is 500GB: this is too much even for the modified firmware of Unslung, unable to read the full directory trees (and the contained files) of my massive movie&#39;s collection.</p>
+                <p><a href="http://www.detronizator.org/2008/05/11/unslung-on-my-nslu2/">After some playing</a> with <a href="http://www.nslu2-linux.org/wiki/Unslung/HomePage">Unslung</a> on my <a href="http://www.google.com/search?hl=en&amp;q=linksys+nslu2&amp;btnG=Google+Search&amp;meta=">Linksys NSLU2</a>, I realize it was a “very limited solution” for our needs. We need to share 4 (sometimes 5) NTFS (or others) volumes, where everyone of them is 500GB: this is too much even for the modified firmware of Unslung, unable to read the full directory trees (and the contained files) of my massive movie’s collection.</p>
 
 <div align="center">
-<table style="width:194px;"><tr><td align="center" style="height:194px;background:url(http://picasaweb.google.com/f/img/transparent_album_background.gif) no-repeat left"><a href="http://picasaweb.google.com/detronizator/TheDebianNSLU2SReign"><img src="http://lh6.ggpht.com/detronizator/SC9F6fE2BaE/AAAAAAAAA8I/oz-Ujfnmj9g/s160-c/TheDebianNSLU2SReign.jpg" width="160" height="160" style="margin:1px 0 0 4px;"/></a></td></tr><tr><td style="text-align:center;font-family:arial,sans-serif;font-size:11px"><a href="http://picasaweb.google.com/detronizator/TheDebianNSLU2SReign" style="color:#4D4D4D;font-weight:bold;text-decoration:none;">The Debian/NSL<wbr></wbr>U2&#39;s Reign</a></td></tr></table>
+<table style="width:194px;"><tr><td align="center" style="height:194px;background:url(http://picasaweb.google.com/f/img/transparent_album_background.gif) no-repeat left"><a href="http://picasaweb.google.com/detronizator/TheDebianNSLU2SReign"><img src="http://lh6.ggpht.com/detronizator/SC9F6fE2BaE/AAAAAAAAA8I/oz-Ujfnmj9g/s160-c/TheDebianNSLU2SReign.jpg" width="160" height="160" style="margin:1px 0 0 4px;" /></a></td></tr><tr><td style="text-align:center;font-family:arial,sans-serif;font-size:11px"><a href="http://picasaweb.google.com/detronizator/TheDebianNSLU2SReign" style="color:#4D4D4D;font-weight:bold;text-decoration:none;">The Debian/NSL<wbr />&lt;/wbr&gt;U2&#39;s Reign</a></td></tr></table>
 </div>
 
 <p>So, I came back to the <a href="http://www.nslu2-linux.org/wiki/Debian/HomePage">Debian/NSLU2</a> solution. This time, with all the intention to make it work.
-It&#39;s quite pointless to report here all the things I did to make it work in the way I want/need. I&#39;ll just write down the most important bits:
+It’s quite pointless to report here all the things I did to make it work in the way I want/need. I’ll just write down the most important bits:</p>
 <ul>
 <li>Memory Optimization:
 <ul>
@@ -144,33 +142,17 @@ It&#39;s quite pointless to report here all the things I did to make it work in 
 <li>remove <strong>unnecessary services/daemons</strong> (like <code>exim4</code> or <code>nfsd</code>)</li>
 </ul>
 </li>
-<li>Mount volumes &quot;<code>by-label</code>&quot;, to avoid messes in mounting if the <code>/dev</code><code> files associated with the particular devices changes (reboot, unplug/replug, etc.) (take a look at <a href="http://en.opensuse.org/NTFS">this page for more info</a>)</code></li>
-<li>Use the <code>noatime</code> option in the <code>/etc/fstab</code> file to <strong>avoid the system to update the &quot;last-access&quot; field in the i-nodes</strong>: this is very important to <strong>reduce I/O on Flash memories</strong></li>
+<li>Mount volumes "<code>by-label</code>", to avoid messes in mounting if the <code>/dev</code><code> files associated with the particular devices changes (reboot, unplug/replug, etc.) (take a look at <a href="http://en.opensuse.org/NTFS">this page for more info</a>)</code></li>
+<li>Use the <code>noatime</code> option in the <code>/etc/fstab</code> file to <strong>avoid the system to update the "last-access" field in the i-nodes</strong>: this is very important to <strong>reduce I/O on Flash memories</strong></li>
 <li>Reduce the <strong>swappiness</strong> of the kernel (reduce the I/O)</li>
-<li>Install <code>fuse</code> and compile <a href="http://www.ntfs-3g.org/"><code>ntfs-3g</code></a> by hand: on Debian stable it&#39;s not available yet (I could have used <code>stable-backports</code> but no one compiled <code>ntfs-3g</code> for [en:ARM] :( )</li>
-<li>Configure one [en:Samba] share for Disk. This avoid the problem of Samba calculating &quot;free-space&quot; when the sub-directory of a share is the mount point of a different disk.</li>
+<li>Install <code>fuse</code> and compile <a href="http://www.ntfs-3g.org/"><code>ntfs-3g</code></a> by hand: on Debian stable it's not available yet (I could have used <code>stable-backports</code> but no one compiled <code>ntfs-3g</code> for [en:ARM] :( )</li>
+<li>Configure one [en:Samba] share for Disk. This avoid the problem of Samba calculating "free-space" when the sub-directory of a share is the mount point of a different disk.</li>
 <li><strong>De-underclock the NSLU2</strong>: the CPU (<strong>XScale-IXP42x Family rev 1 (v5l)</strong>) is soldered to the board with a pin configuration that makes it run half of is speed. I just removed the Resistor that realize that particular configuration. More info <a href="http://www.nslu2-linux.org/wiki/HowTo/OverClockTheSlug">here</a> and <a href="http://www.intel.com/design/network/manuals/252480.htm">here</a>.
 </li>
-</ul></p>
+</ul>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -186,7 +168,7 @@ It&#39;s quite pointless to report here all the things I did to make it work in 
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

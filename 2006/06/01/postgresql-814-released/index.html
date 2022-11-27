@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        396 words
+                        399 words
                     </li>
                 
             </ul>
@@ -130,66 +128,49 @@
         <div class="body">
             
                 <p><img src="http://www.bimboflap.it/risorse/servizi/coloriamo/B.N/elefante.gif" width="150" align="left" alt="PG" />
-The most advanced Open Source RDBMS... becomes even more advanced!!! ;)
-<blockquote><strong>New Advanced Database Features</strong></p>
+The most advanced Open Source RDBMS… becomes even more advanced!!! ;)</p>
+<blockquote><strong>New Advanced Database Features</strong>
 
-<p><strong>Roles:</strong> PostgreSQL now supports database roles, which simplify the management of large numbers of users with complex overlapping database rights.</p>
+<strong>Roles:</strong> PostgreSQL now supports database roles, which simplify the management of large numbers of users with complex overlapping database rights.
 
-<p><strong>IN/OUT Parameters:</strong> PostgreSQL functions now support IN, OUT and INOUT parameters, which substantially improves support of complex business logic for J2EE and .NET applications.</p>
+<strong>IN/OUT Parameters:</strong> PostgreSQL functions now support IN, OUT and INOUT parameters, which substantially improves support of complex business logic for J2EE and .NET applications.
 
-<p><strong>Two-Phase Commit (2PC):</strong> long in demand for WAN applications and heterogeneous data centers using PostgreSQL, this feature allows ACID-compliant transactions across widely separated servers.
-Performance Enhancements</p>
+<strong>Two-Phase Commit (2PC):</strong> long in demand for WAN applications and heterogeneous data centers using PostgreSQL, this feature allows ACID-compliant transactions across widely separated servers.
+Performance Enhancements
 
-<p><strong>Improved Multiprocessor (SMP) Performance:</strong> the buffer manager for 8.1 has been enhanced to scale almost linearly with the number of processors, leading to significant performance gains on 8-way, 16-way, dual-core, and multi-core CPU servers.</p>
+<strong>Improved Multiprocessor (SMP) Performance:</strong> the buffer manager for 8.1 has been enhanced to scale almost linearly with the number of processors, leading to significant performance gains on 8-way, 16-way, dual-core, and multi-core CPU servers.
 
-<p><strong>Bitmap Scan:</strong> indexes will be dynamically converted to bitmaps in memory when appropriate, giving up to twenty times faster index performance on complex queries against very large tables. This also helps simplify database management by greatly reducing the need for multi-column indexes.
+<strong>Bitmap Scan:</strong> indexes will be dynamically converted to bitmaps in memory when appropriate, giving up to twenty times faster index performance on complex queries against very large tables. This also helps simplify database management by greatly reducing the need for multi-column indexes.
 <strong>
 Table Partitioning:</strong> the query planner is now able to avoid scanning whole sections of a large table using a technique known as Constraint Exclusion. Similar to the Table Partitioning found in other database management systems, this feature improves both performance and data management for multi-gigabyte tables.
 <strong>
-Shared Row Locking:</strong> PostgreSQL&#39;s &quot;better than row-level locking&quot; now supports even higher levels of concurrency through the addition of shared row locks for foreign keys. Shared locks will improve insert and update performance on many high-volume OLTP applications.</p>
+Shared Row Locking:</strong> PostgreSQL's "better than row-level locking" now supports even higher levels of concurrency through the addition of shared row locks for foreign keys. Shared locks will improve insert and update performance on many high-volume OLTP applications.
 
-<p><a href="http://www.postgresql.org/docs/whatsnew">...</a>
-</blockquote></p>
+<a href="http://www.postgresql.org/docs/whatsnew">...</a>
+</blockquote>
 
-<p><a href="http://www.postgresql.org/docs/techdocs.52">Bug fixes</a>.
-<blockquote> Q: What&#39;s being released?
-A: PostgreSQL minor versions 8.1.4, 8.0.8, 7.4.13 and 7.3.15. All of these versions implement a security patch which eliminates a specific vulnerability to SQL injection attacks.</p>
+<p><a href="http://www.postgresql.org/docs/techdocs.52">Bug fixes</a>.</p>
+<blockquote> Q: What's being released?
+A: PostgreSQL minor versions 8.1.4, 8.0.8, 7.4.13 and 7.3.15. All of these versions implement a security patch which eliminates a specific vulnerability to SQL injection attacks.
 
-<p>Q: Who does this vulnerability affect?
-A: Users of PostgreSQL servers which are exposed to &quot;untrusted input&quot;, from the internet or otherwise, and use any &quot;multi-byte encoding&quot;, such as UTF-8 or SJIS. Basically, most open source database users with Web applications.</p>
+Q: Who does this vulnerability affect?
+A: Users of PostgreSQL servers which are exposed to "untrusted input", from the internet or otherwise, and use any "multi-byte encoding", such as UTF-8 or SJIS. Basically, most open source database users with Web applications.
 
-<p>Q: Who is not affected?
-A: Several kinds of applications:</p>
+Q: Who is not affected?
+A: Several kinds of applications:
 
-<ol>
-<li>Users whose database applications are not exposed to untrusted input, such as single-user applications not exposed to the Internet.</li>
-<li>Databases which are set up with &quot;LATIN-1&quot; or other single-byte encoding, on both client and server.</li>
-<li>If application always sends untrusted strings as out-of-line parameters, instead of embedding them into SQL commands, it is not vulnerable. This is only available in PostgreSQL 7.4 or later.</li>
-</ol>
+   1. Users whose database applications are not exposed to untrusted input, such as single-user applications not exposed to the Internet.
+   2. Databases which are set up with "LATIN-1" or other single-byte encoding, on both client and server.
+   3. If application always sends untrusted strings as out-of-line parameters, instead of embedding them into SQL commands, it is not vulnerable. This is only available in PostgreSQL 7.4 or later.
 
-<p><a href="http://www.postgresql.org/docs/techdocs.48">...</a>
-</blockquote></p>
+<a href="http://www.postgresql.org/docs/techdocs.48">...</a>
+</blockquote>
 
 <p>Source, <a href="http://www.ziobudda.net/">Ziobudda</a>.</p>
 
+
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -205,7 +186,7 @@ A: Several kinds of applications:</p>
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

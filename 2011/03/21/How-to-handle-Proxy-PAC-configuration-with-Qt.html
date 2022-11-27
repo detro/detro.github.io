@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong>
+                        <h2>Ivan <strong>De Marino</strong>
 </h2>
                     </hgroup>
 
@@ -79,8 +79,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -121,7 +119,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        936 words
+                        938 words
                     </li>
                 
             </ul>
@@ -130,14 +128,13 @@
     
         <div class="body">
             
-                <p>This article was originally <a href="http://blog.orangelabsuk.com/2010/06/03/extract-proxy-configuration-from-a-pac-file-with-qt/">written on another blog</a>. That blog was never <em>officially published</em>, and it will probably never be. It was written on the <strong>3rd of June 2010</strong>, but is still "somewhat important" and relevant.</p>
+                <p>This article was originally <a href="http://blog.orangelabsuk.com/2010/06/03/extract-proxy-configuration-from-a-pac-file-with-qt/">written on another blog</a>. That blog was never <em>officially published</em>, and it will probably never be. It was written on the <strong>3rd of June 2010</strong>, but is still “somewhat important” and relevant.</p>
 
-<p>Since the post was published, <strong>Richard Moore <rich></rich></strong> has done <a href="http://gitorious.org/qt-examples/qt-examples/trees/master/pac-files">a commit in the Qt examples directory that resamples very closely my code below</a>.</p>
+<p>Since the post was published, <strong>Richard Moore &lt;rich <a href="https://twitter.com/linux" class="user-mention">@linux</a>…fpb.site&gt;</strong> has done <a href="http://gitorious.org/qt-examples/qt-examples/trees/master/pac-files">a commit in the Qt examples directory that resamples very closely my code below</a>.</p>
 
 <p>So, I decided to repost it here.</p>
 
-<h1>Qt and Proxy Configuration</h1>
-
+<h1 id="qt-and-proxy-configuration">Qt and Proxy Configuration</h1>
 <p>What’s great of <a href="http://qt.nokia.com/">Qt</a>, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time.</p>
 
 <p>For us a Mobile Developer like me, coming from a <a href="http://www.symbian.org/">Symbian</a> background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive.</p>
@@ -149,43 +146,44 @@
 Automatic Proxy Configuration on Mac OS X
 </div>
 
-<h1>What could be done on Linux</h1>
-
-<p>Of course this can be worked out: in the case of Maemo, being it based on <a href="http://www.kernel.org/">Linux</a>, I will probably just have to find a way to interface with the <strong>gconftool</strong> or make use of <code>QProcess::systemEnvironment()</code>. But what if you are in a LAN where the Proxy configuration is distributed across different offices using a <a href="http://en.wikipedia.org/wiki/Proxy_auto-config">PAC file</a>? Well, you need to work by hand.</p>
+<h1 id="what-could-be-done-on-linux">What could be done on Linux</h1>
+<p>Of course this can be worked out: in the case of Maemo, being it based on <a href="http://www.kernel.org/">Linux</a>, I will probably just have to find a way to interface with the <strong>gconftool</strong> or make use of <code class="language-plaintext highlighter-rouge">QProcess::systemEnvironment()</code>. But what if you are in a LAN where the Proxy configuration is distributed across different offices using a <a href="http://en.wikipedia.org/wiki/Proxy_auto-config">PAC file</a>? Well, you need to work by hand.</p>
 
 <p>A PAC file is a Javascript that looks like this:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
    <span class="c1">// our local URLs from the domains below example.com don't need a proxy:</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="s2">"*.example.com/*"</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="s2">"DIRECT"</span><span class="p">;}</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">"*.example.com:*/*"</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="s2">"DIRECT"</span><span class="p">;}</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="dl">"</span><span class="s2">*.example.com/*</span><span class="dl">"</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">*.example.com:*/*</span><span class="dl">"</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
 
    <span class="c1">// URLs within this network are accessed through</span>
    <span class="c1">// port 8080 on fastproxy.example.com:</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">isInNet</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="s2">"10.0.0.0"</span><span class="p">,</span>  <span class="s2">"255.255.248.0"</span><span class="p">))</span>    <span class="p">{</span>
-      <span class="k">return</span> <span class="s2">"PROXY fastproxy.example.com:8080"</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">isInNet</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="dl">"</span><span class="s2">10.0.0.0</span><span class="dl">"</span><span class="p">,</span>  <span class="dl">"</span><span class="s2">255.255.248.0</span><span class="dl">"</span><span class="p">))</span>    <span class="p">{</span>
+      <span class="k">return</span> <span class="dl">"</span><span class="s2">PROXY fastproxy.example.com:8080</span><span class="dl">"</span><span class="p">;</span>
    <span class="p">}</span>
 
    <span class="c1">// All other requests go through port 8080 of proxy.example.com.</span>
    <span class="c1">// should that fail to respond, go directly to the WWW:</span>
-   <span class="k">return</span> <span class="s2">"PROXY proxy.example.com:8080; DIRECT"</span><span class="p">;</span>
+   <span class="k">return</span> <span class="dl">"</span><span class="s2">PROXY proxy.example.com:8080; DIRECT</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Working by hand looks scary, because, like in our case, a script can be huge and complex. A <a href="http://en.wikipedia.org/wiki/Regular_expression">RegExp</a> is a very bad idea, and start from “square one” with <a href="http://en.wikipedia.org/wiki/Lex_(software)">LEX</a> and <a href="http://en.wikipedia.org/wiki/Yacc">YACC</a> would feel dumb… and an overkill.</p>
 
-<h1>
-<code>QtScript</code> to the rescue</h1>
-
+<h1 id="qtscript-to-the-rescue">
+<code class="language-plaintext highlighter-rouge">QtScript</code> to the rescue</h1>
 <p>Fortunately, Qt provides a lot of help. The <a href="http://doc.qt.nokia.com/4.7-snapshot/network-programming.html">QtNetwork</a> and <a href="http://doc.qt.nokia.com/4.7-snapshot/qtscript.html">QtScript</a> (<a href="http://labs.qt.nokia.com/2009/11/23/qtscript-in-46/">now based on WebKit’s JavascriptCore</a>) have what it takes to solve the problem. What I show here is a usage of the QtScript Engine, that takes the PAC file and executes it to extract the right configuration.</p>
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;QtCore/QCoreApplication&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QScriptEngine&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QIODevice&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QFile&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QDebug&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QScriptValue&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QHostInfo&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QHostAddress&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;QNetworkInterface&gt;</span><span class="cp"></span>
 
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;QtCore/QCoreApplication&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QScriptEngine&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QIODevice&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QFile&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QDebug&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QScriptValue&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QHostInfo&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QHostAddress&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;QNetworkInterface&gt;</span><span class="cp">
+</span>
 <span class="c1">// Functions to implement are here:</span>
 <span class="c1">// - http://linuxmafia.com/faq/Web/autoproxy.html</span>
 <span class="c1">// - http://www.returnproxy.com/proxypac/static/netscape-proxy-format.html</span>
@@ -203,7 +201,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="nf">isPlainHostName</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="n">isPlainHostName</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
    <span class="n">QString</span> <span class="n">hostname</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"isPlainHostName - hostname: "</span> <span class="o">&lt;&lt;</span> <span class="n">hostname</span><span class="p">;</span>
@@ -211,7 +209,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="k">return</span> <span class="n">hostname</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="sc">'.'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">false</span> <span class="o">:</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="nf">isInNet</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="n">isInNet</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
    <span class="n">QString</span> <span class="n">host</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
    <span class="n">QHostAddress</span> <span class="n">hostAddress</span><span class="p">;</span>
@@ -233,7 +231,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="nf">myIpAddress</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="n">myIpAddress</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
 
@@ -252,7 +250,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
    <span class="n">QCoreApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
 
@@ -290,14 +288,16 @@ Automatic Proxy Configuration on Mac OS X
    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"Error Occurred"</span><span class="p">;</span>
    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>As you can see, what I had to add to the QtScript module was just the implementation of some of the core functions that a PAC interpreter has to offer. Those are not part of the standard Javascript, but QtScript makes it super-easy to inject what is missing.</p>
 
-<h1>Contributing back?</h1>
-
+<h1 id="contributing-back">Contributing back?</h1>
 <p>Maybe I’ll should see if the Trolls are interested in getting something like that added to Qt. Maybe a method like</p>
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="n">QNetworkProxyFactory</span><span class="o">::</span><span class="n">proxyForPac</span><span class="p">(</span><span class="k">const</span> <span class="n">QIODevice</span> <span class="o">&amp;</span><span class="n">pacFile</span><span class="p">)</span>
-</code></pre></div>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QNetworkProxyFactory</span><span class="o">::</span><span class="n">proxyForPac</span><span class="p">(</span><span class="k">const</span> <span class="n">QIODevice</span> <span class="o">&amp;</span><span class="n">pacFile</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p>could be added to the current QNetworkProxyFactory.</p>
 
 <p><strong>What do you think?</strong></p>
@@ -305,31 +305,14 @@ Automatic Proxy Configuration on Mac OS X
 <p>PS If you are asking yourself if there is a BUG/FEATURE-REQUEST on the Qt Official Bugzilla, here is what you can currently find:</p>
 
 <ul>
-<li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-2069">QTBUG-2069</a></li>
-<li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-9588">QTBUG-9588</a></li>
+  <li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-2069">QTBUG-2069</a></li>
+  <li><a href="http://bugreports.qt.nokia.com/browse/QTBUG-9588">QTBUG-9588</a></li>
 </ul>
 
 <p>and both are marked as <em>“P3: Somewhat important”</em>.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -345,7 +328,7 @@ Automatic Proxy Configuration on Mac OS X
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

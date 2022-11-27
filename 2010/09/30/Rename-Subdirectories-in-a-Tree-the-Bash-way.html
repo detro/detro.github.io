@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -132,75 +130,61 @@
                 <p>My granma always used to say every time she was recompiling the <a href="http://www.kernel.org">Linux Kernel</a> of her wash machine:</p>
 
 <blockquote>
-<p>Bash Scripting is GREAT!
+  <p>Bash Scripting is GREAT!
 Be sure you learn it.
 One day will understand why it can make your life much easier.</p>
 </blockquote>
 
-<p>And she was right! I&#39;m not an <a href="http://tiswww.case.edu/php/chet/bash/bashtop.html">Bash</a> expert, but when I spend that <em>10 minutes</em> putting together that scripts that <em>makes that tedious task _piece of cake</em>, the satisfaction is as tick as a Mug of Coffee.</p>
+<p>And she was right! I’m not an <a href="http://tiswww.case.edu/php/chet/bash/bashtop.html">Bash</a> expert, but when I spend that <em>10 minutes</em> putting together that scripts that <em>makes that tedious task _piece of cake</em>, the satisfaction is as tick as a Mug of Coffee.</p>
 
 <p>Today I got this new colleague having to rename a lot of specific directories in a deep directory tree, and I decided to help.</p>
 
 <p>Here is the full code:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1"># Simple Bash script to recursively rename Subdirectories in a Tree.</span>
-<span class="c1"># Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;</span>
-<span class="c1">#</span>
-<span class="c1"># Usage:</span>
-<span class="c1">#    rename_subdirs.sh &lt;starting directory&gt; &lt;new dir name&gt; &lt;old dir name&gt;</span>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># Simple Bash script to recursively rename Subdirectories in a Tree.</span>
+<span class="c"># Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;</span>
+<span class="c">#</span>
+<span class="c"># Usage:</span>
+<span class="c">#    rename_subdirs.sh &lt;starting directory&gt; &lt;new dir name&gt; &lt;old dir name&gt;</span>
 
 usage <span class="o">()</span> <span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">&quot;Simple Bash script to recursively rename Subdirectories in a Tree.&quot;</span>
-   <span class="nb">echo</span> <span class="s2">&quot;Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;&quot;</span>
-   <span class="nb">echo</span>
-   <span class="nb">echo</span> <span class="s2">&quot;Usage:&quot;</span>
-   <span class="nb">echo</span> <span class="s2">&quot;   rename_subdirs.sh &lt;starting directory&gt; &lt;old dir name&gt; &lt;new dir name&gt;&quot;</span>
-
-   <span class="nb">exit</span> <span class="m">1</span>
+   <span class="nb">echo</span> <span class="s2">"Simple Bash script to recursively rename Subdirectories in a Tree."</span>
+   <span class="nb">echo</span> <span class="s2">"Author: Ivan De Marino &lt;ivan.demarino@betfair.com&gt;"</span>
+   <span class="nb">echo
+   echo</span> <span class="s2">"Usage:"</span>
+   <span class="nb">echo</span> <span class="s2">"   rename_subdirs.sh &lt;starting directory&gt; &lt;old dir name&gt; &lt;new dir name&gt;"</span>
+	
+   <span class="nb">exit </span>1
 <span class="o">}</span>
 
-<span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span> -eq <span class="m">3</span> <span class="o">]</span> <span class="o">||</span> usage
+<span class="o">[</span> <span class="s2">"$#"</span> <span class="nt">-eq</span> 3 <span class="o">]</span> <span class="o">||</span> usage
 
 recursive<span class="o">()</span>
 <span class="o">{</span>
-   <span class="nb">cd</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-   <span class="k">for</span> dir in *
-   <span class="k">do</span>
-      <span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-         <span class="nb">echo</span> <span class="s2">&quot;Directory found: &#39;</span><span class="nv">$dir</span><span class="s2">&#39;&quot;</span>
-         <span class="o">(</span> recursive <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span> <span class="o">)</span>
-         <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-            <span class="nb">echo</span> <span class="s2">&quot;Renaming &#39;</span><span class="nv">$2</span><span class="s2">&#39; in &#39;</span><span class="nv">$3</span><span class="s2">&#39;&quot;</span>
-            mv <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+   <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+   <span class="k">for </span><span class="nb">dir </span><span class="k">in</span> <span class="k">*</span>
+   <span class="k">do
+      if</span> <span class="o">[</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+         </span><span class="nb">echo</span> <span class="s2">"Directory found: '</span><span class="nv">$dir</span><span class="s2">'"</span>
+         <span class="o">(</span> recursive <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span> <span class="o">)</span>
+         <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$dir</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">echo</span> <span class="s2">"Renaming '</span><span class="nv">$2</span><span class="s2">' in '</span><span class="nv">$3</span><span class="s2">'"</span>
+            <span class="nb">mv</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span>
          <span class="k">fi</span><span class="p">;</span>
       <span class="k">fi</span><span class="p">;</span>
    <span class="k">done</span>
 <span class="o">}</span>
 
-recursive <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
-</code></pre></div>
+recursive <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span>
+</code></pre></div></div>
+
 <p>Clean and Fun: I learned how to do recursion in Bash.</p>
 
 <p>Happy (Bash) Scripting.</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -216,7 +200,7 @@ recursive <span class="s2">&quot;</span><span class="nv">$1</span><span class="s
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,66 +127,63 @@
     
         <div class="body">
             
-                <p>This post has been in my &quot;TODO list&quot; long enough. It&#39;s time to put it in words.
-Let&#39;s go!</p>
+                <p>This post has been in my “TODO list” long enough. It’s time to put it in words.
+Let’s go!</p>
 
 <p>As you probably know, <a href="http://blog.ivandemarino.me/2010/08/30/Hello-World-again">I decided to give up Wordpress.org</a>
 in favour of <a href="http://github.com/detro/bloggart">Bloggart on App Engine</a>. A great choice so far I must say.</p>
 
 <div style="text-align: center; ">
-<img src="http://farm4.static.flickr.com/3646/3482243965_02d4129590_b.jpg" alt="Migration" style="width: 500px; "/>
+<img src="http://farm4.static.flickr.com/3646/3482243965_02d4129590_b.jpg" alt="Migration" style="width: 500px; " />
 <br />
 <em>Migration, a proper one</em>
 </div>
 
-<h3>What I wanted to achieve</h3>
-
+<h3 id="what-i-wanted-to-achieve">What I wanted to achieve</h3>
 <p>My aim was to migrate more than 6 years of content (posts <em>and</em> comments) from my previous blog at <strong>detronizator.org</strong> into a bloggart installation.
 Why bloggart? <a href="http://blog.notdot.net/">Nick Johnson</a>, the original author of Bloggart on Appengine,
 wrote <a href="http://blog.notdot.net/2009/10/Writing-a-blog-system-on-App-Engine">a series of article</a>
 on how to build a nice, little, smart blogging app on App Engine.
 At the same time, work on <a href="http://www.txty.mobi">txty.mobi</a> started to get more and more engaging,
 making me a lover (and advocate) of <a href="code.google.com/appengine/">Google App Engine</a>.
-Plus, I was interested in &quot;starting from scratch&quot;: <a href="http://www.wordpress.org">Wordpress.org</a>
-is a great project, but I just didn&#39;t feel it <em>&quot;mine enough&quot;</em>. My blog must feel really <em>mine</em>:
-it&#39;s about me after all.</p>
+Plus, I was interested in “starting from scratch”: <a href="http://www.wordpress.org">Wordpress.org</a>
+is a great project, but I just didn’t feel it <em>“mine enough”</em>. My blog must feel really <em>mine</em>:
+it’s about me after all.</p>
 
-<h4>Quick and Easy? Not really...</h4>
-
+<h4 id="quick-and-easy-not-really">Quick and Easy? Not really…</h4>
 <p>Migrating all <em>that shit</em> from my previous host was clearly not an easy task. Some reasons were:</p>
 
 <ul>
-<li>My Wordpress installation was sitting on a <a href="http://www.mysql.com">MySQL DB</a>: App Engine is based on <a href="http://code.google.com/appengine/docs/python/datastore/">Google Datastore API</a></li>
-<li>I decided to change domain to <em>ivandemarino.me</em>: this needed redirection handling, domain transfer and <em>trying to look not too fool in crawler&#39;s eyes</em></li>
-<li>Comments: how the hell am I going to handle those given that Bloggart doesn&#39;t provide it but relays on <a href="http://disqus.com/">Disqus</a>?</li>
+  <li>My Wordpress installation was sitting on a <a href="http://www.mysql.com">MySQL DB</a>: App Engine is based on <a href="http://code.google.com/appengine/docs/python/datastore/">Google Datastore API</a></li>
+  <li>I decided to change domain to <em>ivandemarino.me</em>: this needed redirection handling, domain transfer and <em>trying to look not too fool in crawler’s eyes</em></li>
+  <li>Comments: how the hell am I going to handle those given that Bloggart doesn’t provide it but relays on <a href="http://disqus.com/">Disqus</a>?</li>
 </ul>
 
 <p>It took some planning and step-by-step strategy. What follows is an attempt to do exactly that.</p>
 
-<h4>So, what&#39;s this all about?</h4>
-
+<h4 id="so-whats-this-all-about">So, what’s this all about?</h4>
 <p>This post will be a walk-through of what it got to do the Migration.
-It will have some of the characteristics of &quot;classic&quot; howtos, but I won&#39;t go too much in details when,
+It will have some of the characteristics of “classic” howtos, but I won’t go too much in details when,
 in my opinion, a description of a trivial task will be enough.</p>
 
 <p>Expect some code, some <a href="http://en.wikipedia.org/wiki/Command-line_interface">CLI</a> instructions,
 and make sure that you have at least went through
-the <a href="http://code.google.com/appengine/docs/python/gettingstarted/">&quot;Getting Started&quot; of App Engine</a> before doing this:
-I can&#39;t cover that as well.</p>
+the <a href="http://code.google.com/appengine/docs/python/gettingstarted/">“Getting Started” of App Engine</a> before doing this:
+I can’t cover that as well.</p>
 
-<h3>Step 1: Export your Wordpress Data</h3>
+<h3 id="step-1-export-your-wordpress-data">Step 1: Export your Wordpress Data</h3>
+<p>Let’s start easy. What you want to do is to backup your Wordpress blog. <a href="http://codex.wordpress.org/WordPress_Backups">Here is how</a>.</p>
 
-<p>Let&#39;s start easy. What you want to do is to backup your Wordpress blog. <a href="http://codex.wordpress.org/WordPress_Backups">Here is how</a>.</p>
-
-<p>What we really need, though, is an <em>&quot;XML Export&quot;</em> of the blog. <a href="http://en.blog.wordpress.com/2006/06/12/xml-import-export/">Matt here explains</a> how to do
+<p>What we really need, though, is an <em>“XML Export”</em> of the blog. <a href="http://en.blog.wordpress.com/2006/06/12/xml-import-export/">Matt here explains</a> how to do
 exactly that. The result in my case was an enormous (for a personal irrelevant blog like mine) <strong>6MB</strong>! Yes, I write a lot of bulls**t! ;)
 The result will be something looking like:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;rss</span> <span class="na">xmlns:excerpt=</span><span class="s">&quot;http://wordpress.org/export/1.0/excerpt/&quot;</span>
-    <span class="na">xmlns:content=</span><span class="s">&quot;http://purl.org/rss/1.0/modules/content/&quot;</span>
-    <span class="na">xmlns:wfw=</span><span class="s">&quot;http://wellformedweb.org/CommentAPI/&quot;</span>
-    <span class="na">xmlns:dc=</span><span class="s">&quot;http://purl.org/dc/elements/1.1/&quot;</span>
-    <span class="na">xmlns:wp=</span><span class="s">&quot;http://wordpress.org/export/1.0/&quot;</span>
-    <span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="nt">&gt;</span>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;rss</span> <span class="na">xmlns:excerpt=</span><span class="s">"http://wordpress.org/export/1.0/excerpt/"</span>
+    <span class="na">xmlns:content=</span><span class="s">"http://purl.org/rss/1.0/modules/content/"</span>
+    <span class="na">xmlns:wfw=</span><span class="s">"http://wellformedweb.org/CommentAPI/"</span>
+    <span class="na">xmlns:dc=</span><span class="s">"http://purl.org/dc/elements/1.1/"</span>
+    <span class="na">xmlns:wp=</span><span class="s">"http://wordpress.org/export/1.0/"</span>
+    <span class="na">version=</span><span class="s">"2.0"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;channel&gt;</span>
         <span class="nt">&lt;title&gt;</span>Your blog title<span class="nt">&lt;/title&gt;</span>
         <span class="nt">&lt;link&gt;</span>http://www.yourblog.com<span class="nt">&lt;/link&gt;</span>
@@ -216,82 +211,84 @@ The result will be something looking like:</p>
             <span class="c">&lt;!-- ... body and other stuff --&gt;</span>
         <span class="nt">&lt;/item&gt;</span>
         <span class="c">&lt;!-- ... more items/articles ... --&gt;</span>    
-</code></pre></div>
-<p><strong>Save it somewhere safe</strong>. <em>Why do we need the XML? Isn&#39;t the SQL backup enough?</em>
+</code></pre></div></div>
+
+<p><strong>Save it somewhere safe</strong>. <em>Why do we need the XML? Isn’t the SQL backup enough?</em>
 No, because Bloggart has a nice tool to import the XML export. More about this later.</p>
 
-<h3>Step 2: Clone, Setup and Deploy the new blog</h3>
-
+<h3 id="step-2-clone-setup-and-deploy-the-new-blog">Step 2: Clone, Setup and Deploy the new blog</h3>
 <p>So, you want to get a nice clean installation of Bloggart in the cloud. Open your CLI and type:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git clone git://github.com/detro/bloggart.git
-$ <span class="nb">cd</span> bloggart
-$ git submodule update --init
-</code></pre></div>
-<p>This will clone the latest master of my branch of Bloggart, where I host all my additions, tweaks and changes to Bloggart.
-<a href="http://github.com/Arachnid/bloggart">Nick&#39;s original branch</a> hasn&#39;t been updated since June 2010.</p>
 
-<p>Now, edit <code>app.yaml</code>&#39;s <code>application:</code> field with your <strong>Application Identifier</strong> that you
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone git://github.com/detro/bloggart.git
+<span class="nv">$ </span><span class="nb">cd </span>bloggart
+<span class="nv">$ </span>git submodule update <span class="nt">--init</span>
+</code></pre></div></div>
+
+<p>This will clone the latest master of my branch of Bloggart, where I host all my additions, tweaks and changes to Bloggart.
+<a href="http://github.com/Arachnid/bloggart">Nick’s original branch</a> hasn’t been updated since June 2010.</p>
+
+<p>Now, edit <code class="language-plaintext highlighter-rouge">app.yaml</code>’s <code class="language-plaintext highlighter-rouge">application: </code> field with your <strong>Application Identifier</strong> that you
 just created <a href="https://appengine.google.com/start/createapp?">here</a> (you did it, right?).
-Then, edit the <code>config.py</code> following the internal comments/documentation; it should be pretty straightforward.
+Then, edit the <code class="language-plaintext highlighter-rouge">config.py</code> following the internal comments/documentation; it should be pretty straightforward.
 Bear in mind that there are configuration parameters
 that are very much related with UI and stuff like that. But also there are parameters like
 the <a href="https://www.google.com/webmasters/tools/h">Google Sitemap</a>
 or Disqus: take care of this stuff properly, otherwise you will get just an half-assed blog.</p>
 
 <p>Take particular care of Disqus: once you create a forum (that will be populated by the comments on your new Blog)
-(ah, don&#39;t forget to note down the <strong>&quot;Disqus Forum Name&quot;</strong>),
-and logged in, you will need to retrieve something important: the <strong>&quot;Disqus User Key&quot;</strong>. To do that, once you logged in Disqus,
-go at <a href="http://disqus.com/api/get_my_key/">http://disqus.com/api/get<em>my</em>key/</a>, and annotate somewhere the key.
+(ah, don’t forget to note down the <strong>“Disqus Forum Name”</strong>),
+and logged in, you will need to retrieve something important: the <strong>“Disqus User Key”</strong>. To do that, once you logged in Disqus,
+go at <a href="http://disqus.com/api/get_my_key/">http://disqus.com/api/get_my_key/</a>, and annotate somewhere the key.
 You will need this later on as well.</p>
 
-<p>No, I won&#39;t go more in details: if you are not <strong>techy enough</strong> to read the comments in the <code>config.py</code> and figure out what to do, why are you even reading this?</p>
+<p>No, I won’t go more in details: if you are not <strong>techy enough</strong> to read the comments in the <code class="language-plaintext highlighter-rouge">config.py</code> and figure out what to do, why are you even reading this?</p>
 
 <p>Well, now you should be ready to deploy!</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> ..
-$ appcfg.py update bloggart
-</code></pre></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ..
+<span class="nv">$ </span>appcfg.py update bloggart
+</code></pre></div></div>
+
 <p>If you are not interested in migrating, but just starting a blog, then you are done. Your blog is up-and-running already.
 Otherwise, read on.</p>
 
-<h3>Step 3: <code>migrate.py</code></h3>
-
+<h3 id="step-3-migratepy">Step 3: <code class="language-plaintext highlighter-rouge">migrate.py</code></h3>
 <p>The great thing about Open Source software, is that there is almost always someone that had your problem before and found (or built) a solution.
 So that you can <em>stand on shoulders of Giants</em>. In this case is <a href="http://blog.andialbrecht.de/">Andi Albrecht</a> that added support for Wordpress migration
 in <a href="http://github.com/detro/bloggart/commits/master/migrate.py">migrate.py</a>. This suited my needs (and will probably suite yours).</p>
 
-<p>Unfortunately though, <code>migrate.py</code> doesn&#39;t come with a great deal of UI. It&#39;s just a set of classes. We will have to fill the gap.
+<p>Unfortunately though, <code class="language-plaintext highlighter-rouge">migrate.py</code> doesn’t come with a great deal of UI. It’s just a set of classes. We will have to fill the gap.
 But fortunately Google App Engine is not short of surprises.</p>
 
-<h4>remote_api</h4>
-
+<h4 id="remote_api">remote_api</h4>
 <p><a href="http://code.google.com/appengine/articles/remote_api.html">remote_api</a> is a module introduced in 1.1.9 that allows
 remote access to the App Engine datastore, using the same APIs you know and love from writing App Engine Apps.
-What practically does, is provide a python-console that executes code in the context of your remote Application. Isn&#39;t that Great?</p>
+What practically does, is provide a python-console that executes code in the context of your remote Application. Isn’t that Great?</p>
 
 <p>This great idea is made of two parts:</p>
 
 <ul>
-<li>a <strong>&quot;handler&quot;</strong>, which you install on the server to handle remote datastore requests</li>
-<li>a <strong>&quot;stub&quot;</strong>, which you set up on the client to translate datastore requests into calls to the remote handler</li>
+  <li>a <strong>“handler”</strong>, which you install on the server to handle remote datastore requests</li>
+  <li>a <strong>“stub”</strong>, which you set up on the client to translate datastore requests into calls to the remote handler</li>
 </ul>
 
-<p>We already took care of the &quot;handler&quot;, already set up in bloggart. You can create your &quot;stub&quot;
+<p>We already took care of the “handler”, already set up in bloggart. You can create your “stub”
 following the instruction <a href="http://code.google.com/appengine/articles/remote_api.html">here</a>, or appreciate
-that bloggart ALREADY provides one <em>ready-to-go</em> as well: find it at <code>bloggart/scripts/remote.py</code>.</p>
+that bloggart ALREADY provides one <em>ready-to-go</em> as well: find it at <code class="language-plaintext highlighter-rouge">bloggart/scripts/remote.py</code>.</p>
 
-<h4>ready, set, migrate</h4>
+<h4 id="ready-set-migrate">ready, set, migrate</h4>
+<p>We are all set for using <code class="language-plaintext highlighter-rouge">migrate.py</code>. Run <code class="language-plaintext highlighter-rouge">remote.py</code> and type:</p>
 
-<p>We are all set for using <code>migrate.py</code>. Run <code>remote.py</code> and type:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
-</code></pre></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+</code></pre></div></div>
+
 <p>This will kick off Deferred Tasks that will store in App Engine your blog posts and in Disqus the associated comments.</p>
 
-<h4>wait, I&#39;m having a problem here</h4>
-
+<h4 id="wait-im-having-a-problem-here">wait, I’m having a problem here</h4>
 <p>Yes, what I just described might fail. For sure if you have an <em>Export XML</em> that takes <strong>more than 1MB</strong>.
-In fact, the <code>remote_api</code> are limited to handle HTTP File Uploads <strong>smaller than 1MB</strong>.</p>
+In fact, the <code class="language-plaintext highlighter-rouge">remote_api</code> are limited to handle HTTP File Uploads <strong>smaller than 1MB</strong>.</p>
 
 <p>Myself I had a file of <strong>almost 7MB</strong>! How did I do then? I Googled, of course, and found
 a nice little script called <a href="http://www.ogmaciel.com/?p=993">choppedpress.py</a>.</p>
@@ -299,68 +296,52 @@ a nice little script called <a href="http://www.ogmaciel.com/?p=993">choppedpres
 <p>This little script does something extremely useful:</p>
 
 <blockquote>
-<p>ChoppedPress lets you split the WordPress XML export file into smaller files
+  <p>ChoppedPress lets you split the WordPress XML export file into smaller files
 that can be used to import your posts, comments, tags and categories into a
 new WordPress installation.</p>
 </blockquote>
 
-<p>Use it to split your Wordpress Export XML into chunks (remember, smaller than 1MB). Then run the <code>remote.py</code>
+<p>Use it to split your Wordpress Export XML into chunks (remember, smaller than 1MB). Then run the <code class="language-plaintext highlighter-rouge">remote.py</code>
 and do like:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">01</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
 
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">02</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
 
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="o">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mo">03</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="o">.</span><span class="n">migrate_all</span><span class="p">();</span>
-<span class="o">...</span>
-</code></pre></div>
-<h3>Step 4: <code>301 Permanent Redirect</code></h3>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">02</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
 
-<p>Well, you don&#39;t necessarily need this, but it helps if you want to retain some of your old traffic.
-Setup a <code>301 Permanent Redirect</code> from your old URL to the new one.
-Need help for this? Just <a href="http://www.google.com/search?sourceid=chrome&ie=UTF-8&q=setup+301+permanent+redirect">Google it</a>.</p>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">03</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<span class="p">...</span>
+</code></pre></div></div>
 
-<p>But if you want a more fine grained control over the redirect, why don&#39;t you give a look
+<h3 id="step-4-301-permanent-redirect">Step 4: <code class="language-plaintext highlighter-rouge">301 Permanent Redirect</code></h3>
+<p>Well, you don’t necessarily need this, but it helps if you want to retain some of your old traffic.
+Setup a <code class="language-plaintext highlighter-rouge">301 Permanent Redirect</code> from your old URL to the new one.
+Need help for this? Just <a href="http://www.google.com/search?sourceid=chrome&amp;ie=UTF-8&amp;q=setup+301+permanent+redirect">Google it</a>.</p>
+
+<p>But if you want a more fine grained control over the redirect, why don’t you give a look
 at my little project <a href="http://github.com/detro/gredirector">gredirector</a>?
 More info <a href="http://blog.ivandemarino.me/2010/09/29/gredirector---HTTP-301-through-App-Engine">here</a>.</p>
 
-<h3>Conclusion</h3>
-
-<p>Well, I&#39;m sure this is a very &quot;poor&quot; how to: it could be definitely improved.
+<h3 id="conclusion">Conclusion</h3>
+<p>Well, I’m sure this is a very “poor” how to: it could be definitely improved.
 But what would be the point if no one reads it?</p>
 
-<p>Instead, if you find it useful and want to know more or just have questions, don&#39;t hesitate to leave a message
-here and I&#39;ll make sure to answer as quickly as I can. I&#39;ll even eventually update the post if I find
+<p>Instead, if you find it useful and want to know more or just have questions, don’t hesitate to leave a message
+here and I’ll make sure to answer as quickly as I can. I’ll even eventually update the post if I find
 that a particular aspect needs clarification: THIS will really help to improve the howto, collectively.</p>
 
-<p>I really want to help people take a look at <a href="http://github.com/detro/bloggart">Bloggart</a>, <a href="http://blog.notdot.net/">Nick&#39;s</a> great idea:
-it&#39;s probably a very small project, but there are so many interesting
-things in it, that it&#39;s worth caring (if you are like me). This to say that this post is the first of more
-that will be focused on some of the new features I&#39;m adding to bloggart.</p>
+<p>I really want to help people take a look at <a href="http://github.com/detro/bloggart">Bloggart</a>, <a href="http://blog.notdot.net/">Nick’s</a> great idea:
+it’s probably a very small project, but there are so many interesting
+things in it, that it’s worth caring (if you are like me). This to say that this post is the first of more
+that will be focused on some of the new features I’m adding to bloggart.</p>
 
 <p><em>Happy Bloggarting ;)</em></p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -376,7 +357,7 @@ that will be focused on some of the new features I&#39;m adding to bloggart.</p>
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

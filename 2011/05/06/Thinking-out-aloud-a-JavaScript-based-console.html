@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,11 +127,11 @@
     
         <div class="body">
             
-                <p>In the last month or two <a href="https://github.com/detro/phantomjs">I started contributing</a> to <a href="http://www.phantomjs.org">PhantomJS</a>:
+                <p>In the last month or two <a href="https://github.com/detro/phantomjs">I started contributing</a> to <a href="http://www.phantomjs.org">PhantomJS</a>:</p>
 <div class="img">
-<img src="http://www.openclipart.org/image/800px/svg_to_png/lemmling_Cartoon_ghost.png" width="400" alt="PhantomJS logo"/>
+<img src="http://www.openclipart.org/image/800px/svg_to_png/lemmling_Cartoon_ghost.png" width="400" alt="PhantomJS logo" />
 PhantomJS logo
-</div></p>
+</div>
 
 <blockquote>
 PhantomJS is a headless WebKit with JavaScript API. It has fast and native support for various web standards: DOM handling, CSS selector, JSON, Canvas, and SVG.
@@ -144,87 +142,92 @@ PhantomJS is an optimal solution for headless testing of web-based applications,
 <p>The project is really interesting and we are seeing a steady growth in terms of:</p>
 
 <ul>
-<li>Number of users</li>
-<li>Number of posts/questions/answers on the <a href="https://groups.google.com/forum/#!forum/phantomjs">official Google group</a></li>
-<li>Number of <a href="https://github.com/ariya/phantomjs/commits/master">contribution</a></li>
+  <li>Number of users</li>
+  <li>Number of posts/questions/answers on the <a href="https://groups.google.com/forum/#!forum/phantomjs">official Google group</a></li>
+  <li>Number of <a href="https://github.com/ariya/phantomjs/commits/master">contribution</a></li>
 </ul>
 
-<p>The mind behind PhantomJS is <a href="http://ariya.blogspot.com/">Ariya Hidayat</a>, a brilliant guy that I first met when he was still working for Trolltech/Nokia. I will not spend a lot of time here explaining why it&#39;s idea is so great: for that there is <a href="http://code.google.com/p/phantomjs/w/list">the official wiki</a>.</p>
+<p>The mind behind PhantomJS is <a href="http://ariya.blogspot.com/">Ariya Hidayat</a>, a brilliant guy that I first met when he was still working for Trolltech/Nokia. I will not spend a lot of time here explaining why it’s idea is so great: for that there is <a href="http://code.google.com/p/phantomjs/w/list">the official wiki</a>.</p>
 
-<p>To share some awesomeness, here is my favourite example. <em>Do you want to know what&#39;s the weather like in London from your command line?</em> Type something like this:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ phantomjs examples/weather.js London, UK
+<p>To share some awesomeness, here is my favourite example. <em>Do you want to know what’s the weather like in London from your command line?</em> Type something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>phantomjs examples/weather.js London, UK
 
 City: London, UK
 Current condition: Clear
-Temperature: <span class="m">61</span> F
-Humidity: <span class="m">45</span>%
-Wind: N at <span class="m">4</span> mph
+Temperature: 61 F
+Humidity: 45%
+Wind: N at 4 mph
 
-Thu: <span class="m">52</span>-66 F  Partly Sunny
-Fri: <span class="m">57</span>-72 F  Partly Sunny
-Sat: <span class="m">55</span>-72 F  Partly Sunny
-Sun: <span class="m">50</span>-70 F  Chance of Rain
-</code></pre></div>
+Thu: 52-66 F  Partly Sunny
+Fri: 57-72 F  Partly Sunny
+Sat: 55-72 F  Partly Sunny
+Sun: 50-70 F  Chance of Rain
+</code></pre></div></div>
+
 <p>How does that work? Here is the PhantomJS script source:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">length</span> <span class="nx">is</span> <span class="mi">0</span>
-    <span class="nx">city</span> <span class="o">=</span> <span class="s1">&#39;Mountain View&#39;</span>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">length</span> <span class="nx">is</span> <span class="mi">0</span>
+    <span class="nx">city</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Mountain View</span><span class="dl">'</span>
     <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-        <span class="nx">city</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span> <span class="s1">&#39; &#39;</span>
+        <span class="nx">city</span> <span class="o">=</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span>
     <span class="nx">phantom</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">city</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;Loading #{ city }&quot;</span>
-    <span class="nx">phantom</span><span class="p">.</span><span class="nx">open</span> <span class="nb">encodeURI</span> <span class="s2">&quot;http://www.google.com/ig/api?weather=#{ city }&quot;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">"</span><span class="s2">Loading #{ city }</span><span class="dl">"</span>
+    <span class="nx">phantom</span><span class="p">.</span><span class="nx">open</span> <span class="nb">encodeURI</span> <span class="dl">"</span><span class="s2">http://www.google.com/ig/api?weather=#{ city }</span><span class="dl">"</span>
 <span class="k">else</span>
-    <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">loadStatus</span> <span class="nx">is</span> <span class="s1">&#39;fail&#39;</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Unable to access network&#39;</span>
+    <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">loadStatus</span> <span class="nx">is</span> <span class="dl">'</span><span class="s1">fail</span><span class="dl">'</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Unable to access network</span><span class="dl">'</span>
     <span class="k">else</span>
-        <span class="k">if</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;problem_cause&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;No data available for #{ phantom.state }&quot;</span>
+        <span class="k">if</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">problem_cause</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">"</span><span class="s2">No data available for #{ phantom.state }</span><span class="dl">"</span>
         <span class="k">else</span>
             <span class="nx">data</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="o">-&gt;</span>
                 <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="nx">or</span> <span class="nb">document</span>
                 <span class="nx">el</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">querySelector</span> <span class="nx">s</span>
                 <span class="k">if</span> <span class="nx">el</span> <span class="nx">then</span> <span class="nx">el</span><span class="p">.</span><span class="nx">attributes</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">value</span> <span class="k">else</span> <span class="kc">null</span>
 
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;City: &#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; forecast_information &gt; city&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Current condition &#39;</span> <span class="o">+</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; condition&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Temperature: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">(</span><span class="s1">&#39;weather &gt; current_conditions &gt; temp_f&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; F&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; humidity&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="s1">&#39;weather &gt; current_conditions &gt; wind_condition&#39;</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;&#39;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">''</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">City: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; forecast_information &gt; city</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Current condition </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; condition</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">(</span><span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; temp_f</span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> F</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; humidity</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; wind_condition</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">''</span>
 
-            <span class="nx">forecasts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span> <span class="s1">&#39;weather &gt; forecast_conditions&#39;</span>
+            <span class="nx">forecasts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span> <span class="dl">'</span><span class="s1">weather &gt; forecast_conditions</span><span class="dl">'</span>
             <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">forecasts</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;#{ data &#39;day_of_week&#39;, f }: &quot;</span> <span class="o">+</span>
-                            <span class="s2">&quot;#{ data &#39;low&#39;, f }-&quot;</span> <span class="o">+</span>
-                            <span class="s2">&quot;#{ data &#39;high&#39;, f } F  &quot;</span> <span class="o">+</span>
-                            <span class="s2">&quot;#{ data &#39;condition&#39;, f }&quot;</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">"</span><span class="s2">#{ data 'day_of_week', f }: </span><span class="dl">"</span> <span class="o">+</span>
+                            <span class="dl">"</span><span class="s2">#{ data 'low', f }-</span><span class="dl">"</span> <span class="o">+</span>
+                            <span class="dl">"</span><span class="s2">#{ data 'high', f } F  </span><span class="dl">"</span> <span class="o">+</span>
+                            <span class="dl">"</span><span class="s2">#{ data 'condition', f }</span><span class="dl">"</span>
 
     <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
-</code></pre></div>
-<p>This scripts uses the <em>undocumented</em> <a href="http://www.google.com/search?sourceid=chrome&ie=UTF-8&q=google+api+weather#sclient=psy&hl=en&safe=off&source=hp&q=google+weather+api&aq=f&aqi=&aql=&oq=&pbx=1&bav=on.2,or.r_gc.r_pw.&fp=ee59edf59cfa0598">Google Weather API</a>. Nothing special given <em>nowdays</em> Javascript... but this is bring the result to your CLI! And yep, PhantomJS supports <strong>Coffee Script</strong>, as well as Javascript.</p>
+</code></pre></div></div>
 
-<p>Isn&#39;t this enough to make your eyes sparkly?</p>
+<p>This scripts uses the <em>undocumented</em> <a href="http://www.google.com/search?sourceid=chrome&amp;ie=UTF-8&amp;q=google+api+weather#sclient=psy&amp;hl=en&amp;safe=off&amp;source=hp&amp;q=google+weather+api&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;pbx=1&amp;bav=on.2,or.r_gc.r_pw.&amp;fp=ee59edf59cfa0598">Google Weather API</a>. Nothing special given <em>nowdays</em> Javascript… but this is bring the result to your CLI! And yep, PhantomJS supports <strong>Coffee Script</strong>, as well as Javascript.</p>
 
-<h2>a JavaScript based console?</h2>
+<p>Isn’t this enough to make your eyes sparkly?</p>
 
-<p>Anyway, I&#39;m not here to show what&#39;s available. I&#39;m here to throw an idea out.</p>
+<h2 id="a-javascript-based-console">a JavaScript based console?</h2>
+<p>Anyway, I’m not here to show what’s available. I’m here to throw an idea out.</p>
 
 <p>PhantomJS is based on the super-awesome Qt. And Qt provides a <strong>superb</strong> API set. The one that makes PhantomJS possible is <a href="http://trac.webkit.org/wiki/QtWebKit">QtWebKit</a>, a <a href="http:///webkit.org">WebKit</a> flavour that is developed side by side with the Google Chrome and the Apple Safari WebKits, on <a href="http://trac.webkit.org/">the official WebKit repo</a>. <a href="http://doc.qt.nokia.com/latest/qtwebkit.html">QtWebKit API</a> make it extremely easy to build software based on WebKit.</p>
 
-<p>Qt also provides other great modules, and one of them is <a href="http://doc.qt.nokia.com/latest/qtscript.html">QtScript</a>. Based on? Yes, it&#39;s based on Javascript! Actually, it wraps in a great API the &quot;standard&quot; <a href="http://www.webkit.org/projects/javascript/">WebKit JavascriptCode</a>.</p>
+<p>Qt also provides other great modules, and one of them is <a href="http://doc.qt.nokia.com/latest/qtscript.html">QtScript</a>. Based on? Yes, it’s based on Javascript! Actually, it wraps in a great API the “standard” <a href="http://www.webkit.org/projects/javascript/">WebKit JavascriptCode</a>.</p>
 
-<p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a &quot;resource&quot;, like any other object. The developer could do thinks like:</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;WebPage&quot;</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&quot;www.google.com&quot;</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s2">&quot;Lady Gaga&quot;</span><span class="p">,</span> <span class="s2">&quot;#inputTextField&quot;</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="s2">&quot;#submitSearch&quot;</span><span class="p">);</span>
+<p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a “resource”, like any other object. The developer could do thinks like:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">WebPage</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="dl">"</span><span class="s2">www.google.com</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="dl">"</span><span class="s2">Lady Gaga</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#inputTextField</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="dl">"</span><span class="s2">#submitSearch</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">...</span>
-<span class="kd">var</span> <span class="nx">rasterizer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;Rasterizer&quot;</span><span class="p">);</span>
-<span class="nx">rasterizer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="s2">&quot;~/ladyGagaSearchResult.png&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rasterizer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">Rasterizer</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">rasterizer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="dl">"</span><span class="s2">~/ladyGagaSearchResult.png</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">...</span>
-</code></pre></div>
-<p>Do you see where I&#39;m heading here?</p>
+</code></pre></div></div>
+
+<p>Do you see where I’m heading here?</p>
 
 <p>Put into the picture the <a href="http://www.commonjs.org/">CommonJS</a> specs, still cooking, and you can imagine JavaScript reaching places that no one would have imagined few years ago.</p>
 
@@ -232,22 +235,6 @@ Sun: <span class="m">50</span>-70 F  Chance of Rain
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -263,7 +250,7 @@ Sun: <span class="m">50</span>-70 F  Chance of Rain
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

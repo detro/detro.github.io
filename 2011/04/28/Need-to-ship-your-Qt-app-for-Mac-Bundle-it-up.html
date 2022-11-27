@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        715 words
+                        711 words
                     </li>
                 
             </ul>
@@ -129,127 +127,124 @@
     
         <div class="body">
             
-                <p>I&#39;m contributing some code and GCC-CPU-time to <a href="https://github.com/ariya/phantomjs">PhantomJS</a>. It&#39;s a brilliant idea and I hope it will grow, maybe with some help from me as well.</p>
+                <p>I’m contributing some code and GCC-CPU-time to <a href="https://github.com/ariya/phantomjs">PhantomJS</a>. It’s a brilliant idea and I hope it will grow, maybe with some help from me as well.</p>
 
-<p>I have recently spent some time working out how to go from a &quot;compiled from source&quot; version, to generate a shippable executable. For Mac, in my case.</p>
+<p>I have recently spent some time working out how to go from a “compiled from source” version, to generate a shippable executable. For Mac, in my case.</p>
 
 <div class="img">
 <img src="http://i.ehow.co.uk/images/a04/j8/5h/fold-cute-origami-gift-box-800x800.jpg" alt="a 'cute' bundle" />
 a 'cute' bundle
 </div>
 
-<p>I&#39;ll explain how to bundle up your Qt based application, so that you can ship it. PhantomJS will be my reference example.</p>
+<p>I’ll explain how to bundle up your Qt based application, so that you can ship it. PhantomJS will be my reference example.</p>
 
-<h2>Static build? Don&#39;t do it!</h2>
+<h2 id="static-build-dont-do-it">Static build? Don’t do it!</h2>
+<p>PhantomJS is build on top of <a href="http://trac.webkit.org/wiki/QtWebKit">(Qt)WebKit</a>.</p>
 
-<p>PhantomJS is build on top of <a href="http://trac.webkit.org/wiki/QtWebKit">(Qt)WebKit</a>. </p>
-
-<p>The initial idea was to build Qt libraries enabling <strong>static linkage</strong> (i.e. passing <code>-static</code> to <code>./configure</code> script). But I soon discovered that <a href="http://doc.trolltech.com/4.7/developing-on-mac.html#building-qt-statically">QtWebKit can&#39;t be linked statically</a>:
+<p>The initial idea was to build Qt libraries enabling <strong>static linkage</strong> (i.e. passing <code class="language-plaintext highlighter-rouge">-static</code> to <code class="language-plaintext highlighter-rouge">./configure</code> script). But I soon discovered that <a href="http://doc.trolltech.com/4.7/developing-on-mac.html#building-qt-statically">QtWebKit can’t be linked statically</a>:</p>
 <blockquote>
 [...] Static builds are only partially supported, meaning that you can build most of Qt statically, but some modules, like web-kit and Designer, will fail. [...]
-</blockquote></p>
+</blockquote>
 
-<p>So, for PhantomJS was a no go. But I would say in general that if you are building an Application for Mac, you should ship it following the platform &quot;expected format&quot;. In other words, as classical <strong><code>.app bundle</code></strong>.</p>
+<p>So, for PhantomJS was a no go. But I would say in general that if you are building an Application for Mac, you should ship it following the platform “expected format”. In other words, as classical <strong><code class="language-plaintext highlighter-rouge">.app bundle</code></strong>.</p>
 
-<h2>What are we going to do</h2>
+<h2 id="what-are-we-going-to-do">What are we going to do</h2>
+<p>We want to create a <code class="language-plaintext highlighter-rouge">.app</code> and ship it within a <code class="language-plaintext highlighter-rouge">.dmg</code> file. To do that, we need to:</p>
+<ul>
+  <li>Get Qt source and build it</li>
+  <li>Build the <code class="language-plaintext highlighter-rouge">.app</code></li>
+  <li>Tune it (optional)</li>
+  <li>Generate the final <code class="language-plaintext highlighter-rouge">.dmg</code> package</li>
+</ul>
 
-<p>We want to create a <code>.app</code> and ship it within a <code>.dmg</code> file. To do that, we need to:
-* Get Qt source and build it
-* Build the <code>.app</code>
-* Tune it (optional)
-* Generate the final <code>.dmg</code> package</p>
+<h2 id="get-qt-source-and-build-it">Get Qt source and build it</h2>
+<p>It’s advisable NOT to use Qt from the official repo for this. Instead, download latest stable source from <a href="http://qt.nokia.com/downloads">http://qt.nokia.com/downloads</a> and <em>untar</em> with the following command:</p>
 
-<h2>Get Qt source and build it</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> ~/tmp
+<span class="nv">$ </span><span class="nb">cd</span> ~/tmp
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-xzf</span> ~/Downloads/qt-everywhere-opensource-src-&lt;latest stable&gt;.tar.gz 
+</code></pre></div></div>
 
-<p>It&#39;s advisable NOT to use Qt from the official repo for this. Instead, download latest stable source from <a href="http://qt.nokia.com/downloads">http://qt.nokia.com/downloads</a> and <em>untar</em> with the following command:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ mkdir ~/tmp
-$ <span class="nb">cd</span> ~/tmp
-$ tar -xzf ~/Downloads/qt-everywhere-opensource-src-&lt;latest stable&gt;.tar.gz 
-</code></pre></div>
 <p>it will ensure that you build your code against the most stable Qt.</p>
 
 <p>Once finished downloading, build like this:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> ~/tmp/qt-everywhere-opensource
-$ ./configure -universal -carbon -framework -release <span class="se">\</span>
-   -opensource -no-exceptions -webkit -no-phonon <span class="se">\</span>
-   -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl <span class="se">\</span>
-   -no-declarative -prefix <span class="nv">$PWD</span>
-$ make -j3 sub-src
-</code></pre></div>
-<p>Most of the above <em>configure flags</em> it&#39;s focused on compile the minimum necessary to build PhantomJS:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource
+<span class="nv">$ </span>./configure <span class="nt">-universal</span> <span class="nt">-carbon</span> <span class="nt">-framework</span> <span class="nt">-release</span> <span class="se">\</span>
+   <span class="nt">-opensource</span> <span class="nt">-no-exceptions</span> <span class="nt">-webkit</span> <span class="nt">-no-phonon</span> <span class="se">\</span>
+   <span class="nt">-no-xmlpatterns</span> <span class="nt">-no-qt3support</span> <span class="nt">-no-sql-sqlite</span> <span class="nt">-no-stl</span> <span class="se">\</span>
+   <span class="nt">-no-declarative</span> <span class="nt">-prefix</span> <span class="nv">$PWD</span>
+<span class="nv">$ </span>make <span class="nt">-j3</span> sub-src
+</code></pre></div></div>
+
+<p>Most of the above <em>configure flags</em> it’s focused on compile the minimum necessary to build PhantomJS:</p>
 
 <ul>
-<li>&quot;<code>-no-phonon -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl -no-declarative</code>&quot; disabled Phonon, XML Patterns, Qt 3 support, SQLite, STL, Qt Quick for this build</li>
-<li>&quot;<code>-universal -carbon</code>&quot; ensures that we build for both <code>x86</code> and <code>ppc</code> architecture, and maintaining compatibility with older version of Mac OS X</li>
-<li>&quot;<code>-framework</code>&quot; ensures that Mac OS X-style framework bundles are built, to be later included/embedded in our own PhantomJS bundle</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-no-phonon -no-xmlpatterns -no-qt3support -no-sql-sqlite -no-stl -no-declarative</code>” disabled Phonon, XML Patterns, Qt 3 support, SQLite, STL, Qt Quick for this build</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-universal -carbon</code>” ensures that we build for both <code class="language-plaintext highlighter-rouge">x86</code> and <code class="language-plaintext highlighter-rouge">ppc</code> architecture, and maintaining compatibility with older version of Mac OS X</li>
+  <li>”<code class="language-plaintext highlighter-rouge">-framework</code>” ensures that Mac OS X-style framework bundles are built, to be later included/embedded in our own PhantomJS bundle</li>
 </ul>
 
 <p><strong>You should change those flags based on your needs</strong>. Refer to <a href="http://doc.trolltech.com/4.7/configure-options.html">this documentation</a> or just type:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ./configure --help
-</code></pre></div>
-<p>After the build has finished without errors, just add the &quot;<code>/bin</code>&quot; directory in &quot;<code>~/tmp/qt-everywhere-opensource</code>&quot; to the &quot;<code>PATH</code>&quot; environment variable. Do something like:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>~/tmp/qt-everywhere-opensource/bin/:<span class="nv">$PATH</span>
-</code></pre></div>
-<h2>Build the <code>.app</code></h2>
 
-<p>I assume you know where to get your source code :-). I will use the path <strong><code>/sourcedir/</code></strong> to refer to it.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./configure <span class="nt">--help</span>
+</code></pre></div></div>
 
-<p>In case you want to build for <code>x86</code> and <code>ppc</code>, you also need to add to your Qt project <code>.pro</code> file:</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="p">...</span>
-<span class="nl">mac</span><span class="p">:</span> <span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">x86</span> <span class="n">ppc</span>
+<p>After the build has finished without errors, just add the “<code class="language-plaintext highlighter-rouge">/bin</code>” directory in “<code class="language-plaintext highlighter-rouge">~/tmp/qt-everywhere-opensource</code>” to the “<code class="language-plaintext highlighter-rouge">PATH</code>” environment variable. Do something like:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/tmp/qt-everywhere-opensource/bin/:<span class="nv">$PATH</span>
+</code></pre></div></div>
+
+<h2 id="build-the-app">Build the <code class="language-plaintext highlighter-rouge">.app</code></h2>
+<p>I assume you know where to get your source code :-). I will use the path <strong><code class="language-plaintext highlighter-rouge">/sourcedir/</code></strong> to refer to it.</p>
+
+<p>In case you want to build for <code class="language-plaintext highlighter-rouge">x86</code> and <code class="language-plaintext highlighter-rouge">ppc</code>, you also need to add to your Qt project <code class="language-plaintext highlighter-rouge">.pro</code> file:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="n">mac</span><span class="o">:</span> <span class="n">CONFIG</span> <span class="o">+=</span> <span class="n">x86</span> <span class="n">ppc</span>
 <span class="p">...</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>Time to compile:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qmake -spec macx-g++ -config release <span class="o">&amp;&amp;</span> make
-</code></pre></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>qmake <span class="nt">-spec</span> macx-g++ <span class="nt">-config</span> release <span class="o">&amp;&amp;</span> make
+</code></pre></div></div>
+
 <p>Finger crossed, all compiled fine.</p>
 
-<h2>Tune it (optional)</h2>
+<h2 id="tune-it-optional">Tune it (optional)</h2>
+<p>For PhantomJS we didn’t want the classical <em>bouncy icon</em> on the Dock to appear at every execution, given that PhantomJS is a command line tool. If you are in the same situation, edit “<code class="language-plaintext highlighter-rouge">/sourcedir/bin/yourproject.app/Content/Info.plist</code>” and add the attribute:</p>
 
-<p>For PhantomJS we didn&#39;t want the classical <em>bouncy icon</em> on the Dock to appear at every execution, given that PhantomJS is a command line tool. If you are in the same situation, edit &quot;<code>/sourcedir/bin/yourproject.app/Content/Info.plist</code>&quot; and add the attribute:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;key&gt;</span>LSUIElement<span class="nt">&lt;/key&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;key&gt;</span>LSUIElement<span class="nt">&lt;/key&gt;</span>
 <span class="nt">&lt;string&gt;</span>1<span class="nt">&lt;/string&gt;</span>
-</code></pre></div>
-<p><code>Info.plist</code> allows to control many more things than just the Dock icon. Apple documentation about this it&#39;s <a href="http://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/000-Introduction/introduction.html">here</a>. Tune it as you like/need.</p>
+</code></pre></div></div>
 
-<h2>Generate the final <code>.dmg</code> package</h2>
+<p><code class="language-plaintext highlighter-rouge">Info.plist</code> allows to control many more things than just the Dock icon. Apple documentation about this it’s <a href="http://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/000-Introduction/introduction.html">here</a>. Tune it as you like/need.</p>
 
-<p>The Trolls provide a simple tool to convert a dynamically linked executable, in a self contained &quot;<code>.app</code>&quot; file. The tool is called &quot;<code>macdeployqt</code>&quot; and you can find a description <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html#the-mac-deployment-tool">here</a>.</p>
+<h2 id="generate-the-final-dmg-package">Generate the final <code class="language-plaintext highlighter-rouge">.dmg</code> package</h2>
+<p>The Trolls provide a simple tool to convert a dynamically linked executable, in a self contained “<code class="language-plaintext highlighter-rouge">.app</code>” file. The tool is called “<code class="language-plaintext highlighter-rouge">macdeployqt</code>” and you can find a description <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html#the-mac-deployment-tool">here</a>.</p>
 
-<p>It&#39;s part of the Qt source code, but it&#39;s not built by default. So, assuming you still have the previously compiled Qt in your <code>PATH</code>, do the following:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> ~/tmp/qt-everywhere-opensource/tools/macdeployqt
-$ qmake -spec macx-g++ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
-</code></pre></div>
+<p>It’s part of the Qt source code, but it’s not built by default. So, assuming you still have the previously compiled Qt in your <code class="language-plaintext highlighter-rouge">PATH</code>, do the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/tmp/qt-everywhere-opensource/tools/macdeployqt
+<span class="nv">$ </span>qmake <span class="nt">-spec</span> macx-g++ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make <span class="nb">install</span>
+</code></pre></div></div>
+
 <p>We are ready to package. The last bit to do:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> /sourcedir/bin/
-$ macdeployqt phantomjs.app -verbose<span class="o">=</span><span class="m">2</span> -dmg
-</code></pre></div>
-<p><em>Done!</em> Now you have got a nice <code>.dmg</code> ready for deployment.</p>
 
-<h2>A word of advice</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /sourcedir/bin/
+<span class="nv">$ </span>macdeployqt phantomjs.app <span class="nt">-verbose</span><span class="o">=</span>2 <span class="nt">-dmg</span>
+</code></pre></div></div>
 
-<p>I strongly recommend to read the <a href="http://doc.trolltech.com/4.7/developing-on-mac.html">Development</a> and <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html">Deployment</a> on Mac, from the official Qt documentation. Top to bottom. It&#39;s full of useful information and can really help out to understand the <em>full picture</em>.</p>
+<p><em>Done!</em> Now you have got a nice <code class="language-plaintext highlighter-rouge">.dmg</code> ready for deployment.</p>
+
+<h2 id="a-word-of-advice">A word of advice</h2>
+<p>I strongly recommend to read the <a href="http://doc.trolltech.com/4.7/developing-on-mac.html">Development</a> and <a href="http://doc.qt.nokia.com/4.7/deployment-mac.html">Deployment</a> on Mac, from the official Qt documentation. Top to bottom. It’s full of useful information and can really help out to understand the <em>full picture</em>.</p>
 
 <p><em>Happy bundling ;-)</em></p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -265,7 +260,7 @@ $ macdeployqt phantomjs.app -verbose<span class="o">=</span><span class="m">2</s
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

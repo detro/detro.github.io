@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,7 +127,7 @@
     
         <div class="body">
             
-                <p>I&#39;m sick home, but I can&#39;t just sit in bed. It&#39;s not how I work: I need to do something. So, I decided to give some love to Bloggart and put into proper code some features <a href="http://blog.ivandemarino.me/2010/11/25/Too-busy-to-blog">I already said</a> I wanted to add.</p>
+                <p>I’m sick home, but I can’t just sit in bed. It’s not how I work: I need to do something. So, I decided to give some love to Bloggart and put into proper code some features <a href="http://blog.ivandemarino.me/2010/11/25/Too-busy-to-blog">I already said</a> I wanted to add.</p>
 
 <div style="text-align: center; margin: 10px;" class="img">
 <img src="http://www.greatescapecars.co.uk/images/library/images/Mini01.JPG" />
@@ -138,105 +136,96 @@
 <p>I just committed on <a href="https://github.com/detro/bloggart/commits/master">my Bloggart fork</a> quite a list of things:</p>
 
 <ul>
-<li>Support for JS and CSS &#39;Minification&#39; (no obfuscation though)</li>
-<li>Support for JS and CSS &#39;Templating&#39; (i.e. Being able to use App Engine Djiango Template grammar into JS and CSS files)</li>
-<li>Support for JS and CSS &#39;Memcaching&#39;</li>
-<li>Show line numbers for &#39;&lt;pre&gt;sourcecode&lt;/pre&gt;&#39; areas in posts</li>
+  <li>Support for JS and CSS ‘Minification’ (no obfuscation though)</li>
+  <li>Support for JS and CSS ‘Templating’ (i.e. Being able to use App Engine Djiango Template grammar into JS and CSS files)</li>
+  <li>Support for JS and CSS ‘Memcaching’</li>
+  <li>Show line numbers for ‘&lt;pre&gt;sourcecode&lt;/pre&gt;’ areas in posts</li>
 </ul>
 
 <p>Even though this is simple stuff, two of them stand out I think: <strong>Minification and Templating</strong>. Why? Because even if those are not complex or new, they speed Bloggart up even more! Let me spend a couple of words on it, so that it can be useful for you, even if you are not planning to use Bloggart.</p>
 
-<h3>How I implemented Minification and Templating in Bloggart</h3>
+<h3 id="how-i-implemented-minification-and-templating-in-bloggart">How I implemented Minification and Templating in Bloggart</h3>
 
 <p>The magic is made of 3 parts. First, a new URL handler in the <a href="https://github.com/detro/bloggart/blob/master/app.yaml">app.yaml</a> file:</p>
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span></span><span class="c1"># ...</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/.*\.(css|js)</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">minifier.py</span>
 
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/static/([^/]+)/(.*)</span>
-  <span class="l l-Scalar l-Scalar-Plain">static_files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">themes/\1/static/\2</span>
-  <span class="l l-Scalar l-Scalar-Plain">upload</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">themes/[^/]+/static/.*</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">/.*\.(css|js)</span>
+  <span class="na">script</span><span class="pi">:</span> <span class="s">minifier.py</span>
+
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">/static/([^/]+)/(.*)</span>
+  <span class="na">static_files</span><span class="pi">:</span> <span class="s">themes/\1/static/\2</span>
+  <span class="na">upload</span><span class="pi">:</span> <span class="s">themes/[^/]+/static/.*</span>
 <span class="c1"># ...</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>This routes requests to CSS and JS files to a new Request Handler, <a href="https://github.com/detro/bloggart/blob/master/minifier.py">minifier.py</a>:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="c1"># ...</span>
-<span class="k">class</span> <span class="nc">CssMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...
+</span><span class="k">class</span> <span class="nc">CssMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="p">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">requestedCssFilename</span> <span class="p">):</span>
-      <span class="n">cssPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="vm">__file__</span> <span class="p">),</span> <span class="s1">&#39;themes/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedCssFilename</span><span class="p">)</span> <span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cssPath</span><span class="p">)</span> <span class="p">):</span>
-         <span class="n">util</span><span class="o">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+      <span class="n">cssPath</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">),</span> <span class="s">'themes/%s/%s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedCssFilename</span><span class="p">)</span> <span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cssPath</span><span class="p">)</span> <span class="p">):</span>
+         <span class="n">util</span><span class="p">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
          <span class="k">return</span><span class="p">;</span>
-
+      
       <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">memcaching</span> <span class="p">):</span>
-         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cssPath</span><span class="p">);</span>
-
+      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="p">.</span><span class="n">memcaching</span> <span class="p">):</span>
+         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cssPath</span><span class="p">);</span>
+      
       <span class="k">if</span> <span class="p">(</span> <span class="n">cssRenderingResult</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">):</span>      
-         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;config&#39;</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
+         <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="n">render</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="p">{</span> <span class="s">'config'</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
 
-         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="p">):</span>
-            <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">cssmin</span><span class="o">.</span><span class="n">minify</span><span class="p">(</span><span class="n">cssRenderingResult</span><span class="p">);</span>
+         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="p">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="p">.</span><span class="n">DEBUG</span> <span class="p">):</span>
+            <span class="n">cssRenderingResult</span> <span class="o">=</span> <span class="n">cssmin</span><span class="p">.</span><span class="n">minify</span><span class="p">(</span><span class="n">cssRenderingResult</span><span class="p">);</span>
+         
+         <span class="n">memcache</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="n">cssRenderingResult</span><span class="p">);</span>
+         
+      <span class="bp">self</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'text/css'</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span> <span class="n">cssRenderingResult</span> <span class="p">);</span>
 
-         <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cssPath</span><span class="p">,</span> <span class="n">cssRenderingResult</span><span class="p">);</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;text/css&#39;</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">cssRenderingResult</span> <span class="p">);</span>
-
-<span class="k">class</span> <span class="nc">JSMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="o">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
+<span class="k">class</span> <span class="nc">JSMinifier</span><span class="p">(</span> <span class="n">webapp</span><span class="p">.</span><span class="n">RequestHandler</span> <span class="p">):</span>      
    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">requestedJsFilename</span> <span class="p">):</span>
-      <span class="n">jsPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span> <span class="vm">__file__</span> <span class="p">),</span> <span class="s1">&#39;themes/</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedJsFilename</span><span class="p">)</span> <span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">jsPath</span><span class="p">)</span> <span class="p">):</span>
-         <span class="n">util</span><span class="o">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+      <span class="n">jsPath</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span> <span class="n">__file__</span> <span class="p">),</span> <span class="s">'themes/%s/%s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">theme</span><span class="p">,</span> <span class="n">requestedJsFilename</span><span class="p">)</span> <span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="n">jsPath</span><span class="p">)</span> <span class="p">):</span>
+         <span class="n">util</span><span class="p">.</span><span class="n">setErrorResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
          <span class="k">return</span><span class="p">;</span>
-
+      
       <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">memcaching</span> <span class="p">):</span>
-         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsPath</span><span class="p">);</span>
-
+      <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="p">.</span><span class="n">memcaching</span> <span class="p">):</span>
+         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">memcache</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">jsPath</span><span class="p">);</span>
+      
       <span class="k">if</span> <span class="p">(</span> <span class="n">jsRenderingResult</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">):</span>         
-         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;config&#39;</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
+         <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">template</span><span class="p">.</span><span class="n">render</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="p">{</span> <span class="s">'config'</span> <span class="p">:</span> <span class="n">config</span> <span class="p">});</span>
 
-         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="o">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="p">):</span>
-            <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">jsmin</span><span class="o">.</span><span class="n">jsmin</span><span class="p">(</span><span class="n">jsRenderingResult</span><span class="p">);</span>
+         <span class="k">if</span> <span class="p">(</span> <span class="n">config</span><span class="p">.</span><span class="n">logging_level</span> <span class="o">!=</span> <span class="n">logging</span><span class="p">.</span><span class="n">DEBUG</span> <span class="p">):</span>
+            <span class="n">jsRenderingResult</span> <span class="o">=</span> <span class="n">jsmin</span><span class="p">.</span><span class="n">jsmin</span><span class="p">(</span><span class="n">jsRenderingResult</span><span class="p">);</span>
+         
+         <span class="n">memcache</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="n">jsRenderingResult</span><span class="p">);</span>
+         
+      <span class="bp">self</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'application/javascript'</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span> <span class="n">jsRenderingResult</span> <span class="p">);</span>
 
-         <span class="n">memcache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">jsPath</span><span class="p">,</span> <span class="n">jsRenderingResult</span><span class="p">);</span>
-
-      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/javascript&#39;</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">jsRenderingResult</span> <span class="p">);</span>
-
-<span class="n">application</span> <span class="o">=</span> <span class="n">webapp</span><span class="o">.</span><span class="n">WSGIApplication</span><span class="p">([</span>
-                                      <span class="p">(</span> <span class="s1">&#39;(/.*\.js)$&#39;</span><span class="p">,</span> <span class="n">JSMinifier</span> <span class="p">),</span>
-                                      <span class="p">(</span> <span class="s1">&#39;(/.*\.css)$&#39;</span><span class="p">,</span> <span class="n">CssMinifier</span> <span class="p">)</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">webapp</span><span class="p">.</span><span class="n">WSGIApplication</span><span class="p">([</span>
+                                      <span class="p">(</span> <span class="s">'(/.*\.js)$'</span><span class="p">,</span> <span class="n">JSMinifier</span> <span class="p">),</span>
+                                      <span class="p">(</span> <span class="s">'(/.*\.css)$'</span><span class="p">,</span> <span class="n">CssMinifier</span> <span class="p">)</span>
                                       <span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
-<span class="c1"># ...</span>
-</code></pre></div>
-<p>The minification is done using a couple of libraries that I&#39;ll mention in a second. Templating is transparently applied <strong>BEFORE Minification</strong>, so that the Theme developer (me most probably) can use code like the following to Bundle JS and CSS in as less HTTP Requests as possible:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"><span></span>/* CSS code... */
-{ % include &quot;another_file.css&quot; % }
+<span class="c1"># ...
+</span></code></pre></div></div>
+
+<p>The minification is done using a couple of libraries that I’ll mention in a second. Templating is transparently applied <strong>BEFORE Minification</strong>, so that the Theme developer (me most probably) can use code like the following to Bundle JS and CSS in as less HTTP Requests as possible:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* CSS code... */
+{ % include "another_file.css" % }
 /* more CSS code */
-</code></pre></div>
+</code></pre></div></div>
+
 <p>The actual business logic for the minification is done by <a href="https://github.com/detro/bloggart/blob/master/lib/cssmin.py">lib/cssmin.py</a> and <a href="https://github.com/detro/bloggart/blob/master/lib/jsmin.py">lib/jsmin.py from Douglas Crockford</a>.</p>
 
-<p>If you are a Python App Engine developer, I hope you find useful this <em>simple-yet-effectiv</em>e technique.</p>
+<p>If you are a Python App Engine developer, I hope you find useful this _simple-yet-effectiv_e technique.</p>
+
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -252,7 +241,7 @@
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

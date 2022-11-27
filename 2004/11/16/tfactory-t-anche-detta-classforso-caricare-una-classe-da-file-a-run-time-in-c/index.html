@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -120,7 +118,7 @@
                 
                     <li>
                         <i class="icon-time"></i>
-                        202 words
+                        206 words
                     </li>
                 
             </ul>
@@ -129,26 +127,11 @@
     
         <div class="body">
             
-                <div style="clear:both;"></div>L'idea mi é venuta durante lo sviluppo di <a href="http://www.mandolinux.org/MGS/"><span style="font-weight: bold;">MGS</span></a>: sapevo che alcuni miei colleghi (<span style="font-weight: bold;">SbatMan</span>, <span style="font-weight: bold;">o'Troll</span>, <span style="font-weight: bold;">Sax</span>) avevano fatto una cosa in questa direzione per il loro progetto di OOP.<br />In particolare loro avevano realizzato una <u><span style="color: rgb(204, 0, 0); font-style: italic;">Template Factory</span><span style="color: rgb(0, 0, 0);"></span></u>: molto intelligente come approccio, dato che questo svincolava da una semplice Factory di Classi ad una ben più astratta <u><span style="color: rgb(204, 0, 0); font-style: italic;">Factory Parametrizzata</span></u>.<br />C'era però un limite legato ad alcune restrizioni sulle Gerarchie (alcuni <code> <span style="font-weight: bold;">typedef</span> </code> obbligatori per gestire gli handler delle SO) che una Classe che si voleva istanziare a Run-Time doveva rispettare: ho eliminato il tutto approfondendo un pò l'argomento:<br /><code><br /># man dlsym<br /></code><br />Avendo studiato il loro codice per benino (come fanno i programmatori seri...;-)), il risultato é stato una leggera trasformazione del Template che ora permette di:<br /><ul>   <li>Caricare una classe da una SO (Shared Object Library) a Run-Time (come prima);</li>   <li>Assegnare l'oggetto istanziato tramite UP-Casting ad una Super-Classe (come prima);</li>   <li>Nessuna restrizione sulle Gerarchie (unica differenza con il lavoro dei miei colleghi).</li> </ul> Cosa ho fatto quindi io di nuovo? La mia versione della <code><span style="font-weight: bold;">TFactory <t></t></span></code> (così il nome della Classe) può essere portata ovunque continuando a funzionare sempre.<br />Prossimamente posterò il codice completo o un link allo stesso.<br /><span style="font-size:78%;">Da notare che, al momeno, il sito ufficiale non é stato ancora aggiornato.</span><br /><div style="clear:both; padding-bottom: 0.25em;"></div>
+                <div style="clear:both;"></div>
+<p>L’idea mi é venuta durante lo sviluppo di <a href="http://www.mandolinux.org/MGS/"><span style="font-weight: bold;">MGS</span></a>: sapevo che alcuni miei colleghi (<span style="font-weight: bold;">SbatMan</span>, <span style="font-weight: bold;">o’Troll</span>, <span style="font-weight: bold;">Sax</span>) avevano fatto una cosa in questa direzione per il loro progetto di OOP.<br />In particolare loro avevano realizzato una <u><span style="color: rgb(204, 0, 0); font-style: italic;">Template Factory</span><span style="color: rgb(0, 0, 0);"></span></u>: molto intelligente come approccio, dato che questo svincolava da una semplice Factory di Classi ad una ben più astratta <u><span style="color: rgb(204, 0, 0); font-style: italic;">Factory Parametrizzata</span></u>.<br />C’era però un limite legato ad alcune restrizioni sulle Gerarchie (alcuni <code> <span style="font-weight: bold;">typedef</span> </code> obbligatori per gestire gli handler delle SO) che una Classe che si voleva istanziare a Run-Time doveva rispettare: ho eliminato il tutto approfondendo un pò l’argomento:<br /><code><br /># man dlsym<br /></code><br />Avendo studiato il loro codice per benino (come fanno i programmatori seri…;-)), il risultato é stato una leggera trasformazione del Template che ora permette di:<br />&lt;ul&gt;   &lt;li&gt;Caricare una classe da una SO (Shared Object Library) a Run-Time (come prima);&lt;/li&gt;   &lt;li&gt;Assegnare l’oggetto istanziato tramite UP-Casting ad una Super-Classe (come prima);&lt;/li&gt;   &lt;li&gt;Nessuna restrizione sulle Gerarchie (unica differenza con il lavoro dei miei colleghi).&lt;/li&gt; &lt;/ul&gt; Cosa ho fatto quindi io di nuovo? La mia versione della <code><span style="font-weight: bold;">TFactory <t></t></span></code> (così il nome della Classe) può essere portata ovunque continuando a funzionare sempre.<br />Prossimamente posterò il codice completo o un link allo stesso.<br /><span style="font-size:78%;">Da notare che, al momeno, il sito ufficiale non é stato ancora aggiornato.</span><br />&lt;div style="clear:both; padding-bottom: 0.25em;"&gt;&lt;/div&gt;</p>
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -164,7 +147,7 @@
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -131,11 +129,11 @@
             
                 <p>Last week I started implementing <a href="http://dev.w3.org/html5/websockets/">W3C Sockets API</a> into a Rhino based JavaScript runtime.</p>
 
-<p>It seems like <em>plumbing</em> API from one environment to another is one of the activity I do the most. And if you dare doing a joke about my Italian-ness and Super Mario... you will be pointed in the direction of the door.</p>
+<p>It seems like <em>plumbing</em> API from one environment to another is one of the activity I do the most. And if you dare doing a joke about my Italian-ness and Super Mario… you will be pointed in the direction of the door.</p>
 
 <p>Here I want to share a couple of findings.</p>
 
-<h2>Rhino is not bad at all</h2>
+<h2 id="rhino-is-not-bad-at-all">Rhino is not bad at all</h2>
 
 <p>Yes, I said it. And who has worked in the past with me, knows how my opinion are hard to change. But they do sometimes, fortunately.</p>
 
@@ -144,19 +142,18 @@
 a big one...
 </div>
 
-<p>I&#39;m accustomed to <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtscript.html">QtScript</a> and <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtwebkit.html">QtWebKit</a>: those are the javascript runtime API/environment I used the most. But I have to give credit to this very good piece of software from the Mozilla Foundation.</p>
+<p>I’m accustomed to <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtscript.html">QtScript</a> and <a href="http://developer.qt.nokia.com/doc/qt-4.8/qtwebkit.html">QtWebKit</a>: those are the javascript runtime API/environment I used the most. But I have to give credit to this very good piece of software from the Mozilla Foundation.</p>
 
-<p>In facts, <a href="http://www.mozilla.org/rhino/doc.html">Rhino</a> is not bad at all. I was initially very dubious of his quality (Java, ehm...) but I have to slap my own hand: it not only provides good execution time, but it also has a very, VERY nice API. And <a href="http://www.webmetrics.com/">Neustar Webmetrics</a> runs it&#39;s whole business on it!</p>
+<p>In facts, <a href="http://www.mozilla.org/rhino/doc.html">Rhino</a> is not bad at all. I was initially very dubious of his quality (Java, ehm…) but I have to slap my own hand: it not only provides good execution time, but it also has a very, VERY nice API. And <a href="http://www.webmetrics.com/">Neustar Webmetrics</a> runs it’s whole business on it!</p>
 
 <p>What I liked the most? <strong>2 things</strong>:</p>
 
 <ul>
-<li>One, the fact that to create a JavaScript read-only property named, say, <code>prop</code> you just have to provide <code>getProp</code> method. And if you want the property to be writable, provide a <code>setProp</code>. The engine will take care of mapping <code>L-VALUES</code> or <code>R-VALUES</code> usages to the correct getter/setter.</li>
-<li>Two, the <code>NativeFunction</code> Class is neat and easy to use: extremely simple to allow the scripter to provide an event handler. Almost <em>brain-dead-simple</em>.</li>
+  <li>One, the fact that to create a JavaScript read-only property named, say, <code class="language-plaintext highlighter-rouge">prop</code> you just have to provide <code class="language-plaintext highlighter-rouge">getProp</code> method. And if you want the property to be writable, provide a <code class="language-plaintext highlighter-rouge">setProp</code>. The engine will take care of mapping <code class="language-plaintext highlighter-rouge">L-VALUES</code> or <code class="language-plaintext highlighter-rouge">R-VALUES</code> usages to the correct getter/setter.</li>
+  <li>Two, the <code class="language-plaintext highlighter-rouge">NativeFunction</code> Class is neat and easy to use: extremely simple to allow the scripter to provide an event handler. Almost <em>brain-dead-simple</em>.</li>
 </ul>
 
-<h2>Java-WebSocket</h2>
-
+<h2 id="java-websocket">Java-WebSocket</h2>
 <p><a href="http://tootallnate.net/">Nathan Rajlich</a> has made available on GitHub a good (not yet complete, though) <a href="https://github.com/TooTallNate/Java-WebSocket">implementation of WebSockets in Java</a>. The API is simple, reflects <em>more or less</em> the W3C specs, and does the job.</p>
 
 <div class="img">
@@ -164,7 +161,7 @@ a big one...
 the fun of WebSocket handshake
 </div>
 
-<p>I used it with a couple of Node WebSocket implementations (<a href="https://github.com/miksago/node-websocket-server">miksago&#39;s</a> and <a href="https://github.com/einaros/ws">einaros&#39;</a>), and it&#39;s the only one that managed to negotiate a connection and transmit stuff without issues.</p>
+<p>I used it with a couple of Node WebSocket implementations (<a href="https://github.com/miksago/node-websocket-server">miksago’s</a> and <a href="https://github.com/einaros/ws">einaros’</a>), and it’s the only one that managed to negotiate a connection and transmit stuff without issues.</p>
 
 <p>There are not many implementation of WebSockets out there yet (particularly for Java). I believe the main reason being the unstable and still-changing specs (take a look at <a href="http://en.wikipedia.org/wiki/WebSocket#Browser_support">this table</a>).</p>
 
@@ -174,22 +171,6 @@ the fun of WebSocket handshake
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -205,7 +186,7 @@ the fun of WebSocket handshake
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 

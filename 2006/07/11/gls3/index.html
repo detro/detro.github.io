@@ -6,7 +6,7 @@
         <meta name="author" content="Ivan De Marino">
         <meta name="generator" content="Jekyll"
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much <strong>coffee</strong><br/>too little <strong>time</strong>" />
+        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
 
                     <hgroup>
                         <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
-                        <h2>Ivan<strong>DeMarino</strong></h2>
+                        <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
                     <nav id="navigation">
@@ -78,8 +78,6 @@
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
                                     <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
-                                
-                                    <li><a rel="me" href="http://instagram.com/detronizator" target="_blank"><i class="icon-instagram"></i></a></li>
                                 
                                     <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
@@ -129,33 +127,32 @@
     
         <div class="body">
             
-                <p>Imagine an Integrated Desktop Search Engine that re-index every work you write, every file you create, every &quot;content&quot;... <strong>as you do that things</strong>... in a very discreet way.
-Every developer will thinks it&#39;s a very difficult &quot;mission&quot;, it isn&#39;t? ;)</p>
+                <p>Imagine an Integrated Desktop Search Engine that re-index every work you write, every file you create, every “content”… <strong>as you do that things</strong>… in a very discreet way.
+Every developer will thinks it’s a very difficult “mission”, it isn’t? ;)</p>
 
-<p>Ok, but take a look here:
-<blockquote>The <a href="http://www.glscube.org/">GNU/Linux Semantic Storage System (GLS³)</a> is a solution designed to facilitate the management and retrieval of your data. It is a solution that distances you from thinking about Where you store your data to What your data is. With GLS³, you can organize and retrieve your data based on their semantics, based on What they mean to you, and not based on their hierarchical location.</p>
+<p>Ok, but take a look here:</p>
+<blockquote>The <a href="http://www.glscube.org/">GNU/Linux Semantic Storage System (GLS³)</a> is a solution designed to facilitate the management and retrieval of your data. It is a solution that distances you from thinking about Where you store your data to What your data is. With GLS³, you can organize and retrieve your data based on their semantics, based on What they mean to you, and not based on their hierarchical location.
 
-<p>GLS³ is an open source semantic storage solution for GNU/Linux that indexes your data, extracts from it metadata and relevant information, allows you to organize it using queries and tags, an API to allow Developers to integrate searching and organization capabilities in their application, an extensible plugin-based Type System, shared schemas between applications through an API, a pseudo file system for backward compatibility, a web interface, As-You-Type searching and more.</blockquote></p>
+GLS³ is an open source semantic storage solution for GNU/Linux that indexes your data, extracts from it metadata and relevant information, allows you to organize it using queries and tags, an API to allow Developers to integrate searching and organization capabilities in their application, an extensible plugin-based Type System, shared schemas between applications through an API, a pseudo file system for backward compatibility, a web interface, As-You-Type searching and more.</blockquote>
 
-<p>I suggest also to take a look to the published <a href="http://www.glscube.org/download.html">demo-videos</a>: these are very interesting and... pregnant!</p>
+<p>I suggest also to take a look to the published <a href="http://www.glscube.org/download.html">demo-videos</a>: these are very interesting and… pregnant!</p>
 
 <!--more-->
+<p>For Developers and Expert Users:</p>
+<blockquote>GLS³ is implemented in C++, with much reliance on the Standard Template Library (STL), and uses <a href="http://zthread.sourceforge.net/">ZThread</a>, for multithreading support.
 
-<p>For Developers and Expert Users:
-<blockquote>GLS³ is implemented in C++, with much reliance on the Standard Template Library (STL), and uses <a href="http://zthread.sourceforge.net/">ZThread</a>, for multithreading support.</p>
+Apache's <a href="http://lucene.apache.org/java/docs/">Lucene</a> is used for Information Retrieval (IR). Lucene is a widely recognized IR library used in the implementation of internet search engines and local, single-site searching. After evaluating several IR libraries, Lucene was selected for its leading performance results, the detailed documentation available and its wide adoption, and thus, active development.
 
-<p>Apache&#39;s <a href="http://lucene.apache.org/java/docs/">Lucene</a> is used for Information Retrieval (IR). Lucene is a widely recognized IR library used in the implementation of internet search engines and local, single-site searching. After evaluating several IR libraries, Lucene was selected for its leading performance results, the detailed documentation available and its wide adoption, and thus, active development.</p>
+<a href="http://www.postgresql.org/">PostgreSQL</a> was used as the Database Management System (DBMS) for storage of Metadata about Documents, Types and Stores. The Design Documentation describes why PostgreSQL was selected as the DBMS of choice. However, we are evaluating the possibility of migrating to to a lighter DBMS, specifically, <a href="http://www.sqlite.org/">SQLite</a>.
 
-<p><a href="http://www.postgresql.org/">PostgreSQL</a> was used as the Database Management System (DBMS) for storage of Metadata about Documents, Types and Stores. The Design Documentation describes why PostgreSQL was selected as the DBMS of choice. However, we are evaluating the possibility of migrating to to a lighter DBMS, specifically, <a href="http://www.sqlite.org/">SQLite</a>.</p>
+The core of GLS³ is an user-level daemon process that communicates with other client processes through either an API or an Internet Socket Interface. Information is sent to the Socket Interface as XML, and requests are received through it also through XML, hence comes the need to parse XML documents in the GLS³ daemon. Additionally, To pass objects between the GLS³ daemon and the API, objects are serialized to XML. <a href="http://xmlsoft.org/">libxml</a> was used for parsing XML documents.
 
-<p>The core of GLS³ is an user-level daemon process that communicates with other client processes through either an API or an Internet Socket Interface. Information is sent to the Socket Interface as XML, and requests are received through it also through XML, hence comes the need to parse XML documents in the GLS³ daemon. Additionally, To pass objects between the GLS³ daemon and the API, objects are serialized to XML. <a href="http://xmlsoft.org/">libxml</a> was used for parsing XML documents.</p>
+GLS³ includes a pseudo file system that provides a backward-compatibility layer for non-GLS³-aware applications. The pseudo file system is implemented as a client module for <a href="http://fuse.sourceforge.net/">FUSE</a>. This file system, named glscubefs, allows users to browse and search the stored information through the traditional file systems interface.
 
-<p>GLS³ includes a pseudo file system that provides a backward-compatibility layer for non-GLS³-aware applications. The pseudo file system is implemented as a client module for <a href="http://fuse.sourceforge.net/">FUSE</a>. This file system, named glscubefs, allows users to browse and search the stored information through the traditional file systems interface.</p>
+Additional dependencies may be brought up by Importers. For example, the PDF Importer depends on <a href="http://www.foolabs.com/xpdf/">xpdf</a>.
 
-<p>Additional dependencies may be brought up by Importers. For example, the PDF Importer depends on <a href="http://www.foolabs.com/xpdf/">xpdf</a>.</p>
-
-<p>GLS³ does not depend on any libraries specific to a desktop environment, with the only exception being the Browser. The prototype browser was implemented in HTML, CSS and JavaScript, along with a small KDE container application that uses KHTML for rendering.
-</blockquote></p>
+GLS³ does not depend on any libraries specific to a desktop environment, with the only exception being the Browser. The prototype browser was implemented in HTML, CSS and JavaScript, along with a small KDE container application that uses KHTML for rendering.
+</blockquote>
 
 <p>Better than <a href="http://beagle-project.org/Main_Page">Beagle</a> or other similar projects? Test and Answer, please! ;)</p>
 
@@ -163,22 +160,6 @@ Every developer will thinks it&#39;s a very difficult &quot;mission&quot;, it is
 
             
         </div>
-    
-    
-        <div id="disqus_thread" class="comments"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = "blogivandemarinome";
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     
 </article>
 
@@ -194,7 +175,7 @@ Every developer will thinks it&#39;s a very difficult &quot;mission&quot;, it is
                     
                     
                     
-                        <span>Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC ASA 3.0</a></span>
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span>
                     
                 </footer>
 
