@@ -103,6 +103,7 @@ DEPENDENCIES
   jekyll-mentions (= 1.6.0)
   jekyll-paginate (= 1.1.0)
   jekyll-redirect-from (= 0.16.0)
+  jekyll-seo-tag (= 2.8.0)
   jekyll-sitemap (= 1.4.0)
   jemoji (= 0.13.0)
   minima (= 2.5.1)

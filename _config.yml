@@ -79,6 +79,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-seo-tag
 
 # Jekyll feed plugin
 feed:
