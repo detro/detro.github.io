@@ -21,15 +21,25 @@
         <!-- Utility JS -->
         <script type="text/javascript" src="/js/normalize.js"></script>
 
-        {% if site.google_analytics_4 %}
-            <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_4.config }}"></script>
+        {% if site.google_analytics.ua_tracking_id %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.ua_tracking_id }}"></script>
             <script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', '{{ site.google_analytics_4.config }}');
+              gtag('config', '{{ site.google_analytics.ua_tracking_id }}');
+            </script>
+        {% endif %}
+
+        {% if site.google_analytics.ga4_config %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.ga4_config }}"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '{{ site.google_analytics.ga4_config }}');
             </script>
         {% endif %}
 
