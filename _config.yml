@@ -93,8 +93,4 @@ jekyll-mentions:
 google_analytics:
     account: UA-136869-11
 
-# Disqus Configuration
-disqus:
-    shortname: "blogivandemarinome"
-
 # limit_posts: 50 #< Useful when developing
