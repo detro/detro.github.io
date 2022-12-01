@@ -8,10 +8,10 @@ uninstall:
 	rm -rf .vendor
 
 serve:
-	bundle exec jekyll serve --incremental --open-url
+	bundle exec jekyll serve --drafts --open-url
 
 ghp.build:
-	bundle exec jekyll build --incremental
+	bundle exec jekyll build
 
 ghp.commit:
 	git -C ../gh-pages add .
