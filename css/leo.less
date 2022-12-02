@@ -69,9 +69,15 @@
 }
 
 .codeFont {
-    font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     font-weight: normal;
-    line-height: 1.5em;
+    line-height: 1.4em;
+    color: @darkGrey;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    background-color: #f0f7fc;
+    overflow-wrap: break-word;
+    border-radius: 5px;
 }
 
 * {
@@ -229,6 +235,11 @@ div.highlight, code, pre {
                         margin: 1em auto 1em;
                     }
 
+                    code {
+                        padding: 2px 5px;
+                        border: 1px solid @evenLighterGrey;
+                    }
+
                     .img {
                         color: @lightGrey;
                         text-align: center;
@@ -262,7 +273,10 @@ div.highlight, code, pre {
 
                             code {
                                 display: block;
+                                border: none;
                             }
+
+                            border: 1px solid @evenLighterGrey;
                         }
                     }
 
