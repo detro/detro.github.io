@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This article was originally written on another blog. That blog was never officially published, and it will probably never be. It was written on the 3rd of June 2010, but is still “somewhat important” and relevant. Since the post was published, Richard Moore &lt;rich @linux…fpb.site&gt; has done a commit in the Qt examples directory that resamples very closely my code below. So, I decided to repost it here. Qt and Proxy Configuration What’s great of Qt, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time. For us a Mobile Developer like me, coming from a Symbian background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive. There are (very small) shortcomings though. Qt provides QNetworkProxyFactory to get the proxy configuration from the System Configuration, but it works only on Windows and, partially, on Mac. Other platforms are not handled for now. That’s unfortunate, given that we mainly work with Qt on Symbian and, in my current case, Maemo 5. Automatic Proxy Configuration on Mac OS X What could be done on Linux Of course this can be worked out: in the case of Maemo, being it based on Linux, I will probably just have to find a way to interface with the gconftool or make use of QProcess::systemEnvironment(). But what if you are in a LAN where the Proxy configuration is distributed across different offices using a PAC file? Well, you need to work by hand. A PAC file is a Javascript that looks like this:" />
 <meta property="og:description" content="This article was originally written on another blog. That blog was never officially published, and it will probably never be. It was written on the 3rd of June 2010, but is still “somewhat important” and relevant. Since the post was published, Richard Moore &lt;rich @linux…fpb.site&gt; has done a commit in the Qt examples directory that resamples very closely my code below. So, I decided to repost it here. Qt and Proxy Configuration What’s great of Qt, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time. For us a Mobile Developer like me, coming from a Symbian background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive. There are (very small) shortcomings though. Qt provides QNetworkProxyFactory to get the proxy configuration from the System Configuration, but it works only on Windows and, partially, on Mac. Other platforms are not handled for now. That’s unfortunate, given that we mainly work with Qt on Symbian and, in my current case, Maemo 5. Automatic Proxy Configuration on Mac OS X What could be done on Linux Of course this can be worked out: in the case of Maemo, being it based on Linux, I will probably just have to find a way to interface with the gconftool or make use of QProcess::systemEnvironment(). But what if you are in a LAN where the Proxy configuration is distributed across different offices using a PAC file? Well, you need to work by hand. A PAC file is a Javascript that looks like this:" />
-<link rel="canonical" href="http://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt" />
-<meta property="og:url" content="http://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt" />
+<link rel="canonical" href="https://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt" />
+<meta property="og:url" content="https://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt" />
 <meta property="og:site_name" content="Too much coffee, too little time" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2011-03-20T19:51:31+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to handle Proxy PAC configuration with Qt" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2011-03-20T19:51:31+00:00","datePublished":"2011-03-20T19:51:31+00:00","description":"This article was originally written on another blog. That blog was never officially published, and it will probably never be. It was written on the 3rd of June 2010, but is still “somewhat important” and relevant. Since the post was published, Richard Moore &lt;rich @linux…fpb.site&gt; has done a commit in the Qt examples directory that resamples very closely my code below. So, I decided to repost it here. Qt and Proxy Configuration What’s great of Qt, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time. For us a Mobile Developer like me, coming from a Symbian background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive. There are (very small) shortcomings though. Qt provides QNetworkProxyFactory to get the proxy configuration from the System Configuration, but it works only on Windows and, partially, on Mac. Other platforms are not handled for now. That’s unfortunate, given that we mainly work with Qt on Symbian and, in my current case, Maemo 5. Automatic Proxy Configuration on Mac OS X What could be done on Linux Of course this can be worked out: in the case of Maemo, being it based on Linux, I will probably just have to find a way to interface with the gconftool or make use of QProcess::systemEnvironment(). But what if you are in a LAN where the Proxy configuration is distributed across different offices using a PAC file? Well, you need to work by hand. A PAC file is a Javascript that looks like this:","headline":"How to handle Proxy PAC configuration with Qt","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt"},"url":"http://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2011-03-20T19:51:31+00:00","datePublished":"2011-03-20T19:51:31+00:00","description":"This article was originally written on another blog. That blog was never officially published, and it will probably never be. It was written on the 3rd of June 2010, but is still “somewhat important” and relevant. Since the post was published, Richard Moore &lt;rich @linux…fpb.site&gt; has done a commit in the Qt examples directory that resamples very closely my code below. So, I decided to repost it here. Qt and Proxy Configuration What’s great of Qt, is that it comes with a very rich set of libraries to cover almost everything you can think of. As a Qt developer, you should always double check the Documentation first, to see if “it’s already there”, before jumping into coding. It saves tons of time. For us a Mobile Developer like me, coming from a Symbian background, Qt makes me feel “guilty” (stuff gets too easy) and “lazy” (I have to squeeze my neurons less). But I also get more productive. There are (very small) shortcomings though. Qt provides QNetworkProxyFactory to get the proxy configuration from the System Configuration, but it works only on Windows and, partially, on Mac. Other platforms are not handled for now. That’s unfortunate, given that we mainly work with Qt on Symbian and, in my current case, Maemo 5. Automatic Proxy Configuration on Mac OS X What could be done on Linux Of course this can be worked out: in the case of Maemo, being it based on Linux, I will probably just have to find a way to interface with the gconftool or make use of QProcess::systemEnvironment(). But what if you are in a LAN where the Proxy configuration is distributed across different offices using a PAC file? Well, you need to work by hand. A PAC file is a Javascript that looks like this:","headline":"How to handle Proxy PAC configuration with Qt","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt"},"url":"https://ivandemarino.me/2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -73,7 +73,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
                         <h2>Ivan <strong>De Marino</strong>
 </h2>
                     </hgroup>
@@ -82,13 +82,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -100,11 +100,11 @@
                                 
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

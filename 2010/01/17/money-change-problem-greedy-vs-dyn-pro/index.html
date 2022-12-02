@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This is a classical problem of Computer Science: it’s used to study both Greedy and Dynamic Programming algorithmic techniques. I hate having my pocket full of copper!!! -_- Definition Given: A set of n Denominations D[0...n-1] in ascending order, representing a Monetary Coin System An money amount A, as input calculate a solution: S[0...n-1], with 0 &lt;= S[i] &lt;= (A/S[i]) and 0 &lt; i &lt; n-1 where: A = Sum[i=0 -&gt; n-1] { D[i] * S[i] } Min{ Sum[i=0 -&gt; n-1] { S[i] } } In other words Find the smallest amount of coins to make the given amount. First, the Greedy solution The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy. [soucecode:c] change_coins_greedy(D[], A): init S[n] i = n-1 // Pick as much largest coins as possible while ( A &gt; 0 ) do: S[i] = A / D[i] A = A - S[i] * D[i] i = i - 1 endwhile // Set to ‘0’ the result for all the other coins while ( i &gt;= 0 ) do: S[i] = 0 i = i - 1 endwhile ``` This algorithm, of time complexity O(A), doesn’t work for some (rare) situations. When Greedy is not enough The Greedy algorithm doesn’t work for Denominations where if 2 denominations D[i] and D[j] exists with: i &lt; j D[i] &lt; D[j] 2 * D[i] &gt; D[j] For example, taken D = {1, 10, 30, 40} and amount A = 63, the Greedy algorithm will build a solution S = {3, 2, 0, 1}, that is sub-optimal. The optimal solution in this case is S = {3, 0, 2, 0}. UPDATE: In the comments Vincenzo gives an example where this condition doesn’t still stand but the Greedy Algorithm still produces the best solution. Dynamically Programmed Solution In real life the Greedy algorithm should be always enough: I couldn’t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being “normally” applies when changing money. But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one. Given the function M[j], that is the minimum number of coins to make the amount ‘j’, it looks like: M[A] = min[i = 0 -&gt; n-1] { M[ A - D[i] ] +1 , M[A] } Here is the code:" />
 <meta property="og:description" content="This is a classical problem of Computer Science: it’s used to study both Greedy and Dynamic Programming algorithmic techniques. I hate having my pocket full of copper!!! -_- Definition Given: A set of n Denominations D[0...n-1] in ascending order, representing a Monetary Coin System An money amount A, as input calculate a solution: S[0...n-1], with 0 &lt;= S[i] &lt;= (A/S[i]) and 0 &lt; i &lt; n-1 where: A = Sum[i=0 -&gt; n-1] { D[i] * S[i] } Min{ Sum[i=0 -&gt; n-1] { S[i] } } In other words Find the smallest amount of coins to make the given amount. First, the Greedy solution The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy. [soucecode:c] change_coins_greedy(D[], A): init S[n] i = n-1 // Pick as much largest coins as possible while ( A &gt; 0 ) do: S[i] = A / D[i] A = A - S[i] * D[i] i = i - 1 endwhile // Set to ‘0’ the result for all the other coins while ( i &gt;= 0 ) do: S[i] = 0 i = i - 1 endwhile ``` This algorithm, of time complexity O(A), doesn’t work for some (rare) situations. When Greedy is not enough The Greedy algorithm doesn’t work for Denominations where if 2 denominations D[i] and D[j] exists with: i &lt; j D[i] &lt; D[j] 2 * D[i] &gt; D[j] For example, taken D = {1, 10, 30, 40} and amount A = 63, the Greedy algorithm will build a solution S = {3, 2, 0, 1}, that is sub-optimal. The optimal solution in this case is S = {3, 0, 2, 0}. UPDATE: In the comments Vincenzo gives an example where this condition doesn’t still stand but the Greedy Algorithm still produces the best solution. Dynamically Programmed Solution In real life the Greedy algorithm should be always enough: I couldn’t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being “normally” applies when changing money. But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one. Given the function M[j], that is the minimum number of coins to make the amount ‘j’, it looks like: M[A] = min[i = 0 -&gt; n-1] { M[ A - D[i] ] +1 , M[A] } Here is the code:" />
-<link rel="canonical" href="http://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/" />
-<meta property="og:url" content="http://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/" />
+<link rel="canonical" href="https://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/" />
+<meta property="og:url" content="https://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/" />
 <meta property="og:site_name" content="Too much coffee, too little time" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2010-01-17T21:37:56+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Money change problem: Greedy vs. Dyn.Pro." />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-01-17T21:37:56+00:00","datePublished":"2010-01-17T21:37:56+00:00","description":"This is a classical problem of Computer Science: it’s used to study both Greedy and Dynamic Programming algorithmic techniques. I hate having my pocket full of copper!!! -_- Definition Given: A set of n Denominations D[0...n-1] in ascending order, representing a Monetary Coin System An money amount A, as input calculate a solution: S[0...n-1], with 0 &lt;= S[i] &lt;= (A/S[i]) and 0 &lt; i &lt; n-1 where: A = Sum[i=0 -&gt; n-1] { D[i] * S[i] } Min{ Sum[i=0 -&gt; n-1] { S[i] } } In other words Find the smallest amount of coins to make the given amount. First, the Greedy solution The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy. [soucecode:c] change_coins_greedy(D[], A): init S[n] i = n-1 // Pick as much largest coins as possible while ( A &gt; 0 ) do: S[i] = A / D[i] A = A - S[i] * D[i] i = i - 1 endwhile // Set to ‘0’ the result for all the other coins while ( i &gt;= 0 ) do: S[i] = 0 i = i - 1 endwhile ``` This algorithm, of time complexity O(A), doesn’t work for some (rare) situations. When Greedy is not enough The Greedy algorithm doesn’t work for Denominations where if 2 denominations D[i] and D[j] exists with: i &lt; j D[i] &lt; D[j] 2 * D[i] &gt; D[j] For example, taken D = {1, 10, 30, 40} and amount A = 63, the Greedy algorithm will build a solution S = {3, 2, 0, 1}, that is sub-optimal. The optimal solution in this case is S = {3, 0, 2, 0}. UPDATE: In the comments Vincenzo gives an example where this condition doesn’t still stand but the Greedy Algorithm still produces the best solution. Dynamically Programmed Solution In real life the Greedy algorithm should be always enough: I couldn’t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being “normally” applies when changing money. But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one. Given the function M[j], that is the minimum number of coins to make the amount ‘j’, it looks like: M[A] = min[i = 0 -&gt; n-1] { M[ A - D[i] ] +1 , M[A] } Here is the code:","headline":"Money change problem: Greedy vs. Dyn.Pro.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/"},"url":"http://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-01-17T21:37:56+00:00","datePublished":"2010-01-17T21:37:56+00:00","description":"This is a classical problem of Computer Science: it’s used to study both Greedy and Dynamic Programming algorithmic techniques. I hate having my pocket full of copper!!! -_- Definition Given: A set of n Denominations D[0...n-1] in ascending order, representing a Monetary Coin System An money amount A, as input calculate a solution: S[0...n-1], with 0 &lt;= S[i] &lt;= (A/S[i]) and 0 &lt; i &lt; n-1 where: A = Sum[i=0 -&gt; n-1] { D[i] * S[i] } Min{ Sum[i=0 -&gt; n-1] { S[i] } } In other words Find the smallest amount of coins to make the given amount. First, the Greedy solution The Greedy approach is as expected: tries to take as much largest coins as possible. Nothing fancy. [soucecode:c] change_coins_greedy(D[], A): init S[n] i = n-1 // Pick as much largest coins as possible while ( A &gt; 0 ) do: S[i] = A / D[i] A = A - S[i] * D[i] i = i - 1 endwhile // Set to ‘0’ the result for all the other coins while ( i &gt;= 0 ) do: S[i] = 0 i = i - 1 endwhile ``` This algorithm, of time complexity O(A), doesn’t work for some (rare) situations. When Greedy is not enough The Greedy algorithm doesn’t work for Denominations where if 2 denominations D[i] and D[j] exists with: i &lt; j D[i] &lt; D[j] 2 * D[i] &gt; D[j] For example, taken D = {1, 10, 30, 40} and amount A = 63, the Greedy algorithm will build a solution S = {3, 2, 0, 1}, that is sub-optimal. The optimal solution in this case is S = {3, 0, 2, 0}. UPDATE: In the comments Vincenzo gives an example where this condition doesn’t still stand but the Greedy Algorithm still produces the best solution. Dynamically Programmed Solution In real life the Greedy algorithm should be always enough: I couldn’t find any money system that has the problem described above. And, indeed, the Greedy approach is what every human being “normally” applies when changing money. But we are Comp-Sci, and we need to find a better solution ;-) - a Dynamically Programmed one. Given the function M[j], that is the minimum number of coins to make the amount ‘j’, it looks like: M[A] = min[i = 0 -&gt; n-1] { M[ A - D[i] ] +1 , M[A] } Here is the code:","headline":"Money change problem: Greedy vs. Dyn.Pro.","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/"},"url":"https://ivandemarino.me/2010/01/17/money-change-problem-greedy-vs-dyn-pro/"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -73,7 +73,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
@@ -81,13 +81,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -99,11 +99,11 @@
                                 
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

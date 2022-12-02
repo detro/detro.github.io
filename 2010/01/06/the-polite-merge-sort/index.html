@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Another old-classic problem: the Merge Sort. Merge Sort Algorithm The problem of the classical implementation The whole algorithm is explained in the wikipedia link above, so I’ll focus on the problem here. The Merge Sort is an in-place-sorting-algorithm that requires some support memory to do it’s calculations. At the “merge step”, an amount of memory as large as the current portion of array being merged is allocated to be used as priority queue (again, the why is easy to find on the web). After this memory is used, normally get’s released. Theoretically speaking, the amount of memory that at every recursive call get’s created is always &lt;= size-of-input-array. So, no big deal: we knew it. Unfortunately in practice this is not always a good idea: malloc(...) and free(...) are System Calls, and those are expensive to do. They normally require Context Switches and other system operations that I can’t advice to do without properly thinking through your code. A more “Polite” Merge Sort So, because we know the amount of memory that is going to be needed by this algorithm, why don’t we design one that takes it in the beginning and doesn’t bother the Operating System anymore? Good idea! The thing we need is an array of the same size of the input. Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this “support array”. Not Polite Enough? A small tweak: when the size input array of the Kth is 2, I avoid to do another recursive call. Instead, I just swap the 2 values if they are not already sorted. Very “basical” tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid. … Done? Yes, if M is the number of recursive calls that this algorithm will normally generate, I avoid M/2 calls. The logical structure of the calls of this problem, as in the example image above, is a Balanced Binary Tree. And in such structure the number of Leaf is equal to M/2, if M are the nodes. Quite a relieve for the call stack, isn’t it! ;) The code" />
 <meta property="og:description" content="Another old-classic problem: the Merge Sort. Merge Sort Algorithm The problem of the classical implementation The whole algorithm is explained in the wikipedia link above, so I’ll focus on the problem here. The Merge Sort is an in-place-sorting-algorithm that requires some support memory to do it’s calculations. At the “merge step”, an amount of memory as large as the current portion of array being merged is allocated to be used as priority queue (again, the why is easy to find on the web). After this memory is used, normally get’s released. Theoretically speaking, the amount of memory that at every recursive call get’s created is always &lt;= size-of-input-array. So, no big deal: we knew it. Unfortunately in practice this is not always a good idea: malloc(...) and free(...) are System Calls, and those are expensive to do. They normally require Context Switches and other system operations that I can’t advice to do without properly thinking through your code. A more “Polite” Merge Sort So, because we know the amount of memory that is going to be needed by this algorithm, why don’t we design one that takes it in the beginning and doesn’t bother the Operating System anymore? Good idea! The thing we need is an array of the same size of the input. Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this “support array”. Not Polite Enough? A small tweak: when the size input array of the Kth is 2, I avoid to do another recursive call. Instead, I just swap the 2 values if they are not already sorted. Very “basical” tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid. … Done? Yes, if M is the number of recursive calls that this algorithm will normally generate, I avoid M/2 calls. The logical structure of the calls of this problem, as in the example image above, is a Balanced Binary Tree. And in such structure the number of Leaf is equal to M/2, if M are the nodes. Quite a relieve for the call stack, isn’t it! ;) The code" />
-<link rel="canonical" href="http://ivandemarino.me/2010/01/06/the-polite-merge-sort/" />
-<meta property="og:url" content="http://ivandemarino.me/2010/01/06/the-polite-merge-sort/" />
+<link rel="canonical" href="https://ivandemarino.me/2010/01/06/the-polite-merge-sort/" />
+<meta property="og:url" content="https://ivandemarino.me/2010/01/06/the-polite-merge-sort/" />
 <meta property="og:site_name" content="Too much coffee, too little time" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2010-01-06T17:04:10+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="The “Polite” Merge Sort" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-01-06T17:04:10+00:00","datePublished":"2010-01-06T17:04:10+00:00","description":"Another old-classic problem: the Merge Sort. Merge Sort Algorithm The problem of the classical implementation The whole algorithm is explained in the wikipedia link above, so I’ll focus on the problem here. The Merge Sort is an in-place-sorting-algorithm that requires some support memory to do it’s calculations. At the “merge step”, an amount of memory as large as the current portion of array being merged is allocated to be used as priority queue (again, the why is easy to find on the web). After this memory is used, normally get’s released. Theoretically speaking, the amount of memory that at every recursive call get’s created is always &lt;= size-of-input-array. So, no big deal: we knew it. Unfortunately in practice this is not always a good idea: malloc(...) and free(...) are System Calls, and those are expensive to do. They normally require Context Switches and other system operations that I can’t advice to do without properly thinking through your code. A more “Polite” Merge Sort So, because we know the amount of memory that is going to be needed by this algorithm, why don’t we design one that takes it in the beginning and doesn’t bother the Operating System anymore? Good idea! The thing we need is an array of the same size of the input. Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this “support array”. Not Polite Enough? A small tweak: when the size input array of the Kth is 2, I avoid to do another recursive call. Instead, I just swap the 2 values if they are not already sorted. Very “basical” tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid. … Done? Yes, if M is the number of recursive calls that this algorithm will normally generate, I avoid M/2 calls. The logical structure of the calls of this problem, as in the example image above, is a Balanced Binary Tree. And in such structure the number of Leaf is equal to M/2, if M are the nodes. Quite a relieve for the call stack, isn’t it! ;) The code","headline":"The “Polite” Merge Sort","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2010/01/06/the-polite-merge-sort/"},"url":"http://ivandemarino.me/2010/01/06/the-polite-merge-sort/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-01-06T17:04:10+00:00","datePublished":"2010-01-06T17:04:10+00:00","description":"Another old-classic problem: the Merge Sort. Merge Sort Algorithm The problem of the classical implementation The whole algorithm is explained in the wikipedia link above, so I’ll focus on the problem here. The Merge Sort is an in-place-sorting-algorithm that requires some support memory to do it’s calculations. At the “merge step”, an amount of memory as large as the current portion of array being merged is allocated to be used as priority queue (again, the why is easy to find on the web). After this memory is used, normally get’s released. Theoretically speaking, the amount of memory that at every recursive call get’s created is always &lt;= size-of-input-array. So, no big deal: we knew it. Unfortunately in practice this is not always a good idea: malloc(...) and free(...) are System Calls, and those are expensive to do. They normally require Context Switches and other system operations that I can’t advice to do without properly thinking through your code. A more “Polite” Merge Sort So, because we know the amount of memory that is going to be needed by this algorithm, why don’t we design one that takes it in the beginning and doesn’t bother the Operating System anymore? Good idea! The thing we need is an array of the same size of the input. Every recursive call of the algorithm, given that it operates on a fixed portion of the input array, will do great operating in the same way on this “support array”. Not Polite Enough? A small tweak: when the size input array of the Kth is 2, I avoid to do another recursive call. Instead, I just swap the 2 values if they are not already sorted. Very “basical” tweak, but, for the sake of it, have fun to calculate how many recursive call I avoid. … Done? Yes, if M is the number of recursive calls that this algorithm will normally generate, I avoid M/2 calls. The logical structure of the calls of this problem, as in the example image above, is a Balanced Binary Tree. And in such structure the number of Leaf is equal to M/2, if M are the nodes. Quite a relieve for the call stack, isn’t it! ;) The code","headline":"The “Polite” Merge Sort","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2010/01/06/the-polite-merge-sort/"},"url":"https://ivandemarino.me/2010/01/06/the-polite-merge-sort/"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -73,7 +73,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
@@ -81,13 +81,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -99,11 +99,11 @@
                                 
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

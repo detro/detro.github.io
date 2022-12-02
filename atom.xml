@@ -1,742 +1,868 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-11-27T21:58:58+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Ugly, expensive Housing</title><link href="https://ivandemarino.me/2015/07/ugly-expensive-housing" rel="alternate" type="text/html" title="Ugly, expensive Housing" /><published>2015-07-17T00:00:00+01:00</published><updated>2015-07-17T00:00:00+01:00</updated><id>https://ivandemarino.me/2015/07/ugly-expensive-housing</id><content type="html" xml:base="https://ivandemarino.me/2015/07/ugly-expensive-housing"><![CDATA[Yet [another](/2015/07/HTB-means-richer-builders/) take on expensive housing.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-12-02T19:40:05+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">TFZK - A Terraform Provider for Apache ZooKeeper</title><link href="https://ivandemarino.me/2022/12/tfzk" rel="alternate" type="text/html" title="TFZK - A Terraform Provider for Apache ZooKeeper" /><published>2022-12-02T00:00:00+00:00</published><updated>2022-12-02T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/tfzk</id><content type="html" xml:base="https://ivandemarino.me/2022/12/tfzk"><![CDATA[<h2 id="gimme-the-tldr">Gimme the TL;DR</h2>
 
-I'm not sure I fully agree with the idea that poor aesthetic (actually, _ugliness_)
+<p>A new Terraform provider is available, designed to interact with ZooKeeper ZNodes:
+<a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest">TFZK</a>.
+The latest stable version is <code class="language-plaintext highlighter-rouge">v1.0.3</code>, and you should give it a go.</p>
+
+<p>Ah! And <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs">here is the doc</a>.</p>
+
+<h2 id="ok-i-got-more-time---go-ahead">OK, I got more time - go ahead!</h2>
+
+<p>Earlier this year I decided to scratch a long-standing itch: build a
+<a href="https://developer.hashicorp.com/terraform/language/providers">Terraform Provider</a>
+for <a href="https://zookeeper.apache.org/">Apache ZooKeeper</a>. While there was already
+<a href="https://registry.terraform.io/providers/ContentSquare/zookeeper/latest">one</a>,
+it came with limitations that created issues in production environments:</p>
+
+<ul>
+  <li>only supported connecting to a <em>single</em> ensemble member</li>
+  <li>no support for storing binary data</li>
+  <li>no access to the <a href="https://zookeeper.apache.org/doc/current/zookeeperProgrammers.html#sc_zkStatStructure">ZNode Stat Structure</a></li>
+  <li>no support for <a href="https://zookeeper.apache.org/doc/r3.1.2/zookeeperProgrammers.html#Sequence+Nodes+--+Unique+Naming"><code class="language-plaintext highlighter-rouge">PERSISTENT_SEQUENTIAL</code> ZNodes</a></li>
+</ul>
+
+<p>Enter <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest">Terraform Provider ZooKeeper (TFZK)</a>
+(<a href="https://github.com/tfzk/terraform-provider-zookeeper">GitHub repo</a>).</p>
+
+<p><img src="/img/tfzk-logo.png" alt="tfzk logo" /></p>
+
+<h2 id="wait-whats-zookeeper">Wait! What’s ZooKeeper?</h2>
+
+<p>From <a href="https://zookeeper.apache.org/doc/current/index.html">here</a>:</p>
+
+<blockquote>
+  <p>ZooKeeper is a high-performance coordination service for distributed applications.
+It exposes common services - such as naming, configuration management,
+synchronization, and group services - in a simple interface so you don’t have
+to write them from scratch. You can use it off-the-shelf to implement consensus,
+group management, leader election, and presence protocols.</p>
+</blockquote>
+
+<h2 id="what-does-zookeeper-have-to-do-with-terraform">What does ZooKeeper have to do with Terraform?</h2>
+
+<p>Good question.</p>
+
+<p><a href="https://developer.hashicorp.com/terraform/intro">Terraform</a> is a <em>de-facto</em>
+industry standard for managing small, medium and even large infrastructure in a
+declarative manner. In a <em>cloud world</em>, <strong>Terraform is a tool to bring order to chaos</strong>.</p>
+
+<p>Build a large enough infrastructure, and you will need to come up with ways to
+dynamically distribute configuration to running systems. Say, you need a way
+to inform your 
+<em><a href="https://www.sciencedirect.com/topics/computer-science/sharding">sharded</a> cloud infrastructure</em>
+of things like:</p>
+
+<ul>
+  <li>which shard is in charge of what incoming traffic</li>
+  <li>how services running in one shard, can send data to another one</li>
+  <li>a new shard was deployed</li>
+  <li>an existing shard was retired/drained</li>
+</ul>
+
+<p>You could, in theory, provide your <em>topology</em> to every service, via startup-time configuration.
+But that comes with a non-zero downtime: you need to modify and distribute the
+configuration, and then restart your services to read it. Not ideal for your uptime.</p>
+
+<p>That’s where a service like ZooKeeper shines: it’s not designed for
+high throughput or for storing lots of data. But to be a reliable central place
+to send services to, so they can coordinate and react to larger infrastructure changes.</p>
+
+<p>So, to answer your question, <em>what does ZooKeeper have to do with Terraform?</em>
+ZooKeeper can be a perfect place to store a <em>live</em> picture of your
+infrastructure reality and let services rely on it to listen for changes.</p>
+
+<h2 id="so-what-can-i-do-with-this-provider">So, what can I do with this provider?</h2>
+
+<p>ZooKeeper can do a lot of things, but all are built around the core concept
+of <a href="https://zookeeper.apache.org/doc/current/zookeeperProgrammers.html#sc_zkDataModel_znodes">ZNode</a>:</p>
+
+<blockquote>
+  <p>Every node in a ZooKeeper tree is referred to as a znode.
+Znodes maintain a stat structure that includes version numbers for data changes,
+acl changes. The stat structure also has timestamps.
+The version number, together with the timestamp, allows ZooKeeper to validate
+the cache and coordinate updates.
+Each time a znode’s data changes, the version number increases.
+For instance, whenever a client retrieves data, it also receives the version of the data.</p>
+</blockquote>
+
+<p>TFZK offers a ZNode <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>:</p>
+
+<ul>
+  <li>A Persistent ZNodes resource: <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs/resources/znode"><code class="language-plaintext highlighter-rouge">zookeeper_znode</code></a></li>
+  <li>A Persistent Sequential ZNodes resource: <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs/resources/sequential_znode"><code class="language-plaintext highlighter-rouge">zookeeper_sequential_znode</code></a></li>
+  <li>A ZNode data source: <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs/data-sources/znode"><code class="language-plaintext highlighter-rouge">zookeeper_znode</code></a></li>
+  <li>Support for <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs#servers">connecting the provider to all servers</a> in the Ensemble</li>
+  <li>Configurable <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs#zookeeper-sessions">sessions time-out</a></li>
+  <li>Full access to the ZNodes <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs#the-stat-structure">Stat Structure</a></li>
+</ul>
+
+<p>Given that a Terraform Provider only “runs” during your <code class="language-plaintext highlighter-rouge">plan</code>s and <code class="language-plaintext highlighter-rouge">apply</code>s,
+its focus is on Persistent ZNodes. For this reason, it can’t support 
+Ephemeral ZNodes, Watchers and other “live” features, that are built
+for services that hold a persistent connection:
+those are more targeted at runtime services and applications (i.e. your code).</p>
+
+<h2 id="ok-im-sold-how-do-i-get-started">OK, I’m sold. How do I get started?</h2>
+
+<p>At the time I’m writing this, <a href="https://registry.terraform.io/providers/tfzk/zookeeper/1.0.3"><code class="language-plaintext highlighter-rouge">v1.0.3</code></a>
+is out. Start by adding to your Terraform configuration:</p>
+
+<div class="language-terraform highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">terraform</span> <span class="p">{</span>
+  <span class="nx">required_providers</span> <span class="p">{</span>
+    <span class="nx">zookeeper</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">source</span> <span class="p">=</span> <span class="s2">"tfzk/zookeeper"</span>
+      <span class="nx">version</span> <span class="p">=</span> <span class="s2">"1.0.3"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">provider</span> <span class="s2">"zookeeper"</span> <span class="p">{</span>
+  <span class="c1"># Configuration options</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And then head to the
+<a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest/docs">official documentation</a>.</p>
+
+<h2 id="its-great-but-its-missing-feature-x">It’s great, but it’s missing feature X!</h2>
+
+<p>Great, <a href="https://github.com/tfzk/terraform-provider-zookeeper#development">why don’t you help me?</a>
+I set it up so it should be easy to set up a local dev environment, where you
+can spin up an ensemble to test against.</p>
+
+<p>There are especially 2 <a href="https://github.com/tfzk/terraform-provider-zookeeper#provider-features">features</a>
+I’d like to see implemented:</p>
+
+<ul>
+  <li>Support for full authentication</li>
+  <li>Support for ACLs</li>
+</ul>
+
+<p>And if you are new to Terraform Provider development, take a look at
+<a href="https://developer.hashicorp.com/terraform/tutorials/providers/provider-use">this amazing tutorial</a>.
+That’s how I got started.</p>]]></content><author><name>Ivan De Marino</name></author><category term="tfzk" /><category term="terraform" /><category term="zookeeper" /><category term="apache" /><category term="opensource" /><category term="project" /><summary type="html"><![CDATA[Gimme the TL;DR]]></summary></entry><entry><title type="html">Ugly, expensive Housing</title><link href="https://ivandemarino.me/2015/07/ugly-expensive-housing" rel="alternate" type="text/html" title="Ugly, expensive Housing" /><published>2015-07-17T00:00:00+01:00</published><updated>2015-07-17T00:00:00+01:00</updated><id>https://ivandemarino.me/2015/07/ugly-expensive-housing</id><content type="html" xml:base="https://ivandemarino.me/2015/07/ugly-expensive-housing"><![CDATA[<p>Yet <a href="/2015/07/HTB-means-richer-builders/">another</a> take on expensive housing.</p>
+
+<p>I’m not sure I fully agree with the idea that poor aesthetic (actually, <em>ugliness</em>)
 has a dominating role in the pricing bubble. I still believe the the biggest issue
-is with political choices, that most probably are driven by lobbist interests.
+is with political choices, that most probably are driven by lobbist interests.</p>
 
-Nevertheless this video is an interesting and watch-worth perspective.
+<p>Nevertheless this video is an interesting and watch-worth perspective.</p>
 
 <div class="img">
-<iframe width="640" height="360" src="https://www.youtube.com/embed/dcbjWGj3jBk?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/dcbjWGj3jBk?rel=0" frameborder="0" allowfullscreen=""></iframe>
 </div>
 
-After watching this video I subscribed to ["The School of Life"](https://www.youtube.com/channel/UC7IcJI8PUf5Z3zKxnZvTBog)
-channel. And frankly you should too.]]></content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="housing" /><category term="bubble" /><category term="pricing" /><category term="ugly" /><category term="expensive" /><category term="aesthetic" /><summary type="html"><![CDATA[Yet another take on expensive housing.]]></summary></entry><entry><title type="html">Help to Buy means richer Builders</title><link href="https://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" /><published>2015-07-03T00:00:00+01:00</published><updated>2015-07-03T00:00:00+01:00</updated><id>https://ivandemarino.me/2015/07/HTB-means-richer-builders</id><content type="html" xml:base="https://ivandemarino.me/2015/07/HTB-means-richer-builders"><![CDATA[Britain, you have a problem: house prices in the East/South East have grown
+<p>After watching this video I subscribed to <a href="https://www.youtube.com/channel/UC7IcJI8PUf5Z3zKxnZvTBog">“The School of Life”</a>
+channel. And frankly you should too.</p>]]></content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="housing" /><category term="bubble" /><category term="pricing" /><category term="ugly" /><category term="expensive" /><category term="aesthetic" /><summary type="html"><![CDATA[Yet another take on expensive housing.]]></summary></entry><entry><title type="html">Help to Buy means richer Builders</title><link href="https://ivandemarino.me/2015/07/HTB-means-richer-builders" rel="alternate" type="text/html" title="Help to Buy means richer Builders" /><published>2015-07-03T00:00:00+01:00</published><updated>2015-07-03T00:00:00+01:00</updated><id>https://ivandemarino.me/2015/07/HTB-means-richer-builders</id><content type="html" xml:base="https://ivandemarino.me/2015/07/HTB-means-richer-builders"><![CDATA[<p>Britain, you have a problem: house prices in the East/South East have grown
 ridiculous. See 2014 house pricing data by the 
-[Office for National Statistics (ONS)](https://webarchive.nationalarchives.gov.uk/ukgwa/20160105200947/http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html) that compares prices with the pre-crisis ones.
+<a href="https://webarchive.nationalarchives.gov.uk/ukgwa/20160105200947/http://www.ons.gov.uk/ons/rel/hpi/house-price-index/april-2014/info-hpi-comparison.html">Office for National Statistics (ONS)</a> that compares prices with the pre-crisis ones.</p>
 
 <div class="img">
-    <img src="/img/hpifinal_tcm77-369630.png" alt="Comparison of Regional House Prices Indices BEFORE and AFTER the Financial Crisis (2014)">
+    <img src="/img/hpifinal_tcm77-369630.png" alt="Comparison of Regional House Prices Indices BEFORE and AFTER the Financial Crisis (2014)" />
     <span>+31.6!?!?!?!</span>
 </div>
 
-We all know that UK is very much London centered, and this is reflected in the
-graph above. The government doesn't shy away from policy that are openly "pro-London"
+<p>We all know that UK is very much London centered, and this is reflected in the
+graph above. The government doesn’t shy away from policy that are openly “pro-London”
 and while there are complaints, as an immigrant since 2007, I can see not much
-more than some "grumpiness" about it. It's like Britons are _"sort of ok with it"_.
+more than some “grumpiness” about it. It’s like Britons are <em>“sort of ok with it”</em>.</p>
 
-## Enter "Help to Buy" scheme
+<h2 id="enter-help-to-buy-scheme">Enter “Help to Buy” scheme</h2>
 
-To address the housing needs, the Tory government has come up with [Help to Buy](http://www.helptobuy.org.uk/): you put 5% deposit (say £10k), the government puts 20% (say £40k) and you can now afford a home of up to £200k - you can easily find a bank that would give you
-a Mortgage for **75% LTV**. It's like asking them for a glass of water: of course
-they will have you as a customer.
+<p>To address the housing needs, the Tory government has come up with <a href="http://www.helptobuy.org.uk/">Help to Buy</a>: you put 5% deposit (say £10k), the government puts 20% (say £40k) and you can now afford a home of up to £200k - you can easily find a bank that would give you
+a Mortgage for <strong>75% LTV</strong>. It’s like asking them for a glass of water: of course
+they will have you as a customer.</p>
 
-This sounds great, but it's actually a recipe for disaster.
+<p>This sounds great, but it’s actually a recipe for disaster.</p>
 
-## Can I buy any kind of home with the HTB scheme?
+<h2 id="can-i-buy-any-kind-of-home-with-the-htb-scheme">Can I buy any kind of home with the HTB scheme?</h2>
 
-HTB has been launched in 2 phases in 2013: **HTB1** (_Equity Loan_) and **HTB2** (_Mortgage Guarantees_) first only applied for newly built homes,
+<p>HTB has been launched in 2 phases in 2013: <strong>HTB1</strong> (<em>Equity Loan</em>) and <strong>HTB2</strong> (<em>Mortgage Guarantees</em>) first only applied for newly built homes,
 now HTB can be used also to purchase pre-built homes. But ONLY in the formula HTB2:
 instead of giving you 20% of the money, the HTB2 just makes the government guarantor
-of your Mortgage.
+of your Mortgage.</p>
 
-All of those, capped to £600k.
+<p>All of those, capped to £600k.</p>
 
-Sounds good, right?
-Not a bit. But first let's highlight the benefit.
+<p>Sounds good, right?
+Not a bit. But first let’s highlight the benefit.</p>
 
-## So, why everyone is buying so much if HTB is so bad?
+<h2 id="so-why-everyone-is-buying-so-much-if-htb-is-so-bad">So, why everyone is buying so much if HTB is so bad?</h2>
 
-Because we are stupid. Humans rarely think long term.
+<p>Because we are stupid. Humans rarely think long term.
 All of a sudden, Bob (fictional character) can afford a much bigger house, and he
-has to only provide 5% of deposit. Suddenly, life is amazing.
+has to only provide 5% of deposit. Suddenly, life is amazing.</p>
 
-HTB works as a loan: once you buy, you are repaying the government a monthly installment
+<p>HTB works as a loan: once you buy, you are repaying the government a monthly installment
 (to define with a HMRC official). First 5 years are interest free (WOW!) and then
-it's like 1.5% + some increase over time. It's a great loan compared to any Mortgage.
+it’s like 1.5% + some increase over time. It’s a great loan compared to any Mortgage.</p>
 
-If prices of houses were fair, this would be a great thing that would really
-allow people to buy a home.
+<p>If prices of houses were fair, this would be a great thing that would really
+allow people to buy a home.</p>
 
-## Beyond their means
+<h2 id="beyond-their-means">Beyond their means</h2>
 
-In short, people are buying beyond their means.
+<p>In short, people are buying beyond their means.
 Yes, you have taken 20% of the money with this great cheap loan, so in theory you
 are saving loads of money. But still, you now have 2 loans: a Mortgage and the HTB loan.
-Your credit score is affected. You are less "trust worthy" in case you need an emergency
-loan.
+Your credit score is affected. You are less “trust worthy” in case you need an emergency
+loan.</p>
 
-And if that 5% deposit was already hard to put together, you are most certainly now
+<p>And if that 5% deposit was already hard to put together, you are most certainly now
 in a situation where ALL your income is taken by the repayments.
-You can make it, but just a glitch in your monthly INs/OUTs and you are in trouble.
+You can make it, but just a glitch in your monthly INs/OUTs and you are in trouble.</p>
 
-I have made my calculation, so it's possible to take the HTB and still be comfortably
+<p>I have made my calculation, so it’s possible to take the HTB and still be comfortably
 between your means. But as a Software Engineer, my income is way above the national
-average: I ought to be in this position.
+average: I ought to be in this position.</p>
 
-## Builders are getting richer, at tax-payers expenses
+<h2 id="builders-are-getting-richer-at-tax-payers-expenses">Builders are getting richer, at tax-payers expenses</h2>
 
-If house prices where a fixed value, this whole HTB thing would be great and Britain
-would have no housing problems.
+<p>If house prices where a fixed value, this whole HTB thing would be great and Britain
+would have no housing problems.</p>
 
-But the market laws are well known: flood the market with money, and prices will soar.
-And that's what's happening. House prices are going drastically up because more people
-can afford them all of a sudden.
+<p>But the market laws are well known: flood the market with money, and prices will soar.
+And that’s what’s happening. House prices are going drastically up because more people
+can afford them all of a sudden.</p>
 
-That would be "OK" if there wasn't a party exploiting this.
+<p>That would be “OK” if there wasn’t a party exploiting this.</p>
 
-What we forget to consider, is that Government's Money is OUR money. Is what every
-month we pay in taxes. Is the the 20/30/40/50% of our monthly sweat that goes "puff"
-so that the _"Government Machine can keep cranking"_. Mind you, I'm not complaining
+<p>What we forget to consider, is that Government’s Money is OUR money. Is what every
+month we pay in taxes. Is the the 20/30/40/50% of our monthly sweat that goes “puff”
+so that the <em>“Government Machine can keep cranking”</em>. Mind you, I’m not complaining
 about this: this is what a government does - takes money from X to make Y happen.
-It's sort-of an investment logic at play, on a country-scale.
+It’s sort-of an investment logic at play, on a country-scale.</p>
 
-The issue I have is that the HTB is being exploited BIG TIME by big house builders
+<p>The issue I have is that the HTB is being exploited BIG TIME by big house builders
 (i.e. not your average tiny builder - we are talking about market-floating companies like
-[Bewley Homes](http://www.bewley.co.uk/), [Barrat / David Wilson](http://www.barratthomes.co.uk/), [Bloor Homes](https://bloorhomes.com/), [Crest Nicholson](https://www.crestnicholson.com/)...)
-to squeeze as much money as possible out of buyers and government's pocket. That
-at the end of the day are the same pocket!
+<a href="http://www.bewley.co.uk/">Bewley Homes</a>, <a href="http://www.barratthomes.co.uk/">Barrat / David Wilson</a>, <a href="https://bloorhomes.com/">Bloor Homes</a>, <a href="https://www.crestnicholson.com/">Crest Nicholson</a>…)
+to squeeze as much money as possible out of buyers and government’s pocket. That
+at the end of the day are the same pocket!</p>
 
-And how they do that? How they maximise their profit? **Withholding properties!**
+<p>And how they do that? How they maximise their profit? <strong>Withholding properties!</strong></p>
 
-Try to go to any site where they have set up a show-room and they are starting
-to sell the first plots. They will tell you that "only this much are available right now".
-You will ask "what's going to be available in X months?". They will show you what
+<p>Try to go to any site where they have set up a show-room and they are starting
+to sell the first plots. They will tell you that “only this much are available right now”.
+You will ask “what’s going to be available in X months?”. They will show you what
 but prices will not be available because, in X months, the very same house, built 50
-meters down the same road, might be able to go on the market for £10/20k extra!
+meters down the same road, might be able to go on the market for £10/20k extra!</p>
 
-New homes increase the market-demand for homes. Even pre-owned. This is basic
-economics that any university student has studied at some point. It's called
-"Fabricated Demand". You go down the street, and see signage of "New Luxury Homes" in
+<p>New homes increase the market-demand for homes. Even pre-owned. This is basic
+economics that any university student has studied at some point. It’s called
+“Fabricated Demand”. You go down the street, and see signage of “New Luxury Homes” in
 your neighbourhood. Your mind now wants to buy, but the new homes are too costly.
-So you buy something else.
+So you buy something else.</p>
 
-The houses on the market reduce in number, so what's left can ask for more money.
-The builder knows that the customer can use HTB to "spend that little extra for their
-dream home". So they are ready to release houses at the right time. At a price that
-maximise profit.
+<p>The houses on the market reduce in number, so what’s left can ask for more money.
+The builder knows that the customer can use HTB to “spend that little extra for their
+dream home”. So they are ready to release houses at the right time. At a price that
+maximise profit.</p>
 
-To prove that, check the price of homes that are above the HTB £600k threshold:
-because HTB doesn't apply to them, their prices can't move as much. They incur the
-risk of going "out of market".
+<p>To prove that, check the price of homes that are above the HTB £600k threshold:
+because HTB doesn’t apply to them, their prices can’t move as much. They incur the
+risk of going “out of market”.</p>
 
-## What's different from the usual "market rules"
+<h2 id="whats-different-from-the-usual-market-rules">What’s different from the usual “market rules”</h2>
 
-What's different is that the HTB has injected money that have altered reality.
-More money means pushing prices beyond the "too expensive" point. The point that
+<p>What’s different is that the HTB has injected money that have altered reality.
+More money means pushing prices beyond the “too expensive” point. The point that
 houses were supposed to reach, before demand will cease and sellers would be forced
-to rethink their pricing.
+to rethink their pricing.</p>
 
-Ah, and consider also that UK has done massive [Quantitative Easing (QE)](https://en.wikipedia.org/wiki/Quantitative_easing): pretty much printing money.
-This is where the Government gets the extra-edge to support HTB.
+<p>Ah, and consider also that UK has done massive <a href="https://en.wikipedia.org/wiki/Quantitative_easing">Quantitative Easing (QE)</a>: pretty much printing money.
+This is where the Government gets the extra-edge to support HTB.</p>
 
-But QE is a dangerous thing to over-use: ultimately those extra money in the market
-will be paid by the tax-payers, through massively inflated prices (i.e. _inflation baby!_).
+<p>But QE is a dangerous thing to over-use: ultimately those extra money in the market
+will be paid by the tax-payers, through massively inflated prices (i.e. <em>inflation baby!</em>).</p>
 
-## What happens once you can't repay your Mortgage?
+<h2 id="what-happens-once-you-cant-repay-your-mortgage">What happens once you can’t repay your Mortgage?</h2>
 
-**Who cares! The builder is happy!** Who is in trouble is the customer (that can't
+<p><strong>Who cares! The builder is happy!</strong> Who is in trouble is the customer (that can’t
 repay the mortgage and loses his/her home) and the Government (that has lost
-tax-payers money).
+tax-payers money).</p>
 
-In this game, the loser is always you.
-Unless you are a builder: in that case your third yacht is coming next week.
+<p>In this game, the loser is always you.
+Unless you are a builder: in that case your third yacht is coming next week.</p>
 
-**I'd call this ++a new house bubble++.** But in a country where media are very much influenced by
-government, mentioning bubble would probably get journalists fired...]]></content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="affordable" /><category term="housing" /><category term="bubble" /><category term="pricing" /><summary type="html"><![CDATA[Britain, you have a problem: house prices in the East/South East have grown ridiculous. See 2014 house pricing data by the Office for National Statistics (ONS) that compares prices with the pre-crisis ones.]]></summary></entry><entry><title type="html">Phonebooth on Mount Sinai</title><link href="https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" /><published>2014-02-23T00:00:00+00:00</published><updated>2014-02-23T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</id><content type="html" xml:base="https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai"><![CDATA[Moses didn't know what to do any more with those idiots. So he decides to go
+<p><strong>I’d call this ++a new house bubble++.</strong> But in a country where media are very much influenced by
+government, mentioning bubble would probably get journalists fired…</p>]]></content><author><name>Ivan De Marino</name></author><category term="help to buy" /><category term="uk" /><category term="politics" /><category term="affordable" /><category term="housing" /><category term="bubble" /><category term="pricing" /><summary type="html"><![CDATA[Britain, you have a problem: house prices in the East/South East have grown ridiculous. See 2014 house pricing data by the Office for National Statistics (ONS) that compares prices with the pre-crisis ones.]]></summary></entry><entry><title type="html">Phonebooth on Mount Sinai</title><link href="https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai" rel="alternate" type="text/html" title="Phonebooth on Mount Sinai" /><published>2014-02-23T00:00:00+00:00</published><updated>2014-02-23T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai</id><content type="html" xml:base="https://ivandemarino.me/2014/02/phonebooth-on-mount-sinai"><![CDATA[<p>Moses didn’t know what to do any more with those idiots. So he decides to go
 out for a wander. The pressure was too much. He knew that, sooner or later,
 they will just crash his skull with a stone. He needed a plan. He needed a way
 to survive (both him and them!), without ruining it all. Without having to look
-the fool he knew he was.
+the fool he knew he was.</p>
 
 <div class="img">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Mount_Sinai_Egypt.jpg/800px-Mount_Sinai_Egypt.jpg" />
     <span>Mount Sinai, Egypt</span>
 </div>
 
-To cool off, he decides to go up there. On that peak no one will follow him.
+<p>To cool off, he decides to go up there. On that peak no one will follow him.
 They were all pretty much exhausted: no sane mind would follow him in a hike at
-this stage. Good, that would do!
+this stage. Good, that would do!</p>
 
-Also, on top of that no stupid idiot would yell at him how stupid was to leave
+<p>Also, on top of that no stupid idiot would yell at him how stupid was to leave
 the stupid Egyptians. Yes, slavery was bad, and building palaces, pyramids and
 the sort was getting boring, but they got something to eat there. A shelter.
-A mean to survive.
+A mean to survive.</p>
 
-When he is about to reach the top of the mountain, from far, he sees something
-"sparkly". A big metal box, looking like made of gold, but was too far to
-distinguish it's details. So, he decided to look into it.
+<p>When he is about to reach the top of the mountain, from far, he sees something
+“sparkly”. A big metal box, looking like made of gold, but was too far to
+distinguish it’s details. So, he decided to look into it.</p>
 
 <div class="img">
     <img src="http://upload.wikimedia.org/wikipedia/commons/1/10/Lightmatter_phonebooths.jpg" />
     <span>"THE" Phonebooth</span>
 </div>
 
-Unbelievable! It was a... phonebooth. No keypad on it: just one button.
-On the button and engraved on it: <strong>"Mr God"</strong>.
+<p>Unbelievable! It was a… phonebooth. No keypad on it: just one button.
+On the button and engraved on it: <strong>“Mr God”</strong>.</p>
 
-He picks the phone, pushes the button and waits...
+<p>He picks the phone, pushes the button and waits…</p>
 
-Meanwhile, in Heaven.
+<p>Meanwhile, in Heaven.</p>
 
-(Phone ringing)
+<p>(Phone ringing)</p>
 
-God> <em>Mmm...</em>
+<p>God&gt; <em>Mmm…</em></p>
 
-(Phone still ringing)
+<p>(Phone still ringing)</p>
 
-God> <em>Oh crap! Another idiot calling from Sinai. I don't have time for this shit today!</em>
+<p>God&gt; <em>Oh crap! Another idiot calling from Sinai. I don’t have time for this shit today!</em></p>
 
-Secretary> <em>God, do you want me to take that?</em>
+<p>Secretary&gt; <em>God, do you want me to take that?</em></p>
 
-God> <em>Yes, please. Tell him to fuck off.</em>
+<p>God&gt; <em>Yes, please. Tell him to fuck off.</em></p>
 
-Secretary> <em>OK!</em>
+<p>Secretary&gt; <em>OK!</em></p>
 
-Secretary (whispering)> <em>Such a tool...</em>
+<p>Secretary (whispering)&gt; <em>Such a tool…</em></p>
 
-(Secretary answers the phone)
+<p>(Secretary answers the phone)</p>
 
-Secretary> <em>Heeeelllo!</em>
+<p>Secretary&gt; <em>Heeeelllo!</em></p>
 
-Moses> <em>Hi. Is this God?</em>
+<p>Moses&gt; <em>Hi. Is this God?</em></p>
 
-Secretary> <em>Actually, I'm his secretary. Farrokh.</em>
+<p>Secretary&gt; <em>Actually, I’m his secretary. Farrokh.</em></p>
 
-Moses> <em>Farrokh?</em>
+<p>Moses&gt; <em>Farrokh?</em></p>
 
-Secretary> <em>Yes, Farrokh. Farrokh Bulsara.</em>
+<p>Secretary&gt; <em>Yes, Farrokh. Farrokh Bulsara.</em></p>
 
-Moses> <em>You are a man! I would assumed God's secretary to be a hot girl</em>
+<p>Moses&gt; <em>You are a man! I would assumed God’s secretary to be a hot girl</em></p>
 
-Secretary> <em>You haven't seen me, my dear!</em>
+<p>Secretary&gt; <em>You haven’t seen me, my dear!</em></p>
 
-(Awkward silence)
+<p>(Awkward silence)</p>
 
-Secretary> <em>So, how can I help?</em>
+<p>Secretary&gt; <em>So, how can I help?</em></p>
 
-Moses> <em>May I speak with Mr God, please.</em>
+<p>Moses&gt; <em>May I speak with Mr God, please.</em></p>
 
-Secretary> <em>God is quite busy at the moment. He is working on his latest play: "Landing in America".</em>
+<p>Secretary&gt; <em>God is quite busy at the moment. He is working on his latest play: “Landing in America”.</em></p>
 
-Moses> <em>Mmm... OK. Whatever. Can I speak with him?</em>
+<p>Moses&gt; <em>Mmm… OK. Whatever. Can I speak with him?</em></p>
 
-Secretary> <em>He is actually very busy. He hates being interrupted when he is testing new religious scenarios.</em>
+<p>Secretary&gt; <em>He is actually very busy. He hates being interrupted when he is testing new religious scenarios.</em></p>
 
-Moses> <em>It will only take a minute!</em>
+<p>Moses&gt; <em>It will only take a minute!</em></p>
 
-Secretary> <em>Mmm... wait please.</em>
+<p>Secretary&gt; <em>Mmm… wait please.</em></p>
 
-(Secretary puts his hand on the phone and starts whispering to God)
+<p>(Secretary puts his hand on the phone and starts whispering to God)</p>
 
-Secretary> <em>He insists. He sounds quite like a rude guy. Do you want me to put him through?</em>
+<p>Secretary&gt; <em>He insists. He sounds quite like a rude guy. Do you want me to put him through?</em></p>
 
-God> <em>FUCK!!! I'm never gonna finish this shit if I get interrupted all the time!</em>
+<p>God&gt; <em>FUCK!!! I’m never gonna finish this shit if I get interrupted all the time!</em></p>
 
-God> <em>OK. Let the fucker through. But fucking cut the line if I'm not done in 2 minutes.
-Those South Americans can't be kept waiting. They already started building all
-sort of crazy shit to substitute me and I got to crash that pretty soon...</em>
+<p>God&gt; <em>OK. Let the fucker through. But fucking cut the line if I’m not done in 2 minutes.
+Those South Americans can’t be kept waiting. They already started building all
+sort of crazy shit to substitute me and I got to crash that pretty soon…</em></p>
 
-(God coughs and deepens his voice)
+<p>(God coughs and deepens his voice)</p>
 
-God> <em>Hello child!</em>
+<p>God&gt; <em>Hello child!</em></p>
 
-Moses> <em>Hello God. How have you been?</em>
+<p>Moses&gt; <em>Hello God. How have you been?</em></p>
 
-God> <em>Moses! It's been a while. Did you like the water trick?</em>
+<p>God&gt; <em>Moses! It’s been a while. Did you like the water trick?</em></p>
 
-Moses> <em>Impressive. For a second I thought you won't be paying attention and I'd
+<p>Moses&gt; <em>Impressive. For a second I thought you won’t be paying attention and I’d
 have looked like a tool, standing there with my harms in the air, and nothing
-actually happening.</em>
+actually happening.</em></p>
 
-God> <em>Glad to be helpful.</em>
+<p>God&gt; <em>Glad to be helpful.</em></p>
 
-(God picking his nose while talking)
+<p>(God picking his nose while talking)</p>
 
-God> <em>OK. It was nice to speak with you. I shall...</em>
+<p>God&gt; <em>OK. It was nice to speak with you. I shall…</em></p>
 
-Moses> <em>Wait. I called to ask for your help. Those people down there, they are driving me crazy!</em>
+<p>Moses&gt; <em>Wait. I called to ask for your help. Those people down there, they are driving me crazy!</em></p>
 
-Moses> <em>One of them just started melting gold and he wants to make a cow! Or a Lamb, I don't know.</em>
+<p>Moses&gt; <em>One of them just started melting gold and he wants to make a cow! Or a Lamb, I don’t know.</em></p>
 
-God> <em>Yes, I have seen it - I won't worry too much. You will probably be all dead pretty soon...</em>
+<p>God&gt; <em>Yes, I have seen it - I won’t worry too much. You will probably be all dead pretty soon…</em></p>
 
-Moses> <em>But they want to worship it!!!</em>
+<p>Moses&gt; <em>But they want to worship it!!!</em></p>
 
-God> <em>Stupid dick-heads! That's why I'm giving up on y'all!</em>
+<p>God&gt; <em>Stupid dick-heads! That’s why I’m giving up on y’all!</em></p>
 
-Moses> <em>"Y'all"!?!?!</em>
+<p>Moses&gt; <em>“Y’all”!?!?!</em></p>
 
-God> <em>Yeah. I started to pick up some of that American slang you know...</em>
+<p>God&gt; <em>Yeah. I started to pick up some of that American slang you know…</em></p>
 
-Moses> <em>No please. I need your help! Don't you have an advice or a message I could bring to them?</em>
+<p>Moses&gt; <em>No please. I need your help! Don’t you have an advice or a message I could bring to them?</em></p>
 
-God> <em>Shit. I'm tired. It has been a long day. Can't you call again tomorrow?</em>
+<p>God&gt; <em>Shit. I’m tired. It has been a long day. Can’t you call again tomorrow?</em></p>
 
-Moses> <em>Come on! You are usually so patronising? For once that I'm actually asking for it?</em>
+<p>Moses&gt; <em>Come on! You are usually so patronising? For once that I’m actually asking for it?</em></p>
 
-God> <em>Mmmm... OK. Have you got a pen?</em>
+<p>God&gt; <em>Mmmm… OK. Have you got a pen?</em></p>
 
-Moses> <em>No. Left it in the other trousers. I got a couple of stone slabs though...</em>
+<p>Moses&gt; <em>No. Left it in the other trousers. I got a couple of stone slabs though…</em></p>
 
-God> <em>That would do!</em>
+<p>God&gt; <em>That would do!</em></p>
 
-Moses> <em>OK. Go ahead!</em>
+<p>Moses&gt; <em>OK. Go ahead!</em></p>
 
-God> <em>First Commandment: <strong>NEVER CALL GOD IN VANE!</strong>
-He is a cranky old man and he can't really hear you anyway.
+<p>God&gt; <em>First Commandment: <strong>NEVER CALL GOD IN VANE!</strong>
+He is a cranky old man and he can’t really hear you anyway.
 He is busy having fun torturing minions all the time and no interest in helping them.
-So, leave him alone. Unless you are a hot gay version of David Jude Heyworth Law.</em>
+So, leave him alone. Unless you are a hot gay version of David Jude Heyworth Law.</em></p>
 
-Moses> <em>Oh. OK. That's it?</em>
+<p>Moses&gt; <em>Oh. OK. That’s it?</em></p>
 
-God> <em>Of course not, fuck face. Here is number Two.</em>
+<p>God&gt; <em>Of course not, fuck face. Here is number Two.</em></p>
 
-(Click. Phone disconnects.)
+<p>(Click. Phone disconnects.)</p>
 
-Moses> <em>God? GOD? Holy shit, this guy! He is impossible.</em>
+<p>Moses&gt; <em>God? GOD? Holy shit, this guy! He is impossible.</em></p>
 
-(Moses thinks a bit and then says...)
+<p>(Moses thinks a bit and then says…)</p>
 
-Moses> <em>Well, once again, I suppose I'll have to just make stuff up.</em>
+<p>Moses&gt; <em>Well, once again, I suppose I’ll have to just make stuff up.</em></p>
 
-(Meanwhile)
+<p>(Meanwhile)</p>
 
-God> <em>Moses? MOSES? Whatever...</em>
+<p>God&gt; <em>Moses? MOSES? Whatever…</em></p>
 
-Secretary> <em>I cut the line. As you asked.</em>
+<p>Secretary&gt; <em>I cut the line. As you asked.</em></p>
 
-God> <em>Oh! It was YOU then. Well done. You are my saviour, as usual.</em>
+<p>God&gt; <em>Oh! It was YOU then. Well done. You are my saviour, as usual.</em></p>
 
-Secretary> <em>My pleasure <a href="http://youtu.be/lBhPDxszukU" target="_blank">Brian</a>.
-Please go back to your plays now: those plagues are not going to make themselves.</em>]]></content><author><name>Ivan De Marino</name></author><category term="satire" /><category term="sinai" /><category term="phonebooth" /><category term="god" /><category term="moses" /><category term="phonecall" /><summary type="html"><![CDATA[Moses didn’t know what to do any more with those idiots. So he decides to go out for a wander. The pressure was too much. He knew that, sooner or later, they will just crash his skull with a stone. He needed a plan. He needed a way to survive (both him and them!), without ruining it all. Without having to look the fool he knew he was.]]></summary></entry><entry><title type="html">PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title><link href="https://ivandemarino.me/2014/01/phantomjs_196vs197" rel="alternate" type="text/html" title="PhantomJS 1.9.6 vs 1.9.7: what went wrong?" /><published>2014-01-28T00:00:00+00:00</published><updated>2014-01-28T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/01/phantomjs_196vs197</id><content type="html" xml:base="https://ivandemarino.me/2014/01/phantomjs_196vs197"><![CDATA[_tl;dr;_ Latest **stable** release of PhantomJS is **1.9.7**, and you
-should probably go and [download it](http://phantomjs.org/download.html).
-It contains [GhostDriver 1.1.0 "Banquo"](https://github.com/detro/ghostdriver/releases/tag/1.1.0),
-and that's it.
+<p>Secretary&gt; <em>My pleasure <a href="http://youtu.be/lBhPDxszukU" target="_blank">Brian</a>.
+Please go back to your plays now: those plagues are not going to make themselves.</em></p>]]></content><author><name>Ivan De Marino</name></author><category term="satire" /><category term="sinai" /><category term="phonebooth" /><category term="god" /><category term="moses" /><category term="phonecall" /><summary type="html"><![CDATA[Moses didn’t know what to do any more with those idiots. So he decides to go out for a wander. The pressure was too much. He knew that, sooner or later, they will just crash his skull with a stone. He needed a plan. He needed a way to survive (both him and them!), without ruining it all. Without having to look the fool he knew he was.]]></summary></entry><entry><title type="html">PhantomJS 1.9.6 vs 1.9.7: what went wrong?</title><link href="https://ivandemarino.me/2014/01/phantomjs_196vs197" rel="alternate" type="text/html" title="PhantomJS 1.9.6 vs 1.9.7: what went wrong?" /><published>2014-01-28T00:00:00+00:00</published><updated>2014-01-28T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/01/phantomjs_196vs197</id><content type="html" xml:base="https://ivandemarino.me/2014/01/phantomjs_196vs197"><![CDATA[<p><em>tl;dr;</em> Latest <strong>stable</strong> release of PhantomJS is <strong>1.9.7</strong>, and you
+should probably go and <a href="http://phantomjs.org/download.html">download it</a>.
+It contains <a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">GhostDriver 1.1.0 “Banquo”</a>,
+and that’s it.</p>
 
-1.9.6, released not more than 2 weeks ago (1 week?), was a _coordination went wrong_
-and I take part of the responsibility for it. Just discard that release.
+<p>1.9.6, released not more than 2 weeks ago (1 week?), was a <em>coordination went wrong</em>
+and I take part of the responsibility for it. Just discard that release.</p>
 
-# What's the long story?
-So, for a few days I was helping with testing and refining the
-[new `cookiejar` module (#11535)](https://github.com/ariya/phantomjs/pull/11535)
-for PhantomJS that [Joseph Rollinson (jtrollinson)](https://github.com/jtrollinson)
+<h1 id="whats-the-long-story">What’s the long story?</h1>
+<p>So, for a few days I was helping with testing and refining the
+<a href="https://github.com/ariya/phantomjs/pull/11535">new <code class="language-plaintext highlighter-rouge">cookiejar</code> module (#11535)</a>
+for PhantomJS that <a href="https://github.com/jtrollinson">Joseph Rollinson (jtrollinson)</a>
 contributed.
-I'm very interested in this module because it allows to instantiate **multiple
-Cookie Jar objects** instead of having all the WebPage object use the same jar.
+I’m very interested in this module because it allows to instantiate <strong>multiple
+Cookie Jar objects</strong> instead of having all the WebPage object use the same jar.
 Such feature would allow GhostDriver to finally support
-[Session Isolation (#170)](https://github.com/detro/ghostdriver/issues/170), a long
-overdue feature.
+<a href="https://github.com/detro/ghostdriver/issues/170">Session Isolation (#170)</a>, a long
+overdue feature.</p>
 
-[I had just released GhostDriver 1.1.0](https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo/),
+<p><a href="https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo/">I had just released GhostDriver 1.1.0</a>,
 and so I was pretty much all setup to do an extra release.
 Having that feature supported would make PhantomJS/GhostDriver play better with
 Selenium Grid, allowing to register more than 1 session against one browser
-process instance.
+process instance.</p>
 
-So, once the `cookijar` thing was merged, I cut
-[GhostDriver 1.1.1 "Okiku"](https://github.com/detro/ghostdriver/releases/tag/1.1.1)
+<p>So, once the <code class="language-plaintext highlighter-rouge">cookijar</code> thing was merged, I cut
+<a href="https://github.com/detro/ghostdriver/releases/tag/1.1.1">GhostDriver 1.1.1 “Okiku”</a>
 and promptly made
-[a PR against PhantomJS to merge that in](https://github.com/ariya/phantomjs/pull/11893).
+<a href="https://github.com/ariya/phantomjs/pull/11893">a PR against PhantomJS to merge that in</a>.</p>
 
-[Ariya](github.com/ariya) was so kind to wait for me to do that and cut a **minor** release of
-PhantomJS: in his intention _just bugfixes and latest GhostDriver_.
-Little he knew that latest GhostDriver depended on the new `cookiejar` feature.
+<p><a href="github.com/ariya">Ariya</a> was so kind to wait for me to do that and cut a <strong>minor</strong> release of
+PhantomJS: in his intention <em>just bugfixes and latest GhostDriver</em>.
+Little he knew that latest GhostDriver depended on the new <code class="language-plaintext highlighter-rouge">cookiejar</code> feature.</p>
 
-So, when he prepared the release branch (by `git cherry-pick`-ing), left out
-the `cookiejar` module, but included GhostDriver 1.1.1.
+<p>So, when he prepared the release branch (by <code class="language-plaintext highlighter-rouge">git cherry-pick</code>-ing), left out
+the <code class="language-plaintext highlighter-rouge">cookiejar</code> module, but included GhostDriver 1.1.1.</p>
 
-Result? KA-BOOM!
+<p>Result? KA-BOOM!</p>
 
 <div class="img">
-    <img src="http://strangesounds.org/wp-content/uploads/2013/06/KA-BOOM-1.jpg"
-        alt="KA-BOOM!" />
+    <img src="http://strangesounds.org/wp-content/uploads/2013/06/KA-BOOM-1.jpg" alt="KA-BOOM!" />
 </div>
 
-# Lesson Learned
-Next time I decide to add support to a major feature (even if it's not in my
-direct project but the one I'm based upon), I should increase the
-**minor version number** or even the **major** (depending on the case).
+<h1 id="lesson-learned">Lesson Learned</h1>
+<p>Next time I decide to add support to a major feature (even if it’s not in my
+direct project but the one I’m based upon), I should increase the
+<strong>minor version number</strong> or even the <strong>major</strong> (depending on the case).</p>
 
-If I had done that, Ariya would have known that
-_it wasn't just a minor fix in GhostDriver_,
-and this mess would have been avoided.
+<p>If I had done that, Ariya would have known that
+<em>it wasn’t just a minor fix in GhostDriver</em>,
+and this mess would have been avoided.</p>
 
-Happy _Ghosting_!]]></content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="git" /><category term="misunderstanding" /><summary type="html"><![CDATA[tl;dr; Latest stable release of PhantomJS is 1.9.7, and you should probably go and download it. It contains GhostDriver 1.1.0 “Banquo”, and that’s it.]]></summary></entry><entry><title type="html">GhostDriver 1.1.0: codename “Banquo”</title><link href="https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo" rel="alternate" type="text/html" title="GhostDriver 1.1.0: codename “Banquo”" /><published>2014-01-03T00:00:00+00:00</published><updated>2014-01-03T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</id><content type="html" xml:base="https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo"><![CDATA[It's long overdue. Last time I have cut a release of GhostDriver
-([1.0.4](https://github.com/detro/ghostdriver/releases/tag/1.0.4))
-was... July 2013.
-And [blogged about it](https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/)
+<p>Happy <em>Ghosting</em>!</p>]]></content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="git" /><category term="misunderstanding" /><summary type="html"><![CDATA[tl;dr; Latest stable release of PhantomJS is 1.9.7, and you should probably go and download it. It contains GhostDriver 1.1.0 “Banquo”, and that’s it.]]></summary></entry><entry><title type="html">GhostDriver 1.1.0: codename “Banquo”</title><link href="https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo" rel="alternate" type="text/html" title="GhostDriver 1.1.0: codename “Banquo”" /><published>2014-01-03T00:00:00+00:00</published><updated>2014-01-03T00:00:00+00:00</updated><id>https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo</id><content type="html" xml:base="https://ivandemarino.me/2014/01/ghostdriver-1-1-0-codename-banquo"><![CDATA[<p>It’s long overdue. Last time I have cut a release of GhostDriver
+(<a href="https://github.com/detro/ghostdriver/releases/tag/1.0.4">1.0.4</a>)
+was… July 2013.
+And <a href="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little/">blogged about it</a>
 only in August!!!
 I gotta take a look at my GitHub commits over the 2013: something tells me that
-_year-in-commits_ nicely overlaps with my eventful 2013.
-But let's try to stay on topic.
+<em>year-in-commits</em> nicely overlaps with my eventful 2013.
+But let’s try to stay on topic.</p>
 
-So, [GhostDriver 1.1.0](https://github.com/detro/ghostdriver/releases/tag/1.1.0),
-codename _["Banquo"](http://en.wikipedia.org/wiki/Banquo)_.
+<p>So, <a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">GhostDriver 1.1.0</a>,
+codename <em><a href="http://en.wikipedia.org/wiki/Banquo">“Banquo”</a></em>.
 This time the codename was picked by my wife - fitting, given how important she
-has become this year for Leonardo and Me.
+has become this year for Leonardo and Me.</p>
 
-I know, I keep going off topic. Sorry...
+<p>I know, I keep going off topic. Sorry…</p>
 
-As I'm writing, this new version hasn't been imported into PhantomJS yet,
+<p>As I’m writing, this new version hasn’t been imported into PhantomJS yet,
 but it will be very soon. Definitely before next release of PhantomJS. And please,
-don't ask me about that - there is the
-[PhantomJS Google Group](https://groups.google.com/d/forum/phantomjs)
+don’t ask me about that - there is the
+<a href="https://groups.google.com/d/forum/phantomjs">PhantomJS Google Group</a>
 for this kind of questions (I have
-[just opened a discussion](https://groups.google.com/forum/#!topic/phantomjs/ouFiiB1UoLw)
-about this).
+<a href="https://groups.google.com/forum/#!topic/phantomjs/ouFiiB1UoLw">just opened a discussion</a>
+about this).</p>
 
-# What's new in 1.1.0
+<h1 id="whats-new-in-110">What’s new in 1.1.0</h1>
 
-For a complete, up-to-date list of changes in the releases of
+<p>For a complete, up-to-date list of changes in the releases of
 GhostDriver, please DO take a look at the
-[`CHANGELOG`](https://github.com/detro/ghostdriver/blob/master/CHANGELOG.md).
+<a href="https://github.com/detro/ghostdriver/blob/master/CHANGELOG.md"><code class="language-plaintext highlighter-rouge">CHANGELOG</code></a>.</p>
 
-Here is a _cut&paste_ for 1.1.0:
+<p>Here is a <em>cut&amp;paste</em> for 1.1.0:</p>
 
-* ENHANCEMENT #293: Import Selenium 2.39.0 WebDriver Atoms
-* ENHANCEMENT: `/maximize` window will set the window size to 1336x768,
-currently most common resolution online (see [statcounter](http://gs.statcounter.com/#resolution-ww-monthly-201307-201312))
-* ENHANCEMENT #275: **Implemented Browser and Network (HAR) Logging types**
-* FIXED #284: Attempt to wait for Page to Load if input causes form submit
-* FIXED #291: Throw exception when attempting to set invalid timeout value
-* FIXED #259: Fix issue regarding mouse clicks
-* ENHANCEMENT #290: Enabled support for "Keep Alive" HTTP connections
-* ENHANCEMENT #262: **Allow access to PhantomJS API from WebDriver (Driver part)**
+<ul>
+  <li>ENHANCEMENT #293: Import Selenium 2.39.0 WebDriver Atoms</li>
+  <li>ENHANCEMENT: <code class="language-plaintext highlighter-rouge">/maximize</code> window will set the window size to 1336x768,
+currently most common resolution online (see <a href="http://gs.statcounter.com/#resolution-ww-monthly-201307-201312">statcounter</a>)</li>
+  <li>ENHANCEMENT #275: <strong>Implemented Browser and Network (HAR) Logging types</strong></li>
+  <li>FIXED #284: Attempt to wait for Page to Load if input causes form submit</li>
+  <li>FIXED #291: Throw exception when attempting to set invalid timeout value</li>
+  <li>FIXED #259: Fix issue regarding mouse clicks</li>
+  <li>ENHANCEMENT #290: Enabled support for “Keep Alive” HTTP connections</li>
+  <li>ENHANCEMENT #262: <strong>Allow access to PhantomJS API from WebDriver (Driver part)</strong></li>
+</ul>
 
-As you might have noticed, I have highlighted 2 entries above...
+<p>As you might have noticed, I have highlighted 2 entries above…</p>
 
-## Browser and Network (HAR) Logging
+<h2 id="browser-and-network-har-logging">Browser and Network (HAR) Logging</h2>
 
-One _difficulty_ of working with an headless browser is: there is no
-direct way to look at the browser and try to understand what it's doing. It's
-pretty much a black-box and debugging your tests against it might be hard.
+<p>One <em>difficulty</em> of working with an headless browser is: there is no
+direct way to look at the browser and try to understand what it’s doing. It’s
+pretty much a black-box and debugging your tests against it might be hard.</p>
 
-Logging was already implemented, but the only way to grab the output was via
-**standard output/error redirect**. Not always suitable for the client-server
-architecture of WebDriver.
+<p>Logging was already implemented, but the only way to grab the output was via
+<strong>standard output/error redirect</strong>. Not always suitable for the client-server
+architecture of WebDriver.</p>
 
-The WebDriver WireProtocol defines a
-[set of API to access LOGs](https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/log)
+<p>The WebDriver WireProtocol defines a
+<a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/log">set of API to access LOGs</a>
 of different type.
-The _logtype_ `client` is implemented by the binding. The `driver` should
-provide a view into the _inner guts_ of the WebDriver implementation. The
-`browser` essentially is the _console_ of the browser. The `server`... I'm
+The <em>logtype</em> <code class="language-plaintext highlighter-rouge">client</code> is implemented by the binding. The <code class="language-plaintext highlighter-rouge">driver</code> should
+provide a view into the <em>inner guts</em> of the WebDriver implementation. The
+<code class="language-plaintext highlighter-rouge">browser</code> essentially is the <em>console</em> of the browser. The <code class="language-plaintext highlighter-rouge">server</code>… I’m
 not sure.
-In GhostDriver 1.1.0 we have added support for 2: `browser` and `har`.
+In GhostDriver 1.1.0 we have added support for 2: <code class="language-plaintext highlighter-rouge">browser</code> and <code class="language-plaintext highlighter-rouge">har</code>.</p>
 
-_HAR???_ Yes, [HAR - HTTP Archive](http://www.softwareishard.com/blog/har-12-spec/).
-While I explained already the browser log-type, `har` will return a single-entry
-log, with the HAR of the current webpage, since the first load (it's cleared
-at every `unload` event).
+<p><em>HAR???</em> Yes, <a href="http://www.softwareishard.com/blog/har-12-spec/">HAR - HTTP Archive</a>.
+While I explained already the browser log-type, <code class="language-plaintext highlighter-rouge">har</code> will return a single-entry
+log, with the HAR of the current webpage, since the first load (it’s cleared
+at every <code class="language-plaintext highlighter-rouge">unload</code> event).</p>
 
-Support for the other logtypes might come in the future (the `driver` type should
-be simple enough).
+<p>Support for the other logtypes might come in the future (the <code class="language-plaintext highlighter-rouge">driver</code> type should
+be simple enough).</p>
 
-A great **THANK YOU** goes to [Dmitry Balabka (torinaki)](https://github.com/torinaki)
-and [Wouter Groeneveld (wgroeneveld)](https://github.com/wgroeneveld) for their
-key contributions. _Keep it coming guys!_
+<p>A great <strong>THANK YOU</strong> goes to <a href="https://github.com/torinaki">Dmitry Balabka (torinaki)</a>
+and <a href="https://github.com/wgroeneveld">Wouter Groeneveld (wgroeneveld)</a> for their
+key contributions. <em>Keep it coming guys!</em></p>
 
-## Access to PhantomJS API
+<h2 id="access-to-phantomjs-api">Access to PhantomJS API</h2>
 
-This feature that has been requested SO MANY FREAKING TIMES!!!
+<p>This feature that has been requested SO MANY FREAKING TIMES!!!</p>
 
-PhantomJS has [a rich set of API](https://github.com/ariya/phantomjs/wiki/API-Reference)
+<p>PhantomJS has <a href="https://github.com/ariya/phantomjs/wiki/API-Reference">a rich set of API</a>
 to control and tune the internal WebKit core.
 Access to the plethora of API that PhantomJS has was always high, since the
-beginning of the GhostDriver project.
+beginning of the GhostDriver project.</p>
 
-While some see GhostDriver/PhantomJS as _just_ a WebDriver implementation against
+<p>While some see GhostDriver/PhantomJS as <em>just</em> a WebDriver implementation against
 a non-production browser, others see this as a way to easily control PhantomJS
 from another software.
-The issue was that the WebDriver Protocol is _tuned_ for a specific scenario: emulate
+The issue was that the WebDriver Protocol is <em>tuned</em> for a specific scenario: emulate
 user interaction with a browser. PhantomJS is a bit less of a browser, and more
-of a **scriptable browser engine**. And it's very useful in scenarios also not
-strictly related to testing and user interaction.
+of a <strong>scriptable browser engine</strong>. And it’s very useful in scenarios also not
+strictly related to testing and user interaction.</p>
 
-This API allows to send a string of JavaScript, written for PhantomJS, and be
+<p>This API allows to send a string of JavaScript, written for PhantomJS, and be
 interpreted within the context of a WebDriver Page. In other words, for the given
-script the `this` variable is initialized to be the current Page.
+script the <code class="language-plaintext highlighter-rouge">this</code> variable is initialized to be the current Page.</p>
 
- The format of this _WebDriver Protocol Extension_:
+<p>The format of this <em>WebDriver Protocol Extension</em>:</p>
 
-```
-HTTP POST /session/:id/phantom/execute
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP POST /session/:id/phantom/execute
 {
     "script"    : SCRIPT_SCRIPT
     "args"      : [ARRAY_OF_JS_BASIC_TYPES]
 }
-```
+</code></pre></div></div>
 
-To see an example use of this API, check out
-[this example](https://github.com/detro/ghostdriver/blob/master/test/java/src/test/java/ghostdriver/PhantomJSCommandTest.java).
+<p>To see an example use of this API, check out
+<a href="https://github.com/detro/ghostdriver/blob/master/test/java/src/test/java/ghostdriver/PhantomJSCommandTest.java">this example</a>.</p>
 
-This new API was **entirely developed** by
-[Mark Watson (watsonmw)](https://github.com/watsonmw),
+<p>This new API was <strong>entirely developed</strong> by
+<a href="https://github.com/watsonmw">Mark Watson (watsonmw)</a>,
 ex-colleague of mine at
-[Neustar](https://ivandemarino.me/2011/12/14/Crossing-the-pond/)
-and awesome chap.
+<a href="https://ivandemarino.me/2011/12/14/Crossing-the-pond/">Neustar</a>
+and awesome chap.</p>
 
-# What do I have left to do
+<h1 id="what-do-i-have-left-to-do">What do I have left to do</h1>
 
-As I write this, I still have to finish up a couple of tasks to consider 1.1.0
-fully released:
+<p>As I write this, I still have to finish up a couple of tasks to consider 1.1.0
+fully released:</p>
 
-* <del>Commit 1.1.0 Java Bindings's JAR to the Selenium repository</del>
-[DONE](https://code.google.com/p/selenium/source/detail?r=6146f3a5bec6bd28747e91a07cacd75a3db589f2)
-* <del>Import 1.1.0 into PhantomJS</del>
-[DONE](https://github.com/ariya/phantomjs/pull/11877)
-* <del>Tag 1.1.0 on the repository</del>
-[DONE](https://github.com/detro/ghostdriver/releases/tag/1.1.0)
+<ul>
+  <li><del>Commit 1.1.0 Java Bindings’s JAR to the Selenium repository</del>
+<a href="https://code.google.com/p/selenium/source/detail?r=6146f3a5bec6bd28747e91a07cacd75a3db589f2">DONE</a></li>
+  <li><del>Import 1.1.0 into PhantomJS</del>
+<a href="https://github.com/ariya/phantomjs/pull/11877">DONE</a></li>
+  <li><del>Tag 1.1.0 on the repository</del>
+<a href="https://github.com/detro/ghostdriver/releases/tag/1.1.0">DONE</a></li>
+</ul>
 
-I could have waited for those tasks to be complete... but I felt like this
-was overdue and I wanted to share a _status report_ as soon as I could.
+<p>I could have waited for those tasks to be complete… but I felt like this
+was overdue and I wanted to share a <em>status report</em> as soon as I could.</p>
 
-Also, it gives me _closure_ for this blog post.]]></content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="info" /><category term="banquo" /><summary type="html"><![CDATA[It’s long overdue. Last time I have cut a release of GhostDriver (1.0.4) was… July 2013. And blogged about it only in August!!! I gotta take a look at my GitHub commits over the 2013: something tells me that year-in-commits nicely overlaps with my eventful 2013. But let’s try to stay on topic.]]></summary></entry><entry><title type="html">Oldboy: 10 years later</title><link href="https://ivandemarino.me/2013/12/oldboy-10-years-later" rel="alternate" type="text/html" title="Oldboy: 10 years later" /><published>2013-12-11T00:00:00+00:00</published><updated>2013-12-11T00:00:00+00:00</updated><id>https://ivandemarino.me/2013/12/oldboy-10-years-later</id><content type="html" xml:base="https://ivandemarino.me/2013/12/oldboy-10-years-later"><![CDATA[It was 10 years ago. A night just like this one. Winter. Everyone in the house
-was asleep. Well, Leonardo isn't really sleeping right now but you get the idea.
-I was alone in the kitchen. Alone with the TV, an `.avi` file and an `.srt` file.
+<p>Also, it gives me <em>closure</em> for this blog post.</p>]]></content><author><name>Ivan De Marino</name></author><category term="ghostdriver" /><category term="phantomjs" /><category term="release" /><category term="changes" /><category term="info" /><category term="banquo" /><summary type="html"><![CDATA[It’s long overdue. Last time I have cut a release of GhostDriver (1.0.4) was… July 2013. And blogged about it only in August!!! I gotta take a look at my GitHub commits over the 2013: something tells me that year-in-commits nicely overlaps with my eventful 2013. But let’s try to stay on topic.]]></summary></entry><entry><title type="html">Oldboy: 10 years later</title><link href="https://ivandemarino.me/2013/12/oldboy-10-years-later" rel="alternate" type="text/html" title="Oldboy: 10 years later" /><published>2013-12-11T00:00:00+00:00</published><updated>2013-12-11T00:00:00+00:00</updated><id>https://ivandemarino.me/2013/12/oldboy-10-years-later</id><content type="html" xml:base="https://ivandemarino.me/2013/12/oldboy-10-years-later"><![CDATA[<p>It was 10 years ago. A night just like this one. Winter. Everyone in the house
+was asleep. Well, Leonardo isn’t really sleeping right now but you get the idea.
+I was alone in the kitchen. Alone with the TV, an <code class="language-plaintext highlighter-rouge">.avi</code> file and an <code class="language-plaintext highlighter-rouge">.srt</code> file.</p>
 
-I had just started watching movies in foreign language and during the week I had
-stumbled upon [Old Boy](http://www.imdb.com/title/tt0364569/).
-I wasn't really in the mode of staying up late, but something made me.
+<p>I had just started watching movies in foreign language and during the week I had
+stumbled upon <a href="http://www.imdb.com/title/tt0364569/">Old Boy</a>.
+I wasn’t really in the mode of staying up late, but something made me.</p>
 
 <div class="img">
-    <img src="/img/oldboy-poster.jpg" alt="Oldboy (2003)">
+    <img src="/img/oldboy-poster.jpg" alt="Oldboy (2003)" />
     <span>Oldboy (Korean poster)</span>
 </div>
 
-The title was in English: how was I supposed to know it was a movie from
-South Korea? I know, I was _very naïve_.
+<p>The title was in English: how was I supposed to know it was a movie from
+South Korea? I know, I was <em>very naïve</em>.</p>
 
-I remember being captured very quickly by the story. It was intriguing, cruel,
+<p>I remember being captured very quickly by the story. It was intriguing, cruel,
 nightmare-ish. Just the kind of stuff that tingles me. The main actor,
-[Min-sik Choi](http://www.imdb.com/name/nm0158856/),
-looked a lot like [Jackie Chan](http://www.imdb.com/name/nm0000329/),
-but much better at acting.
+<a href="http://www.imdb.com/name/nm0158856/">Min-sik Choi</a>,
+looked a lot like <a href="http://www.imdb.com/name/nm0000329/">Jackie Chan</a>,
+but much better at acting.</p>
 
-I just finished watching it again. Now I got a `.mkv`, and the subtitles are a
-track in it, but the greatness of this movie comes back to mind.
+<p>I just finished watching it again. Now I got a <code class="language-plaintext highlighter-rouge">.mkv</code>, and the subtitles are a
+track in it, but the greatness of this movie comes back to mind.</p>
 
-**Luckly I had almost entirely forgotten the story, so I have enjoyed it all over
-again**. But it's funny: 10 years later you see new details - you notice new scenes,
+<p><strong>Luckly I had almost entirely forgotten the story, so I have enjoyed it all over
+again</strong>. But it’s funny: 10 years later you see new details - you notice new scenes,
 new details you had missed, new characters even. I had totally forgot about the
 way he gets released and the first guy with the dog that
-he meets once he is back in the world.
+he meets once he is back in the world.</p>
 
-Same exact movie: what is changed is me. In 10 years SO MUCH has changed.
+<p>Same exact movie: what is changed is me. In 10 years SO MUCH has changed.
 10 years ago I had not met yet my lovely wife. I knew I wanted to leave the
-limiting life of the south of Italy, but I didn't know I could actually do it.
-I didn't know that the next time me and this movie would meet,
-I'd be living a completely new life.
+limiting life of the south of Italy, but I didn’t know I could actually do it.
+I didn’t know that the next time me and this movie would meet,
+I’d be living a completely new life.
 With a beautiful wife and a beautiful son - my own little family that
-is just starting.
+is just starting.</p>
 
-Every New Year's Eve I look back at the year, make a mental list of what changed,
-_"where am I now"_. I enjoy thinking that, next year, I'll be somewhere else
-again with my life. _How exciting!_
+<p>Every New Year’s Eve I look back at the year, make a mental list of what changed,
+<em>“where am I now”</em>. I enjoy thinking that, next year, I’ll be somewhere else
+again with my life. <em>How exciting!</em></p>
 
-Maybe in 10 years, 2023, I should find again this long lost friend of a movie,
-and watch it again. What the hell! I will definitely do that. Let's just hope
-I don't change too much and forget to do it.
+<p>Maybe in 10 years, 2023, I should find again this long lost friend of a movie,
+and watch it again. What the hell! I will definitely do that. Let’s just hope
+I don’t change too much and forget to do it.</p>
 
-Maybe in 10 years, my son will join me. Well, he will be 10 and this movie
-will be probably too _"gruesome"_ for him - let's say he will have to wait 20
-years instead...
+<p>Maybe in 10 years, my son will join me. Well, he will be 10 and this movie
+will be probably too <em>“gruesome”</em> for him - let’s say he will have to wait 20
+years instead…</p>
 
-**Time**. You bastard. How do you go so fast?
+<p><strong>Time</strong>. You bastard. How do you go so fast?</p>
 
-# P.S.
+<h1 id="ps">P.S.</h1>
 
-Yes, I know that
-[Spike Lee's "new" Oldboy](http://www.imdb.com/title/tt1321511/)
-has just been released, but that's an almost total coincidence.
-I'm going to eventually watch this _USA edition_, but I don't expect it to make
+<p>Yes, I know that
+<a href="http://www.imdb.com/title/tt1321511/">Spike Lee’s “new” Oldboy</a>
+has just been released, but that’s an almost total coincidence.
+I’m going to eventually watch this <em>USA edition</em>, but I don’t expect it to make
 me happy - remakes are usually badly executed.
-Still, the actors involved are very good so I don't expect to be disappointed either.]]></content><author><name>Ivan De Marino</name></author><category term="oldboy" /><category term="movie" /><category term="south korea" /><category term="personal" /><category term="growth" /><category term="life" /><category term="change" /><category term="italy" /><category term="uk" /><category term="night" /><summary type="html"><![CDATA[It was 10 years ago. A night just like this one. Winter. Everyone in the house was asleep. Well, Leonardo isn’t really sleeping right now but you get the idea. I was alone in the kitchen. Alone with the TV, an .avi file and an .srt file.]]></summary></entry><entry><title type="html">RESETtling…</title><link href="https://ivandemarino.me/2013/11/resettling" rel="alternate" type="text/html" title="RESETtling…" /><published>2013-11-30T23:36:12+00:00</published><updated>2013-11-30T23:36:12+00:00</updated><id>https://ivandemarino.me/2013/11/resettling</id><content type="html" xml:base="https://ivandemarino.me/2013/11/resettling"><![CDATA[**Puff, Pant!** THAT was not easy! But finally, "normality" seems not too far
-away.
+Still, the actors involved are very good so I don’t expect to be disappointed either.</p>]]></content><author><name>Ivan De Marino</name></author><category term="oldboy" /><category term="movie" /><category term="south korea" /><category term="personal" /><category term="growth" /><category term="life" /><category term="change" /><category term="italy" /><category term="uk" /><category term="night" /><summary type="html"><![CDATA[It was 10 years ago. A night just like this one. Winter. Everyone in the house was asleep. Well, Leonardo isn’t really sleeping right now but you get the idea. I was alone in the kitchen. Alone with the TV, an .avi file and an .srt file.]]></summary></entry><entry><title type="html">RESETtling…</title><link href="https://ivandemarino.me/2013/11/resettling" rel="alternate" type="text/html" title="RESETtling…" /><published>2013-11-30T23:36:12+00:00</published><updated>2013-11-30T23:36:12+00:00</updated><id>https://ivandemarino.me/2013/11/resettling</id><content type="html" xml:base="https://ivandemarino.me/2013/11/resettling"><![CDATA[<p><strong>Puff, Pant!</strong> THAT was not easy! But finally, “normality” seems not too far
+away.</p>
 
-Many things have happened in the recent months: we got **married**; I helped my
-lovely wife with the **pregnancy** (well, she did all the hard work); and, on the
-7th of November, we have became parents of this **beauty**:
+<p>Many things have happened in the recent months: we got <strong>married</strong>; I helped my
+lovely wife with the <strong>pregnancy</strong> (well, she did all the hard work); and, on the
+7th of November, we have became parents of this <strong>beauty</strong>:</p>
 
 <div class="img">
-<img src="/img/leo.png" alt="Leonardo Antonio DE MARINO-SIMOLA">
+<img src="/img/leo.png" alt="Leonardo Antonio DE MARINO-SIMOLA" />
 <span>Leonardo Antonio DE MARINO-SIMOLA</span>
 </div>
 
-Now, we have to slowly learn to live our new life **together**: while we learn
+<p>Now, we have to slowly learn to live our new life <strong>together</strong>: while we learn
 how to be parents, Leonardo will be learning how to be a baby. What now looks
 like a difficult, consuming and intense task (ask me how much we sleep
-at night!), will at some point become "daily routine".
-_A sweeter routine with Leo at the center of it all!_
+at night!), will at some point become “daily routine”.
+<em>A sweeter routine with Leo at the center of it all!</em></p>
 
-It is a full **RESET** to which we need to **SETTLE**. A **RESETTLE**.
+<p>It is a full <strong>RESET</strong> to which we need to <strong>SETTLE</strong>. A <strong>RESETTLE</strong>.</p>
 
-A new life,
+<p>A new life,
 with many unknowns to uncover, but also the will and need to be as united and as
 strong - actually, even more. But love seems to be our great strength, and
-Alessandra and I are quite good at _teamwork_.
+Alessandra and I are quite good at <em>teamwork</em>.</p>
 
-# Night sleep: a memory of the past
+<h1 id="night-sleep-a-memory-of-the-past">Night sleep: a memory of the past</h1>
 
-Well, as EVERYONE warned us, sleeping with a newborn baby is like trying to play
-retro videogames: you ALWAYS want to do, but never manage to.
+<p>Well, as EVERYONE warned us, sleeping with a newborn baby is like trying to play
+retro videogames: you ALWAYS want to do, but never manage to.</p>
 
-Leonardo is a very unstable sleeper so far, and he seems to like to be more
+<p>Leonardo is a very unstable sleeper so far, and he seems to like to be more
 active during the night: maybe a good skill if he decides to join me in the
-_craft of programming_, but for now it's just an energy drain (for us!).
+<em>craft of programming</em>, but for now it’s just an energy drain (for us!).
 A drain that transforms into a sweet smile once you see his eyes looking at you.
 You are tired, you are exhausted but, somehow, his puffy cheeks make
-everything perfect.
+everything perfect.</p>
 
-One thing that seems to work is carrying him around, while I rock him and tell
-him all sort of _stuff_, just from the top of my head.
-I think I have already talked him into becoming a software developer: he hasn't
-disagreed, so I assume he is OK with it :-P .
+<p>One thing that seems to work is carrying him around, while I rock him and tell
+him all sort of <em>stuff</em>, just from the top of my head.
+I think I have already talked him into becoming a software developer: he hasn’t
+disagreed, so I assume he is OK with it :-P .</p>
 
-# Time for ourselves?
+<h1 id="time-for-ourselves">Time for ourselves?</h1>
 
-This is close to `0` for now. Either as a couple, or on our own, time to do
-stuff by yourself seems a very hard thing to achieve. But I'm sure it will get
-better: myself I'm still a night-worker, so with his sleeping becoming more
-regular, working a bit on **opensource** or playing videogames will be
-eventually possible.
+<p>This is close to <code class="language-plaintext highlighter-rouge">0</code> for now. Either as a couple, or on our own, time to do
+stuff by yourself seems a very hard thing to achieve. But I’m sure it will get
+better: myself I’m still a night-worker, so with his sleeping becoming more
+regular, working a bit on <strong>opensource</strong> or playing videogames will be
+eventually possible.</p>
 
-## Blog migration finished!
+<h2 id="blog-migration-finished">Blog migration finished!</h2>
 
-Talking of having no time to do stuff, while it seemed quite impossible,
+<p>Talking of having no time to do stuff, while it seemed quite impossible,
 I have indeed managed to complete
 the blog migration! It took a while to do
-the different bits, and I still have stuff to work on, but I'm now serving this
-from [GitHub Pages](http://pages.github.com/)
-using [Jekyll](http://jekyllrb.com/) to generate the static HTML/CSS/JS.
-Much happier: I can move to any other hosting in a matter of hours. I don't
+the different bits, and I still have stuff to work on, but I’m now serving this
+from <a href="http://pages.github.com/">GitHub Pages</a>
+using <a href="http://jekyllrb.com/">Jekyll</a> to generate the static HTML/CSS/JS.
+Much happier: I can move to any other hosting in a matter of hours. I don’t
 even know why I was bothering to use non-static content for
-blogging/personal site.
+blogging/personal site.</p>
 
-If interested, the repository with all the source code (posts +
+<p>If interested, the repository with all the source code (posts +
 Jekyll plugins) can be found at my
-[detro/detro.github.io "source" branch](https://github.com/detro/detro.github.io/tree/source).
+<a href="https://github.com/detro/detro.github.io/tree/source">detro/detro.github.io “source” branch</a>.</p>
 
-# Resume blogging
+<h1 id="resume-blogging">Resume blogging</h1>
 
-Migrating the blog means also producing more content, right?
+<p>Migrating the blog means also producing more content, right?
 Well, this is a first attempt. Not a great one, I admit -
-I find quite difficult to come up with things to say, when my brain it's
+I find quite difficult to come up with things to say, when my brain it’s
 affected by sleep deprivation.
-But I have a TODO list on my whiteboard of things I want to talk about:
+But I have a TODO list on my whiteboard of things I want to talk about:</p>
 
-1. Bought and still setting up a [N54L](http://www8.hp.com/uk/en/products/proliant-servers/product-detail.html?oid=5336624#!tab=features)
-[ZFS](http://en.wikipedia.org/wiki/ZFS) NAS at home: I think some of the
-decisions I have taken so far in the configuration process are worth sharing
-2. An update on the status of the
-[GhostDriver](https://github.com/detro/ghostdriver) and
-[PhantomJS](http://phantomjs.org) projects
-3. A satiric bible-related story that I want to publish (very short and
-quite offensive :P)
-4. [Sulfur](https://github.com/detro/sulfur), that I haven't introduced
-nor documented properly _yet_: it's a tiny Java library that provides a level
-of abstraction over [Selenium](http://www.seleniumhq.org/)
-5. 2013 is the year I read the most in my life:
-[George R.R. Martin](http://www.georgerrmartin.com/) and
-[Arthur Conan Doyle](http://en.wikipedia.org/wiki/Arthur_Conan_Doyle)
-_in primis_
-6. I'm leaving [Amazon AIV ADCL](http://www.amazondcl.com/)
-7. Algorithms that I have re-studied and coded examples of
+<ol>
+  <li>Bought and still setting up a <a href="http://www8.hp.com/uk/en/products/proliant-servers/product-detail.html?oid=5336624#!tab=features">N54L</a>
+<a href="http://en.wikipedia.org/wiki/ZFS">ZFS</a> NAS at home: I think some of the
+decisions I have taken so far in the configuration process are worth sharing</li>
+  <li>An update on the status of the
+<a href="https://github.com/detro/ghostdriver">GhostDriver</a> and
+<a href="http://phantomjs.org">PhantomJS</a> projects</li>
+  <li>A satiric bible-related story that I want to publish (very short and
+quite offensive :P)</li>
+  <li><a href="https://github.com/detro/sulfur">Sulfur</a>, that I haven’t introduced
+nor documented properly <em>yet</em>: it’s a tiny Java library that provides a level
+of abstraction over <a href="http://www.seleniumhq.org/">Selenium</a></li>
+  <li>2013 is the year I read the most in my life:
+<a href="http://www.georgerrmartin.com/">George R.R. Martin</a> and
+<a href="http://en.wikipedia.org/wiki/Arthur_Conan_Doyle">Arthur Conan Doyle</a>
+<em>in primis</em></li>
+  <li>I’m leaving <a href="http://www.amazondcl.com/">Amazon AIV ADCL</a></li>
+  <li>Algorithms that I have re-studied and coded examples of</li>
+</ol>
 
-# Catching up on personal projects
+<h1 id="catching-up-on-personal-projects">Catching up on personal projects</h1>
 
-I have been quite far from [Selenium](http://www.seleniumhq.org/),
-[GhostDriver](https://github.com/detro/ghostdriver) and
-[PhantomJS](http://phantomjs.org). Partially is my fault (I did spend some time
-playing _GTA V_ before Leonardo was here), but mostly is because of all the
-above.
+<p>I have been quite far from <a href="http://www.seleniumhq.org/">Selenium</a>,
+<a href="https://github.com/detro/ghostdriver">GhostDriver</a> and
+<a href="http://phantomjs.org">PhantomJS</a>. Partially is my fault (I did spend some time
+playing <em>GTA V</em> before Leonardo was here), but mostly is because of all the
+above.</p>
 
-While I don't really have a fully up-to-date picture of what's happening with
+<p>While I don’t really have a fully up-to-date picture of what’s happening with
 PhantomJS, I know that
-[Vitallium is working on the porting to Qt5](https://github.com/Vitallium/phantomjs-qt5).
+<a href="https://github.com/Vitallium/phantomjs-qt5">Vitallium is working on the porting to Qt5</a>.
 That is a very exciting perspective, and the project looks like it has a
-brilliant future ahead.
+brilliant future ahead.</p>
 
-Also, the [Qt-Project](http://qt-project.org/) is
-[moving Chromium/Blink](http://blog.qt.digia.com/blog/2013/06/25/experimenting-with-chromium-and-qt/):
+<p>Also, the <a href="http://qt-project.org/">Qt-Project</a> is
+<a href="http://blog.qt.digia.com/blog/2013/06/25/experimenting-with-chromium-and-qt/">moving Chromium/Blink</a>:
 this means that PhantomJS architecture will have to change sensibly, the core
-will be based on a more _commercial_ browser and, most importantly, I believe
-a full API compatibility break would be a given. _Why is that good?_ Because
+will be based on a more <em>commercial</em> browser and, most importantly, I believe
+a full API compatibility break would be a given. <em>Why is that good?</em> Because
 we could apply all we learned from developing PhantomJS so far, and do a better
-job in many areas.
+job in many areas.</p>
 
-## Quick note about GhostDriver
+<h2 id="quick-note-about-ghostdriver">Quick note about GhostDriver</h2>
 
-GhostDriver has received some love (aka _Pull Requests_). I have worked to
-integrate them into an upcoming `1.1.0`, but I think there are other more
-pressing improvements to do, before considering a release.
+<p>GhostDriver has received some love (aka <em>Pull Requests</em>). I have worked to
+integrate them into an upcoming <code class="language-plaintext highlighter-rouge">1.1.0</code>, but I think there are other more
+pressing improvements to do, before considering a release.</p>
 
-And, if you really want to, you can still check out the `master` branch
-and run it inside latest PhantomJS. So, I don't feel too much pressure to
-package a full release.
+<p>And, if you really want to, you can still check out the <code class="language-plaintext highlighter-rouge">master</code> branch
+and run it inside latest PhantomJS. So, I don’t feel too much pressure to
+package a full release.</p>
 
-_That's all for now._
+<p><em>That’s all for now.</em></p>
 
-**P.S.** I still haven't told you what's my next job, have I? :)]]></content><author><name>Ivan De Marino</name></author><category term="personal" /><category term="leonardo" /><category term="life" /><category term="reset" /><category term="settling" /><category term="blogging" /><category term="opensource" /><category term="ghostdriver" /><category term="phantomjs" /><category term="job" /><category term="career" /><summary type="html"><![CDATA[Puff, Pant! THAT was not easy! But finally, “normality” seems not too far away.]]></summary></entry><entry><title type="html">GhostDriver 1.0.4, blog migration and blogging too little</title><link href="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" /><published>2013-08-09T16:03:47+01:00</published><updated>2013-08-09T16:03:47+01:00</updated><id>https://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id><content type="html" xml:base="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little"><![CDATA[Yes, I'm not blogging enough.
-Yes, it's a shame that the world can't read my terrible English on a more regular basis.
-Yes, I'm lazy.
+<p><strong>P.S.</strong> I still haven’t told you what’s my next job, have I? :)</p>]]></content><author><name>Ivan De Marino</name></author><category term="personal" /><category term="leonardo" /><category term="life" /><category term="reset" /><category term="settling" /><category term="blogging" /><category term="opensource" /><category term="ghostdriver" /><category term="phantomjs" /><category term="job" /><category term="career" /><summary type="html"><![CDATA[Puff, Pant! THAT was not easy! But finally, “normality” seems not too far away.]]></summary></entry><entry><title type="html">GhostDriver 1.0.4, blog migration and blogging too little</title><link href="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" /><published>2013-08-09T16:03:47+01:00</published><updated>2013-08-09T16:03:47+01:00</updated><id>https://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id><content type="html" xml:base="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little"><![CDATA[<p>Yes, I’m not blogging enough.
+Yes, it’s a shame that the world can’t read my terrible English on a more regular basis.
+Yes, I’m lazy.</p>
 
-Well, here is a quick update for the few eager souls I have let down.
+<p>Well, here is a quick update for the few eager souls I have let down.</p>
 
-### GhostDriver
+<h3 id="ghostdriver">GhostDriver</h3>
 
-I have release [GhostDriver 1.0.4 - "Arghan Div"](https://github.com/detro/ghostdriver/releases/tag/1.0.4). It should be released in the [upcoming PhantomJS 1.9.2](https://github.com/ariya/phantomjs/issues/11452).
+<p>I have release <a href="https://github.com/detro/ghostdriver/releases/tag/1.0.4">GhostDriver 1.0.4 - “Arghan Div”</a>. It should be released in the <a href="https://github.com/ariya/phantomjs/issues/11452">upcoming PhantomJS 1.9.2</a>.</p>
 
 <div class="img">
-<img src="http://placehold.it/600x150/eee/500&text=1.0.4" />
+<img src="http://placehold.it/600x150/eee/500&amp;text=1.0.4" />
 </div>
 
-The code has been merged already into [PhantomJS master branch](https://github.com/ariya/phantomjs/commit/73bb56084028e1ee902bfedb8bd0443b337c7578) so, if you are really keen on putting your hands on it, just do a `./build.sh` of that branch.
+<p>The code has been merged already into <a href="https://github.com/ariya/phantomjs/commit/73bb56084028e1ee902bfedb8bd0443b337c7578">PhantomJS master branch</a> so, if you are really keen on putting your hands on it, just do a <code class="language-plaintext highlighter-rouge">./build.sh</code> of that branch.</p>
 
-### Blog migration
+<h3 id="blog-migration">Blog migration</h3>
 
-I'm planning to abandon [my fork of Bloggart](https://github.com/detro/bloggart). I have written a "backupper" that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to "leave" as well, look in [here](https://github.com/detro/bloggart/tree/blogivandemarinome-configuration/backup).
+<p>I’m planning to abandon <a href="https://github.com/detro/bloggart">my fork of Bloggart</a>. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in <a href="https://github.com/detro/bloggart/tree/blogivandemarinome-configuration/backup">here</a>.</p>
 
-I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I'm going to use [Jekyll](http://jekyllrb.com/). First tests look promising. I hope I'll get around to do it. And I want to use GitHub Pages to host it.
+<p>I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use <a href="http://jekyllrb.com/">Jekyll</a>. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it.</p>
 
-I'll probably have to make sure URLs are redirected properly, as I don't know how much of my current hostname structure I can use on GitHub pages.
+<p>I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages.</p>
 
-### Blogging too little
+<h3 id="blogging-too-little">Blogging too little</h3>
 
-One reason to migrate is that I think I'll write more if I can dump my thoughts into text file and do a `git push`: loading a URL to the Admin interface of this blog and typing in a `textarea` is sort of difficult nowdays.
+<p>One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a <code class="language-plaintext highlighter-rouge">git push</code>: loading a URL to the Admin interface of this blog and typing in a <code class="language-plaintext highlighter-rouge">textarea</code> is sort of difficult nowdays.</p>
 
-So that might make me blog more. Or not. I don't know. Will see.
+<p>So that might make me blog more. Or not. I don’t know. Will see.</p>
 
-Cheers.]]></content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html"><![CDATA[Yes, I’m not blogging enough. Yes, it’s a shame that the world can’t read my terrible English on a more regular basis. Yes, I’m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - “Arghan Div”. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I’m planning to abandon my fork of Bloggart. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use Jekyll. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it. I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don’t know. Will see. Cheers.]]></summary></entry><entry><title type="html">I’m off. See you in 2 weeks.</title><link href="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I’m off. See you in 2 weeks." /><published>2013-03-28T17:53:06+00:00</published><updated>2013-03-28T17:53:06+00:00</updated><id>https://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id><content type="html" xml:base="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks"><![CDATA[This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on [GhostDriver](https://github.com/detro/ghostdriver) or [PhantomJS](https://github.com/ariya/phantomjs) (for the latter you have coverage, as the team on that is rich of geniuses - so you won't miss my average-hood).
+<p>Cheers.</p>]]></content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html"><![CDATA[Yes, I’m not blogging enough. Yes, it’s a shame that the world can’t read my terrible English on a more regular basis. Yes, I’m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - “Arghan Div”. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I’m planning to abandon my fork of Bloggart. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use Jekyll. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it. I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don’t know. Will see. Cheers.]]></summary></entry><entry><title type="html">I’m off. See you in 2 weeks.</title><link href="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I’m off. See you in 2 weeks." /><published>2013-03-28T17:53:06+00:00</published><updated>2013-03-28T17:53:06+00:00</updated><id>https://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id><content type="html" xml:base="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks"><![CDATA[<p>This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on <a href="https://github.com/detro/ghostdriver">GhostDriver</a> or <a href="https://github.com/ariya/phantomjs">PhantomJS</a> (for the latter you have coverage, as the team on that is rich of geniuses - so you won’t miss my average-hood).</p>
 
-I'm **getting married** (crazy, right?) and will be mostly off-line. I should be back from the second week of April.
+<p>I’m <strong>getting married</strong> (crazy, right?) and will be mostly off-line. I should be back from the second week of April.</p>
 
 <div class="img">
 <img src="http://blog.fashionwindows.com/wp-content/uploads/2010/08/exchanging_rings.jpg" />
 </div>
 
-Surely there will be the usual _casual-tweet_ but nothing major.
+<p>Surely there will be the usual <em>casual-tweet</em> but nothing major.</p>
 
-See ya!]]></content><author><name>detro</name></author><category term="phantomjs" /><category term="personal" /><category term="off-line" /><category term="marriage" /><category term="wedding" /><category term="ghostdriver" /><summary type="html"><![CDATA[This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on GhostDriver or PhantomJS (for the latter you have coverage, as the team on that is rich of geniuses - so you won’t miss my average-hood). I’m getting married (crazy, right?) and will be mostly off-line. I should be back from the second week of April. Surely there will be the usual casual-tweet but nothing major. See ya!]]></summary></entry><entry><title type="html">GhostDriver 1.0.3 is out!</title><link href="https://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out" rel="alternate" type="text/html" title="GhostDriver 1.0.3 is out!" /><published>2013-03-18T18:25:19+00:00</published><updated>2013-03-18T18:25:19+00:00</updated><id>https://ivandemarino.me/2013/03/19/updated-phantomjs-1-9-0-ghostdriver-1-0-3-is-out</id><content type="html" xml:base="https://ivandemarino.me/2013/03/19/GhostDriver-1-0-3-is-out"><![CDATA[After few months of endless nights trying to figure out what I screwed up and where, I'm finally happy (enough) to release **GhostDriver 1.0.3** into the wild.
-
-This release is an _hardening release_: this means that it's focused on bug-fixing and very little new features have been added.
-
-**GhostDriver 1.0.3** <del>will be part of the upcoming **PhantomJS 1.9** release, do in few days</del> is now part of **PhantomJS 1.9.0**, and you can download binaries for various platform from [https://code.google.com/p/phantomjs/downloads/list](https://code.google.com/p/phantomjs/downloads/list).
-
-<div class="img">
-<img src="http://dummyimage.com/500x220/383b38/00ff00.png&text=1.0.3" />
-</div>
-If you want to know what made it for the `1.0.3` cut, take a look at the [Changelog](https://github.com/detro/ghostdriver/blob/master/CHANGELOG.md).
-
-I apologise in advance for whom have seen his "pet issue" not being implemented/fixed/addressed for this release, but it's only one of me.
-
-I'd like to take the time to thank the few brave souls that have contributed to this release with their code. In chronological contribution order:
-
-* [garyd203](https://github.com/garyd203)
-* [Christoph Neuroth](https://github.com/c089)
-* [Nathan Dace](https://github.com/nathandace)
-* [Loduis Madariaga Barrios](https://github.com/loduis)
-* [Ben McCann](https://github.com/benmccann)
-
-Thanks guys! _Keep being awesome!_]]></content><author><name>detro</name></author><category term="webdriver" /><category term="contributors" /><category term="phantomjs" /><category term="1.0.3" /><category term="release" /><category term="1.9.0" /><category term="ghostdriver" /><summary type="html"><![CDATA[After few months of endless nights trying to figure out what I screwed up and where, I’m finally happy (enough) to release GhostDriver 1.0.3 into the wild. This release is an hardening release: this means that it’s focused on bug-fixing and very little new features have been added. GhostDriver 1.0.3 will be part of the upcoming PhantomJS 1.9 release, do in few days is now part of PhantomJS 1.9.0, and you can download binaries for various platform from https://code.google.com/p/phantomjs/downloads/list. If you want to know what made it for the 1.0.3 cut, take a look at the Changelog. I apologise in advance for whom have seen his “pet issue” not being implemented/fixed/addressed for this release, but it’s only one of me. I’d like to take the time to thank the few brave souls that have contributed to this release with their code. In chronological contribution order: garyd203 Christoph Neuroth Nathan Dace Loduis Madariaga Barrios Ben McCann Thanks guys! Keep being awesome!]]></summary></entry></feed>
+<p>See ya!</p>]]></content><author><name>detro</name></author><category term="phantomjs" /><category term="personal" /><category term="off-line" /><category term="marriage" /><category term="wedding" /><category term="ghostdriver" /><summary type="html"><![CDATA[This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on GhostDriver or PhantomJS (for the latter you have coverage, as the team on that is rich of geniuses - so you won’t miss my average-hood). I’m getting married (crazy, right?) and will be mostly off-line. I should be back from the second week of April. Surely there will be the usual casual-tweet but nothing major. See ya!]]></summary></entry></feed>

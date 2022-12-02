@@ -4,13 +4,19 @@
   font-weight: 100;
 }
 .normalFont {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   font-weight: normal;
 }
 .codeFont {
-  font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-weight: normal;
-  line-height: 1.5em;
+  line-height: 1.4em;
+  color: #444;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  background-color: #f0f7fc;
+  overflow-wrap: break-word;
+  border-radius: 5px;
 }
 * {
   text-rendering: optimizeLegibility;
@@ -40,9 +46,15 @@ h6 a {
 div.highlight,
 code,
 pre {
-  font-family: "Consolas", "Liberation Mono", "Monaco", Courier, monospace;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-weight: normal;
-  line-height: 1.5em;
+  line-height: 1.4em;
+  color: #444;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  background-color: #f0f7fc;
+  overflow-wrap: break-word;
+  border-radius: 5px;
 }
 div.highlight span,
 code span,
@@ -115,6 +127,7 @@ pre span {
 }
 #layout #main {
   background-color: white;
+  max-width: 900px;
 }
 #layout #main #content a {
   color: #1f8dd6;
@@ -163,9 +176,9 @@ pre span {
   color: #09293e;
 }
 #layout #main #content .entry .meta {
-  font-size: 0.8em;
+  font-size: 0.9em;
   list-style: none;
-  color: #999;
+  color: #777;
   line-height: 1.5em;
   padding-left: 20px;
   padding-right: 20px;
@@ -176,7 +189,7 @@ pre span {
   color: #d4d4d4;
 }
 #layout #main #content .entry .body {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   font-weight: normal;
   line-height: 1.5em;
   text-align: justify;
@@ -194,12 +207,16 @@ pre span {
 #layout #main #content .entry .body img,
 #layout #main #content .entry .body iframe,
 #layout #main #content .entry .body object {
-  -o-box-shadow: 0 2px 10px #999;
-  -moz-box-shadow: 0 2px 10px #999;
-  -webkit-box-shadow: 0 2px 10px #999;
-  box-shadow: 0 2px 10px #999;
+  -o-box-shadow: 0 2px 10px #d4d4d4;
+  -moz-box-shadow: 0 2px 10px #d4d4d4;
+  -webkit-box-shadow: 0 2px 10px #d4d4d4;
+  box-shadow: 0 2px 10px #d4d4d4;
   display: block;
   margin: 1em auto 1em;
+}
+#layout #main #content .entry .body code {
+  padding: 2px 5px;
+  border: 1px solid #e1e1e1;
 }
 #layout #main #content .entry .body .img {
   color: #bbb;
@@ -210,7 +227,7 @@ pre span {
   font-weight: 100;
 }
 #layout #main #content .entry .body .img span {
-  color: #666;
+  color: #444;
   background-color: white;
   background-color: rgba(255, 255, 255, 0.7);
   position: absolute;
@@ -220,23 +237,23 @@ pre span {
   width: 100%;
 }
 #layout #main #content .entry .body .highlight {
-  -o-box-shadow: 0 2px 10px #999;
-  -moz-box-shadow: 0 2px 10px #999;
-  -webkit-box-shadow: 0 2px 10px #999;
-  box-shadow: 0 2px 10px #999;
+  -o-box-shadow: 0 2px 10px #d4d4d4;
+  -moz-box-shadow: 0 2px 10px #d4d4d4;
+  -webkit-box-shadow: 0 2px 10px #d4d4d4;
+  box-shadow: 0 2px 10px #d4d4d4;
   font-size: 0.9em;
   line-height: 1.2em;
-  border-top: 1px solid #e0f0fb;
-  border-bottom: 1px solid #e0f0fb;
 }
 #layout #main #content .entry .body .highlight pre {
   padding: 1em 1em;
   overflow: auto;
   word-wrap: normal;
   white-space: pre;
+  border: 1px solid #e1e1e1;
 }
 #layout #main #content .entry .body .highlight pre code {
   display: block;
+  border: none;
 }
 #layout #main #content .entry .body h1,
 #layout #main #content .entry .body h2,
@@ -246,7 +263,7 @@ pre span {
 #layout #main #content .entry .body h6 {
   padding-left: 20px;
   padding-right: 20px;
-  color: #999;
+  color: #777;
   padding-top: 0.5em;
   padding-bottom: 0.3em;
 }
@@ -260,7 +277,7 @@ pre span {
   margin-right: 0;
   padding-left: 20px;
   padding-right: 20px;
-  color: #999;
+  color: #777;
 }
 #layout #main #content .entry .body blockquote p {
   padding: 0;
@@ -305,7 +322,7 @@ pre span {
 }
 #layout #main #content .entry .body .archive .month h3 {
   background: none;
-  color: #666;
+  color: #444;
   box-shadow: none;
   padding: 0;
   border: none;
@@ -327,7 +344,7 @@ pre span {
   padding-right: 20px;
 }
 #layout #main #content .entry.summary .body {
-  color: #666;
+  color: #444;
 }
 #layout #main #content .entry.summary .body .readmore {
   font-style: italic;
@@ -337,7 +354,7 @@ pre span {
   border-bottom: 0;
 }
 #layout #main #content .entry.full .body {
-  font-size: 1em;
+  font-size: 1.1em;
 }
 #layout #main #content #paginator {
   font-size: 1.1em;
@@ -357,7 +374,7 @@ pre span {
   text-align: center;
   text-transform: uppercase;
   font-size: 0.8em;
-  color: #999;
+  color: #777;
   text-shadow: 0 1px 1px #fafafa;
 }
 #layout #main #footer span {
@@ -365,7 +382,7 @@ pre span {
 }
 #layout #main #footer a {
   font-weight: bold;
-  color: #999;
+  color: #777;
   text-decoration: none;
   -webkit-transition: color 0.3s ease;
   -moz-transition: color 0.3s ease;
@@ -375,7 +392,7 @@ pre span {
 #layout #main #footer a:link,
 #layout #main #footer a:visited,
 #layout #main #footer a:active {
-  color: #999;
+  color: #777;
 }
 #layout #main #footer a:hover,
 #layout #main #footer a:focus {

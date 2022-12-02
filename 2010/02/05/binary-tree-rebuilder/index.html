@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Imagine you have a Binary Tree, with those characteristics: Nodes do not respect any order relation - In other words: it&#39;s not a Binary Search Tree of any kind Every node appears once and only once within the tree A nice Binary Tree Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I’m pathetic at inventing hypothetical situations :-P ). Fortunately though, you previously did a Pre-Order and an In-Order visit of your tree, and stored the result in an 2 nice array. Can you rebuild the original tree structure out of this 2 array? How are you going to rebuild it? Yes, you can! (Sorry, I couldn’t resist). And it’s quite easy as well. What you have to do, is the following: Take the first element of the PreOrder Array and use it as root of a new tree Find the position of this New Node in the InOrder Array, scanning it from 0 to n-1 (n is the number of Nodes) IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from 0 to the position of the New Node in the InOrder Array -1. IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the position of the New Node in the InOrder Array +1 to n-1. Return the New Node By the way, this doesn’t work. To fix it we should be more generic, specifying things a little bit better. Things like: Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array There is going to be as much recursive calls as the number of elements in the PreOrder array Of course, is a tree what we are talking about here: recursion is a MUST. The solution Well, after the crappiest algorithmic explanation I have ever written, here it comes the code. This time it’s not pure C: I wanted to use the beautiful Qt Framework that I’m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:" />
 <meta property="og:description" content="Imagine you have a Binary Tree, with those characteristics: Nodes do not respect any order relation - In other words: it&#39;s not a Binary Search Tree of any kind Every node appears once and only once within the tree A nice Binary Tree Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I’m pathetic at inventing hypothetical situations :-P ). Fortunately though, you previously did a Pre-Order and an In-Order visit of your tree, and stored the result in an 2 nice array. Can you rebuild the original tree structure out of this 2 array? How are you going to rebuild it? Yes, you can! (Sorry, I couldn’t resist). And it’s quite easy as well. What you have to do, is the following: Take the first element of the PreOrder Array and use it as root of a new tree Find the position of this New Node in the InOrder Array, scanning it from 0 to n-1 (n is the number of Nodes) IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from 0 to the position of the New Node in the InOrder Array -1. IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the position of the New Node in the InOrder Array +1 to n-1. Return the New Node By the way, this doesn’t work. To fix it we should be more generic, specifying things a little bit better. Things like: Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array There is going to be as much recursive calls as the number of elements in the PreOrder array Of course, is a tree what we are talking about here: recursion is a MUST. The solution Well, after the crappiest algorithmic explanation I have ever written, here it comes the code. This time it’s not pure C: I wanted to use the beautiful Qt Framework that I’m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:" />
-<link rel="canonical" href="http://ivandemarino.me/2010/02/05/binary-tree-rebuilder/" />
-<meta property="og:url" content="http://ivandemarino.me/2010/02/05/binary-tree-rebuilder/" />
+<link rel="canonical" href="https://ivandemarino.me/2010/02/05/binary-tree-rebuilder/" />
+<meta property="og:url" content="https://ivandemarino.me/2010/02/05/binary-tree-rebuilder/" />
 <meta property="og:site_name" content="Too much coffee, too little time" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2010-02-05T20:54:01+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Binary Tree Rebuilder" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-02-05T20:54:01+00:00","datePublished":"2010-02-05T20:54:01+00:00","description":"Imagine you have a Binary Tree, with those characteristics: Nodes do not respect any order relation - In other words: it&#39;s not a Binary Search Tree of any kind Every node appears once and only once within the tree A nice Binary Tree Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I’m pathetic at inventing hypothetical situations :-P ). Fortunately though, you previously did a Pre-Order and an In-Order visit of your tree, and stored the result in an 2 nice array. Can you rebuild the original tree structure out of this 2 array? How are you going to rebuild it? Yes, you can! (Sorry, I couldn’t resist). And it’s quite easy as well. What you have to do, is the following: Take the first element of the PreOrder Array and use it as root of a new tree Find the position of this New Node in the InOrder Array, scanning it from 0 to n-1 (n is the number of Nodes) IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from 0 to the position of the New Node in the InOrder Array -1. IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the position of the New Node in the InOrder Array +1 to n-1. Return the New Node By the way, this doesn’t work. To fix it we should be more generic, specifying things a little bit better. Things like: Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array There is going to be as much recursive calls as the number of elements in the PreOrder array Of course, is a tree what we are talking about here: recursion is a MUST. The solution Well, after the crappiest algorithmic explanation I have ever written, here it comes the code. This time it’s not pure C: I wanted to use the beautiful Qt Framework that I’m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:","headline":"Binary Tree Rebuilder","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2010/02/05/binary-tree-rebuilder/"},"url":"http://ivandemarino.me/2010/02/05/binary-tree-rebuilder/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2010-02-05T20:54:01+00:00","datePublished":"2010-02-05T20:54:01+00:00","description":"Imagine you have a Binary Tree, with those characteristics: Nodes do not respect any order relation - In other words: it&#39;s not a Binary Search Tree of any kind Every node appears once and only once within the tree A nice Binary Tree Then, your little brother passes by your desk and, to upset you, deletes the tree from your computer memory/HD (yeah, I know, I’m pathetic at inventing hypothetical situations :-P ). Fortunately though, you previously did a Pre-Order and an In-Order visit of your tree, and stored the result in an 2 nice array. Can you rebuild the original tree structure out of this 2 array? How are you going to rebuild it? Yes, you can! (Sorry, I couldn’t resist). And it’s quite easy as well. What you have to do, is the following: Take the first element of the PreOrder Array and use it as root of a new tree Find the position of this New Node in the InOrder Array, scanning it from 0 to n-1 (n is the number of Nodes) IF next element in the PreOrder Array is on the left of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from 0 to the position of the New Node in the InOrder Array -1. IF next element in the PreOrder Array is on the right of the New Node in the InOrder array: call RECURSIVELY this procedure, this time taking into account the portion of InOrder array that goes from the position of the New Node in the InOrder Array +1 to n-1. Return the New Node By the way, this doesn’t work. To fix it we should be more generic, specifying things a little bit better. Things like: Every recursive calls takes into account a portion of the InOrder array; in the case of the first call it&#39;s the entire array There is going to be as much recursive calls as the number of elements in the PreOrder array Of course, is a tree what we are talking about here: recursion is a MUST. The solution Well, after the crappiest algorithmic explanation I have ever written, here it comes the code. This time it’s not pure C: I wanted to use the beautiful Qt Framework that I’m using since July/August 2009 for work. I will attach the code full code into a ZIP file; here I report at least the core algorithm:","headline":"Binary Tree Rebuilder","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2010/02/05/binary-tree-rebuilder/"},"url":"https://ivandemarino.me/2010/02/05/binary-tree-rebuilder/"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -73,7 +73,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
                         <h2>Ivan <strong>De Marino</strong></h2>
                     </hgroup>
 
@@ -81,13 +81,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -99,11 +99,11 @@
                                 
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

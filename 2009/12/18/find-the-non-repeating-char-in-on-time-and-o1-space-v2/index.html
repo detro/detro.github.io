@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link type="application/atom+xml" rel="alternate" href="http://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,15 +51,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My colleague and friend Luca (@lucabox) described a better solution to the problem of “Finding the first non repearing char in a string in O(n) time and O(1) space”. It uses smartly the space, making the solution nicer and slicker. Or we are just 2 geeks that need to give more attention to their girlfriends :P Luca’s solution description The logic of this solution is based on the usage of an array of unsigned chars. Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, “present once in the input string” and “present multiple times in the input string”. After the input is “scanned” once, and every letter is marked with the correspondent “presence bit” (once, multiple or none), it get’s scanned a second time to find the first char of the input which has the bit “present once” set to “1”. Before I show you the code Again, this comes from Luca Colantonio (http://uk.linkedin.com/in/lucacolantonio), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;) Now, the code." />
 <meta property="og:description" content="My colleague and friend Luca (@lucabox) described a better solution to the problem of “Finding the first non repearing char in a string in O(n) time and O(1) space”. It uses smartly the space, making the solution nicer and slicker. Or we are just 2 geeks that need to give more attention to their girlfriends :P Luca’s solution description The logic of this solution is based on the usage of an array of unsigned chars. Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, “present once in the input string” and “present multiple times in the input string”. After the input is “scanned” once, and every letter is marked with the correspondent “presence bit” (once, multiple or none), it get’s scanned a second time to find the first char of the input which has the bit “present once” set to “1”. Before I show you the code Again, this comes from Luca Colantonio (http://uk.linkedin.com/in/lucacolantonio), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;) Now, the code." />
-<link rel="canonical" href="http://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/" />
-<meta property="og:url" content="http://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/" />
+<link rel="canonical" href="https://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/" />
+<meta property="og:url" content="https://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/" />
 <meta property="og:site_name" content="Too much coffee, too little time" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2009-12-18T23:22:34+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Find the non repeating char in O(n) time and O(1) space - v2" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2009-12-18T23:22:34+00:00","datePublished":"2009-12-18T23:22:34+00:00","description":"My colleague and friend Luca (@lucabox) described a better solution to the problem of “Finding the first non repearing char in a string in O(n) time and O(1) space”. It uses smartly the space, making the solution nicer and slicker. Or we are just 2 geeks that need to give more attention to their girlfriends :P Luca’s solution description The logic of this solution is based on the usage of an array of unsigned chars. Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, “present once in the input string” and “present multiple times in the input string”. After the input is “scanned” once, and every letter is marked with the correspondent “presence bit” (once, multiple or none), it get’s scanned a second time to find the first char of the input which has the bit “present once” set to “1”. Before I show you the code Again, this comes from Luca Colantonio (http://uk.linkedin.com/in/lucacolantonio), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;) Now, the code.","headline":"Find the non repeating char in O(n) time and O(1) space - v2","mainEntityOfPage":{"@type":"WebPage","@id":"http://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/"},"url":"http://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"detro"},"dateModified":"2009-12-18T23:22:34+00:00","datePublished":"2009-12-18T23:22:34+00:00","description":"My colleague and friend Luca (@lucabox) described a better solution to the problem of “Finding the first non repearing char in a string in O(n) time and O(1) space”. It uses smartly the space, making the solution nicer and slicker. Or we are just 2 geeks that need to give more attention to their girlfriends :P Luca’s solution description The logic of this solution is based on the usage of an array of unsigned chars. Every char (assumed to be lowecase) has an associated small byte (1 char = 8 bits), where the bits 0x1 and 0x2 (the 2 least significant) represents, respectively, “present once in the input string” and “present multiple times in the input string”. After the input is “scanned” once, and every letter is marked with the correspondent “presence bit” (once, multiple or none), it get’s scanned a second time to find the first char of the input which has the bit “present once” set to “1”. Before I show you the code Again, this comes from Luca Colantonio (http://uk.linkedin.com/in/lucacolantonio), smart ass that is too lazy to maintain a blog and post it himself (or even implementing himself - he just explained to me at work and I had to code it). Thanks Luca ;) Now, the code.","headline":"Find the non repeating char in O(n) time and O(1) space - v2","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/"},"url":"https://ivandemarino.me/2009/12/18/find-the-non-repeating-char-in-on-time-and-o1-space-v2/"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -73,7 +73,7 @@
                 <header id="header">
 
                     <hgroup>
-                        <h1><a href="http://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br>too little <strong>time</strong></a></h1>
                         <h2>Ivan <strong>De Marino</strong>
 </h2>
                     </hgroup>
@@ -82,13 +82,13 @@
                         
                             <ul id="internal-links">
                                 
-                                    <li class=""><a href="http://ivandemarino.me/">blog</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/projects">projects</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/about-me">about me</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
                                 
-                                    <li class=""><a href="http://ivandemarino.me/archive">archive</a></li>
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
                                 
                             </ul>
                         
@@ -100,11 +100,11 @@
                                 
                                     <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
                                 
-                                    <li><a rel="me" href="http://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
                                 
                             </ul>
                         

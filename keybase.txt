@@ -4,7 +4,7 @@ https://keybase.io/ivandemarino
 
 I hereby claim:
 
-  * I am an admin of http://ivandemarino.me
+  * I am an admin of https://ivandemarino.me
   * I am ivandemarino (https://keybase.io/ivandemarino) on keybase.
   * I have a public key ASDtf0cqBYy0mExtgZbLKQbmKjJrQrSmDpPKQ6ORrqUbuwo
 
