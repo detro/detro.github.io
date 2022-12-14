@@ -22,7 +22,7 @@ and time to learn-by-doing.
 
 ## Ksunami: waves of Kafka records
 
-From [github](github.com/kafkesc/ksunami):
+From [GitHub](https://github.com/kafkesc/ksunami):
 
 > Ksunami is a command-line tool to produce a constant, configurable, cyclical
 > stream of (dummy) records against a Kafka Cluster Topic.
