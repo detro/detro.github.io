@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-12-14T21:17:05+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Announcing Ksunami v0.1.x</title><link href="https://ivandemarino.me/2022/12/announcing-ksunami" rel="alternate" type="text/html" title="Announcing Ksunami v0.1.x" /><published>2022-12-14T00:00:00+00:00</published><updated>2022-12-14T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/announcing-ksunami</id><content type="html" xml:base="https://ivandemarino.me/2022/12/announcing-ksunami"><![CDATA[<p>October this year, while I was in the process of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-12-14T22:06:13+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Announcing Ksunami v0.1.x</title><link href="https://ivandemarino.me/2022/12/announcing-ksunami" rel="alternate" type="text/html" title="Announcing Ksunami v0.1.x" /><published>2022-12-14T00:00:00+00:00</published><updated>2022-12-14T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/announcing-ksunami</id><content type="html" xml:base="https://ivandemarino.me/2022/12/announcing-ksunami"><![CDATA[<p>October this year, while I was in the process of
 <a href="https://www.linkedin.com/feed/update/urn:li:activity:6995482562605236224/">changing job</a>,
 I started working on an open source project to monitor Kafka <em>consumer lag</em>.
 At <a href="https://newrelic.com">New Relic</a>, a previous gig, we used <strong>a lot of Kafka</strong>,
@@ -16,7 +16,7 @@ and time to learn-by-doing.</p>
 
 <h2 id="ksunami-waves-of-kafka-records">Ksunami: waves of Kafka records</h2>
 
-<p>From <a href="github.com/kafkesc/ksunami">github</a>:</p>
+<p>From <a href="https://github.com/kafkesc/ksunami">GitHub</a>:</p>
 
 <blockquote>
   <p>Ksunami is a command-line tool to produce a constant, configurable, cyclical
