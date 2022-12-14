@@ -1,4 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-12-02T19:40:05+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">TFZK - A Terraform Provider for Apache ZooKeeper</title><link href="https://ivandemarino.me/2022/12/tfzk" rel="alternate" type="text/html" title="TFZK - A Terraform Provider for Apache ZooKeeper" /><published>2022-12-02T00:00:00+00:00</published><updated>2022-12-02T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/tfzk</id><content type="html" xml:base="https://ivandemarino.me/2022/12/tfzk"><![CDATA[<h2 id="gimme-the-tldr">Gimme the TL;DR</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2022-12-14T21:17:05+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Announcing Ksunami v0.1.x</title><link href="https://ivandemarino.me/2022/12/announcing-ksunami" rel="alternate" type="text/html" title="Announcing Ksunami v0.1.x" /><published>2022-12-14T00:00:00+00:00</published><updated>2022-12-14T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/announcing-ksunami</id><content type="html" xml:base="https://ivandemarino.me/2022/12/announcing-ksunami"><![CDATA[<p>October this year, while I was in the process of
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:6995482562605236224/">changing job</a>,
+I started working on an open source project to monitor Kafka <em>consumer lag</em>.
+At <a href="https://newrelic.com">New Relic</a>, a previous gig, we used <strong>a lot of Kafka</strong>,
+and we cared equally about monitoring its usage: there are some
+<a href="https://newrelic.com/blog/best-practices/new-relic-kafkapocalypse">great articles</a>
+on New Relic own blogs, <a href="https://newrelic.com/blog/search?s=kafka">published over the years</a>.</p>
+
+<p>In the process, I realised that I needed a way to spin up a Kafka cluster for
+development, <em>and</em> I needed a producer of Kafka records, that was able to behave
+in accordance to specific scenarios.</p>
+
+<p>I’m also <em>still</em> learning <a href="https://www.rust-lang.org/">Rust</a>, and so this was
+the perfect excuse: fresh project, a language I want to become proficient in,
+and time to learn-by-doing.</p>
+
+<h2 id="ksunami-waves-of-kafka-records">Ksunami: waves of Kafka records</h2>
+
+<p>From <a href="github.com/kafkesc/ksunami">github</a>:</p>
+
+<blockquote>
+  <p>Ksunami is a command-line tool to produce a constant, configurable, cyclical
+stream of (dummy) records against a Kafka Cluster Topic.</p>
+
+  <p>If you are experimenting with scalability and latency against Kafka, and are
+looking for ways to reproduce a continues stream of records, following a
+specific traffic pattern that repeats periodically, Ksunami is the tool for you.</p>
+
+  <p>Ksunami offers a way to set up the production of records, expressing the
+scenario as a sequence of “phases” that repeat indefinitely.
+Records content is configurable but random: the purpose of the tool is to
+help with performance and scalability testing of your infrastructure.</p>
+</blockquote>
+
+<p>Ksunami (<a href="https://crates.io/crates/ksunami">crates.io</a>)
+is a command line tool, useful to reproduce typical production scenarios
+that are harder to do artificially without a lot of preparation.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Example: Low rec/sec, but spike of 1000x once-a-day, lasting 60 seconds</span>
+<span class="nv">$ </span>ksunami <span class="se">\</span>
+    <span class="nt">--topic</span>  <span class="se">\</span>
+    ... <span class="se">\</span>
+    <span class="nt">--min-sec</span> 86310 <span class="se">\ </span> <span class="c"># i.e. 24h - 90s</span>
+    <span class="nt">--min</span> 10 <span class="se">\ </span>        <span class="c"># most of the day, this topics sees 10 rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--up-sec</span> 10 <span class="se">\ </span>     <span class="c"># transitions from min to max within 10 sec</span>
+    <span class="nt">--up</span> spike-in <span class="se">\ </span>   <span class="c"># sudden jump: 10k rec/sec</span>
+    <span class="se">\</span>
+    <span class="nt">--max-sec</span> 60 <span class="se">\ </span>    <span class="c"># a spike of just 60s</span>
+    <span class="nt">--max</span> 10000 <span class="se">\ </span>     <span class="c"># producing at 10k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--down-sec</span> 20 <span class="se">\ </span>   <span class="c"># transitions from max to min within 20 sec</span>
+    <span class="nt">--down</span> spike-out <span class="se">\ </span><span class="c"># sudden drop: back to just 10 rec/sec</span>
+    ...
+</code></pre></div></div>
+
+<p>Ksunami comes from spending a few years managing Kafka infrastructure, and having
+to address problems that occur in very specific, very high-throughput
+situations. Situations that… <em>wake you up at night</em>.</p>
+
+<p>In the repo I provided <a href="https://github.com/kafkesc/ksunami#examples">some ideas</a>
+on how Ksunami can be used. And, even in this early stage, it already
+<a href="https://github.com/kafkesc/ksunami#usage">provides many options</a>, to tailor to
+very specific needs.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Records in a wavy-pattern over the 24h cycle</span>
+<span class="nv">$ </span>ksunami <span class="se">\</span>
+    <span class="nt">--topic</span>  <span class="se">\</span>
+    ... <span class="se">\</span>
+    <span class="nt">--min-sec</span> 21600 <span class="se">\ </span>   <span class="c"># first quarter of the day</span>
+    <span class="nt">--min</span> 1000 <span class="se">\ </span>        <span class="c"># 1k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--up-sec</span> 21600 <span class="se">\ </span>    <span class="c"># second quarter of the day</span>
+    <span class="nt">--up</span> ease-in-out <span class="se">\ </span>  <span class="c"># stable rise</span>
+    <span class="se">\</span>
+    <span class="nt">--max-sec</span> 21600 <span class="se">\ </span>   <span class="c"># third quarter of the day</span>
+    <span class="nt">--max</span> 3000 <span class="se">\ </span>        <span class="c"># 3k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--down-sec</span> 21600 <span class="se">\ </span>  <span class="c"># fourth quarter of the day</span>
+    <span class="nt">--down</span> ease-in-out <span class="se">\ </span><span class="c"># stable decline</span>
+    ...
+</code></pre></div></div>
+
+<p>Ksunami is built around the <strong>concept of <em>4 phases</em> and <em>transitions</em></strong>: in the
+<code class="language-plaintext highlighter-rouge">README.md</code> I provided an extended explaination of its
+<a href="https://github.com/kafkesc/ksunami#core-concepts">core concepts</a>. And if you
+want to know how
+<a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B%C3%A9zier_curves">Cubic Bézier curves</a>
+fit into producing records to Kafka, give it a read.</p>
+
+<p><strong>At the time of writing, Ksunami is at version
+<a href="https://crates.io/crates/ksunami/versions"><code class="language-plaintext highlighter-rouge">v0.1.x</code></a></strong>, and I delineated
+a bit of a roadmap in the <a href="https://github.com/kafkesc/ksunami/issues">issue tracker</a>.</p>
+
+<p>Even if we are just at <code class="language-plaintext highlighter-rouge">0.1.x</code>, Ksunami is already sporting a multi-threaded async core,
+based on the superb <a href="https://tokio.rs/">Tokio</a>, and a rich command line interface,
+thanks to the awesome <a href="https://crates.io/crates/clap">clap</a>.</p>
+
+<h2 id="spinning-a-kafka-cluster-for-development">Spinning a Kafka cluster for development</h2>
+
+<p>Earlier I was hinting at
+<a href="https://github.com/kafkesc/kafka-dev-cluster">Kafka Development Cluster</a>:</p>
+
+<blockquote>
+  <p>A <strong>battery-included</strong> BUT <strong>development-only</strong> pairing of <code class="language-plaintext highlighter-rouge">Makefile</code> &amp;
+<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>, designed to quickly spin-up a Kafka cluster for
+development purposes.</p>
+</blockquote>
+
+<p><a href="https://github.com/kafkesc/kafka-dev-cluster"><code class="language-plaintext highlighter-rouge">kafka-dev-cluster</code></a> has
+all someone (I?) needs to get a local dev cluster going, and it comes with some
+super simple <code class="language-plaintext highlighter-rouge">Makefile</code> commands, so I can get bytes in and out of Kafka fast.</p>
+
+<p>There is no installation: just clone the repo, and start the cluster.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/kafkesc/kafka-dev-cluster.git
+<span class="nv">$ </span><span class="nb">cd </span>kafka-dev-cluster
+<span class="nv">$ </span>make start
+</code></pre></div></div>
+
+<p>I have half a mind to add a Prometheus instance to it, so that it can spin
+up a dashboard on a different port. It could help with local monitoring.
+Ah, and maybe a <a href="https://docs.confluent.io/platform/current/schema-registry/index.html#sr-overview">Schema Registry</a>?</p>
+
+<h2 id="wait-whats-githubcomkafkesc">“Wait! What’s github.com/kafkesc?”</h2>
+
+<p>I created an dedicated GitHub Organization to host what I’m doing.
+Yes! It <em>was</em> supposed to be called <em>Kafkesque</em>, but someone decide to take
+that username, and use it to make 2 commits in 5 years ;-(.
+So I went for a funny alternative: <a href="https://github.com/kafkesc">Kafkesc</a>.</p>
+
+<p><img src="https://avatars.githubusercontent.com/u/115027432?s=400&amp;u=cdabaa31af9824aaaeb05edb8f1c808f10ad1027&amp;v=4" alt="Kafkesc" /></p>
+
+<p>In this organization I’m going to host Kafka-related repositories
+and projects, as the needs arise.</p>
+
+<h2 id="in-conclusion">In conclusion</h2>
+
+<p>Ksunami is a <em>Records Producer</em>: I can tell it to produce more or less,
+at specific intervals, with specific spikes and valleys,
+tailoring its behaviour to the scenarios I want.</p>
+
+<p>I now need a <em>Records Consumer</em>! Something that can be made to misbehave?
+That every 10 minutes takes a <em>nap</em> and stops consuming? That turns on
+once a day, consumes a whole topic of records, and then sleeps for 23h,
+letting records (and lag) accumulate?</p>
+
+<p>Sorry, it will be a while before I can release a consumer lag calculator. But I
+did write last year a Rust parser for <code class="language-plaintext highlighter-rouge">__consumer_offsets</code>: maybe I should
+take a second and release that as a Rust Crate?</p>]]></content><author><name>Ivan De Marino</name></author><category term="ksunami" /><category term="kafkesc" /><category term="apache" /><category term="kafka" /><category term="opensource" /><category term="project" /><category term="workload" /><category term="producer" /><category term="records" /><summary type="html"><![CDATA[October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years.]]></summary></entry><entry><title type="html">TFZK - A Terraform Provider for Apache ZooKeeper</title><link href="https://ivandemarino.me/2022/12/tfzk" rel="alternate" type="text/html" title="TFZK - A Terraform Provider for Apache ZooKeeper" /><published>2022-12-02T00:00:00+00:00</published><updated>2022-12-02T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/tfzk</id><content type="html" xml:base="https://ivandemarino.me/2022/12/tfzk"><![CDATA[<h2 id="gimme-the-tldr">Gimme the TL;DR</h2>
 
 <p>A new Terraform provider is available, designed to interact with ZooKeeper ZNodes:
 <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest">TFZK</a>.
@@ -855,14 +1004,4 @@ Yes, I’m lazy.</p>
 
 <p>So that might make me blog more. Or not. I don’t know. Will see.</p>
 
-<p>Cheers.</p>]]></content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html"><![CDATA[Yes, I’m not blogging enough. Yes, it’s a shame that the world can’t read my terrible English on a more regular basis. Yes, I’m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - “Arghan Div”. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I’m planning to abandon my fork of Bloggart. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use Jekyll. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it. I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don’t know. Will see. Cheers.]]></summary></entry><entry><title type="html">I’m off. See you in 2 weeks.</title><link href="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks" rel="alternate" type="text/html" title="I’m off. See you in 2 weeks." /><published>2013-03-28T17:53:06+00:00</published><updated>2013-03-28T17:53:06+00:00</updated><id>https://ivandemarino.me/2013/03/29/i-m-off-see-you-in-2-weeks</id><content type="html" xml:base="https://ivandemarino.me/2013/03/29/I-m-off-See-you-in-2-weeks"><![CDATA[<p>This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on <a href="https://github.com/detro/ghostdriver">GhostDriver</a> or <a href="https://github.com/ariya/phantomjs">PhantomJS</a> (for the latter you have coverage, as the team on that is rich of geniuses - so you won’t miss my average-hood).</p>
-
-<p>I’m <strong>getting married</strong> (crazy, right?) and will be mostly off-line. I should be back from the second week of April.</p>
-
-<div class="img">
-<img src="http://blog.fashionwindows.com/wp-content/uploads/2010/08/exchanging_rings.jpg" />
-</div>
-
-<p>Surely there will be the usual <em>casual-tweet</em> but nothing major.</p>
-
-<p>See ya!</p>]]></content><author><name>detro</name></author><category term="phantomjs" /><category term="personal" /><category term="off-line" /><category term="marriage" /><category term="wedding" /><category term="ghostdriver" /><summary type="html"><![CDATA[This message is for the few souls that care. This is for the few people that maybe are waiting for me to fix/implement stuff on GhostDriver or PhantomJS (for the latter you have coverage, as the team on that is rich of geniuses - so you won’t miss my average-hood). I’m getting married (crazy, right?) and will be mostly off-line. I should be back from the second week of April. Surely there will be the usual casual-tweet but nothing major. See ya!]]></summary></entry></feed>
+<p>Cheers.</p>]]></content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html"><![CDATA[Yes, I’m not blogging enough. Yes, it’s a shame that the world can’t read my terrible English on a more regular basis. Yes, I’m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - “Arghan Div”. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I’m planning to abandon my fork of Bloggart. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use Jekyll. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it. I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don’t know. Will see. Cheers.]]></summary></entry></feed>

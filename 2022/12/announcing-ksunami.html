@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136869-11"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'UA-136869-11');
+            </script>
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0JQTBH0J9"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-K0JQTBH0J9');
+            </script>
+        
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Announcing Ksunami v0.1.x | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="Announcing Ksunami v0.1.x" />
+<meta name="author" content="Ivan De Marino" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years." />
+<meta property="og:description" content="October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years." />
+<link rel="canonical" href="https://ivandemarino.me/2022/12/announcing-ksunami" />
+<meta property="og:url" content="https://ivandemarino.me/2022/12/announcing-ksunami" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Announcing Ksunami v0.1.x" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ivan De Marino"},"dateModified":"2022-12-14T00:00:00+00:00","datePublished":"2022-12-14T00:00:00+00:00","description":"October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years.","headline":"Announcing Ksunami v0.1.x","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2022/12/announcing-ksunami"},"url":"https://ivandemarino.me/2022/12/announcing-ksunami"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan <strong>De Marino</strong></h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                Announcing Ksunami v0.1.x
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2022-12-14">Wednesday, 14 Dec 2022</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        ksunami &bull; kafkesc &bull; apache &bull; kafka &bull; opensource &bull; project &bull; workload &bull; producer &bull; records
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        894 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>October this year, while I was in the process of
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:6995482562605236224/">changing job</a>,
+I started working on an open source project to monitor Kafka <em>consumer lag</em>.
+At <a href="https://newrelic.com">New Relic</a>, a previous gig, we used <strong>a lot of Kafka</strong>,
+and we cared equally about monitoring its usage: there are some
+<a href="https://newrelic.com/blog/best-practices/new-relic-kafkapocalypse">great articles</a>
+on New Relic own blogs, <a href="https://newrelic.com/blog/search?s=kafka">published over the years</a>.</p>
+
+<p>In the process, I realised that I needed a way to spin up a Kafka cluster for
+development, <em>and</em> I needed a producer of Kafka records, that was able to behave
+in accordance to specific scenarios.</p>
+
+<p>I’m also <em>still</em> learning <a href="https://www.rust-lang.org/">Rust</a>, and so this was
+the perfect excuse: fresh project, a language I want to become proficient in,
+and time to learn-by-doing.</p>
+
+<h2 id="ksunami-waves-of-kafka-records">Ksunami: waves of Kafka records</h2>
+
+<p>From <a href="github.com/kafkesc/ksunami">github</a>:</p>
+
+<blockquote>
+  <p>Ksunami is a command-line tool to produce a constant, configurable, cyclical
+stream of (dummy) records against a Kafka Cluster Topic.</p>
+
+  <p>If you are experimenting with scalability and latency against Kafka, and are
+looking for ways to reproduce a continues stream of records, following a
+specific traffic pattern that repeats periodically, Ksunami is the tool for you.</p>
+
+  <p>Ksunami offers a way to set up the production of records, expressing the
+scenario as a sequence of “phases” that repeat indefinitely.
+Records content is configurable but random: the purpose of the tool is to
+help with performance and scalability testing of your infrastructure.</p>
+</blockquote>
+
+<p>Ksunami (<a href="https://crates.io/crates/ksunami">crates.io</a>)
+is a command line tool, useful to reproduce typical production scenarios
+that are harder to do artificially without a lot of preparation.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Example: Low rec/sec, but spike of 1000x once-a-day, lasting 60 seconds</span>
+<span class="nv">$ </span>ksunami <span class="se">\</span>
+    <span class="nt">--topic</span>  <span class="se">\</span>
+    ... <span class="se">\</span>
+    <span class="nt">--min-sec</span> 86310 <span class="se">\ </span> <span class="c"># i.e. 24h - 90s</span>
+    <span class="nt">--min</span> 10 <span class="se">\ </span>        <span class="c"># most of the day, this topics sees 10 rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--up-sec</span> 10 <span class="se">\ </span>     <span class="c"># transitions from min to max within 10 sec</span>
+    <span class="nt">--up</span> spike-in <span class="se">\ </span>   <span class="c"># sudden jump: 10k rec/sec</span>
+    <span class="se">\</span>
+    <span class="nt">--max-sec</span> 60 <span class="se">\ </span>    <span class="c"># a spike of just 60s</span>
+    <span class="nt">--max</span> 10000 <span class="se">\ </span>     <span class="c"># producing at 10k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--down-sec</span> 20 <span class="se">\ </span>   <span class="c"># transitions from max to min within 20 sec</span>
+    <span class="nt">--down</span> spike-out <span class="se">\ </span><span class="c"># sudden drop: back to just 10 rec/sec</span>
+    ...
+</code></pre></div></div>
+
+<p>Ksunami comes from spending a few years managing Kafka infrastructure, and having
+to address problems that occur in very specific, very high-throughput
+situations. Situations that… <em>wake you up at night</em>.</p>
+
+<p>In the repo I provided <a href="https://github.com/kafkesc/ksunami#examples">some ideas</a>
+on how Ksunami can be used. And, even in this early stage, it already
+<a href="https://github.com/kafkesc/ksunami#usage">provides many options</a>, to tailor to
+very specific needs.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Records in a wavy-pattern over the 24h cycle</span>
+<span class="nv">$ </span>ksunami <span class="se">\</span>
+    <span class="nt">--topic</span>  <span class="se">\</span>
+    ... <span class="se">\</span>
+    <span class="nt">--min-sec</span> 21600 <span class="se">\ </span>   <span class="c"># first quarter of the day</span>
+    <span class="nt">--min</span> 1000 <span class="se">\ </span>        <span class="c"># 1k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--up-sec</span> 21600 <span class="se">\ </span>    <span class="c"># second quarter of the day</span>
+    <span class="nt">--up</span> ease-in-out <span class="se">\ </span>  <span class="c"># stable rise</span>
+    <span class="se">\</span>
+    <span class="nt">--max-sec</span> 21600 <span class="se">\ </span>   <span class="c"># third quarter of the day</span>
+    <span class="nt">--max</span> 3000 <span class="se">\ </span>        <span class="c"># 3k rec/sec </span>
+    <span class="se">\</span>
+    <span class="nt">--down-sec</span> 21600 <span class="se">\ </span>  <span class="c"># fourth quarter of the day</span>
+    <span class="nt">--down</span> ease-in-out <span class="se">\ </span><span class="c"># stable decline</span>
+    ...
+</code></pre></div></div>
+
+<p>Ksunami is built around the <strong>concept of <em>4 phases</em> and <em>transitions</em></strong>: in the
+<code class="language-plaintext highlighter-rouge">README.md</code> I provided an extended explaination of its
+<a href="https://github.com/kafkesc/ksunami#core-concepts">core concepts</a>. And if you
+want to know how
+<a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B%C3%A9zier_curves">Cubic Bézier curves</a>
+fit into producing records to Kafka, give it a read.</p>
+
+<p><strong>At the time of writing, Ksunami is at version
+<a href="https://crates.io/crates/ksunami/versions"><code class="language-plaintext highlighter-rouge">v0.1.x</code></a></strong>, and I delineated
+a bit of a roadmap in the <a href="https://github.com/kafkesc/ksunami/issues">issue tracker</a>.</p>
+
+<p>Even if we are just at <code class="language-plaintext highlighter-rouge">0.1.x</code>, Ksunami is already sporting a multi-threaded async core,
+based on the superb <a href="https://tokio.rs/">Tokio</a>, and a rich command line interface,
+thanks to the awesome <a href="https://crates.io/crates/clap">clap</a>.</p>
+
+<h2 id="spinning-a-kafka-cluster-for-development">Spinning a Kafka cluster for development</h2>
+
+<p>Earlier I was hinting at
+<a href="https://github.com/kafkesc/kafka-dev-cluster">Kafka Development Cluster</a>:</p>
+
+<blockquote>
+  <p>A <strong>battery-included</strong> BUT <strong>development-only</strong> pairing of <code class="language-plaintext highlighter-rouge">Makefile</code> &amp;
+<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>, designed to quickly spin-up a Kafka cluster for
+development purposes.</p>
+</blockquote>
+
+<p><a href="https://github.com/kafkesc/kafka-dev-cluster"><code class="language-plaintext highlighter-rouge">kafka-dev-cluster</code></a> has
+all someone (I?) needs to get a local dev cluster going, and it comes with some
+super simple <code class="language-plaintext highlighter-rouge">Makefile</code> commands, so I can get bytes in and out of Kafka fast.</p>
+
+<p>There is no installation: just clone the repo, and start the cluster.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/kafkesc/kafka-dev-cluster.git
+<span class="nv">$ </span><span class="nb">cd </span>kafka-dev-cluster
+<span class="nv">$ </span>make start
+</code></pre></div></div>
+
+<p>I have half a mind to add a Prometheus instance to it, so that it can spin
+up a dashboard on a different port. It could help with local monitoring.
+Ah, and maybe a <a href="https://docs.confluent.io/platform/current/schema-registry/index.html#sr-overview">Schema Registry</a>?</p>
+
+<h2 id="wait-whats-githubcomkafkesc">“Wait! What’s github.com/kafkesc?”</h2>
+
+<p>I created an dedicated GitHub Organization to host what I’m doing.
+Yes! It <em>was</em> supposed to be called <em>Kafkesque</em>, but someone decide to take
+that username, and use it to make 2 commits in 5 years ;-(.
+So I went for a funny alternative: <a href="https://github.com/kafkesc">Kafkesc</a>.</p>
+
+<p><img src="https://avatars.githubusercontent.com/u/115027432?s=400&amp;u=cdabaa31af9824aaaeb05edb8f1c808f10ad1027&amp;v=4" alt="Kafkesc" /></p>
+
+<p>In this organization I’m going to host Kafka-related repositories
+and projects, as the needs arise.</p>
+
+<h2 id="in-conclusion">In conclusion</h2>
+
+<p>Ksunami is a <em>Records Producer</em>: I can tell it to produce more or less,
+at specific intervals, with specific spikes and valleys,
+tailoring its behaviour to the scenarios I want.</p>
+
+<p>I now need a <em>Records Consumer</em>! Something that can be made to misbehave?
+That every 10 minutes takes a <em>nap</em> and stops consuming? That turns on
+once a day, consumes a whole topic of records, and then sleeps for 23h,
+letting records (and lag) accumulate?</p>
+
+<p>Sorry, it will be a while before I can release a consumer lag calculator. But I
+did write last year a Rust parser for <code class="language-plaintext highlighter-rouge">__consumer_offsets</code>: maybe I should
+take a second and release that as a Rust Crate?</p>
+
+            
+        </div>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/" target="_blank">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>

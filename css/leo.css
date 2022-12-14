@@ -218,6 +218,23 @@ pre span {
   padding: 2px 5px;
   border: 1px solid #e1e1e1;
 }
+#layout #main #content .entry .body a code {
+  color: #1f8dd6;
+  text-decoration: none;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+#layout #main #content .entry .body a code:link,
+#layout #main #content .entry .body a code:visited,
+#layout #main #content .entry .body a code:active {
+  color: #1f8dd6;
+}
+#layout #main #content .entry .body a code:hover,
+#layout #main #content .entry .body a code:focus {
+  color: #09293e;
+}
 #layout #main #content .entry .body .img {
   color: #bbb;
   text-align: center;
@@ -241,7 +258,7 @@ pre span {
   -moz-box-shadow: 0 2px 10px #d4d4d4;
   -webkit-box-shadow: 0 2px 10px #d4d4d4;
   box-shadow: 0 2px 10px #d4d4d4;
-  font-size: 0.9em;
+  font-size: 1em;
   line-height: 1.2em;
 }
 #layout #main #content .entry .body .highlight pre {
@@ -291,6 +308,47 @@ pre span {
   font-size: 30px;
   margin-top: 0px;
   margin-left: -40px;
+}
+#layout #main #content .entry .body table {
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+#layout #main #content .entry .body table tr {
+  border-top: 1px solid #d4d4d4;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+#layout #main #content .entry .body table tr:nth-child(2n) {
+  background-color: #f2f9fd;
+}
+#layout #main #content .entry .body table tr th {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
+  color: #1f8dd6;
+  background-color: #e0f0fb;
+  font-weight: bold;
+  border: 1px solid #d4d4d4;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+  text-align: center;
+}
+#layout #main #content .entry .body table tr td {
+  border: 1px solid #d4d4d4;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+#layout #main #content .entry .body table tr th :first-child,
+#layout #main #content .entry .body table tr td :first-child {
+  margin-top: 0;
+}
+#layout #main #content .entry .body table tr th :last-child,
+#layout #main #content .entry .body table tr td :last-child {
+  margin-bottom: 0;
 }
 #layout #main #content .entry .body .archive .years {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -445,6 +503,6 @@ pre span {
     display: block;
   }
   #layout #main #content .entry .body .highlight {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
 }
