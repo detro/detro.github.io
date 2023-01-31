@@ -7,6 +7,9 @@ install:
 uninstall:
 	rm -rf .vendor
 
+update:
+	bundle update
+
 serve:
 	bundle exec jekyll serve --drafts --open-url
 
@@ -22,4 +25,4 @@ ghp.push:
 	git -C ../gh-pages push
 	git -C ../gh-pages status
 
-.PHONY: install uninstall serve ghp.build ghp.commit ghp.push
+.PHONY: install uninstall update serve ghp.build ghp.commit ghp.push
