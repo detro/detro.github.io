@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Announcing Ksunami v0.1.x"
-tags: [ksunami, kafkesc, apache, kafka, opensource, project, workload, producer, records]
+tags: [ksunami, kafkesc, apache, kafka, opensource, project, workload, producer, records, rust]
 ---
 
 October this year, while I was in the process of
