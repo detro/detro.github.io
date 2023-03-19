@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2023-01-31T21:35:13+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Announcing Ksunami v0.1.x</title><link href="https://ivandemarino.me/2022/12/announcing-ksunami" rel="alternate" type="text/html" title="Announcing Ksunami v0.1.x" /><published>2022-12-14T00:00:00+00:00</published><updated>2022-12-14T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/announcing-ksunami</id><content type="html" xml:base="https://ivandemarino.me/2022/12/announcing-ksunami"><![CDATA[<p>October this year, while I was in the process of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://ivandemarino.me/atom.xml" rel="self" type="application/atom+xml" /><link href="https://ivandemarino.me/" rel="alternate" type="text/html" /><updated>2023-03-19T22:20:19+00:00</updated><id>https://ivandemarino.me/atom.xml</id><title type="html">Too much coffee, too little time</title><subtitle>Ivan De Marino&apos;s blog and personal website</subtitle><author><name>Ivan De Marino</name></author><entry><title type="html">Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust</title><link href="https://ivandemarino.me/2023/03/kafkesc-updates" rel="alternate" type="text/html" title="Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust" /><published>2023-03-19T00:00:00+00:00</published><updated>2023-03-19T00:00:00+00:00</updated><id>https://ivandemarino.me/2023/03/kafkesc-updates</id><content type="html" xml:base="https://ivandemarino.me/2023/03/kafkesc-updates"><![CDATA[<p>While I haven’t taken the time to blog since the <a href="https://ivandemarino.me/2022/12/announcing-ksunami">Ksunami announcement</a>,
+I have been ploughing away at various projects inside the <a href="https://github.com/kafkesc">Kafkesc</a> organization,
+and also continuing the side-objective of growing my <a href="https://www.rust-lang.org/">Rust</a> skills.</p>
+
+<p>So, here is a recap of a few things I have released since. And also,
+how is it leading to a substantial growth in my <a href="https://www.rust-lang.org/">Rust</a> knowledge.</p>
+
+<h2 id="ksunami-gets-an-official-docker-image">Ksunami gets an official Docker image</h2>
+
+<p>In an attempt to make adoption easier, I setup <a href="https://github.com/kafkesc/ksunami-docker">ksunami-docker</a> so that running
+<code class="language-plaintext highlighter-rouge">ksunami</code> can be ever easier; in Docker, Kubernetes or wherever you
+need. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ksunami</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">ecosystem</span><span class="pi">:</span> <span class="s">kafka</span>
+    <span class="na">purpose</span><span class="pi">:</span> <span class="s">workload-generation</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ksunami-container</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">kafkesc/ksunami:latest</span>
+    <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span>
+        <span class="s2">"</span><span class="s">--brokers"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">B1:9091,B2:9091,..."</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--topic"</span><span class="pi">,</span>    <span class="s2">"</span><span class="s">MY_ONCE_A_DAY_SPIKE_TOPIC"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--min-sec"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">86310"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--min"</span><span class="pi">,</span>      <span class="s2">"</span><span class="s">10"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--up-sec"</span><span class="pi">,</span>   <span class="s2">"</span><span class="s">10"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--up"</span><span class="pi">,</span>       <span class="s2">"</span><span class="s">spike-in"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--max-sec"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">60"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--max"</span><span class="pi">,</span>      <span class="s2">"</span><span class="s">10000"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--down-sec"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">20"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--down"</span><span class="pi">,</span>     <span class="s2">"</span><span class="s">spike-out"</span><span class="pi">,</span>
+    <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>The Docker image is designed so that all the arguments passed to the docker image,
+are passed directly to the internal <code class="language-plaintext highlighter-rouge">ksunami</code> binary. So, the exact same
+<a href="https://github.com/kafkesc/ksunami#usage">usage instructions</a> apply.</p>
+
+<p>As you would expect, for each release of <a href="https://github.com/kafkesc/ksunami">ksunami</a> there will be a corresponding
+release of <a href="https://github.com/kafkesc/ksunami-docker">ksunami-docker</a> with a matching docker image tag.</p>
+
+<p>At the time of writing, <code class="language-plaintext highlighter-rouge">kafkesc/ksunami:latest</code> is <code class="language-plaintext highlighter-rouge">kafkesc/ksunami:v0.1.7</code>.</p>
+
+<h2 id="unlocking-the-secrets-of-the-__consumer_offsets-kafka-topic">Unlocking the secrets of the <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> Kafka Topic</h2>
+
+<p>Unless you decide to track your Consumer Offset outside of Kafka, you are likely
+using the default mechanisms to <em>commit</em> your offsets back to Kafka itself.</p>
+
+<p>Kafka uses a <em>special internal</em> topic to store that information:
+<code class="language-plaintext highlighter-rouge">__consumer_offsets</code>. The documentation about Kafka internal 
+<a href="https://kafka.apache.org/documentation/#impl_offsettracking">Consumer Offset Tracking</a> is a bit wanting, but there are plenty of articles
+<a href="https://www.google.com/search?q=parsing+__consumer_offsets">about this topic</a>.</p>
+
+<p><img src="https://kafka.apache.org/0110/images/log_consumer.png" alt="" /></p>
+
+<p>For <a href="https://github.com/kafkesc">Kafkesc</a>, where I’m writing everything in <a href="https://www.rust-lang.org/">Rust</a> in the spirit of
+<em>learning by doing</em>, I needed a parser for the records that are in this topic.
+The records keys and values are an entirely bespoke binary format, designed
+for this very narrow and specific need of tracking Consumer Offsets: nothing
+generic would do.</p>
+
+<p>I couldn’t find anything in Rust that was able to parse every record and
+every fields in it, so I built one: <a href="https://github.com/kafkesc/konsumer_offsets">kafkesc/konsumer_offsets</a>.</p>
+
+<p>It has the following features:</p>
+
+<ul>
+  <li><strong>Most complete parser for <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> messages out there</strong></li>
+  <li>Reverse-engineering of <a href="https://kafka.apache.org/">Kafka</a> 3.x parsing logic, making it retro-compatible
+by default</li>
+  <li>Able to parse the <em>subscription</em> and <em>assignment</em> data contained in
+<code class="language-plaintext highlighter-rouge">GroupMetadata</code> messages: beyond what even the Kafka own parser can do</li>
+  <li>Every struct and field is well documented</li>
+  <li>Internal parsing functions are also documented and have references to the code
+they are based upon: if you read the code, you can go correlate to the <a href="https://kafka.apache.org/">Kafka</a>
+codebase that its imitating</li>
+  <li>Parsing is based on <a href="https://github.com/detro/bytes_parser">bytes_parser</a> (more on this in a sec)
+and errors on <a href="https://crates.io/crates/thiserror">thiserror</a>, so it’s easy to read and handles result
+errors idiomatically</li>
+</ul>
+
+<p>If you need to consume the <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> <a href="https://kafka.apache.org/">Kafka</a> Topic, and are looking
+for a solid <a href="https://www.rust-lang.org/">Rust</a> parser,
+<a href="https://crates.io/crates/konsumer_offsets"><code class="language-plaintext highlighter-rouge">konsumer_offsets</code> <code class="language-plaintext highlighter-rouge">v0.1.1</code></a> is on
+<a href="https://crates.io">crates.io</a>. Give it a whirl.</p>
+
+<h2 id="easiest-byte-parsing-you-can-find-in-rust">Easiest byte parsing you can find in <a href="https://www.rust-lang.org/">Rust</a></h2>
+
+<p>When I was reverse engineering <a href="https://kafka.apache.org/">Kafka</a> internal logic to implement
+<a href="https://github.com/kafkesc/konsumer_offsets">kafkesc/konsumer_offsets</a>, I was looking for the <a href="https://www.rust-lang.org/">Rust</a> equivalent of
+<a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/ByteBuffer.html">Java <code class="language-plaintext highlighter-rouge">ByteBuffer</code></a>: I was looking for a simple wrapper to place around the
+raw bytes, and use a <em>plain English</em> interface that would:</p>
+
+<ul>
+  <li>read the correct amount of bytes that encode a specific type</li>
+  <li>parse those bytes into that type, and return it</li>
+  <li>move an internal cursor, that would move forward the same amount of bytes we
+had just read</li>
+</ul>
+
+<p>Initially I didn’t find a crate that would do it for me, so I started
+writing basic functions <code class="language-plaintext highlighter-rouge">parse_&lt;type&gt;()</code> into the
+<a href="https://crates.io/crates/konsumer_offsets"><code class="language-plaintext highlighter-rouge">konsumer_offsets</code></a> project
+I was working on.</p>
+
+<p>After a few parsing functions, I realised that a simple yet effective generalization
+was possible, and that would give me a chance to write my first <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">Rust</a>. So I did.</p>
+
+<p>That lead to creating <a href="https://github.com/detro/bytes_parser">bytes_parser</a>, currently at version
+<a href="https://crates.io/crates/bytes_parser"><code class="language-plaintext highlighter-rouge">v0.1.4</code></a> on <a href="https://crates.io">crates.io</a>.</p>
+
+<h3 id="but-what-about-nom">But… what about <a href="https://crates.io/crates/nom">nom</a>?</h3>
+
+<p>I later learned that I could have used <a href="https://crates.io/crates/nom">nom</a>, but I still think it would have
+felt like shooting a fly with a cannon, so I’m glad I went my own way.</p>
+
+<p>While <a href="https://crates.io/crates/nom">nom</a> seems like an excellent and feature reach crate, I needed a simple
+wrapper like what I described above. This is also because the work required
+was to reverse-engineer the Kafka source code (Scala): in there the logic is
+based on types very similar to <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/ByteBuffer.html">Java <code class="language-plaintext highlighter-rouge">ByteBuffer</code></a>.</p>
+
+<p>I saw no reason not to put together a super-simple solution, to call my own.</p>
+
+<h2 id="the-power-of-learning-by-doing">The power of learning by doing</h2>
+
+<p>This quick blogpost is a way to crystallize how important is for people like me,
+to have an active-part in learning: reading a documentation and trying to
+retain information for later use, just doesn’t work.</p>
+
+<p>At university it was the same: the Computer Science classes that I have absorbed
+best, are the one that had big laboratory assignment, where you would put to
+use the concepts.</p>
+
+<p>I know, maybe I’m (like we say in Napoli) <em>discovering hot water</em> here. But
+I feel very frequently in this industry, that because we are all about efficiency
+and we hate repeating ourselves, we rely on writing long, information-dense
+documentations, and then expect people to absorb it.</p>
+
+<p>It doesn’t work for me, and I bet it also doesn’t work for many others.</p>
+
+<h3 id="things-i-learned-about-rust-in-the-past-few-months">Things I learned about Rust in the past few months</h3>
+
+<p>In the specific, here are a few things about <a href="https://www.rust-lang.org/">Rust</a> that working on <a href="https://github.com/kafkesc">Kafkesc</a>
+projects lead me to use and pick up (so far):</p>
+
+<ul>
+  <li>How to use <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">Macros</a> to generate source code</li>
+  <li>It’s a great idea to have your CI run <code class="language-plaintext highlighter-rouge">cargo clippy</code></li>
+  <li>Enums and <a href="https://doc.rust-lang.org/book/ch06-02-match.html"><code class="language-plaintext highlighter-rouge">match</code></a> are the best way to model (exhaustively) multi-branch logic</li>
+  <li>How to define and implement my own <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Traits</a></li>
+  <li>Using <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code class="language-plaintext highlighter-rouge">Arc</code></a> and <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code class="language-plaintext highlighter-rouge">RwLock</code></a> to make multi-threaded async programming easy</li>
+  <li>Growing confident with <a href="https://crates.io/crates/tokio">tokio</a> and async/await programming</li>
+  <li>Cherish the <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code class="language-plaintext highlighter-rouge">Clone</code></a> trait</li>
+  <li>Implement as many <a href="https://stevedonovan.github.io/rustifications/2018/09/08/common-rust-traits.html">common Traits</a> as possible</li>
+  <li>Loving the <a href="https://crates.io/crates/thiserror">thiserror</a> crate</li>
+  <li>Write increasingly better <code class="language-plaintext highlighter-rouge">rustdoc</code> (even for macro-generated function!)</li>
+  <li>That many <a href="https://www.rust-lang.org/">Rust</a> projects use dual licensing: <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> + <a href="http://opensource.org/licenses/MIT">MIT</a></li>
+  <li>There is a reason <a href="https://crates.io/crates/clap">clap</a> is used by everyone, and its declarative syntax is amazing</li>
+</ul>
+
+<p>And probably a lot more that I can’t think of right now.</p>
+
+<h2 id="conclusion-about-rust">Conclusion, about Rust</h2>
+
+<p>A lot of what I have listed above was already known to me. But by trying to
+apply <em>business ideas</em> to Rust idioms, trying to model what was in my head,
+to what Rust <em>wants</em> you to write, is leading to a deeper understanding and
+learning of this amazing programming language.</p>
+
+<p>And my admiration and respect for it and the people behind it, has grown too.</p>
+
+<h2 id="conclusion-about-kafkesc">Conclusion, about Kafkesc</h2>
+
+<p>The beauty of not having a deadline, means that I can stop every now and then,
+and <em>hone</em> something until it looks great, before I move on. Where in a business
+setting one should never let <em>perfect get in the way of great</em>, with <a href="https://github.com/kafkesc">Kafkesc</a>
+I totally can.</p>
+
+<p>And if a community spawns out of it at some point, that would be a cherry on top.
+For now, I’m just happy to share my Kafka-centric solutions, written in <a href="https://www.rust-lang.org/">Rust</a>.</p>
+
+<p>People that have worked with me, likely know or can figure out where I’m heading
+with this organization: for now, I’ll keep the overarching plan to myself.</p>]]></content><author><name>Ivan De Marino</name></author><category term="kafkesc" /><category term="ksunami" /><category term="docker" /><category term="consumer_offsets" /><category term="parsing" /><category term="apache" /><category term="kafka" /><category term="opensource" /><category term="projects" /><category term="rust" /><summary type="html"><![CDATA[While I haven’t taken the time to blog since the Ksunami announcement, I have been ploughing away at various projects inside the Kafkesc organization, and also continuing the side-objective of growing my Rust skills.]]></summary></entry><entry><title type="html">Announcing Ksunami v0.1.x</title><link href="https://ivandemarino.me/2022/12/announcing-ksunami" rel="alternate" type="text/html" title="Announcing Ksunami v0.1.x" /><published>2022-12-14T00:00:00+00:00</published><updated>2022-12-14T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/announcing-ksunami</id><content type="html" xml:base="https://ivandemarino.me/2022/12/announcing-ksunami"><![CDATA[<p>October this year, while I was in the process of
 <a href="https://www.linkedin.com/feed/update/urn:li:activity:6995482562605236224/">changing job</a>,
 I started working on an open source project to monitor Kafka <em>consumer lag</em>.
 At <a href="https://newrelic.com">New Relic</a>, a previous gig, we used <strong>a lot of Kafka</strong>,
@@ -147,7 +333,7 @@ letting records (and lag) accumulate?</p>
 
 <p>Sorry, it will be a while before I can release a consumer lag calculator. But I
 did write last year a Rust parser for <code class="language-plaintext highlighter-rouge">__consumer_offsets</code>: maybe I should
-take a second and release that as a Rust Crate?</p>]]></content><author><name>Ivan De Marino</name></author><category term="ksunami" /><category term="kafkesc" /><category term="apache" /><category term="kafka" /><category term="opensource" /><category term="project" /><category term="workload" /><category term="producer" /><category term="records" /><summary type="html"><![CDATA[October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years.]]></summary></entry><entry><title type="html">TFZK - A Terraform Provider for Apache ZooKeeper</title><link href="https://ivandemarino.me/2022/12/tfzk" rel="alternate" type="text/html" title="TFZK - A Terraform Provider for Apache ZooKeeper" /><published>2022-12-02T00:00:00+00:00</published><updated>2022-12-02T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/tfzk</id><content type="html" xml:base="https://ivandemarino.me/2022/12/tfzk"><![CDATA[<h2 id="gimme-the-tldr">Gimme the TL;DR</h2>
+take a second and release that as a Rust Crate?</p>]]></content><author><name>Ivan De Marino</name></author><category term="ksunami" /><category term="kafkesc" /><category term="apache" /><category term="kafka" /><category term="opensource" /><category term="project" /><category term="workload" /><category term="producer" /><category term="records" /><category term="rust" /><summary type="html"><![CDATA[October this year, while I was in the process of changing job, I started working on an open source project to monitor Kafka consumer lag. At New Relic, a previous gig, we used a lot of Kafka, and we cared equally about monitoring its usage: there are some great articles on New Relic own blogs, published over the years.]]></summary></entry><entry><title type="html">TFZK - A Terraform Provider for Apache ZooKeeper</title><link href="https://ivandemarino.me/2022/12/tfzk" rel="alternate" type="text/html" title="TFZK - A Terraform Provider for Apache ZooKeeper" /><published>2022-12-02T00:00:00+00:00</published><updated>2022-12-02T00:00:00+00:00</updated><id>https://ivandemarino.me/2022/12/tfzk</id><content type="html" xml:base="https://ivandemarino.me/2022/12/tfzk"><![CDATA[<h2 id="gimme-the-tldr">Gimme the TL;DR</h2>
 
 <p>A new Terraform provider is available, designed to interact with ZooKeeper ZNodes:
 <a href="https://registry.terraform.io/providers/tfzk/zookeeper/latest">TFZK</a>.
@@ -974,34 +1160,4 @@ package a full release.</p>
 
 <p><em>That’s all for now.</em></p>
 
-<p><strong>P.S.</strong> I still haven’t told you what’s my next job, have I? :)</p>]]></content><author><name>Ivan De Marino</name></author><category term="personal" /><category term="leonardo" /><category term="life" /><category term="reset" /><category term="settling" /><category term="blogging" /><category term="opensource" /><category term="ghostdriver" /><category term="phantomjs" /><category term="job" /><category term="career" /><summary type="html"><![CDATA[Puff, Pant! THAT was not easy! But finally, “normality” seems not too far away.]]></summary></entry><entry><title type="html">GhostDriver 1.0.4, blog migration and blogging too little</title><link href="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little" rel="alternate" type="text/html" title="GhostDriver 1.0.4, blog migration and blogging too little" /><published>2013-08-09T16:03:47+01:00</published><updated>2013-08-09T16:03:47+01:00</updated><id>https://ivandemarino.me/2013/08/10/ghostdriver-1-0-4-blog-migration-and-blogging-too-little</id><content type="html" xml:base="https://ivandemarino.me/2013/08/10/GhostDriver-1-0-4-blog-migration-and-blogging-too-little"><![CDATA[<p>Yes, I’m not blogging enough.
-Yes, it’s a shame that the world can’t read my terrible English on a more regular basis.
-Yes, I’m lazy.</p>
-
-<p>Well, here is a quick update for the few eager souls I have let down.</p>
-
-<h3 id="ghostdriver">GhostDriver</h3>
-
-<p>I have release <a href="https://github.com/detro/ghostdriver/releases/tag/1.0.4">GhostDriver 1.0.4 - “Arghan Div”</a>. It should be released in the <a href="https://github.com/ariya/phantomjs/issues/11452">upcoming PhantomJS 1.9.2</a>.</p>
-
-<div class="img">
-<img src="http://placehold.it/600x150/eee/500&amp;text=1.0.4" />
-</div>
-
-<p>The code has been merged already into <a href="https://github.com/ariya/phantomjs/commit/73bb56084028e1ee902bfedb8bd0443b337c7578">PhantomJS master branch</a> so, if you are really keen on putting your hands on it, just do a <code class="language-plaintext highlighter-rouge">./build.sh</code> of that branch.</p>
-
-<h3 id="blog-migration">Blog migration</h3>
-
-<p>I’m planning to abandon <a href="https://github.com/detro/bloggart">my fork of Bloggart</a>. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in <a href="https://github.com/detro/bloggart/tree/blogivandemarinome-configuration/backup">here</a>.</p>
-
-<p>I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use <a href="http://jekyllrb.com/">Jekyll</a>. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it.</p>
-
-<p>I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages.</p>
-
-<h3 id="blogging-too-little">Blogging too little</h3>
-
-<p>One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a <code class="language-plaintext highlighter-rouge">git push</code>: loading a URL to the Admin interface of this blog and typing in a <code class="language-plaintext highlighter-rouge">textarea</code> is sort of difficult nowdays.</p>
-
-<p>So that might make me blog more. Or not. I don’t know. Will see.</p>
-
-<p>Cheers.</p>]]></content><author><name>detro</name></author><category term="github" /><category term="phantomjs" /><category term="blog" /><category term="jekyll" /><category term="migration" /><category term="release" /><category term="bloggart" /><category term="ghostdriver" /><summary type="html"><![CDATA[Yes, I’m not blogging enough. Yes, it’s a shame that the world can’t read my terrible English on a more regular basis. Yes, I’m lazy. Well, here is a quick update for the few eager souls I have let down. GhostDriver I have release GhostDriver 1.0.4 - “Arghan Div”. It should be released in the upcoming PhantomJS 1.9.2. The code has been merged already into PhantomJS master branch so, if you are really keen on putting your hands on it, just do a ./build.sh of that branch. Blog migration I’m planning to abandon my fork of Bloggart. I have written a “backupper” that uses Node.JS to download and save locally all the Pages and Posts stored in it. If you use Bloggart and want to “leave” as well, look in here. I want to move to a static generated, file stored blog. I initially thought about building it myself, but then I realised I have no time so I’m going to use Jekyll. First tests look promising. I hope I’ll get around to do it. And I want to use GitHub Pages to host it. I’ll probably have to make sure URLs are redirected properly, as I don’t know how much of my current hostname structure I can use on GitHub pages. Blogging too little One reason to migrate is that I think I’ll write more if I can dump my thoughts into text file and do a git push: loading a URL to the Admin interface of this blog and typing in a textarea is sort of difficult nowdays. So that might make me blog more. Or not. I don’t know. Will see. Cheers.]]></summary></entry></feed>
+<p><strong>P.S.</strong> I still haven’t told you what’s my next job, have I? :)</p>]]></content><author><name>Ivan De Marino</name></author><category term="personal" /><category term="leonardo" /><category term="life" /><category term="reset" /><category term="settling" /><category term="blogging" /><category term="opensource" /><category term="ghostdriver" /><category term="phantomjs" /><category term="job" /><category term="career" /><summary type="html"><![CDATA[Puff, Pant! THAT was not easy! But finally, “normality” seems not too far away.]]></summary></entry></feed>

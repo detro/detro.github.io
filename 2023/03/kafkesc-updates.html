@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link type="application/atom+xml" rel="alternate" href="https://ivandemarino.me/atom.xml" title="Too much coffee, too little time" />
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- Third Party CSS -->
+        <link href="/css/thirdparty/purecss-combo.min.css" rel="stylesheet">
+        <link href="/css/thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!--[if IE 7]>
+            <link href="/css/thirdparty/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet" >
+        <![endif]-->
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/css/leo.css">
+
+        <!-- Utility JS -->
+        <script type="text/javascript" src="/js/normalize.js"></script>
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136869-11"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'UA-136869-11');
+            </script>
+        
+
+        
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0JQTBH0J9"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-K0JQTBH0J9');
+            </script>
+        
+
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust | Too much coffee, too little time</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust" />
+<meta name="author" content="Ivan De Marino" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="While I haven’t taken the time to blog since the Ksunami announcement, I have been ploughing away at various projects inside the Kafkesc organization, and also continuing the side-objective of growing my Rust skills." />
+<meta property="og:description" content="While I haven’t taken the time to blog since the Ksunami announcement, I have been ploughing away at various projects inside the Kafkesc organization, and also continuing the side-objective of growing my Rust skills." />
+<link rel="canonical" href="https://ivandemarino.me/2023/03/kafkesc-updates" />
+<meta property="og:url" content="https://ivandemarino.me/2023/03/kafkesc-updates" />
+<meta property="og:site_name" content="Too much coffee, too little time" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ivan De Marino"},"dateModified":"2023-03-19T00:00:00+00:00","datePublished":"2023-03-19T00:00:00+00:00","description":"While I haven’t taken the time to blog since the Ksunami announcement, I have been ploughing away at various projects inside the Kafkesc organization, and also continuing the side-objective of growing my Rust skills.","headline":"Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust","mainEntityOfPage":{"@type":"WebPage","@id":"https://ivandemarino.me/2023/03/kafkesc-updates"},"url":"https://ivandemarino.me/2023/03/kafkesc-updates"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+
+    <body>
+        <div id="layout" class="pure-g-r">
+
+            <div id="sidebar" class="pure-u">
+                <a id="toggle-navigation" href="#"><i class="icon-reorder"></i></a>
+
+                <header id="header">
+
+                    <hgroup>
+                        <h1><a href="https://ivandemarino.me/">Too much <strong>coffee</strong><br/>too little <strong>time</strong></a></h1>
+                        <h2>Ivan <strong>De Marino</strong></h2>
+                    </hgroup>
+
+                    <nav id="navigation">
+                        
+                            <ul id="internal-links">
+                                
+                                    <li class=""><a href="https://ivandemarino.me/">blog</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/projects">projects</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/about-me">about me</a></li>
+                                
+                                    <li class=""><a href="https://ivandemarino.me/archive">archive</a></li>
+                                
+                            </ul>
+                        
+
+                        
+                            <ul id="rel-me-links">
+                                
+                                    <li><a rel="me" href="https://twitter.com/detronizator" target="_blank"><i class="icon-twitter"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://github.com/detro" target="_blank"><i class="icon-github"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://linkedin.com/in/ivandemarino" target="_blank"><i class="icon-linkedin"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://ivandemarino.me/atom.xml" target="_blank"><i class="icon-rss"></i></a></li>
+                                
+                                    <li><a rel="me" href="https://ivandemarino.me/sitemap.xml" target="_blank"><i class="icon-sitemap"></i></a></li>
+                                
+                            </ul>
+                        
+                    </nav>
+
+                </header>
+            </div>
+
+            <div id="main" class="pure-u-1">
+
+                <div id="content">
+                    
+<article class="entry full pure-u-1">
+    <header>
+        <h1 class="title">
+            
+                Kafkesc Updates: Docker, __consumer_offsets, byte parsing and Rust
+            
+        </h1>
+        
+            <ul class="meta">
+                
+                    <li>
+                        <i class="icon-calendar"></i>
+                        <time datetime="2023-03-19">Sunday, 19 Mar 2023</time>
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-tags"></i>
+                        kafkesc &bull; ksunami &bull; docker &bull; consumer_offsets &bull; parsing &bull; apache &bull; kafka &bull; opensource &bull; projects &bull; rust
+                    </li>
+                
+
+                
+                    <li>
+                        <i class="icon-time"></i>
+                        1192 words
+                    </li>
+                
+            </ul>
+        
+    </header>
+    
+        <div class="body">
+            
+                <p>While I haven’t taken the time to blog since the <a href="https://ivandemarino.me/2022/12/announcing-ksunami">Ksunami announcement</a>,
+I have been ploughing away at various projects inside the <a href="https://github.com/kafkesc">Kafkesc</a> organization,
+and also continuing the side-objective of growing my <a href="https://www.rust-lang.org/">Rust</a> skills.</p>
+
+<p>So, here is a recap of a few things I have released since. And also,
+how is it leading to a substantial growth in my <a href="https://www.rust-lang.org/">Rust</a> knowledge.</p>
+
+<h2 id="ksunami-gets-an-official-docker-image">Ksunami gets an official Docker image</h2>
+
+<p>In an attempt to make adoption easier, I setup <a href="https://github.com/kafkesc/ksunami-docker">ksunami-docker</a> so that running
+<code class="language-plaintext highlighter-rouge">ksunami</code> can be ever easier; in Docker, Kubernetes or wherever you
+need. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ksunami</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">ecosystem</span><span class="pi">:</span> <span class="s">kafka</span>
+    <span class="na">purpose</span><span class="pi">:</span> <span class="s">workload-generation</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ksunami-container</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">kafkesc/ksunami:latest</span>
+    <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span>
+        <span class="s2">"</span><span class="s">--brokers"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">B1:9091,B2:9091,..."</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--topic"</span><span class="pi">,</span>    <span class="s2">"</span><span class="s">MY_ONCE_A_DAY_SPIKE_TOPIC"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--min-sec"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">86310"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--min"</span><span class="pi">,</span>      <span class="s2">"</span><span class="s">10"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--up-sec"</span><span class="pi">,</span>   <span class="s2">"</span><span class="s">10"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--up"</span><span class="pi">,</span>       <span class="s2">"</span><span class="s">spike-in"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--max-sec"</span><span class="pi">,</span>  <span class="s2">"</span><span class="s">60"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--max"</span><span class="pi">,</span>      <span class="s2">"</span><span class="s">10000"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--down-sec"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">20"</span><span class="pi">,</span>
+        <span class="s2">"</span><span class="s">--down"</span><span class="pi">,</span>     <span class="s2">"</span><span class="s">spike-out"</span><span class="pi">,</span>
+    <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>The Docker image is designed so that all the arguments passed to the docker image,
+are passed directly to the internal <code class="language-plaintext highlighter-rouge">ksunami</code> binary. So, the exact same
+<a href="https://github.com/kafkesc/ksunami#usage">usage instructions</a> apply.</p>
+
+<p>As you would expect, for each release of <a href="https://github.com/kafkesc/ksunami">ksunami</a> there will be a corresponding
+release of <a href="https://github.com/kafkesc/ksunami-docker">ksunami-docker</a> with a matching docker image tag.</p>
+
+<p>At the time of writing, <code class="language-plaintext highlighter-rouge">kafkesc/ksunami:latest</code> is <code class="language-plaintext highlighter-rouge">kafkesc/ksunami:v0.1.7</code>.</p>
+
+<h2 id="unlocking-the-secrets-of-the-__consumer_offsets-kafka-topic">Unlocking the secrets of the <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> Kafka Topic</h2>
+
+<p>Unless you decide to track your Consumer Offset outside of Kafka, you are likely
+using the default mechanisms to <em>commit</em> your offsets back to Kafka itself.</p>
+
+<p>Kafka uses a <em>special internal</em> topic to store that information:
+<code class="language-plaintext highlighter-rouge">__consumer_offsets</code>. The documentation about Kafka internal 
+<a href="https://kafka.apache.org/documentation/#impl_offsettracking">Consumer Offset Tracking</a> is a bit wanting, but there are plenty of articles
+<a href="https://www.google.com/search?q=parsing+__consumer_offsets">about this topic</a>.</p>
+
+<p><img src="https://kafka.apache.org/0110/images/log_consumer.png" alt="" /></p>
+
+<p>For <a href="https://github.com/kafkesc">Kafkesc</a>, where I’m writing everything in <a href="https://www.rust-lang.org/">Rust</a> in the spirit of
+<em>learning by doing</em>, I needed a parser for the records that are in this topic.
+The records keys and values are an entirely bespoke binary format, designed
+for this very narrow and specific need of tracking Consumer Offsets: nothing
+generic would do.</p>
+
+<p>I couldn’t find anything in Rust that was able to parse every record and
+every fields in it, so I built one: <a href="https://github.com/kafkesc/konsumer_offsets">kafkesc/konsumer_offsets</a>.</p>
+
+<p>It has the following features:</p>
+
+<ul>
+  <li><strong>Most complete parser for <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> messages out there</strong></li>
+  <li>Reverse-engineering of <a href="https://kafka.apache.org/">Kafka</a> 3.x parsing logic, making it retro-compatible
+by default</li>
+  <li>Able to parse the <em>subscription</em> and <em>assignment</em> data contained in
+<code class="language-plaintext highlighter-rouge">GroupMetadata</code> messages: beyond what even the Kafka own parser can do</li>
+  <li>Every struct and field is well documented</li>
+  <li>Internal parsing functions are also documented and have references to the code
+they are based upon: if you read the code, you can go correlate to the <a href="https://kafka.apache.org/">Kafka</a>
+codebase that its imitating</li>
+  <li>Parsing is based on <a href="https://github.com/detro/bytes_parser">bytes_parser</a> (more on this in a sec)
+and errors on <a href="https://crates.io/crates/thiserror">thiserror</a>, so it’s easy to read and handles result
+errors idiomatically</li>
+</ul>
+
+<p>If you need to consume the <code class="language-plaintext highlighter-rouge">__consumer_offsets</code> <a href="https://kafka.apache.org/">Kafka</a> Topic, and are looking
+for a solid <a href="https://www.rust-lang.org/">Rust</a> parser,
+<a href="https://crates.io/crates/konsumer_offsets"><code class="language-plaintext highlighter-rouge">konsumer_offsets</code> <code class="language-plaintext highlighter-rouge">v0.1.1</code></a> is on
+<a href="https://crates.io">crates.io</a>. Give it a whirl.</p>
+
+<h2 id="easiest-byte-parsing-you-can-find-in-rust">Easiest byte parsing you can find in <a href="https://www.rust-lang.org/">Rust</a></h2>
+
+<p>When I was reverse engineering <a href="https://kafka.apache.org/">Kafka</a> internal logic to implement
+<a href="https://github.com/kafkesc/konsumer_offsets">kafkesc/konsumer_offsets</a>, I was looking for the <a href="https://www.rust-lang.org/">Rust</a> equivalent of
+<a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/ByteBuffer.html">Java <code class="language-plaintext highlighter-rouge">ByteBuffer</code></a>: I was looking for a simple wrapper to place around the
+raw bytes, and use a <em>plain English</em> interface that would:</p>
+
+<ul>
+  <li>read the correct amount of bytes that encode a specific type</li>
+  <li>parse those bytes into that type, and return it</li>
+  <li>move an internal cursor, that would move forward the same amount of bytes we
+had just read</li>
+</ul>
+
+<p>Initially I didn’t find a crate that would do it for me, so I started
+writing basic functions <code class="language-plaintext highlighter-rouge">parse_&lt;type&gt;()</code> into the
+<a href="https://crates.io/crates/konsumer_offsets"><code class="language-plaintext highlighter-rouge">konsumer_offsets</code></a> project
+I was working on.</p>
+
+<p>After a few parsing functions, I realised that a simple yet effective generalization
+was possible, and that would give me a chance to write my first <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">Rust</a>. So I did.</p>
+
+<p>That lead to creating <a href="https://github.com/detro/bytes_parser">bytes_parser</a>, currently at version
+<a href="https://crates.io/crates/bytes_parser"><code class="language-plaintext highlighter-rouge">v0.1.4</code></a> on <a href="https://crates.io">crates.io</a>.</p>
+
+<h3 id="but-what-about-nom">But… what about <a href="https://crates.io/crates/nom">nom</a>?</h3>
+
+<p>I later learned that I could have used <a href="https://crates.io/crates/nom">nom</a>, but I still think it would have
+felt like shooting a fly with a cannon, so I’m glad I went my own way.</p>
+
+<p>While <a href="https://crates.io/crates/nom">nom</a> seems like an excellent and feature reach crate, I needed a simple
+wrapper like what I described above. This is also because the work required
+was to reverse-engineer the Kafka source code (Scala): in there the logic is
+based on types very similar to <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/ByteBuffer.html">Java <code class="language-plaintext highlighter-rouge">ByteBuffer</code></a>.</p>
+
+<p>I saw no reason not to put together a super-simple solution, to call my own.</p>
+
+<h2 id="the-power-of-learning-by-doing">The power of learning by doing</h2>
+
+<p>This quick blogpost is a way to crystallize how important is for people like me,
+to have an active-part in learning: reading a documentation and trying to
+retain information for later use, just doesn’t work.</p>
+
+<p>At university it was the same: the Computer Science classes that I have absorbed
+best, are the one that had big laboratory assignment, where you would put to
+use the concepts.</p>
+
+<p>I know, maybe I’m (like we say in Napoli) <em>discovering hot water</em> here. But
+I feel very frequently in this industry, that because we are all about efficiency
+and we hate repeating ourselves, we rely on writing long, information-dense
+documentations, and then expect people to absorb it.</p>
+
+<p>It doesn’t work for me, and I bet it also doesn’t work for many others.</p>
+
+<h3 id="things-i-learned-about-rust-in-the-past-few-months">Things I learned about Rust in the past few months</h3>
+
+<p>In the specific, here are a few things about <a href="https://www.rust-lang.org/">Rust</a> that working on <a href="https://github.com/kafkesc">Kafkesc</a>
+projects lead me to use and pick up (so far):</p>
+
+<ul>
+  <li>How to use <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">Macros</a> to generate source code</li>
+  <li>It’s a great idea to have your CI run <code class="language-plaintext highlighter-rouge">cargo clippy</code></li>
+  <li>Enums and <a href="https://doc.rust-lang.org/book/ch06-02-match.html"><code class="language-plaintext highlighter-rouge">match</code></a> are the best way to model (exhaustively) multi-branch logic</li>
+  <li>How to define and implement my own <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Traits</a></li>
+  <li>Using <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code class="language-plaintext highlighter-rouge">Arc</code></a> and <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html"><code class="language-plaintext highlighter-rouge">RwLock</code></a> to make multi-threaded async programming easy</li>
+  <li>Growing confident with <a href="https://crates.io/crates/tokio">tokio</a> and async/await programming</li>
+  <li>Cherish the <a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code class="language-plaintext highlighter-rouge">Clone</code></a> trait</li>
+  <li>Implement as many <a href="https://stevedonovan.github.io/rustifications/2018/09/08/common-rust-traits.html">common Traits</a> as possible</li>
+  <li>Loving the <a href="https://crates.io/crates/thiserror">thiserror</a> crate</li>
+  <li>Write increasingly better <code class="language-plaintext highlighter-rouge">rustdoc</code> (even for macro-generated function!)</li>
+  <li>That many <a href="https://www.rust-lang.org/">Rust</a> projects use dual licensing: <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> + <a href="http://opensource.org/licenses/MIT">MIT</a></li>
+  <li>There is a reason <a href="https://crates.io/crates/clap">clap</a> is used by everyone, and its declarative syntax is amazing</li>
+</ul>
+
+<p>And probably a lot more that I can’t think of right now.</p>
+
+<h2 id="conclusion-about-rust">Conclusion, about Rust</h2>
+
+<p>A lot of what I have listed above was already known to me. But by trying to
+apply <em>business ideas</em> to Rust idioms, trying to model what was in my head,
+to what Rust <em>wants</em> you to write, is leading to a deeper understanding and
+learning of this amazing programming language.</p>
+
+<p>And my admiration and respect for it and the people behind it, has grown too.</p>
+
+<h2 id="conclusion-about-kafkesc">Conclusion, about Kafkesc</h2>
+
+<p>The beauty of not having a deadline, means that I can stop every now and then,
+and <em>hone</em> something until it looks great, before I move on. Where in a business
+setting one should never let <em>perfect get in the way of great</em>, with <a href="https://github.com/kafkesc">Kafkesc</a>
+I totally can.</p>
+
+<p>And if a community spawns out of it at some point, that would be a cherry on top.
+For now, I’m just happy to share my Kafka-centric solutions, written in <a href="https://www.rust-lang.org/">Rust</a>.</p>
+
+<p>People that have worked with me, likely know or can figure out where I’m heading
+with this organization: for now, I’ll keep the overarching plan to myself.</p>
+
+
+            
+        </div>
+    
+</article>
+
+
+                </div>
+
+                <footer id="footer">
+                    
+                        <span>Hosted on <a href="http://pages.github.com/" target="_blank">GitHub Pages</a></span>
+                    
+                    
+                        <span>Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a></span>
+                    
+                    
+                    
+                        <span>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></span>
+                    
+                </footer>
+
+            </div>
+        </div>
+
+        <script>
+            // Registering "click" handler for "#toggle-navigation"
+            normalize.elementAddEventListener(document.getElementById("toggle-navigation"),
+                "click",
+                function(e) {
+                    var navEl = document.getElementById("navigation");
+                    navEl.classList.toggle("open");
+                    e.preventDefault();
+                });
+        </script>
+    </body>
+</html>

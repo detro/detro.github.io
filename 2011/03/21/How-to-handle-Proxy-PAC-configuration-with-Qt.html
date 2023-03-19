@@ -175,14 +175,14 @@ Automatic Proxy Configuration on Mac OS X
 
 <p>A PAC file is a Javascript that looks like this:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
    <span class="c1">// our local URLs from the domains below example.com don't need a proxy:</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="dl">"</span><span class="s2">*.example.com/*</span><span class="dl">"</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">*.example.com:*/*</span><span class="dl">"</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
+   <span class="nf">if </span><span class="p">(</span><span class="nf">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="dl">"</span><span class="s2">*.example.com/*</span><span class="dl">"</span><span class="p">))</span>                  <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
+   <span class="nf">if </span><span class="p">(</span><span class="nf">shExpMatch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">*.example.com:*/*</span><span class="dl">"</span><span class="p">))</span>               <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">DIRECT</span><span class="dl">"</span><span class="p">;}</span>
 
    <span class="c1">// URLs within this network are accessed through</span>
    <span class="c1">// port 8080 on fastproxy.example.com:</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nx">isInNet</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="dl">"</span><span class="s2">10.0.0.0</span><span class="dl">"</span><span class="p">,</span>  <span class="dl">"</span><span class="s2">255.255.248.0</span><span class="dl">"</span><span class="p">))</span>    <span class="p">{</span>
+   <span class="nf">if </span><span class="p">(</span><span class="nf">isInNet</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="dl">"</span><span class="s2">10.0.0.0</span><span class="dl">"</span><span class="p">,</span>  <span class="dl">"</span><span class="s2">255.255.248.0</span><span class="dl">"</span><span class="p">))</span>    <span class="p">{</span>
       <span class="k">return</span> <span class="dl">"</span><span class="s2">PROXY fastproxy.example.com:8080</span><span class="dl">"</span><span class="p">;</span>
    <span class="p">}</span>
 
@@ -225,7 +225,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="n">isPlainHostName</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="nf">isPlainHostName</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
    <span class="n">QString</span> <span class="n">hostname</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">"isPlainHostName - hostname: "</span> <span class="o">&lt;&lt;</span> <span class="n">hostname</span><span class="p">;</span>
@@ -233,7 +233,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="k">return</span> <span class="n">hostname</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="sc">'.'</span><span class="p">)</span> <span class="o">?</span> <span class="nb">false</span> <span class="o">:</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="n">isInNet</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="nf">isInNet</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
    <span class="n">QString</span> <span class="n">host</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">argument</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
    <span class="n">QHostAddress</span> <span class="n">hostAddress</span><span class="p">;</span>
@@ -255,7 +255,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">QScriptValue</span> <span class="n">myIpAddress</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">QScriptValue</span> <span class="nf">myIpAddress</span><span class="p">(</span><span class="n">QScriptContext</span> <span class="o">*</span><span class="n">context</span><span class="p">,</span> <span class="n">QScriptEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
 
@@ -274,7 +274,7 @@ Automatic Proxy Configuration on Mac OS X
    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
    <span class="n">QCoreApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
 

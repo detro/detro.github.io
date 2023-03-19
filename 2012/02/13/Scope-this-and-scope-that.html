@@ -170,19 +170,19 @@
 
 <span class="c1">// 'foo', but no 'bar'</span>
 <span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callMessage</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="se">\n\</span><span class="s2">033[0;32m</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">callMessage</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> {</span><span class="se">\</span><span class="s2">033[0m</span><span class="dl">"</span><span class="p">);</span>    <span class="c1">//&lt; console.log(callMessage + "{");</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="se">\n\</span><span class="s2">033[0;32m</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">callMessage</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> {</span><span class="se">\</span><span class="s2">033[0m</span><span class="dl">"</span><span class="p">);</span>    <span class="c1">//&lt; console.log(callMessage + "{");</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">that</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> (passed via </span><span class="se">\</span><span class="s2">033[0;31m'that'</span><span class="se">\</span><span class="s2">033[0m)</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">);</span>
+    <span class="nf">if </span><span class="p">(</span><span class="nf">typeof</span><span class="p">(</span><span class="nx">that</span><span class="p">)</span> <span class="o">!=</span> <span class="dl">"</span><span class="s2">undefined</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> (passed via </span><span class="se">\</span><span class="s2">033[0;31m'that'</span><span class="se">\</span><span class="s2">033[0m)</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Here </span><span class="se">\</span><span class="s2">033[0;31m'this'</span><span class="se">\</span><span class="s2">033[0m resolves to </span><span class="se">\</span><span class="s2">033[0;31m'window'</span><span class="se">\</span><span class="s2">033[0m</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nf">if </span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Here </span><span class="se">\</span><span class="s2">033[0;31m'this'</span><span class="se">\</span><span class="s2">033[0m resolves to </span><span class="se">\</span><span class="s2">033[0;31m'window'</span><span class="se">\</span><span class="s2">033[0m</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="se">\</span><span class="s2">033[0;32m}</span><span class="se">\</span><span class="s2">033[0m</span><span class="se">\n</span><span class="dl">"</span><span class="p">);</span>                        <span class="c1">//&lt; console.log("}");</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="se">\</span><span class="s2">033[0;32m}</span><span class="se">\</span><span class="s2">033[0m</span><span class="se">\n</span><span class="dl">"</span><span class="p">);</span>                        <span class="c1">//&lt; console.log("}");</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -199,7 +199,7 @@
 <p>I started with something very easy:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function Invocation Pattern</span>
-<span class="nx">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Function Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nf">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Function Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>that will print out:</p>
@@ -224,7 +224,7 @@ Here 'this' is equal to 'window'
     <span class="na">aVariable</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">I'm a String in an object (i.e. scope/'this')</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">foo</span> <span class="p">:</span> <span class="nx">foo</span>
 <span class="p">};</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Method Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Method Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>the above will print:</p>
@@ -245,8 +245,8 @@ I'm a String in a global (attached to 'window')
     <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
 <span class="p">};</span>
 <span class="nx">Constructor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
-<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Constructor</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String in an object (i.e. scope/'this'), assigned via a Constructor</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Prototype Inheritance' ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Constructor</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String in an object (i.e. scope/'this'), assigned via a Constructor</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">foo</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Prototype Inheritance' ***</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>predictably this prints:</p>
@@ -268,12 +268,12 @@ I'm a String in a global (attached to 'window')
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ClosuredScope</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">aVariable</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">fooWrapper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> (from the wrapper)</span><span class="dl">"</span><span class="p">);</span> <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fooWrapper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span> <span class="nf">foo</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">aVariable</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> (from the wrapper)</span><span class="dl">"</span><span class="p">);</span> <span class="p">};</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">fooOriginal</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
 <span class="p">};</span>
-<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String in an object (i.e. scope/'this'), accessible via Closure</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">fooOriginal</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Closure' (original) ***</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">fooWrapper</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Closure' (wrapper) ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClosuredScope</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String in an object (i.e. scope/'this'), accessible via Closure</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">fooOriginal</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Closure' (original) ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">fooWrapper</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'Constructor Invocation Pattern + Closure' (wrapper) ***</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>that prints out:</p>
@@ -301,7 +301,7 @@ I'm a String in an object (i.e. scope/'this'), accessible via Closure (from the 
 
 <h2 id="apply-invocation-pattern">Apply Invocation Pattern</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">foo</span><span class="p">.</span><span class="nf">apply</span><span class="p">({</span>
     <span class="na">aVariable</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">I'm a String set via the 'apply' method: scope/'this' is passed to 'apply()'</span><span class="dl">"</span>
 <span class="p">},</span> <span class="p">[</span><span class="dl">"</span><span class="s2">*** Proving the 'Apply Invocation Pattern' ***</span><span class="dl">"</span><span class="p">]);</span>
 </code></pre></div></div>
@@ -330,8 +330,8 @@ I'm a String in a global (attached to 'window')
         <span class="na">fooThat</span> <span class="p">:</span> <span class="nx">foo</span>
     <span class="p">};</span>
 <span class="p">};</span>
-<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClosuredScope</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String set in another Closure</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">fooThat</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'That = This Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClosuredScope</span><span class="p">(</span><span class="dl">"</span><span class="s2">I'm a String set in another Closure</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nf">fooThat</span><span class="p">(</span><span class="dl">"</span><span class="s2">*** Proving the 'That = This Invocation Pattern' ***</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>and this one comes out with:</p>
@@ -350,8 +350,8 @@ I'm a String set in another Closure (passed via 'that')
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...</span>
 <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
- <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-     <span class="nx">that</span><span class="p">.</span><span class="nx">doStuff</span><span class="p">();</span>
+ <span class="nf">setTimeout</span><span class="p">(</span><span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+     <span class="nx">that</span><span class="p">.</span><span class="nf">doStuff</span><span class="p">();</span>
  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="c1">// ...</span>
 </code></pre></div></div>

@@ -160,9 +160,9 @@
 
 <p>The first version of the code looked like:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">).</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-   <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#chars_num</span><span class="dl">'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span> <span class="nx">new_len</span> <span class="p">);</span>
-   <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#sms_num</span><span class="dl">'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">).</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">161</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">).</span><span class="nf">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+   <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#chars_num</span><span class="dl">'</span><span class="p">).</span><span class="nf">html</span><span class="p">(</span> <span class="nx">new_len</span> <span class="p">);</span>
+   <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#sms_num</span><span class="dl">'</span><span class="p">).</span><span class="nf">html</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">).</span><span class="nf">val</span><span class="p">().</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">161</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
@@ -170,13 +170,13 @@
 <!--more-->
 Well, a decent programmer (not like me at 3 o’clock in the morning) will do something like:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">obj_message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">obj_chars_num</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#chars_num</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">obj_sms_num</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#sms_num</span><span class="dl">'</span><span class="p">);</span>
-<span class="nx">obj_message</span><span class="p">.</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-   <span class="nx">new_len</span> <span class="o">=</span> <span class="nx">obj_message</span><span class="p">.</span><span class="nx">val</span><span class="p">().</span><span class="nx">length</span><span class="p">;</span>
-   <span class="nx">obj_chars_num</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">new_len</span> <span class="p">);</span>
-   <span class="nx">obj_sms_num</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">new_len</span> <span class="o">/</span> <span class="mi">161</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span> <span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">obj_message</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#message</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">obj_chars_num</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#chars_num</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">obj_sms_num</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#sms_num</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">obj_message</span><span class="p">.</span><span class="nf">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+   <span class="nx">new_len</span> <span class="o">=</span> <span class="nx">obj_message</span><span class="p">.</span><span class="nf">val</span><span class="p">().</span><span class="nx">length</span><span class="p">;</span>
+   <span class="nx">obj_chars_num</span><span class="p">.</span><span class="nf">html</span><span class="p">(</span> <span class="nx">new_len</span> <span class="p">);</span>
+   <span class="nx">obj_sms_num</span><span class="p">.</span><span class="nf">html</span><span class="p">(</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nx">new_len</span> <span class="o">/</span> <span class="mi">161</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span> <span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 

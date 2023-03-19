@@ -202,7 +202,7 @@ Sun: 50-70 F  Chance of Rain
     <span class="k">if</span> <span class="nx">phantom</span><span class="p">.</span><span class="nx">loadStatus</span> <span class="nx">is</span> <span class="dl">'</span><span class="s1">fail</span><span class="dl">'</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Unable to access network</span><span class="dl">'</span>
     <span class="k">else</span>
-        <span class="k">if</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">problem_cause</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">problem_cause</span><span class="dl">'</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">"</span><span class="s2">No data available for #{ phantom.state }</span><span class="dl">"</span>
         <span class="k">else</span>
             <span class="nx">data</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="o">-&gt;</span>
@@ -213,7 +213,7 @@ Sun: 50-70 F  Chance of Rain
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">''</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">City: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; forecast_information &gt; city</span><span class="dl">'</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Current condition </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; condition</span><span class="dl">'</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">(</span><span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; temp_f</span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> F</span><span class="dl">'</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">'</span><span class="s1">Temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nf">data</span><span class="p">(</span><span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; temp_f</span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> F</span><span class="dl">'</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; humidity</span><span class="dl">'</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">data</span> <span class="dl">'</span><span class="s1">weather &gt; current_conditions &gt; wind_condition</span><span class="dl">'</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="dl">''</span>
@@ -225,7 +225,7 @@ Sun: 50-70 F  Chance of Rain
                             <span class="dl">"</span><span class="s2">#{ data 'high', f } F  </span><span class="dl">"</span> <span class="o">+</span>
                             <span class="dl">"</span><span class="s2">#{ data 'condition', f }</span><span class="dl">"</span>
 
-    <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+    <span class="nx">phantom</span><span class="p">.</span><span class="nf">exit</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>This scripts uses the <em>undocumented</em> <a href="http://www.google.com/search?sourceid=chrome&amp;ie=UTF-8&amp;q=google+api+weather#sclient=psy&amp;hl=en&amp;safe=off&amp;source=hp&amp;q=google+weather+api&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;pbx=1&amp;bav=on.2,or.r_gc.r_pw.&amp;fp=ee59edf59cfa0598">Google Weather API</a>. Nothing special given <em>nowdays</em> Javascript… but this is bring the result to your CLI! And yep, PhantomJS supports <strong>Coffee Script</strong>, as well as Javascript.</p>
@@ -241,13 +241,13 @@ Sun: 50-70 F  Chance of Rain
 
 <p>So, if you do <em>1+1</em> what happens? <strong>PhantomJS can become a fully fledged Javascript interpreter!</strong> The WebPage could just be an object to manipulate as a “resource”, like any other object. The developer could do thinks like:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">WebPage</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="dl">"</span><span class="s2">www.google.com</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="dl">"</span><span class="s2">Lady Gaga</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#inputTextField</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="dl">"</span><span class="s2">#submitSearch</span><span class="dl">"</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">WebPage</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="dl">"</span><span class="s2">www.google.com</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nf">input</span><span class="p">(</span><span class="dl">"</span><span class="s2">Lady Gaga</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">#inputTextField</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">page</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="dl">"</span><span class="s2">#submitSearch</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">...</span>
-<span class="kd">var</span> <span class="nx">rasterizer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">Rasterizer</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">rasterizer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="dl">"</span><span class="s2">~/ladyGagaSearchResult.png</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rasterizer</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">Rasterizer</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">rasterizer</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="dl">"</span><span class="s2">~/ladyGagaSearchResult.png</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">...</span>
 </code></pre></div></div>
 

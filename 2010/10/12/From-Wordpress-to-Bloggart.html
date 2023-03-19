@@ -303,9 +303,9 @@ that bloggart ALREADY provides one <em>ready-to-go</em> as well: find it at <cod
 <h4 id="ready-set-migrate">ready, set, migrate</h4>
 <p>We are all set for using <code class="language-plaintext highlighter-rouge">migrate.py</code>. Run <code class="language-plaintext highlighter-rouge">remote.py</code> and type:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="nc">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="nf">migrate_all</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>This will kick off Deferred Tasks that will store in App Engine your blog posts and in Disqus the associated comments.</p>
@@ -328,15 +328,15 @@ new WordPress installation.</p>
 <p>Use it to split your Wordpress Export XML into chunks (remember, smaller than 1MB). Then run the <code class="language-plaintext highlighter-rouge">remote.py</code>
 and do like:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">migrate</span><span class="p">;</span>
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">migrate</span><span class="p">;</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="nc">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="nf">migrate_all</span><span class="p">();</span>
 
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">02</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="nc">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">02</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="nf">migrate_all</span><span class="p">();</span>
 
-<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="n">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">03</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
-<span class="n">wpmig</span><span class="p">.</span><span class="n">migrate_all</span><span class="p">();</span>
+<span class="n">wpmig</span> <span class="o">=</span> <span class="n">migrate</span><span class="p">.</span><span class="nc">WordpressMigration</span><span class="p">(</span><span class="n">path_to_your_wordpress_export_xml</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="mi">03</span><span class="p">,</span> <span class="n">the_disqus_key</span><span class="p">,</span> <span class="n">the_disqus_forum_name</span><span class="p">);</span>
+<span class="n">wpmig</span><span class="p">.</span><span class="nf">migrate_all</span><span class="p">();</span>
 <span class="p">...</span>
 </code></pre></div></div>
 

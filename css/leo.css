@@ -283,6 +283,7 @@ pre span {
   color: #777;
   padding-top: 0.5em;
   padding-bottom: 0.3em;
+  border-bottom: 1px solid #09293e;
 }
 #layout #main #content .entry .body h1,
 #layout #main #content .entry .body h2,

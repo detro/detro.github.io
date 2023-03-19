@@ -218,11 +218,11 @@ In a REPL, the user may enter expressions, which are then evaluated, and the res
 
 <p>a tester that uses phantom could do something like:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">),</span>
-    <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">webpage</span><span class="dl">'</span><span class="p">).</span><span class="nx">create</span><span class="p">(),</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">),</span>
+    <span class="nx">page</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">webpage</span><span class="dl">'</span><span class="p">).</span><span class="nf">create</span><span class="p">(),</span>
     <span class="nx">HTTP_MAP</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">httpmap.json</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="nx">page</span><span class="p">.</span><span class="nx">setHttpMap</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="nx">HTTP_MAP</span><span class="p">));</span>
+<span class="nx">page</span><span class="p">.</span><span class="nf">setHttpMap</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="nx">HTTP_MAP</span><span class="p">));</span>
 
 <span class="c1">// ... do stuff with page, while the HTTP requests are mapped</span>
 </code></pre></div></div>
