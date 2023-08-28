@@ -191,11 +191,11 @@ _301 Redirection_
 
       <span class="c1"># Check that we were able to build a URL and that this URL actually exists
 </span>      <span class="k">if</span> <span class="n">url</span> <span class="ow">and</span> <span class="p">(</span><span class="nf">check_url_exists</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="p">.</span><span class="n">CHECK_URL_EXISTANCE</span> <span class="k">else</span> <span class="bp">True</span><span class="p">):</span>
-         <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Redirecting URL '%s' to URL '%s'"</span> <span class="o">%</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+         <span class="n">logging</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">Redirecting URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> to URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'"</span> <span class="o">%</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="p">);</span>
          <span class="n">self</span><span class="p">.</span><span class="nf">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">permanent</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
       <span class="k">else</span><span class="p">:</span>
          <span class="c1"># Log that we didn't know what this was, and redirect to a good default
-</span>         <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s">"Unable to Redirect URL '%s'"</span> <span class="o">%</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+</span>         <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">Unable to Redirect URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'"</span> <span class="o">%</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
          <span class="k">if</span> <span class="n">config</span><span class="p">.</span><span class="n">ERROR_EMAIL_ACTIVE</span><span class="p">:</span>
             <span class="n">mail</span><span class="p">.</span><span class="nf">send_mail_to_admins</span><span class="p">(</span>
                <span class="n">sender</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">ERROR_EMAIL_SENDER</span><span class="p">,</span>
@@ -221,7 +221,7 @@ _301 Redirection_
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># /config.py
 # ...
 # Default URL: if no Redirect URL can be generated, traffic will be diverted here
-</span><span class="n">DEFAULT_URL</span> <span class="o">=</span> <span class="s">'http://default.new-domain.com/'</span>
+</span><span class="n">DEFAULT_URL</span> <span class="o">=</span> <span class="sh">'</span><span class="s">http://default.new-domain.com/</span><span class="sh">'</span>
 
 <span class="c1"># Mapping of Source URLs to Target URLs.
 # You can choose to map in 2 ways:
@@ -230,10 +230,10 @@ _301 Redirection_
 # Format:
 #    URLS = { 'Old Domain': ('New Domain', 'Discard URL Path part and Redirect to Root?'), ... }
 </span><span class="n">URLS</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s">'%s.appspot.com'</span> <span class="o">%</span> <span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'APPLICATION_ID'</span><span class="p">])</span> <span class="p">:</span> <span class="p">(</span><span class="s">'www.new-domain.com'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-   <span class="s">'www.old-domain.com'</span> <span class="p">:</span> <span class="p">(</span><span class="s">'www.new-domain.com'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-	<span class="s">'downloads.old-domain.com'</span><span class="p">:</span> <span class="p">(</span><span class="s">'downloads.new-domain.com'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-	<span class="s">'stuff.old-domain.com'</span><span class="p">:</span> <span class="p">(</span><span class="s">'stuff.new-domain.com'</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+   <span class="sh">'</span><span class="s">%s.appspot.com</span><span class="sh">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">'</span><span class="s">APPLICATION_ID</span><span class="sh">'</span><span class="p">])</span> <span class="p">:</span> <span class="p">(</span><span class="sh">'</span><span class="s">www.new-domain.com</span><span class="sh">'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+   <span class="sh">'</span><span class="s">www.old-domain.com</span><span class="sh">'</span> <span class="p">:</span> <span class="p">(</span><span class="sh">'</span><span class="s">www.new-domain.com</span><span class="sh">'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+	<span class="sh">'</span><span class="s">downloads.old-domain.com</span><span class="sh">'</span><span class="p">:</span> <span class="p">(</span><span class="sh">'</span><span class="s">downloads.new-domain.com</span><span class="sh">'</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+	<span class="sh">'</span><span class="s">stuff.old-domain.com</span><span class="sh">'</span><span class="p">:</span> <span class="p">(</span><span class="sh">'</span><span class="s">stuff.new-domain.com</span><span class="sh">'</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
 <span class="p">};</span>
 <span class="c1"># ...
 </span></code></pre></div></div>
@@ -245,20 +245,20 @@ _301 Redirection_
 # Generates the URL to redirect to
 </span><span class="k">def</span> <span class="nf">get_redirect_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
    <span class="c1"># Search the Memcache
-</span>   <span class="n">memcachekey</span> <span class="o">=</span> <span class="s">"get_redirect_url-"</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+</span>   <span class="n">memcachekey</span> <span class="o">=</span> <span class="sh">"</span><span class="s">get_redirect_url-</span><span class="sh">"</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
    <span class="n">result</span> <span class="o">=</span> <span class="n">memcache</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="p">.</span><span class="n">MEMCACHE_ACTIVE</span> <span class="k">else</span> <span class="bp">None</span><span class="p">;</span>
    
    <span class="c1"># Nothing in Memcache
 </span>   <span class="nf">if </span><span class="p">(</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span> <span class="p">):</span>
-      <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Redirect for URL '%s' not in Memcache"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+      <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">Redirect for URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> not in Memcache</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
       <span class="n">scheme</span><span class="p">,</span> <span class="n">netloc</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">.</span><span class="nf">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 	
       <span class="c1"># Discard any port number from the hostname
-</span>      <span class="n">netloc</span> <span class="o">=</span> <span class="n">netloc</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">':'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+</span>      <span class="n">netloc</span> <span class="o">=</span> <span class="n">netloc</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
 	
    	<span class="c1"># Fix empty paths to be just '/' for consistency
-</span>      <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="s">''</span><span class="p">:</span>
-         <span class="n">path</span> <span class="o">=</span> <span class="s">'/'</span><span class="p">;</span>
+</span>      <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="sh">''</span><span class="p">:</span>
+         <span class="n">path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">;</span>
 	
    	<span class="c1"># Check if we have a mapping for this domain
 </span>      <span class="k">if</span> <span class="n">netloc</span> <span class="ow">in</span> <span class="n">config</span><span class="p">.</span><span class="n">URLS</span><span class="p">:</span>
@@ -266,15 +266,15 @@ _301 Redirection_
 </span>         <span class="n">redirect_info</span> <span class="o">=</span> <span class="n">config</span><span class="p">.</span><span class="n">URLS</span><span class="p">[</span><span class="n">netloc</span><span class="p">];</span>
          <span class="c1"># Root redirects
 </span>         <span class="k">if</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="s">'http://'</span> <span class="o">+</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">'/'</span><span class="p">;</span>
-            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Redirecting to Root: "</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="sh">'</span><span class="s">http://</span><span class="sh">'</span> <span class="o">+</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">;</span>
+            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">Redirecting to Root: </span><span class="sh">"</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
          <span class="c1"># Paths
 </span>         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">.</span><span class="nf">urlunsplit</span><span class="p">([</span><span class="s">'http'</span><span class="p">,</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span><span class="p">]);</span>
-            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Redirecting to Precise Path: "</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">.</span><span class="nf">urlunsplit</span><span class="p">([</span><span class="sh">'</span><span class="s">http</span><span class="sh">'</span><span class="p">,</span> <span class="n">redirect_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span><span class="p">]);</span>
+            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">Redirecting to Precise Path: </span><span class="sh">"</span> <span class="o">+</span> <span class="n">result</span><span class="p">);</span>
       <span class="c1"># No mapping, so return None
 </span>      <span class="k">else</span><span class="p">:</span>
-         <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"No Mapping found for: "</span> <span class="o">+</span> <span class="n">url</span><span class="p">);</span>
+         <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">No Mapping found for: </span><span class="sh">"</span> <span class="o">+</span> <span class="n">url</span><span class="p">);</span>
          <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span><span class="p">;</span>
    	
       <span class="c1"># Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
@@ -295,23 +295,23 @@ _301 Redirection_
 # Check if a URL exists, trying a URL Fetch
 </span><span class="k">def</span> <span class="nf">check_url_exists</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
    <span class="c1"># Search the Memcache
-</span>   <span class="n">memcachekey</span> <span class="o">=</span> <span class="s">"check_url_exists-"</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+</span>   <span class="n">memcachekey</span> <span class="o">=</span> <span class="sh">"</span><span class="s">check_url_exists-</span><span class="sh">"</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
    <span class="n">result</span> <span class="o">=</span> <span class="n">memcache</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">memcachekey</span><span class="p">)</span> <span class="k">if</span> <span class="n">config</span><span class="p">.</span><span class="n">MEMCACHE_ACTIVE</span> <span class="k">else</span> <span class="bp">None</span><span class="p">;</span>
    
    <span class="c1"># Nothing in Memcache
 </span>   <span class="nf">if </span><span class="p">(</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span> <span class="p">):</span>
-      <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Existence of URL '%s' not in Memcache"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
+      <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">Existence of URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> not in Memcache</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">);</span>
       <span class="k">try</span><span class="p">:</span>
          <span class="n">response</span> <span class="o">=</span> <span class="n">urlfetch</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_truncated</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span> <span class="c1"># Wait as much as possible: 10 sec
 </span>         <span class="nf">if </span><span class="p">(</span> <span class="n">response</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">):</span>
-            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s">"Verified URL '%s' existence"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+            <span class="n">logging</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="sh">"</span><span class="s">Verified URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> existence</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">True</span><span class="p">;</span>
          <span class="k">else</span><span class="p">:</span>
-            <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s">"Unable to Verify URL '%s' existence"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+            <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">Unable to Verify URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> existence</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
       <span class="k">except</span><span class="p">:</span>
          <span class="c1"># In case of InvalidURLError or DownloadError
-</span>         <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s">"Exception while Verifying URL '%s' existence"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
+</span>         <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">"</span><span class="s">Exception while Verifying URL </span><span class="sh">'</span><span class="s">%s</span><span class="sh">'</span><span class="s"> existence</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">));</span>
          <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
       
       <span class="c1"># Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
