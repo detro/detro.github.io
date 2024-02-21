@@ -25,4 +25,6 @@ ghp.push:
 	git -C ../gh-pages push
 	git -C ../gh-pages status
 
-.PHONY: install uninstall update serve ghp.build ghp.commit ghp.push
+ghp.build_commit_push: ghp.build ghp.commit ghp.push
+
+.PHONY: install uninstall update serve ghp.build ghp.commit ghp.push ghp.build_commit_push
