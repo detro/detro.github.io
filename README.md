@@ -35,7 +35,7 @@ Jekyll, Jekyll plugins, Less. And with this, you are all set.
 The typical "dev-cycle" is:
 
 ```
-serve -> MAKE CHANGES UNTIL HAPPY -> ghp.generate -> ghp.commit -> ghp.push
+serve -> MAKE CHANGES UNTIL HAPPY -> ghp.build_commit_push
 ```
 
 ## License
