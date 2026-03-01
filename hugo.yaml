@@ -113,8 +113,12 @@ params:
     # NOTE: Verified via DNS TXT record
     # google:
     #   SiteVerificationTag: "XYZabc"
-    bing:
-      SiteVerificationTag: "978622F5CFFCA7E029A2CC202E453B03"
+    #
+    # NOTE: Verified via DNS CNAME record
+    # bing:
+    #   SiteVerificationTag: "978622F5CFFCA7E029A2CC202E453B03"
+    #
+    # NOTE: No way!
     # yandex:
     #   SiteVerificationTag: "XYZabc"
 
