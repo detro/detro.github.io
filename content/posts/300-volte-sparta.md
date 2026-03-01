@@ -1,0 +1,40 @@
+---
+layout: post
+author: detro
+title: "300 volte Sparta"
+tags: [movies-tv, art, italian]
+date: "2007-03-26T23:06:27Z"
+aliases:
+  - /2007/03/26/300-volte-sparta
+  - /2007/03/300-volte-sparta
+---
+
+Magnifico! Stupendo! Quasi Inarrivabile!
+
+
+![Kick of Leonida](http://upload.wikimedia.org/wikipedia/en/f/ff/This.Is.Sparta_GN.to.film.jpg)
+
+
+
+
+>> <strong>Cast</strong>: Gerard Butler, Lena Headey, David Wenham, Dominic West, Vincent Regan, Rodrigo Santoro, Andrew Tiernan, Andrew Pleavin
+> <strong>Regia</strong>: Zack Snyder
+> <strong>Sceneggiatura</strong>: Zack Snyder, Michael Gordon
+> <strong>Durata</strong>: 01:57:00
+> <strong>Data di uscita</strong>: Venerdì 23 Marzo 2007
+> <strong>Generi</strong>: Drammatico, Storico, Guerra
+> <strong>Distribuito da</strong>: WARNER BROS. ITALIA
+
+
+
+
+Non si poteva fare di meglio con lo stupendo fumetto di [en:Frank_Miller|Miller].
+Una fotografia senza uguali, un ritmo che definirei "SPARTANO", una carica emotiva tale... da farti sentire parte della LOTTA di questi 300 valorosi contro l'irriverente avanzata Persiana.
+
+Non so come, ma Snyder è riuscito a far meglio di [en:Robert_Rodriguez|Rodriguez] con [en:Sin_City_(film)|Sin City].
+
+La cosa che mi è piaciuta di più in assoluto in questa "ORGIA FILMOGRAFICA"? La colonna sonora! Composta da [en:Tyler Bates], riesce a trasmettere a pieno i ritmi, le sensazioni, le cariche emozionali, il "battito cardiaco", l'amore, la passione degli Spartani di Miller.
+
+Per chi se lo fosse perso, il [Trailer](http://www.detronizator.org/2007/03/04/video-of-the-day-26/).
+
+Onore a [Λεωνίδας](http://it.wikipedia.org/wiki/Leonida%2C_Re_di_Sparta).

@@ -1,0 +1,19 @@
+---
+layout: post
+author: detro
+title: "Il VERO fattore WOW!!!"
+tags: [c, sw, it, hw, opensource, curiosity, linux, projects, italian]
+date: "2007-01-31T09:13:48Z"
+aliases:
+  - /2007/01/31/il-vero-fattore-wow
+  - /2007/01/il-vero-fattore-wow
+---
+
+[Pollycoke](http://pollycoke.wordpress.com/2007/01/30/gli-sviluppatori-del-kernel-fanno-la-proposta-indecente/), che sta ormai acquistando una certa notorietà in tutta la comunità Italiana (ma non solo), ci parla di una proposta SCONVOLGENTE (in positivo) fatta dalla comunità degli sviluppatori del Kernel ai produttori di hardware:
+
+
+> […] the Linux kernel community is offering all companies free Linux driver developmentAll that is needed is some kind of specification that describes how your device works, or the email address of an engineer that is willing to answer questions every once in a while. […] In return, you will receive a complete and working Linux driver that is added to the main Linux kernel source tree
+
+
+
+Inutile che mi dilunghi, lui ha già scritto abbastanza e in maniera esauriente. [Vi rimando al suo blog](http://pollycoke.wordpress.com/2007/01/30/gli-sviluppatori-del-kernel-fanno-la-proposta-indecente/).

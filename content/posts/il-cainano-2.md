@@ -1,0 +1,23 @@
+---
+layout: post
+author: detro
+title: "Il CaiNano / 2"
+tags: [personal, art, news-and-politics, italian]
+date: "2006-03-30T12:41:58Z"
+aliases:
+  - /2006/03/30/il-cainano-2
+  - /2006/03/il-cainano-2
+---
+
+![cainano](http://www.gabryella.net/images/cai.gif)
+Un film.
+Un bel film.
+Un film ben fatto, girato e pensato.
+Uno di quei film che in italia si fanno sempre meno.
+Personaggi precisi ma pieni di sfaccettature.
+Storia commovente, triste, complessa, viva.
+
+Non un documentario: sarebbe stato davvero stupido farlo.
+
+Come dice Moretti nel film:
+<strong>&laquo;Chi [voleva](http://www.detronizator.org/categories/news-and-politics/) [sapere](http://blog.neminis.org/category/politica/politica-interna/) [sa!](http://www.marcotravaglio.it/) [Chi non vuole sapere, continua a non voler sapere](http://www.tgcom.mediaset.it/)!&raquo;</strong>

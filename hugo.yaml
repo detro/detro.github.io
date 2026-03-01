@@ -1,0 +1,225 @@
+baseURL: "https://ivandemarino.me/"
+title: "Zio Ivan"
+
+# See: https://adityatelange.github.io/hugo-PaperMod/
+theme: PaperMod
+
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+enableEmoji: true
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  hideAuthor: true
+  author:
+    email: detronizator+blog@gmail.com
+    name: Ivan De Marino, aka "Zio Ivan", aka "detro"
+
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  keywords: 
+    - blog
+    - personal
+    - projects
+    - about
+    - "software engineering"
+    - AI
+    - detro
+    - "Zio Ivan"
+  images: []
+  DateFormat: "January 2, 2006"
+  
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  # See: https://gohugo.io/content-management/mathematics/
+  math: true
+
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  # disableSpecial1stPost: true
+  displayFullLangName: true
+  ShowCodeCopyButtons: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  assets:
+    disableHLJS: true # to disable highlight.js
+    # disableFingerprinting: true
+    favicon: "/images/2026-02 butterbeer-favicon.png"
+    favicon16x16: "/images/2026-02 butterbeer-favicon-16x16.png"
+    favicon32x32: "/images/2026-02 butterbeer-favicon-32x32.png"
+    apple_touch_icon: "/images/2026-02 butterbeer-favicon-128x128.png"
+    safari_pinned_tab: "/images/2026-02 butterbeer-favicon.png"
+
+  label:
+    # text: "Home"
+    icon: "/images/2026-02 butterbeer-favicon-128x128.png"
+    iconHeight: 32
+
+  # profile-mode
+  profileMode:
+    enabled: true # needs to be explicitly set
+    # title: "<Title>" # optional default will be site title
+    subtitle: >-
+      40+yy of strong opinions held loosely —
+      a lifetime of pasta al dente —
+      lots of _atti-dude_
+    imageUrl: "/images/2026-02 butterbeer.jpeg"
+    imageWidth: 360
+    imageHeight: 360
+    imageTitle: "Ciao! I'm Zio Ivan."
+    buttons:
+      - name: About
+        url: /about/
+      - name: Posts
+        url: /posts/
+      # - name: Projects
+      #   url: /projects/
+
+  # # home-info mode
+  # homeInfoParams:
+  #   Title: "Hi there, Cowboy"
+  #   Content: Welcome to my blog
+
+  socialIcons:
+    - name: linkedin
+      url: "https://linkedin.com/in/ivandemarino"
+    - name: github
+      url: "https://github.com/detro"
+    - name: keybase
+      url: "https://keybase.io/ivandemarino"
+    - name: strava
+      url: "https://www.strava.com/athletes/detro"
+
+  # TODO Setup SiteVerification
+  analytics:
+    google:
+      SiteVerificationTag: "XYZabc"
+    # bing:
+    #   SiteVerificationTag: "XYZabc"
+    # yandex:
+    #   SiteVerificationTag: "XYZabc"
+
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
+  editPost:
+    URL: "https://github.com/detro/detro.github.io/content"
+    Text: "Edit" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+  # Search in PaperMod is based on https://www.fusejs.io/
+  # See: https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    keys: ["title", "permalink", "summary", "content"]
+
+menu:
+  main:
+    - identifier: search
+      name: "🔍 Search"
+      url: /search/
+      weight: 1
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 2
+    # - identifier: projects
+    #   name: Projects
+    #   url: /projects/
+    #   weight: 3
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 4
+    - identifier: archives
+      name: Archive
+      url: /archives/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+pygmentsUseClasses: true
+markup:
+  highlight:
+    # anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    noClasses: false
+    style: tokyonight-night
+    tabWidth: 2
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        # See: https://gohugo.io/content-management/mathematics/
+        delimiters:
+          block:
+          - - '\['
+            - '\]'
+          - - '$$'
+            - '$$'
+          inline:
+          - - '\('
+            - '\)'
+          - - '$'
+            - '$'
+        enable: true
+
+outputFormats:
+  llms:
+    mediaType: "text/plain"
+    baseName: "llms"
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+    - llms
+
+caches:
+  images:
+    dir: :cacheDir/images
+
+services:
+  googleAnalytics:
+    id: G-K0JQTBH0J9
+
+copyright: >-
+  © 2004-2026 Ivan De Marino.
+  Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer">CC BY 4.0</a>
+enableRobotsTXT: true

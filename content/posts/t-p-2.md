@@ -1,0 +1,22 @@
+---
+layout: post
+author: detro
+title: "T.P. #2"
+tags: [training, personal, running, london, uk, english, italian]
+date: "2008-04-15T23:23:45Z"
+aliases:
+  - /2008/04/15/t-p-2
+  - /2008/04/t-p-2
+---
+
+
+
+<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.uk/maps/ms?ie=UTF8&amp;hl=en&amp;msa=0&amp;ll=51.50631,-0.09888&amp;spn=0.015413,0.041456&amp;t=h&amp;msid=108844976807441536323.00044af089afa7d374d93&amp;output=embed&amp;s=AARTsJqtuKdD1D8BBez6NozaWyciIwqE3A"></iframe>
+<small>[View Larger Map](http://maps.google.co.uk/maps/ms?ie=UTF8&amp;hl=en&amp;msa=0&amp;ll=51.50631,-0.09888&amp;spn=0.015413,0.041456&amp;t=h&amp;msid=108844976807441536323.00044af089afa7d374d93&amp;source=embed)</small>
+<strong>2.08 miles</strong>
+
+
+
+IT: Gia' va meglio!
+EN: That's better!
+;)

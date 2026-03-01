@@ -1,0 +1,23 @@
+---
+layout: post
+author: detro
+title: "New Logo"
+tags: [pwnage, personal, tool, personalize, iphone, curiosity, english, pwn, logo]
+date: "2008-04-17T20:04:04Z"
+aliases:
+  - /2008/04/17/new-logo
+  - /2008/04/new-logo
+---
+
+
+
+![New Logo](http://www.detronizator.org/wp-content/uploads/2008/04/newlogo.png)
+
+
+
+My iPhone is now more "mine" ;)
+I'll proudly show you as soon as we meet.
+
+What? Ah, yeah. Thanks to [PwnageTool](http://wikee.iphwn.org/news:pwnage1dot1_announcement) from the GREAT [DevTeam](http://wikee.iphwn.org/)! Carry on guys!
+
+PS Yes, I'll use it also with my [Wind](http://www.wind.it) SIM ;)

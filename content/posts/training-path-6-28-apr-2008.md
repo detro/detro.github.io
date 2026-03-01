@@ -1,0 +1,20 @@
+---
+layout: post
+author: detro
+title: "Training Path #6 - 28 Apr 2008"
+tags: [training, personal, it, running, london, uk, english, path]
+date: "2008-04-29T23:06:53Z"
+aliases:
+  - /2008/04/29/training-path-6-28-apr-2008
+  - /2008/04/training-path-6-28-apr-2008
+---
+
+
+
+[![Training Path #6 - 28 Apr 2008](http://www.detronizator.org/wp-content/uploads/2008/04/trainingpath_6-20080428.jpg)](http://www.walkjogrun.net/routes/route_list.cfm?rid=9C2FD32F-0888-C0D9-5571A878CF59CE0D)
+<strong>2.2 miles ~= 3.54 kms</strong>
+
+
+
+This time I was running with Luca: we pushed a bit the speed... but we practically died at the end of Blackfriars Bridge: still good, but next time I need to slow down to last more.
+Wish me good luck. I will run on the [JP Morgan Chase Corporate Challenge](http://www.jpmorganchasecc.com/) on July ;)

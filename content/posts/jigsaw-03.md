@@ -1,0 +1,19 @@
+---
+layout: post
+author: detro
+title: "Jigsaw 03"
+tags: [curiosity, personal, jigsaw, job, uk, arabic, italian]
+date: "2008-06-04T17:30:04Z"
+aliases:
+  - /2008/06/04/jigsaw-03
+  - /2008/06/jigsaw-03
+---
+
+
+
+>> اعجاب مدى التعقيد هي القيام 02 (01) لك!
+
+
+
+
+PS Tra poco, pure chi non capisce l'Italiano risolve questo Enigma.

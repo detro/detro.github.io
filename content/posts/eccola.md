@@ -1,0 +1,15 @@
+---
+layout: post
+author: detro
+title: "Eccola!"
+tags: [news-and-politics, laugh, italian]
+date: "2006-04-09T22:09:24Z"
+aliases:
+  - /2006/04/09/eccola
+  - /2006/04/eccola
+---
+
+![la madre ed il bassotto](http://www.lastampa.it/redazione/cmssezioni/politica/200604images/berlusconi_seggio.jpg)
+La vedete? E' lei quella grandissima [z*****a](http://blog.neminis.org/berlusco.xhtml) che "se teneva le gambe chiuse, ci faceva un piacere a tutti"!!!
+
+ps Meglio ridere in un momento di "alta tensione" come questo: io personalmente sono elettrico e sto quasi pregando...
