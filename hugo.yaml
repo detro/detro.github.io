@@ -109,12 +109,12 @@ params:
     - name: strava
       url: "https://www.strava.com/athletes/detro"
 
-  # TODO Setup SiteVerification
   analytics:
-    google:
-      SiteVerificationTag: "XYZabc"
-    # bing:
+    # NOTE: Verified via DNS TXT record
+    # google:
     #   SiteVerificationTag: "XYZabc"
+    bing:
+      SiteVerificationTag: "978622F5CFFCA7E029A2CC202E453B03"
     # yandex:
     #   SiteVerificationTag: "XYZabc"
 
