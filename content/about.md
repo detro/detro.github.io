@@ -30,7 +30,7 @@ In a software world where the only constant is change, I refuse to be legacy.
 Whether it's mastering a new paradigm or refactoring my own leadership approach,
 I have a restless desire to learn, grow, and reinvent myself.
 Just as the *Contemporanea* style honours _"La Tradizione"_ while pushing
-the boundaries of what a crust can be (pun intended),
+the _boundaries_ of what a _crust_ can be (visual pun intended 😜),
 I believe in **respecting the fundamentals**
 of engineering while **improving the execution** and not being
 afraid of **reinventing**.
