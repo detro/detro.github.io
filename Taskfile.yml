@@ -1,0 +1,51 @@
+# Taskfile.yml for Hugo
+# Task Documentation: https://taskfile.dev/
+version: '3'
+
+vars:
+  # Define directory variables
+  PUBLIC_DIR: public
+  HUGO_ENV: development # Switch to production for final build
+
+tasks:
+  default:
+    desc: Run the development server
+    cmds:
+      - task: serve
+
+  # Build the site
+  build:
+    desc: Build the website
+    vars:
+      HUGO_ENV: production
+    cmds:
+      - hugo --gc --minify --environment {{.HUGO_ENV}} --destination {{.PUBLIC_DIR}}
+    sources:
+      - content/**/*
+      - themes/**/*
+      - static/**/*
+      - assets/**/*
+      - config.toml
+      - hugo.toml
+    generates:
+      - "{{.PUBLIC_DIR}}/**"
+
+  # Run local server
+  serve:
+    desc: Run Hugo server for development
+    cmds:
+      - hugo server --buildDrafts --buildFuture --disableFastRender
+
+  # Create a new post
+  new:
+    desc: Create a new content file (e.g., task new path/to/post.md)
+    prompt: "Enter the new content path (e.g., posts/my-post.md):"
+    cmds:
+      - hugo new content {{.CLI_ARGS}}
+
+  # Clean build artifacts
+  clean:
+    desc: Delete generated files
+    cmds:
+      - rm -rf {{.PUBLIC_DIR}}
+      - rm -rf resources/_gen

@@ -1,12 +1,49 @@
-# Where the generated site goes
-_site/
+# Created via https://www.toptal.com/developers/gitignore
 
-# Jetbrains IDE
-.idea/
+### Hugo ###
+# Generated files by hugo
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
 
-# Configured Bundler vendoring directory
-.vendor/
+# Executable may be added to repository
+hugo.exe
+hugo.darwin
+hugo.linux
 
-# Jekyll
-.jekyll-cache
-.jekyll-metadata
+# Temporary lock file while building
+/.hugo_build.lock
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
