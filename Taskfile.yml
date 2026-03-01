@@ -30,6 +30,10 @@ tasks:
     generates:
       - "{{.PUBLIC_DIR}}/**"
 
+  submodule.refresh:
+    cmds:
+      - git submodule update --remote
+
   # Run local server
   serve:
     desc: Run Hugo server for development
