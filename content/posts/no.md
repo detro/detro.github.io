@@ -1,0 +1,18 @@
+---
+layout: post
+author: detro
+title: "NO!"
+tags: [news-and-politics, italian]
+date: "2006-06-26T10:04:35Z"
+aliases:
+  - /2006/06/26/no
+  - /2006/06/no
+---
+
+![NO allo scempio della nostra Carta Costituzionale](http://www.detronizator.org/wp-content/uploads/2006/06/salvalacostituzione.png)
+No alla Costituzione Violentata!
+No al Premierato Assolutistico!
+No al Capo dello Stato soggiogato al Premier!
+No alla Devoluzione Regionale!
+
+Mi unisco volentieri all'[URLO del mio amico Nemo](http://blog.neminis.org/altro-giro-altra-corsa.xhtml) (e da cui scrocco pure l'immagine ;P ).

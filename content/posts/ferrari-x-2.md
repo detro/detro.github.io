@@ -1,0 +1,15 @@
+---
+layout: post
+author: detro
+title: "Ferrari x 2"
+tags: [personal, curiosity, it, laugh, italian]
+date: "2006-05-07T14:52:13Z"
+aliases:
+  - /2006/05/07/ferrari-x-2
+  - /2006/05/ferrari-x-2
+---
+
+![Schumacher sul Podio](http://www.quotidianiespresso.it/gazzettareggio/quotidiano/specialeformula1/formula1_26032001/nte01_01.jpg)
+Sarà un caso che con la fine del Governo del CaiNano, la Ferrari sia tornata a DOMINARE? ;)
+
+W la Feraaaaaariiiii!!! :D

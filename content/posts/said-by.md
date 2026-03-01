@@ -1,0 +1,47 @@
+---
+layout: post
+author: detro
+title: "Said by..."
+tags: [personal, english, art, news-and-politics, italian]
+date: "2007-12-29T14:36:21Z"
+aliases:
+  - /2007/12/29/said-by
+  - /2007/12/said-by
+---
+
+
+
+>> ...
+> Stavo per partire, dovevo andare da mio cugino a Milano. È strano come con chiunque parli, qualunque sia l'argomento, appena dici che stai per andartene via ricevi auguri, complimenti e giudizi entusiasti: «È così che si fa. Fai benissimo, lo farei anch'io».
+> Non devi aggiungere dettagli, specificare cosa andrai a fare. Qualunque sia il motivo, sarà migliore di quelli che troverai per continuare a vivere in queste zone. 
+> ...
+
+
+
+
+I try to translate it in English, but it's a quite hard piece of Italian, so I'll do my best (I don't have the vocabulary at short hand too...):
+
+
+>> ...
+> I was on my way to leave, to go to meet my cousin in Milan. It's strange that whoever you talk to, whatever the topic, as soon as you say that you're leaving, you receive greetings, compliments and good judgement: «It's the right thing to do. You did well. Well done, I would do the same». You don't need to add any details, or specify what you are gonna do. Whatever the cause, it will be better than the ones that force you to still live in these places.
+> ...
+
+
+
+
+I'd like to focus on the last thing that the "generic person" says: «... I would do the same».
+"What the FUCK are you waiting for?" would be my answer (and, actually, is what I normally do): I understand old people, tired and for whom it would be impossible/hard to live in a different place. But what about ALL THE YOUNG PEOPLE? What force you here?
+Love?
+Friends?
+Family?
+
+I know someone will hate me for this but: SORRY, NOT ENOUGH!!!
+
+Ah, the author.
+
+
+![Roberto Saviano](http://www.officinaitalia.net/gallery/003.jpg)
+<em>Roberto Saviano</em>
+
+
+[it:Roberto_Saviano|Roberto Saviano] - [Gomorra](http://it.wikipedia.org/wiki/Gomorra_%28romanzo%29).

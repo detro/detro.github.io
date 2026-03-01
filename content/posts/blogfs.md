@@ -1,0 +1,17 @@
+---
+layout: post
+author: detro
+title: "BlogFS"
+tags: [english, sw, it, opensource, linux, php, projects]
+date: "2005-12-23T00:12:38Z"
+aliases:
+  - /2005/12/23/blogfs
+  - /2005/12/blogfs
+---
+
+
+
+> [BlogFS](http://rohanpm.net/blogfs/) is a [FUSE](http://fuse.sourceforge.net/) filesystem allowing you to mount your WordPress blog on your local filesystem. It uses XML-RPC and the MetaWeblog API to communicate with WordPress. It might work on other MetaWeblog compatible weblogs, but it has only been tested with the single user edition of WordPress 1.5.
+
+
+

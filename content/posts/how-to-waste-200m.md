@@ -1,0 +1,24 @@
+---
+layout: post
+author: detro
+title: "How to waste £200M"
+tags: [curiosity, pathetic, money, it, video, laugh, english, waste, microsoft, ads]
+date: "2008-09-05T11:23:00Z"
+aliases:
+  - /2008/09/05/how-to-waste-200m
+  - /2008/09/how-to-waste-200m
+---
+
+
+
+<object width="425" height="344">
+
+<embed src="http://www.youtube.com/v/uz6amk3P-hY&hl=en&fs=1&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object>
+
+
+
+How can I say it without being unpolite with M$?
+...
+<strong>I simply can't!</strong>
+
+[Original Source: [melablog.it](http://www.melablog.it/post/6688/microsoft-ecco-il-primo-spot-seinfeldgates)] 

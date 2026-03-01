@@ -1,0 +1,13 @@
+---
+layout: post
+author: detro
+title: "Skype 2.0 is out"
+tags: [sw, it, projects, english]
+date: "2006-01-06T16:29:37Z"
+aliases:
+  - /2006/01/06/skype-2-0-is-out
+  - /2006/01/skype-2-0-is-out
+---
+
+![Skype logo](http://www.skype.com/i/logos/skype.png)Only for windows, by now.
+Download it for [windows](http://www.skype.com/products/skype/windows/) and read the changelog [here](http://www.skype.com/products/skype/windows/changelog.html).

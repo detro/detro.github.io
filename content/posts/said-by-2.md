@@ -1,0 +1,26 @@
+---
+layout: post
+author: detro
+title: "Said by..."
+tags: [art, curiosity, english]
+date: "2007-07-07T19:45:40Z"
+aliases:
+  - /2007/07/07/said-by
+  - /2007/07/said-by
+---
+
+
+
+![O. Henry](http://upload.wikimedia.org/wikipedia/commons/thumb/5/55/William_Sydney_Porter.jpg/180px-William_Sydney_Porter.jpg)
+
+
+
+>> Life is made up of sobs,
+> sniffless, and smiles,
+> with sniffles predominating.
+
+
+
+
+[O. Henry](http://en.wikipedia.org/wiki/O._Henry) (also known as [William Sydney Porter](http://en.wikipedia.org/wiki/William_Sydney_Porter)).
+

@@ -1,0 +1,16 @@
+---
+layout: post
+author: detro
+title: "IRon"
+tags: [personal, laugh, curiosity, english]
+date: "2007-03-27T15:54:21Z"
+aliases:
+  - /2007/03/27/iron
+  - /2007/03/iron
+---
+
+Ok, it's an horrible game of words (Just say if you understand it). But I have to post these photos! :D 
+![iRon 01](http://static.zooomr.com/images/869470_026753b957.jpg)
+![iRon 02](http://static.zooomr.com/images/869476_4462b4b54d.jpg)
+
+[I'm ironing](http://www.detronizator.org/2007/03/26/iron-a-shirt/) a lot of things (I left only 2 shirt... for tomorrow). It's the demonstration that "The Man does not need The Woman!" ;)
