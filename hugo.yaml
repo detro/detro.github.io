@@ -1,6 +1,5 @@
 baseURL: "https://ivandemarino.me/"
 title: "Zio Ivan"
-paginate: 5
 theme: PaperMod
 
 buildDrafts: false
@@ -14,13 +13,12 @@ minify:
   minifyOutput: true
 
 params:
+  hideAuthor: true
   author:
     email: detronizator+blog@gmail.com
-    name: detro, aka "Zio Ivan", aka "Ivan De Marino"
+    name: Ivan De Marino, aka "Zio Ivan", aka "detro"
 
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: ExampleSite
-  description: "Too much coffe, too little time"
   keywords: 
     - blog
     - personal
@@ -28,7 +26,8 @@ params:
     - about
     - "software engineering"
     - AI
-  # author: ["Me", "You"] # multiple authors
+    - detro
+    - "Zio Ivan"
   images: []
   DateFormat: "January 2, 2006"
   
@@ -78,11 +77,13 @@ params:
   profileMode:
     enabled: true # needs to be explicitly set
     # title: "<Title>" # optional default will be site title
-    subtitle: "This is subtitle"
+    subtitle: >-
+      40+ years of strong opinions held loosely;
+      a lifetime of pasta al dente!
     imageUrl: "/images/2026-02 butterbeer.jpeg"
-    imageWidth: 240
-    imageHeight: 240
-    imageTitle: my image
+    imageWidth: 360
+    imageHeight: 360
+    imageTitle: "Ciao! I'm Zio Ivan."
     buttons:
       - name: About
         url: /about/
@@ -140,7 +141,7 @@ params:
 menu:
   main:
     - identifier: search
-      name: Search
+      name: "🔍 Search"
       url: /search/
       weight: 5
     - identifier: posts
