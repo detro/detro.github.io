@@ -211,6 +211,10 @@ outputs:
     - JSON # necessary for search
     - llms
 
+caches:
+  images:
+    dir: :cacheDir/images
+
 services:
   googleAnalytics:
     id: G-K0JQTBH0J9
