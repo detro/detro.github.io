@@ -1,0 +1,14 @@
+---
+layout: post
+author: detro
+title: "Pagani Zonda Roadster F"
+tags: [art, motors, curiosity, english]
+date: "2006-02-25T15:50:09Z"
+---
+
+Private show of this Beauty Monster-Car.
+<object width="425" height="350">
+
+<embed src="http://www.youtube.com/v/oJV0IcYEXJc" type="application/x-shockwave-flash" width="425" height="350"></embed></object>
+
+No one tried to answer to my [old quiz about its dashboard](http://www.detronizator.org/2006/02/12/pz-roadster-f/) :(

@@ -1,0 +1,15 @@
+---
+layout: post
+author: detro
+title: "Nuova bufera su Fazio e Antonveneta"
+tags: [news-and-politics, italian]
+date: "2005-12-16T17:11:40Z"
+---
+
+Sembra proprio che la questione sia più grande di quanto ci abbiano voluto far credere sin ora: i magistrati, dichiarano, indagavano su Fazio già dall'estate.
+Il Governo comincia a spaccarsi (Bossi liquida Fazio come "già scomparso" mentre Berlusconi ammonisce "non sarà una nuova mani pulite"): cominciano ad uscire fuori gli scheletri dagli armadi?
+
+Staremo a vedere.
+Intanto tutto il paese sta facendo una <strong>ENORME figura di me**a</strong> internazionale.
+
+[Fonte](http://www.unita.it/index.asp?SEZIONE_COD=HP&TOPIC_TIPO=&TOPIC_ID=46298).
