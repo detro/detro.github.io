@@ -6,6 +6,7 @@ tags: [art, curiosity, windows, macosx, it, laugh, english, microsoft, apple]
 date: "2007-01-28T13:30:29Z"
 aliases:
   - /2007/01/28/i-d-like-to-buy-vista
+  - /2007/01/28/id-like-to-buy-vista
   - /2007/01/i-d-like-to-buy-vista
 ---
 

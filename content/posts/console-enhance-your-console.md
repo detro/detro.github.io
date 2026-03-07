@@ -5,6 +5,7 @@ title: "Console++ - enhance your console"
 tags: [npm, console, log, phantomjs, javascript, nodejs, colours, library, enhance, level, ghostdriver, console++]
 date: "2013-02-18T01:05:48Z"
 aliases:
+  - /2013/02/18/Console---enhance-your-console
   - /2013/02/18/console-enhance-your-console
   - /2013/02/console-enhance-your-console
 ---
@@ -26,4 +27,3 @@ It does output colouring, adds timestamps and log level to the lines, and can be
 It's so simple that the [README](https://github.com/detro/consoleplusplus/blob/master/README.md) is more than enough to use it.
 
 It's under [BSD license](http://en.wikipedia.org/wiki/BSD_licenses), so you can have fun with it.
-

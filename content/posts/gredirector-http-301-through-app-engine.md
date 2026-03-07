@@ -7,6 +7,7 @@ date: "2010-09-29T00:00:29Z"
 aliases:
   - /2010/09/29/gredirector-http-301-through-app-engine
   - /2010/09/gredirector-http-301-through-app-engine
+  - /2010/09/29/gredirector---HTTP-301-through-App-Engine
 ---
 
 When I decided to [migrate to this new blog](http://blog.ivandemarino.me/2010/08/30/Hello-World-again) I was confronted by a very important issue: how do I make sure that the (already modest) traffic going to `http://www.detronizator.org/*` would be redirected to this new URL?

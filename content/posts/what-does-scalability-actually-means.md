@@ -7,6 +7,7 @@ date: "2011-08-31T17:03:51Z"
 aliases:
   - /2011/08/31/what-does-scalability-actually-means
   - /2011/08/what-does-scalability-actually-means
+  - /2011/08/31/What-does-scalability-actually-means
 ---
 
 I was on the train to [Portsmouth](http://maps.google.co.uk/maps?cx=c&q=portsmouth&um=1&ie=UTF-8&hq=&hnear=0x487442a41814f1e9:0x45b683ea03373b79,Portsmouth&gl=uk&ei=hgNeTpbZFcSOswaqtNmwDw&sa=X&oi=geocode_result&ct=title&resnum=1&ved=0CCcQ8gEwAA), and listening-reading the book ["In the Plex"](http://books.google.co.uk/books?id=V1u1f8sv3k8C).

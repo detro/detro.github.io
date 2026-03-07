@@ -7,6 +7,7 @@ date: "2007-02-14T16:04:44Z"
 aliases:
   - /2007/02/14/feedburned
   - /2007/02/feedburned
+  - /2007/02/14/feedburned/FeedBurner%20Plugin
 ---
 
 [![FeedBurner logo](http://www.feedburner.com/fb/i/flamocon_175h.gif)](http://www.feedburner.com/)

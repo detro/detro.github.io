@@ -7,6 +7,7 @@ date: "2012-06-26T07:53:18Z"
 aliases:
   - /2012/06/26/ghostdriver-almost-50
   - /2012/06/ghostdriver-almost-50
+  - /2012/06/26/GhostDriver-almost-50
 ---
 
 This post is long overdue. It's weeks that I HAVE TO write it and

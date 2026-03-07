@@ -7,6 +7,7 @@ date: "2011-11-11T00:00:00Z"
 aliases:
   - /2011/11/11/ai-class-com-notes-of-lesson-7-8-9-and-10
   - /2011/11/ai-class-com-notes-of-lesson-7-8-9-and-10
+  - /2011/11/11/ai-class-com---Notes-of-Lesson-7-8-9-and-10
 ---
 
 I have been very busy at home and in the weekend, so I'm a bit behind with study and sharing my notes.

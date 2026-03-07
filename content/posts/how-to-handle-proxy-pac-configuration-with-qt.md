@@ -7,6 +7,7 @@ date: "2011-03-20T19:51:31Z"
 aliases:
   - /2011/03/20/how-to-handle-proxy-pac-configuration-with-qt
   - /2011/03/how-to-handle-proxy-pac-configuration-with-qt
+  - /2011/03/21/How-to-handle-Proxy-PAC-configuration-with-Qt
 ---
 
 This article was originally [written on another blog](http://blog.orangelabsuk.com/2010/06/03/extract-proxy-configuration-from-a-pac-file-with-qt/). That blog was never _officially published_, and it will probably never be. It was written on the **3rd of June 2010**, but is still "somewhat important" and relevant.

@@ -7,6 +7,7 @@ date: "2010-08-30T23:22:34Z"
 aliases:
   - /2010/08/30/hello-world-again
   - /2010/08/hello-world-again
+  - /2011/06/02/Coffee-Shit
 ---
 
 ```bash

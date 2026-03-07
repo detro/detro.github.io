@@ -7,6 +7,7 @@ date: "2012-12-03T00:00:00Z"
 aliases:
   - /2012/12/03/finally-ghostdriver-1-0-0
   - /2012/12/finally-ghostdriver-1-0-0
+  - /2012/12/04/Finally-GhostDriver-1-0-0
 ---
 
 After ~10 months of work, I finally managed to push the ball forward enough to reach **GhostDriver 1.0.0**.

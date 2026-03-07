@@ -5,6 +5,7 @@ title: "ai-class.com - Notes of Lesson 3 and 4"
 tags: [inference, probability, stanford, ai, notes, three, four, course, 3, peter norvig, 4, online, monty hall, lesson, bayes network, class, sebastian thrun]
 date: "2011-10-22T00:00:00Z"
 aliases:
+  - /2011/10/23/ai-class-com---Notes-of-Lesson-3-and-4
   - /2011/10/22/ai-class-com-notes-of-lesson-3-and-4
   - /2011/10/ai-class-com-notes-of-lesson-3-and-4
 ---

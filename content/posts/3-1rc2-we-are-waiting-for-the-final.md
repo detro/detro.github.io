@@ -5,15 +5,13 @@ title: "3.1RC2... we are waiting for the Final!"
 tags: [uncategorized]
 date: "2005-06-13T15:22:14Z"
 aliases:
+  - /2005/06/13/31rc2-we-are-waiting-for-the-final
   - /2005/06/13/3-1rc2-we-are-waiting-for-the-final
   - /2005/06/3-1rc2-we-are-waiting-for-the-final
+  - /2005/06/13/31rc2-we-are-waiting-for-the-final/Matisse
 ---
 
-
-
-<em>
-<strong>Eclipse 3.1RC2</strong>
-</em> now available here: [http://download.eclipse.org/downloads/drops/S-3.1RC2-200506101757/](Download Link)
+_**Eclipse 3.1RC2**_ now available here: [Download Link](http://download.eclipse.org/downloads/drops/S-3.1RC2-200506101757/).
 
 Here, a post from [http://nice3z.homeip.net/node/30](nice3z).
 

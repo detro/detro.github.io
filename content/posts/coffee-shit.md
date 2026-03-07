@@ -7,6 +7,7 @@ date: "2011-06-02T12:24:10Z"
 aliases:
   - /2011/06/02/coffee-shit
   - /2011/06/coffee-shit
+  - /2011/06/02/Coffee-Shit
 ---
 
 I had it. I'm sick and tired of this nonsense. People, Devs in the
