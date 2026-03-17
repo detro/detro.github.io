@@ -41,8 +41,8 @@ params:
 
   ShowReadingTime: true
   ShowShareButtons: false
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
+  ShowPostNavLinks: false
+  ShowBreadCrumbs: false
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
   # disableSpecial1stPost: true
@@ -57,7 +57,7 @@ params:
   comments: false
   hidemeta: false
   hideSummary: false
-  showtoc: false
+  showtoc: true
   tocopen: false
 
   assets:
@@ -74,7 +74,6 @@ params:
     icon: "/images/2026-02 butterbeer-favicon-128x128.png"
     iconHeight: 32
 
-  # profile-mode
   profileMode:
     enabled: true # needs to be explicitly set
     # title: "<Title>" # optional default will be site title
@@ -86,18 +85,13 @@ params:
     imageWidth: 360
     imageHeight: 360
     imageTitle: "Ciao! I'm Zio Ivan."
-    buttons:
-      - name: About
-        url: /about/
-      - name: Posts
-        url: /posts/
-      # - name: Projects
-      #   url: /projects/
-
-  # # home-info mode
-  # homeInfoParams:
-  #   Title: "Hi there, Cowboy"
-  #   Content: Welcome to my blog
+    # buttons:
+    #   - name: About
+    #     url: /about/
+    #   - name: Posts
+    #     url: /posts/
+    #   - name: Projects
+    #     url: /projects/
 
   socialIcons:
     - name: linkedin
