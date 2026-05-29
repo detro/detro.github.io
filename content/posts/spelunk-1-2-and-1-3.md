@@ -62,4 +62,4 @@ But don't ask _Me_ why _You_ end up with YAML or TOML in your secrets!?!?!? 😅
 
 With these two releases, [Spelunk](https://github.com/detro/spelunk) is more powerful and flexible than ever. I'll continue to chip away at the rock to bring you even more sources and modifiers (maybe SHA hashing? Who knows!). 
 
-So grab your pickaxe, update your `go.mod`, and go dig up some secrets! 
+_So grab your pickaxe, update your `go.mod`, and go dig up some secrets!_
