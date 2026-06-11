@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      GO_VERSION: 1.26.0
-      HUGO_VERSION: 0.157.0
+      GO_VERSION: 1.26.4
+      HUGO_VERSION: 0.163.0
       TZ: Europe/London
     
     steps:
