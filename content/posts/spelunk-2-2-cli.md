@@ -6,7 +6,6 @@ tags: ["secrets", "go", "golang", "spelunk", "project", "cli", "tools", "homebre
 date: "2026-08-30T22:03:00Z"
 cover:
   image: "/images/spelunk-cave.png"
-  relative: true
 ---
 
 Quick recap for those joining late. [Spelunk](https://github.com/detro/spelunk) started as
